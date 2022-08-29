@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "amatiasq.sort-imports",
+    "firsttris.vscode-jest-runner",
+    "rangav.vscode-thunder-client"
+  ]
+}

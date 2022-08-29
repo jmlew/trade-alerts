@@ -1,0 +1,39 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "sourceMap": true,
+    "declaration": false,
+    "strictFunctionTypes": false,
+    "strictPropertyInitialization": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@custom-types": ["./types/index.ts"],
+      "@kdb-dash/form/util": ["libs/form/util/src/index.ts"],
+      "@kdb-dash/home/feature": ["libs/home/feature/src/index.ts"],
+      "@kdb-dash/shared/data-access": ["libs/shared/data-access/src/index.ts"],
+      "@kdb-dash/shared/environments": ["libs/shared/environments/src/index.ts"],
+      "@kdb-dash/shared/feature-alert": ["libs/shared/feature-alert/src/index.ts"],
+      "@kdb-dash/shared/util-form": ["libs/shared/util-form/src/index.ts"],
+      "@kdb-dash/shared/ui-common": ["libs/shared/ui-common/src/index.ts"],
+      "@kdb-dash/shared/util-common": ["libs/shared/util-common/src/index.ts"],
+      "@kdb-dash/shell/ui": ["libs/shell/ui/src/index.ts"],
+      "@kdb-dash/users/domain": ["libs/users/domain/src/index.ts"],
+      "@kdb-dash/users/feature/manage-users": [
+        "libs/users/feature/manage-users/src/index.ts"
+      ],
+      "@kdb-dash/users/ui": ["libs/users/ui/src/index.ts"],
+      "@kdb-dash/users/util": ["libs/users/util/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

@@ -1,0 +1,18 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "firstName": "Jason",
+      "lastName": "LastJason",
+      "email": "jason@localhost",
+      "createdAt": "2018-07-16T07:32:20.421Z"
+    },
+    {
+      "id": 2,
+      "firstName": "System",
+      "lastName": "LastSystem",
+      "email": "system@localhost",
+      "createdAt": "2018-07-16T07:32:20.421Z"
+    }
+  ]
+}

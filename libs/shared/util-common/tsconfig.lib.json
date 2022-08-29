@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../../dist/out-tsc",
+    "declaration": true,
+    "types": []
+  },
+  "include": ["**/*.ts", "../../../apps/web-app/src/app/shared/utils/env-vars.util.ts"],
+  "exclude": ["**/*.spec.ts"]
+}
