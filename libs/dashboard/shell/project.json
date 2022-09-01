@@ -1,0 +1,23 @@
+{
+  "root": "libs/dashboard/shell",
+  "sourceRoot": "libs/dashboard/shell/src",
+  "projectType": "library",
+  "tags": ["type:shell", "domain: dashboard"],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/dashboard/shell/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/dashboard/shell"],
+      "options": {
+        "jestConfig": "libs/dashboard/shell/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

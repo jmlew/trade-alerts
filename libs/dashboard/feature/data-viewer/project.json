@@ -1,0 +1,23 @@
+{
+  "root": "libs/dashboard/feature/data-viewer",
+  "sourceRoot": "libs/dashboard/feature/data-viewer/src",
+  "projectType": "library",
+  "tags": ["type:feature", "domain: dashboard"],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/dashboard/feature/data-viewer/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/dashboard/feature/data-viewer"],
+      "options": {
+        "jestConfig": "libs/dashboard/feature/data-viewer/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

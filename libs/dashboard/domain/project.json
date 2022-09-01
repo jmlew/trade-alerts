@@ -1,0 +1,23 @@
+{
+  "root": "libs/dashboard/domain",
+  "sourceRoot": "libs/dashboard/domain/src",
+  "projectType": "library",
+  "tags": ["type:domain-logic", "domain: dashboard"],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/dashboard/domain/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/dashboard/domain"],
+      "options": {
+        "jestConfig": "libs/dashboard/domain/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

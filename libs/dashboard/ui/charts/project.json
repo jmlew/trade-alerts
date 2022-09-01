@@ -1,0 +1,23 @@
+{
+  "root": "libs/dashboard/ui/charts",
+  "sourceRoot": "libs/dashboard/ui/charts/src",
+  "projectType": "library",
+  "tags": ["type:ui", "domain: dashboard"],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/dashboard/ui/charts/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/dashboard/ui/charts"],
+      "options": {
+        "jestConfig": "libs/dashboard/ui/charts/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

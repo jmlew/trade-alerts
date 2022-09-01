@@ -1,0 +1,23 @@
+{
+  "root": "libs/dashboard/ui/controls",
+  "sourceRoot": "libs/dashboard/ui/controls/src",
+  "projectType": "library",
+  "tags": ["type:ui", "domain: dashboard"],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/dashboard/ui/controls/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/dashboard/ui/controls"],
+      "options": {
+        "jestConfig": "libs/dashboard/ui/controls/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}
