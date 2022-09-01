@@ -1,21 +1,21 @@
 {
-  "root": "libs/shell/ui",
-  "sourceRoot": "libs/shell/ui/src",
+  "root": "libs/users/shell",
+  "sourceRoot": "libs/users/shell/src",
   "projectType": "library",
-  "tags": ["type:ui"],
+  "tags": ["type:shell", "domain:users"],
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/shell/ui/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["libs/users/shell/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/shell/ui"],
+      "outputs": ["coverage/libs/users/shell"],
       "options": {
-        "jestConfig": "libs/shell/ui/jest.config.js",
+        "jestConfig": "libs/users/shell/jest.config.js",
         "passWithNoTests": true
       }
     }

@@ -11,6 +11,6 @@ const styles = {
   },
 };
 
-export function AppFooter() {
+export function ShellFooter() {
   return <Box sx={styles.root}>App Footer</Box>;
 }

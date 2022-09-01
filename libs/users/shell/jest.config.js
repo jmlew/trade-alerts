@@ -1,9 +1,9 @@
 module.exports = {
-  displayName: 'shell-ui',
+  displayName: 'users-shell',
   preset: '../../../jest.preset.js',
   transform: {
     '^.+\\.[tj]sx?$': 'babel-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/libs/shell/ui',
+  coverageDirectory: '../../../coverage/libs/users/shell',
 };

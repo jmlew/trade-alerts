@@ -1,22 +1,22 @@
 import { ReactNode } from 'react';
 
+import { Theme } from '@mui/material';
 import Box from '@mui/material/Box';
 
 const styles = {
-  root: {
-    py: 5,
-    px: 2,
+  root: (theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     flexGrow: 1,
-  },
+    pt: 4,
+  }),
 };
 
-interface AppContentProps {
+interface ShellContentProps {
   children: ReactNode;
 }
 
-export function AppContent({ children }: AppContentProps) {
+export function ShellContent({ children }: ShellContentProps) {
   return <Box sx={styles.root}>{children}</Box>;
 }

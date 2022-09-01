@@ -23,14 +23,14 @@
       "@kdb-dash/shared/data-access": ["libs/shared/data-access/src/index.ts"],
       "@kdb-dash/shared/environments": ["libs/shared/environments/src/index.ts"],
       "@kdb-dash/shared/feature-alert": ["libs/shared/feature-alert/src/index.ts"],
-      "@kdb-dash/shared/util-form": ["libs/shared/util-form/src/index.ts"],
       "@kdb-dash/shared/ui-common": ["libs/shared/ui-common/src/index.ts"],
       "@kdb-dash/shared/util-common": ["libs/shared/util-common/src/index.ts"],
-      "@kdb-dash/shell/ui": ["libs/shell/ui/src/index.ts"],
+      "@kdb-dash/shared/util-form": ["libs/shared/util-form/src/index.ts"],
       "@kdb-dash/users/domain": ["libs/users/domain/src/index.ts"],
       "@kdb-dash/users/feature/manage-users": [
         "libs/users/feature/manage-users/src/index.ts"
       ],
+      "@kdb-dash/users/shell": ["libs/users/shell/src/index.ts"],
       "@kdb-dash/users/ui": ["libs/users/ui/src/index.ts"],
       "@kdb-dash/users/util": ["libs/users/util/src/index.ts"]
     }
