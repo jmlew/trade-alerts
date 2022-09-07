@@ -19,13 +19,22 @@ const styles = {
 };
 
 interface AlertIdInputProps {
-  value: string;
-  onSetValue: (value: string) => void;
+  value: number | null;
+  onSetValue: (value: number | null) => void;
 }
 
 export function AlertIdInput({ value, onSetValue }: AlertIdInputProps) {
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
-    onSetValue(event.target.value);
+    const validated: string = event.target.value.replace(/[^0-9]/g, '');
+    if (validated === '') {
+      onSetValue(null);
+      return;
+    }
+    if (isNaN(Number(validated))) {
+      event.preventDefault();
+      return;
+    }
+    onSetValue(Number(validated));
   }
 
   return (
@@ -35,7 +44,7 @@ export function AlertIdInput({ value, onSetValue }: AlertIdInputProps) {
       size="small"
       color="primary"
       sx={styles.root}
-      value={value}
+      value={value == null ? '' : value}
       onChange={handleChange}
     />
   );

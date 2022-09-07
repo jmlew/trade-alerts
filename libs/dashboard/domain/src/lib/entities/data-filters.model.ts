@@ -1,5 +1,9 @@
-export interface DataFilters extends DateRange {
-  alertId: number;
+import { FiltersType } from './data-filters.enum';
+
+export interface DataFilters {
+  type: FiltersType;
+  alertId?: number;
+  dateRange?: DateRange;
 }
 
 export interface DateRange {

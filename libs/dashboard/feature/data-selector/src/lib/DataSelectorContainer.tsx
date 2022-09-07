@@ -1,7 +1,16 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
-import { DateRange, FiltersType, defaultDateRange } from '@kdb-dash/dashboard/domain';
+import {
+  DataFilters,
+  DateRange,
+  FilterSearchParam,
+  FiltersType,
+  getAlertIdFromSearchParams,
+  getDataFiltersFromSearchParams,
+  getDateRangeFromSearchParams,
+  getInitialFilterType,
+} from '@kdb-dash/dashboard/domain';
 import {
   AlertIdInput,
   BtnLoadData,
@@ -21,36 +30,39 @@ const styles = {
 };
 
 export function DataSelectorContainer() {
-  const { filtersParams } = useParams();
-  // TODO: Get filters type from params and set initial.
-  const [type, setType] = useState<FiltersType>(FiltersType.AlertId);
-  // TODO: Get alertId from params and set initial.
-  const [alertId, setAlertId] = useState<string>('');
-  // TODO: Get dateRange from params and set initial.
-  const [dateRange, setDateRange] = useState<DateRange>(defaultDateRange);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [type, setType] = useState<FiltersType>(getInitialFilterType(searchParams));
+  const [alertId, setAlertId] = useState<number | null>(
+    getAlertIdFromSearchParams(searchParams)
+  );
+  const [dateRange, setDateRange] = useState<DateRange>(
+    getDateRangeFromSearchParams(searchParams)
+  );
 
   useEffect(() => {
     switch (type) {
       case FiltersType.AlertId:
-        console.log('alertId :>> ', alertId);
+        if (alertId == null) {
+          return;
+        }
+        searchParams.set(FilterSearchParam.AlertId, `${alertId}`);
+        searchParams.delete(FilterSearchParam.DateFrom);
+        searchParams.delete(FilterSearchParam.DateTo);
+        setSearchParams(searchParams);
         break;
       case FiltersType.DateRange:
       default:
-        console.log('dateRange :>> ', dateRange);
+        searchParams.set(FilterSearchParam.DateFrom, `${dateRange.from}`);
+        searchParams.set(FilterSearchParam.DateTo, `${dateRange.to}`);
+        searchParams.delete(FilterSearchParam.AlertId);
+        setSearchParams(searchParams);
         break;
     }
   }, [dateRange, alertId, type]);
 
   function handleLoadData() {
-    switch (type) {
-      case FiltersType.AlertId:
-        console.log('alertId :>> ', alertId);
-        break;
-      case FiltersType.DateRange:
-      default:
-        console.log('dateRange :>> ', dateRange);
-        break;
-    }
+    const filters: DataFilters = getDataFiltersFromSearchParams(searchParams);
+    console.log('handleLoadData with filters :>> ', filters);
   }
 
   function renderFilterType(type: FiltersType) {

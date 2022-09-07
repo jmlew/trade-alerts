@@ -1,6 +1,6 @@
 import { DashOption } from './dashboards.model';
 
-export const dashboards: DashOption[] = [
+export const dashboardOptions: DashOption[] = [
   {
     value: 'SomeDashboard',
     label: 'Some Dashboard',
@@ -14,3 +14,5 @@ export const dashboards: DashOption[] = [
     label: 'And Another Dashboard',
   },
 ];
+
+export const defaultDashboardOption: DashOption = dashboardOptions[0];
