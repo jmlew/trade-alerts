@@ -1,3 +1,5 @@
+import type {} from '@mui/x-date-pickers/themeAugmentation';
+
 // import { Theme } from '@emotion/react';
 import { Theme } from '@mui/material';
 import { createTheme } from '@mui/material';
@@ -56,6 +58,24 @@ export const themeOptions: ThemeOptions = {
           boxShadow: 'none',
           borderBottom: '1px solid',
           borderColor: colors.primary.dark,
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          color: colors.primary.main,
+        },
+        input: {
+          paddingTop: 7.5,
+          paddingBottom: 7.5,
+        },
+      },
+    },
+    MuiDatePicker: {
+      styleOverrides: {
+        root: {
+          color: colors.primary.main,
         },
       },
     },

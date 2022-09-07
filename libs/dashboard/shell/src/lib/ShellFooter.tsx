@@ -12,5 +12,5 @@ const styles = {
 };
 
 export function ShellFooter() {
-  return <Box sx={styles.root}>Users Footer</Box>;
+  return <Box sx={styles.root}>Dash Footer</Box>;
 }

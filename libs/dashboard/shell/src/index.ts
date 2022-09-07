@@ -1,1 +1,1 @@
-export * from './lib/dashboard-shell';
+export * from './lib/DashShell';

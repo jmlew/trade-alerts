@@ -2,25 +2,20 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import { AlertProvider } from '@kdb-dash/shared/feature-alert';
 import CssBaseline from '@mui/material/CssBaseline';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
 
 import AppRoutes from './app.routes';
-
-export const styles = {
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: '100vh',
-    backgroundColor: '#fafafa',
-  },
-};
 
 function App() {
   return (
     <CssBaseline>
       <Router>
-        <AlertProvider>
-          <AppRoutes />
-        </AlertProvider>
+        <LocalizationProvider dateAdapter={AdapterLuxon}>
+          <AlertProvider>
+            <AppRoutes />
+          </AlertProvider>
+        </LocalizationProvider>
       </Router>
     </CssBaseline>
   );

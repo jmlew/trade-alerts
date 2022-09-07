@@ -1,1 +1,1 @@
-export * from './lib/dashboard-feature-dash-selector';
+export * from './lib/DashSelectorContainer';
