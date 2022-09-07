@@ -2,7 +2,7 @@
   "root": "libs/dashboard/shell",
   "sourceRoot": "libs/dashboard/shell/src",
   "projectType": "library",
-  "tags": ["type:shell", "domain: dashboard"],
+  "tags": ["type:shell", "domain:dashboard"],
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",

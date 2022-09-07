@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
+import { DashShell } from '@kdb-dash/dashboard/shell';
 import { AppHome } from '@kdb-dash/home/feature';
 import { Loading } from '@kdb-dash/shared/ui-common';
 import { UsersShell } from '@kdb-dash/users/shell';
@@ -25,6 +26,14 @@ export default function AppRoutes() {
           element={
             <Suspense fallback={<Loading />}>
               <UsersShell />
+            </Suspense>
+          }
+        />
+        <Route
+          path="dash/*"
+          element={
+            <Suspense fallback={<Loading />}>
+              <DashShell />
             </Suspense>
           }
         />

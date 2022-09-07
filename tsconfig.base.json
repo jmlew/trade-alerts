@@ -22,8 +22,8 @@
       "@kdb-dash/dashboard/feature/dash-selector": [
         "libs/dashboard/feature/dash-selector/src/index.ts"
       ],
-      "@kdb-dash/dashboard/feature/data-filter": [
-        "libs/dashboard/feature/data-filter/src/index.ts"
+      "@kdb-dash/dashboard/feature/data-selector": [
+        "libs/dashboard/feature/data-selector/src/index.ts"
       ],
       "@kdb-dash/dashboard/feature/data-viewer": [
         "libs/dashboard/feature/data-viewer/src/index.ts"

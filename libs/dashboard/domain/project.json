@@ -2,7 +2,7 @@
   "root": "libs/dashboard/domain",
   "sourceRoot": "libs/dashboard/domain/src",
   "projectType": "library",
-  "tags": ["type:domain-logic", "domain: dashboard"],
+  "tags": ["type:domain-logic", "domain:dashboard"],
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
