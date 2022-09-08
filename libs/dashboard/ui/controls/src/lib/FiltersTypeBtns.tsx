@@ -1,5 +1,5 @@
 import { FiltersType } from '@kdb-dash/dashboard/domain';
-import { Box, Button, ButtonGroup, Theme } from '@mui/material';
+import { Button, ButtonGroup, Theme } from '@mui/material';
 
 const styles = {
   root: (theme: Theme) => ({ width: 1 }),

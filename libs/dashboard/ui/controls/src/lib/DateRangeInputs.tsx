@@ -7,8 +7,13 @@ import { Box, TextField, Theme } from '@mui/material';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 
 const styles = {
-  root: { mx: 1, height: 38, display: 'flex', alignItems: 'center' },
-  picker: { height: 38, width: 180 },
+  root: {
+    width: 1,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  picker: { width: 180 },
   input: (theme: Theme) => ({
     height: 38,
     width: 180,

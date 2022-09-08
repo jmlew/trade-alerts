@@ -1,10 +1,10 @@
 import { ChangeEvent } from 'react';
 
-import { Box, TextField, Theme } from '@mui/material';
+import { TextField, Theme } from '@mui/material';
 
 const styles = {
   root: (theme: Theme) => ({
-    width: '50%',
+    width: 1,
     color: 'primary.main',
     '& .MuiOutlinedInput-notchedOutline': {
       borderColor: 'primary.dark',
@@ -26,6 +26,7 @@ interface AlertIdInputProps {
 export function AlertIdInput({ value, onSetValue }: AlertIdInputProps) {
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const validated: string = event.target.value.replace(/[^0-9]/g, '');
+
     if (validated === '') {
       onSetValue(null);
       return;

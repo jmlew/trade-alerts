@@ -6,7 +6,7 @@ const styles = {
 };
 
 interface BtnLoadDataProps {
-  isDisabled: boolean;
+  isDisabled?: boolean;
   onClick: () => void;
 }
 

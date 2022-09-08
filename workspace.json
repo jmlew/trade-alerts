@@ -2,7 +2,6 @@
   "version": 2,
   "projects": {
     "dashboard-domain": "libs/dashboard/domain",
-    "dashboard-feature-dash-selector": "libs/dashboard/feature/dash-selector",
     "dashboard-feature-data-selector": "libs/dashboard/feature/data-selector",
     "dashboard-feature-data-viewer": "libs/dashboard/feature/data-viewer",
     "dashboard-shell": "libs/dashboard/shell",

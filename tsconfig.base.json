@@ -19,9 +19,6 @@
     "paths": {
       "@custom-types": ["./types/index.ts"],
       "@kdb-dash/dashboard/domain": ["libs/dashboard/domain/src/index.ts"],
-      "@kdb-dash/dashboard/feature/dash-selector": [
-        "libs/dashboard/feature/dash-selector/src/index.ts"
-      ],
       "@kdb-dash/dashboard/feature/data-selector": [
         "libs/dashboard/feature/data-selector/src/index.ts"
       ],

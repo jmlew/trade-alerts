@@ -27,7 +27,7 @@ export function getDateRangeFromSearchParams(params: URLSearchParams): DateRange
 }
 
 export function getAlertIdFromSearchParams(params: URLSearchParams): number | null {
-  const id: string | null = params.get(FilterSearchParam.AlertId);
+  const id: string | null = params.get(FilterSearchParam.AlertId) || null;
   return id != null ? parseInt(id, 10) : null;
 }
 
