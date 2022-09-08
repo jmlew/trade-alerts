@@ -28,6 +28,7 @@ export function DashSelectorContainer() {
     setDashboard(selected);
     console.log('selected :>> ', selected.value);
   }
+
   return (
     <DashSelector
       options={dashboardOptions}

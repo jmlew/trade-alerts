@@ -1,9 +1,10 @@
 module.exports = {
+  core: {},
   stories: [],
   addons: [
-    '@nrwl/react/plugins/storybook',
     '@storybook/addon-essentials',
     '@storybook/addon-actions',
+    '@nrwl/react/plugins/storybook',
   ],
   // uncomment the property below if you want to apply some webpack config globally
   // webpackFinal: async (config, { configType }) => {

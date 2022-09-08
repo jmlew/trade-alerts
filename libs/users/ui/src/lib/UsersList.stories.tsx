@@ -1,7 +1,7 @@
 import { User } from '@kdb-dash/users/domain';
-import { Meta, Story } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import { UsersList, UsersListProps } from '.';
+import { UsersList } from './UsersList';
 
 const sampleUsers: User[] = [
   {
@@ -27,15 +27,16 @@ const sampleUsers: User[] = [
 export default {
   title: 'Users/UsersList',
   component: UsersList,
-  argTypes: {
+  parameters: { actions: { argTypesRegex: '^on.*' } },
+  /* argTypes: {
     onEditUser: { action: 'onEditUser' },
     onDeleteUser: { action: 'onDeleteUser' },
-  },
-} as Meta;
+  }, */
+} as ComponentMeta<typeof UsersList>;
 
-const Template: Story<UsersListProps> = (args) => <UsersList {...args} />;
+const Template: ComponentStory<typeof UsersList> = (args) => <UsersList {...args} />;
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const Basic = Template.bind({});
+Basic.args = {
   users: sampleUsers,
 };
