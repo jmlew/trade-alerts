@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import {
@@ -9,6 +10,10 @@ import { BtnLoadData } from '@kdb-dash/dashboard/ui/controls';
 
 export function DataLoaderContainer() {
   const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    handleLoadData();
+  }, []);
 
   function handleLoadData() {
     const filters: DataFilters = getDataFiltersFromSearchParams(searchParams);
