@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "_id": "85f2a658-2dc4-48e9-814c-8d79662c645f",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3333/api/dashboard/reset",
+    "url": "http://localhost:3333/api/dashboard/reset",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-09-08T09:32:10.251Z",
+    "modified": "2022-09-08T09:32:10.258Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  }
+]

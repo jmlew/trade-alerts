@@ -88,7 +88,7 @@
     "method": "GET",
     "sortNum": 5000,
     "created": "2022-06-06T06:36:52.552Z",
-    "modified": "2022-06-08T00:19:33.010Z",
+    "modified": "2022-09-08T09:31:56.193Z",
     "headers": [],
     "params": [],
     "tests": []
@@ -271,6 +271,34 @@
         "isPath": false
       }
     ],
+    "tests": []
+  },
+  {
+    "_id": "f4f936d6-c690-46a3-88c6-5f49d7f85bde",
+    "colId": "27b80a40-3ed0-4389-83b6-648478c96953",
+    "containerId": "",
+    "name": "DashboardData reset DB",
+    "url": "http://localhost:3333/api/dashboard/reset",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2022-09-08T09:32:35.505Z",
+    "modified": "2022-09-08T09:32:35.505Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "b4b83987-be61-47e3-920c-095b90c64422",
+    "colId": "27b80a40-3ed0-4389-83b6-648478c96953",
+    "containerId": "",
+    "name": "DashboardData getDashboardData",
+    "url": "http://localhost:3333/api/dashboard",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2022-09-08T09:33:23.445Z",
+    "modified": "2022-09-08T09:33:50.827Z",
+    "headers": [],
+    "params": [],
     "tests": []
   }
 ]
