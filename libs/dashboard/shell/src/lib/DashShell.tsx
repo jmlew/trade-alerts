@@ -21,7 +21,7 @@ export function DashShell() {
       <ShellHeader />
       <ShellContent>
         <DashboardDataProvider>
-          <DataViewerContainer />
+          <DataViewerContainer isErrorAlertsShown={true} />
         </DashboardDataProvider>
       </ShellContent>
     </Box>

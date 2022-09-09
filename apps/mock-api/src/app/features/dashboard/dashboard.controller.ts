@@ -27,7 +27,7 @@ export class DashboardDataController {
     return 'Mock API Dashboards DB has been reset.';
   }
 
-  @Get()
+  // @Get()
   getDashboardData(): Observable<DashboardData> {
     return this.toStream(this.dataService.getDashboardData());
   }
