@@ -1,3 +1,4 @@
+import { DashboardDataProvider } from '@kdb-dash/dashboard/domain';
 import { DataViewerContainer } from '@kdb-dash/dashboard/feature/data-viewer';
 import { Theme } from '@mui/material';
 import Box from '@mui/material/Box';
@@ -19,7 +20,9 @@ export function DashShell() {
     <Box sx={styles.root}>
       <ShellHeader />
       <ShellContent>
-        <DataViewerContainer />
+        <DashboardDataProvider>
+          <DataViewerContainer />
+        </DashboardDataProvider>
       </ShellContent>
     </Box>
   );

@@ -9,3 +9,7 @@ export * from './lib/entities/dashboard-data.model';
 
 // Expose the facade which encapsulates all data services.
 export * from './lib/application/dashboard-data.facade';
+
+// Expose context and providers to expose facade streams to containers.
+export * from './lib/context/dashboard-data.context';
+export * from './lib/context/DashboardDataProvider';
