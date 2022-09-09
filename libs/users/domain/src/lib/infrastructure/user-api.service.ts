@@ -6,7 +6,7 @@ import {
   AxiosApiInterceptorsService,
   InterceptorsHandlers,
 } from '@kdb-dash/shared/data-access';
-import { normaliseApiErrorMessage } from '@kdb-dash/shared/util-common';
+import { normaliseAxiosApiErrorMessage } from '@kdb-dash/shared/util-common';
 
 import {
   CreateUserResponse,
@@ -140,7 +140,7 @@ export class UserApiService {
       },
       onInterceptResponseError: (error: AxiosError) => {
         // Replace the default error message with the most useful AxiosError value.
-        normaliseApiErrorMessage(error);
+        normaliseAxiosApiErrorMessage(error);
       },
       // onInterceptRequestError: (error: AxiosError) => {},
     };

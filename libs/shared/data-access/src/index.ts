@@ -6,4 +6,5 @@ export * from './lib/http-api/use-axios.hook';
 export * from './lib/http-api/use-fetch.hook';
 export * from './lib/http-state/api-state.enum';
 export * from './lib/http-state/api-state.model';
+export * from './lib/http-state/api-state-manager.util';
 export * from './lib/http-state/use-api-state-manager.hook';

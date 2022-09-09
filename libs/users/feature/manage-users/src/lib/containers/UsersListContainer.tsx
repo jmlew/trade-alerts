@@ -86,7 +86,7 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
   } else {
     return (
       <>
-        {isFailed() && <ErrorMessage message={getError()!} />}
+        {isFailed() && <ErrorMessage>{getError()}</ErrorMessage>}
         {isDataReady && usersData != null && (
           <UsersList
             users={usersData}

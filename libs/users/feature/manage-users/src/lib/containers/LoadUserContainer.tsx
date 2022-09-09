@@ -59,7 +59,7 @@ export function LoadUserContainer({ userId, children }: LoadUserContainerProps) 
       {isPending() && <Loading />}
       {isFailed() && isRead() && (
         <>
-          <ErrorMessage message={getError()!} />
+          <ErrorMessage>{getError()}</ErrorMessage>
           <Button variant="contained" onClick={goToList}>
             Go to Users
           </Button>

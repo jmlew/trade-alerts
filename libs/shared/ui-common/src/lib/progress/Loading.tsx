@@ -1,4 +1,12 @@
-import { Box, CircularProgress, Typography } from '@mui/material';
+import { Box, CircularProgress, Theme, Typography } from '@mui/material';
+
+const styles = {
+  root: (theme: Theme) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }),
+};
 
 interface LoadingProps {
   message?: string;
@@ -6,9 +14,9 @@ interface LoadingProps {
 
 export function Loading({ message }: LoadingProps) {
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <Box sx={styles.root}>
       {!!message && (
-        <Typography variant="caption" mr={2}>
+        <Typography variant="body1" mr={2} color="primary.dark">
           {message}
         </Typography>
       )}

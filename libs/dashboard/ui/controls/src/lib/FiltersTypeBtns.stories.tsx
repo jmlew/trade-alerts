@@ -3,9 +3,6 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { FiltersTypeBtns } from './FiltersTypeBtns';
 
-const options: FiltersType[] = [FiltersType.AlertId, FiltersType.DateRange];
-const labels = ['AlertId', 'DateRange'];
-
 function mockSetType(type: FiltersType) {
   console.log('mockSetType', type);
 }
@@ -16,11 +13,10 @@ export default {
   argTypes: {
     onSetType: { action: 'onSetType' },
     type: {
-      options,
-      mapping: options,
+      options: Object.values(FiltersType).filter((x) => typeof x === 'string'),
+      mapping: FiltersType,
       control: {
         type: 'radio',
-        labels,
       },
     },
   },

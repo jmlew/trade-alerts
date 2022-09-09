@@ -9,7 +9,8 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     flexGrow: 1,
-    pt: 4,
+    pt: 2,
+    px: 2,
   }),
 };
 

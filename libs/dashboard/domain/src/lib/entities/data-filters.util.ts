@@ -15,6 +15,14 @@ export function getDataFiltersFromSearchParams(params: URLSearchParams): DataFil
   }
 }
 
+export function getSearchParamsFromDataFilters(filters: DataFilters): URLSearchParams {
+  const params: URLSearchParams = new URLSearchParams();
+  Object.keys(filters).forEach((key: keyof DataFilters) => {
+    params.append(key, JSON.stringify(filters[key]));
+  });
+  return params;
+}
+
 export function getInitialFilterType(params: URLSearchParams): FiltersType {
   return getAlertIdFromSearchParams(params) ? FiltersType.AlertId : FiltersType.DateRange;
 }

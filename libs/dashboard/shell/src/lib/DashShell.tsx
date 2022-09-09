@@ -1,4 +1,5 @@
-import { Theme, Typography } from '@mui/material';
+import { DataViewerContainer } from '@kdb-dash/dashboard/feature/data-viewer';
+import { Theme } from '@mui/material';
 import Box from '@mui/material/Box';
 
 import { ShellContent } from './ShellContent';
@@ -18,9 +19,7 @@ export function DashShell() {
     <Box sx={styles.root}>
       <ShellHeader />
       <ShellContent>
-        <Typography variant="h2" color="textPrimary">
-          Dashboard content
-        </Typography>
+        <DataViewerContainer />
       </ShellContent>
     </Box>
   );
