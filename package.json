@@ -24,8 +24,6 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@data-driven-forms/mui-component-mapper": "^3.17.3",
-    "@data-driven-forms/react-form-renderer": "^3.16.10",
     "@emotion/react": "11.5.0",
     "@emotion/styled": "11.3.0",
     "@fontsource/inter": "^4.5.1",
@@ -46,7 +44,7 @@
     "react-router-dom": "^6.2.1",
     "reflect-metadata": "^0.1.13",
     "regenerator-runtime": "0.13.7",
-    "rxjs": "^7.0.0",
+    "rxjs": "^7.5.6",
     "tslib": "^2.0.0",
     "webpack": "^5.74.0",
     "yup": "^0.32.11"
