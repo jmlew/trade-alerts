@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-import { uiTheme } from '@kdb-dash/shared/ui-common';
+import { uiTheme } from '@kdb-dash/shared/ui-styles';
 import { ThemeProvider } from '@mui/material/styles';
 
 export function AppShell() {

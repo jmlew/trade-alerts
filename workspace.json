@@ -14,6 +14,7 @@
     "shared-environments": "libs/shared/environments",
     "shared-feature-alert": "libs/shared/feature-alert",
     "shared-ui-common": "libs/shared/ui-common",
+    "shared-ui-styles": "libs/shared/ui-styles",
     "shared-util-common": "libs/shared/util-common",
     "shared-util-form": "libs/shared/util-form",
     "users-domain": "libs/users/domain",

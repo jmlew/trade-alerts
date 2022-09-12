@@ -1,4 +1,4 @@
-import { uiTheme } from '@kdb-dash/shared/ui-common';
+import { uiTheme } from '@kdb-dash/shared/ui-styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 
