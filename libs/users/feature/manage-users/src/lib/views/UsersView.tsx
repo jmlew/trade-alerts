@@ -3,7 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { Add } from '@mui/icons-material';
 import { Box, Card, CardContent, Fab, Typography } from '@mui/material';
 
-import { UsersListContainer } from '../containers';
+import { UsersListContainer } from '../containers/UsersListContainer';
 
 export function UsersView() {
   const [searchParams] = useSearchParams();
@@ -31,7 +31,9 @@ const Header = () => (
       mb: 2,
     }}
   >
-    <Typography variant="h4">Users</Typography>
+    <Typography variant="h4" color="primary">
+      Users
+    </Typography>
     <Fab component={Link} to="new" size="medium" color="primary" aria-label="new user">
       <Add />
     </Fab>

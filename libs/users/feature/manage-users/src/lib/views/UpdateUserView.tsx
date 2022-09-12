@@ -2,7 +2,8 @@ import { useParams } from 'react-router-dom';
 
 import { ErrorMessage } from '@kdb-dash/shared/ui-common';
 
-import { LoadUserContainer, UpdateUserContainer } from '../containers';
+import { LoadUserContainer } from '../containers/LoadUserContainer';
+import { UpdateUserContainer } from '../containers/UpdateUserContainer';
 
 export function UpdateUserView() {
   const { userId } = useParams();

@@ -1,6 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
 
-import { CreateUserView, UpdateUserView, UsersView } from './views';
+import { CreateUserView } from './views/CreateUserView';
+import { UpdateUserView } from './views/UpdateUserView';
+import { UsersView } from './views/UsersView';
 
 export function UsersRoutes() {
   return (
