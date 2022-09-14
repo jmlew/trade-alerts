@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { dashItemPadding, themeColors } from '@kdb-dash/shared/ui-styles';
+import { themeColors } from '@kdb-dash/shared/ui-styles';
 import { Theme } from '@mui/material';
 import Box from '@mui/material/Box';
 
@@ -10,8 +10,6 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     flexGrow: 1,
-    pt: dashItemPadding,
-    px: dashItemPadding,
     backgroundColor: themeColors.backgroundDark,
   }),
 };

@@ -5,7 +5,7 @@ import { createTheme } from '@mui/material';
 import { Palette, PaletteOptions, ThemeOptions } from '@mui/material/styles';
 import { TypographyOptions } from '@mui/material/styles/createTypography';
 
-import { dashItemPadding, dashSectionBorder } from './dash-styles';
+import { dashItemBorderRadius, dashItemPadding, dashSectionBorder } from './dash-styles';
 import { themeColors } from './theme-colors';
 
 const palette: PaletteOptions = {
@@ -82,7 +82,7 @@ const themeOptions: ThemeOptions = {
           color: themeColors.primary.main,
           ...dashSectionBorder,
           '&:first-of-type, :last-of-type': {
-            borderRadius: dashSectionBorder.borderRadius,
+            borderRadius: dashItemBorderRadius,
           },
           borderColor: themeColors.borderDark,
           backgroundImage: 'none',

@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 
 const styles = {
-  root: { width: 1 },
+  root: { width: 1, color: 'primary.main', backgroundColor: themeColors.background },
   gridPanel: { width: 1, backgroundColor: themeColors.backgroundDark },
   grid: { width: 1, height: 400 },
 };
