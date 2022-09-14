@@ -15,12 +15,15 @@ import { DashboardDataService } from '../infrastructure/dashboard-data.service';
 class DashboardDataFacade {
   constructor(private dashboardDataService: DashboardDataService) {}
 
+  // Separate private subjects to handle data and current API states.
   private dashDataSubject: BehaviorSubject<DashboardData | null> = new BehaviorSubject(
     null
   );
   private dashDataStateSubject: BehaviorSubject<ApiState> = new BehaviorSubject(
     ApiStateManager.onInit()
   );
+
+  // Exposed as readonly observables with null values filtered out.
   dashData$: Observable<DashboardData> = this.dashDataSubject
     .asObservable()
     .pipe(filter(isNonNull));

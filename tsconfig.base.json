@@ -29,6 +29,7 @@
       "@kdb-dash/dashboard/ui/charts": ["libs/dashboard/ui/charts/src/index.ts"],
       "@kdb-dash/dashboard/ui/controls": ["libs/dashboard/ui/controls/src/index.ts"],
       "@kdb-dash/dashboard/ui/grids": ["libs/dashboard/ui/grids/src/index.ts"],
+      "@kdb-dash/dashboard/util/grid": ["libs/dashboard/util/grid/src/index.ts"],
       "@kdb-dash/form/util": ["libs/form/util/src/index.ts"],
       "@kdb-dash/home/feature": ["libs/home/feature/src/index.ts"],
       "@kdb-dash/shared/data-access": ["libs/shared/data-access/src/index.ts"],

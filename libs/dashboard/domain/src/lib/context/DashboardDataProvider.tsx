@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useMemo } from 'react';
 
 import { ApiState } from '@kdb-dash/shared/data-access';
 import { useObservable } from '@kdb-dash/shared/util-common';
@@ -28,7 +28,11 @@ export function DashboardDataProvider({ children }: DashboardDataProviderProps) 
     dashboardDataFacade.dashDataState$
   );
 
-  const value: DashboardDataContextValue = { dashData, dashDataState };
+  const value: DashboardDataContextValue = useMemo(
+    () => ({ dashData, dashDataState }),
+    [dashData, dashDataState]
+  );
+
   return (
     <DashboardDataContext.Provider value={value}>
       {children}

@@ -2,7 +2,9 @@ import { ApiRequestType, ApiStatus } from './api-state.enum';
 import { ApiState } from './api-state.model';
 
 /**
- * State manager which returns a new ApiState object based on certain API states.
+ * State machine which manages the state of API requests based on events.
+ * Includes methods which return new API State objects or mutable versions which require
+ * the current state object as an argument.
  */
 
 export class ApiStateManager {

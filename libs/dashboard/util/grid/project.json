@@ -1,0 +1,23 @@
+{
+  "root": "libs/dashboard/util/grid",
+  "sourceRoot": "libs/dashboard/util/grid/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/dashboard/util/grid/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/dashboard/util/grid"],
+      "options": {
+        "jestConfig": "libs/dashboard/util/grid/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

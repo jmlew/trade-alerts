@@ -1,32 +1,20 @@
 import type {} from '@mui/x-date-pickers/themeAugmentation';
 
-// import { Theme } from '@emotion/react';
 import { Theme } from '@mui/material';
 import { createTheme } from '@mui/material';
 import { Palette, PaletteOptions, ThemeOptions } from '@mui/material/styles';
 import { TypographyOptions } from '@mui/material/styles/createTypography';
 
-const colors = {
-  primary: {
-    main: '#90CAF9',
-    light: '#BAE0FF',
-    dark: '#4479A4',
-  },
-  secondary: {
-    main: '#ffa726',
-    light: '#ffd95b',
-    dark: '#c77800',
-  },
-  background: '#061521',
-};
+import { dashItemPadding, dashSectionBorder } from './dash-styles';
+import { themeColors } from './theme-colors';
 
 const palette: PaletteOptions = {
   mode: 'dark',
-  primary: colors.primary,
-  secondary: colors.secondary,
+  primary: themeColors.primary,
+  secondary: themeColors.secondary,
   background: {
-    default: colors.background,
-    paper: colors.background,
+    default: themeColors.background,
+    paper: themeColors.background,
   },
 };
 
@@ -41,14 +29,14 @@ function typography(palette: Palette): TypographyOptions {
   };
 }
 
-export const themeOptions: ThemeOptions = {
+const themeOptions: ThemeOptions = {
   palette,
   typography,
   components: {
     MuiToolbar: {
       styleOverrides: {
         root: {
-          backgroundColor: colors.background,
+          backgroundColor: themeColors.background,
         },
       },
     },
@@ -57,14 +45,14 @@ export const themeOptions: ThemeOptions = {
         root: {
           boxShadow: 'none',
           borderBottom: '1px solid',
-          borderColor: colors.primary.dark,
+          borderColor: themeColors.primary.dark,
         },
       },
     },
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          color: colors.primary.main,
+          color: themeColors.primary.main,
         },
         input: {
           paddingTop: 7.5,
@@ -75,7 +63,36 @@ export const themeOptions: ThemeOptions = {
     MuiDatePicker: {
       styleOverrides: {
         root: {
-          color: colors.primary.main,
+          color: themeColors.primary.main,
+        },
+      },
+    },
+    MuiAccordion: {
+      styleOverrides: {
+        root: {
+          '&:not(:first-of-type)': {
+            marginTop: dashItemPadding,
+          },
+          '&.Mui-expanded': {
+            marginBottom: 0,
+          },
+          '&::before': {
+            backgroundColor: 'transparent',
+          },
+          color: themeColors.primary.main,
+          ...dashSectionBorder,
+          '&:first-of-type, :last-of-type': {
+            borderRadius: dashSectionBorder.borderRadius,
+          },
+          borderColor: themeColors.borderDark,
+          backgroundImage: 'none',
+        },
+      },
+    },
+    MuiAccordionSummary: {
+      styleOverrides: {
+        expandIconWrapper: {
+          color: themeColors.primary.dark,
         },
       },
     },

@@ -5,6 +5,8 @@ import { ApiStateManager } from '@kdb-dash/shared/data-access';
 import { useAlert } from '@kdb-dash/shared/feature-alert';
 import { ErrorMessage, JsonViewer, Loading } from '@kdb-dash/shared/ui-common';
 
+import { DashLayout } from '../components/DashLayout';
+
 const { getError, isCompleted, isFailed, isPending } = ApiStateManager;
 
 interface DataViewerContainerProps {
@@ -36,7 +38,10 @@ export function DataViewerContainer({ isErrorAlertsShown }: DataViewerContainerP
       {isPending(dashDataState) && <Loading message="Loading Dashboard" />}
       {isFailed(dashDataState) && <ErrorMessage>{getError(dashDataState)}</ErrorMessage>}
       {isCompleted(dashDataState) && dashData != null && (
-        <JsonViewer data={dashData as object} sx={{ width: 0.8 }} />
+        <>
+          <DashLayout />
+          {/* <JsonViewer data={dashData as object} sx={{ width: 0.8 }} /> */}
+        </>
       )}
     </>
   );

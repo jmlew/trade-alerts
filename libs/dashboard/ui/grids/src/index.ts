@@ -1,1 +1,1 @@
-export * from './lib/dashboard-ui-grids';
+export * from './lib/dashboard-grid';
