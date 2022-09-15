@@ -1,5 +1,5 @@
 {
-  "root": "libs/dashboard/util/grid",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/dashboard/util/grid/src",
   "projectType": "library",
   "tags": ["type:util", "domain:dashboard"],
@@ -15,7 +15,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/dashboard/util/grid"],
       "options": {
-        "jestConfig": "libs/dashboard/util/grid/jest.config.js",
+        "jestConfig": "libs/dashboard/util/grid/jest.config.ts",
         "passWithNoTests": true
       }
     }

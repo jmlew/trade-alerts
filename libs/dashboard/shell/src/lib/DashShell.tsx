@@ -1,5 +1,7 @@
-import { DashboardDataProvider } from '@kdb-dash/dashboard/domain';
-import { DataViewerContainer } from '@kdb-dash/dashboard/feature/data-viewer';
+import {
+  DashboardDataProvider,
+  DataViewerContainer,
+} from '@kdb-dash/dashboard/feature/data-viewer';
 import { Theme } from '@mui/material';
 import Box from '@mui/material/Box';
 

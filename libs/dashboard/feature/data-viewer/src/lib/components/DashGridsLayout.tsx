@@ -1,6 +1,9 @@
-import { useDashboardDataContext } from '@kdb-dash/dashboard/domain';
-import { DashboardGrid } from '@kdb-dash/dashboard/ui/grids';
-import { alertInfoColDefs, transactionColDefs } from '@kdb-dash/dashboard/util/grid';
+import {
+  DashboardDataGridField,
+  alertInfoConfigs,
+  transactionConfigs,
+} from '@kdb-dash/dashboard/domain';
+import { DashboardGridMui } from '@kdb-dash/dashboard/ui/grids';
 import { themeColors } from '@kdb-dash/shared/ui-styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
@@ -10,6 +13,10 @@ import {
   Box,
   Typography,
 } from '@mui/material';
+
+import { useDashboardDataContext } from '../context/dashboard-data.context';
+import { getTransactionConfigsMui } from '../utils/dashboard-grid-configs.utils';
+import { normaliseMuiGridData } from '../utils/dashboard-grid-data.util';
 
 const styles = {
   root: { width: 1, color: 'primary.main', backgroundColor: themeColors.background },
@@ -23,45 +30,47 @@ export function DashGridsLayout() {
     return null;
   }
   console.log('dashData', dashData);
+  const { alerts, alertsTrans, accountsTrans } = dashData;
+
   return (
     <Box sx={styles.root}>
-      {dashData.alerts != null && (
+      {alerts != null && (
         <Accordion sx={styles.gridPanel}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />} id="grid-1-header">
             <Typography>Alert Information</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <DashboardGrid
-              data={dashData.alerts}
-              configs={alertInfoColDefs}
+            <DashboardGridMui
+              data={normaliseMuiGridData<DashboardDataGridField>(alerts)}
+              configs={getTransactionConfigsMui(alertInfoConfigs)}
               sx={styles.grid}
             />
           </AccordionDetails>
         </Accordion>
       )}
-      {dashData.alertsTrans != null && (
+      {alertsTrans != null && (
         <Accordion sx={styles.gridPanel}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />} id="grid-2-header">
             <Typography>Alerted Transactions</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <DashboardGrid
-              data={dashData.alertsTrans}
-              configs={transactionColDefs}
+            <DashboardGridMui
+              data={normaliseMuiGridData<DashboardDataGridField>(alertsTrans)}
+              configs={getTransactionConfigsMui(transactionConfigs)}
               sx={styles.grid}
             />
           </AccordionDetails>
         </Accordion>
       )}
-      {dashData.accountsTrans != null && (
+      {accountsTrans != null && (
         <Accordion sx={styles.gridPanel}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />} id="grid-3-header">
             <Typography>Account Transactions</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <DashboardGrid
-              data={dashData.accountsTrans}
-              configs={transactionColDefs}
+            <DashboardGridMui
+              data={normaliseMuiGridData<DashboardDataGridField>(accountsTrans)}
+              configs={getTransactionConfigsMui(transactionConfigs)}
               sx={styles.grid}
             />
           </AccordionDetails>

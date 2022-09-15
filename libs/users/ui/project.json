@@ -1,5 +1,5 @@
 {
-  "root": "libs/users/ui",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/users/ui/src",
   "projectType": "library",
   "tags": ["type:ui", "domain:users"],
@@ -15,7 +15,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/users/ui"],
       "options": {
-        "jestConfig": "libs/users/ui/jest.config.js",
+        "jestConfig": "libs/users/ui/jest.config.ts",
         "passWithNoTests": true
       }
     }

@@ -1,5 +1,5 @@
 {
-  "root": "libs/users/shell",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/users/shell/src",
   "projectType": "library",
   "tags": ["type:shell", "domain:users"],
@@ -15,7 +15,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/users/shell"],
       "options": {
-        "jestConfig": "libs/users/shell/jest.config.js",
+        "jestConfig": "libs/users/shell/jest.config.ts",
         "passWithNoTests": true
       }
     }

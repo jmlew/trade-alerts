@@ -1,5 +1,5 @@
 {
-  "root": "libs/users/domain",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/users/domain/src",
   "projectType": "library",
   "tags": ["domain:users", "type:domain-logic"],
@@ -15,7 +15,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/users/domain"],
       "options": {
-        "jestConfig": "libs/users/domain/jest.config.js",
+        "jestConfig": "libs/users/domain/jest.config.ts",
         "passWithNoTests": true
       }
     }

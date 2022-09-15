@@ -1,5 +1,5 @@
 {
-  "root": "libs/shared/feature-alert",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shared/feature-alert/src",
   "projectType": "library",
   "tags": ["type:feature", "domain:shared"],
@@ -15,7 +15,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/shared/feature-alert"],
       "options": {
-        "jestConfig": "libs/shared/feature-alert/jest.config.js",
+        "jestConfig": "libs/shared/feature-alert/jest.config.ts",
         "passWithNoTests": true
       }
     }

@@ -1,5 +1,5 @@
 {
-  "root": "libs/dashboard/ui/controls",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/dashboard/ui/controls/src",
   "projectType": "library",
   "tags": ["type:ui", "domain:dashboard"],
@@ -15,7 +15,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/dashboard/ui/controls"],
       "options": {
-        "jestConfig": "libs/dashboard/ui/controls/jest.config.js",
+        "jestConfig": "libs/dashboard/ui/controls/jest.config.ts",
         "passWithNoTests": true
       }
     }

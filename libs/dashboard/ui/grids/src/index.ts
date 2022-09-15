@@ -1,1 +1,2 @@
-export * from './lib/dashboard-grid';
+export * from './lib/DashboardGridMui';
+export * from './lib/DashboardGridAgGrid';

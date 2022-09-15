@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 
-import { useDashboardDataContext } from '@kdb-dash/dashboard/domain';
 import { ApiStateManager } from '@kdb-dash/shared/data-access';
 import { useAlert } from '@kdb-dash/shared/feature-alert';
 import { ErrorMessage, JsonViewer, Loading } from '@kdb-dash/shared/ui-common';
 
 import { DashLayout } from '../components/DashLayout';
+import { useDashboardDataContext } from '../context/dashboard-data.context';
 
 const { getError, isCompleted, isFailed, isPending } = ApiStateManager;
 

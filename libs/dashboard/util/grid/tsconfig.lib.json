@@ -16,7 +16,14 @@
     "**/*.spec.js",
     "**/*.test.js",
     "**/*.spec.jsx",
-    "**/*.test.jsx"
+    "**/*.test.jsx",
+    "jest.config.ts"
   ],
-  "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"]
+  "include": [, "../../feature/data-viewer/src/lib/utils/dashboard-grid-data.util.ts"
+    "**/*.js",
+    "**/*.jsx",
+    "**/*.ts",
+    "**/*.tsx",
+    "../../domain/src/lib/entities/dashboard-data-configs.constants.ts"
+  ]
 }

@@ -1,5 +1,5 @@
 {
-  "root": "libs/shared/util-form",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shared/util-form/src",
   "projectType": "library",
   "tags": ["type:util", "domain:shared"],
@@ -15,7 +15,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/shared/util-form"],
       "options": {
-        "jestConfig": "libs/shared/util-form/jest.config.js",
+        "jestConfig": "libs/shared/util-form/jest.config.ts",
         "passWithNoTests": true
       }
     }

@@ -1,5 +1,5 @@
 {
-  "root": "libs/shared/environments",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shared/environments/src",
   "projectType": "library",
   "tags": ["type:env", "domain:shared"],
@@ -15,7 +15,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/shared/environments"],
       "options": {
-        "jestConfig": "libs/shared/environments/jest.config.js",
+        "jestConfig": "libs/shared/environments/jest.config.ts",
         "passWithNoTests": true
       }
     }

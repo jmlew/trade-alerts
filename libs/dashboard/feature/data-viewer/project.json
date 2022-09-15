@@ -1,5 +1,5 @@
 {
-  "root": "libs/dashboard/feature/data-viewer",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/dashboard/feature/data-viewer/src",
   "projectType": "library",
   "tags": ["type:feature", "domain:dashboard"],
@@ -15,7 +15,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/dashboard/feature/data-viewer"],
       "options": {
-        "jestConfig": "libs/dashboard/feature/data-viewer/jest.config.js",
+        "jestConfig": "libs/dashboard/feature/data-viewer/jest.config.ts",
         "passWithNoTests": true
       }
     }

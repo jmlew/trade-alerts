@@ -1,5 +1,5 @@
 {
-  "root": "libs/dashboard/domain",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/dashboard/domain/src",
   "projectType": "library",
   "tags": ["type:domain-logic", "domain:dashboard"],
@@ -15,7 +15,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/dashboard/domain"],
       "options": {
-        "jestConfig": "libs/dashboard/domain/jest.config.js",
+        "jestConfig": "libs/dashboard/domain/jest.config.ts",
         "passWithNoTests": true
       }
     }

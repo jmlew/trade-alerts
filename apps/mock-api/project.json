@@ -1,11 +1,11 @@
 {
-  "root": "apps/mock-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/mock-api/src",
   "projectType": "application",
   "tags": ["type:app"],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:build",
+      "executor": "@nrwl/node:webpack",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/mock-api",
@@ -28,7 +28,7 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/node:execute",
+      "executor": "@nrwl/node:node",
       "options": {
         "buildTarget": "mock-api:build"
       }
@@ -44,7 +44,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/mock-api"],
       "options": {
-        "jestConfig": "apps/mock-api/jest.config.js",
+        "jestConfig": "apps/mock-api/jest.config.ts",
         "passWithNoTests": true
       }
     }

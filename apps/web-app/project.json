@@ -1,5 +1,5 @@
 {
-  "root": "apps/web-app",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/web-app/src",
   "projectType": "application",
   "tags": ["type:app"],
@@ -35,6 +35,12 @@
           "namedChunks": false,
           "extractLicenses": true,
           "vendorChunk": false
+        },
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
         }
       }
     },
@@ -50,8 +56,12 @@
         "production": {
           "buildTarget": "web-app:build:production",
           "hmr": false
+        },
+        "development": {
+          "buildTarget": "web-app:build:development"
         }
-      }
+      },
+      "defaultConfiguration": "development"
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
@@ -64,7 +74,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/web-app"],
       "options": {
-        "jestConfig": "apps/web-app/jest.config.js",
+        "jestConfig": "apps/web-app/jest.config.ts",
         "passWithNoTests": true
       }
     },
