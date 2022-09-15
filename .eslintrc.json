@@ -82,6 +82,10 @@
               {
                 "sourceTag": "domain:users",
                 "onlyDependOnLibsWithTags": ["domain:users", "domain:shared"]
+              },
+              {
+                "sourceTag": "domain:dashboard",
+                "onlyDependOnLibsWithTags": ["domain:dashboard", "domain:shared"]
               }
             ]
           }

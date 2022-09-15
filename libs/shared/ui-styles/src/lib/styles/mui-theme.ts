@@ -81,6 +81,7 @@ const themeOptions: ThemeOptions = {
           },
           color: themeColors.primary.main,
           ...dashSectionBorder,
+          borderRadius: dashItemBorderRadius,
           '&:first-of-type, :last-of-type': {
             borderRadius: dashItemBorderRadius,
           },
@@ -93,6 +94,13 @@ const themeOptions: ThemeOptions = {
       styleOverrides: {
         expandIconWrapper: {
           color: themeColors.primary.dark,
+        },
+      },
+    },
+    MuiTablePagination: {
+      styleOverrides: {
+        toolbar: {
+          backgroundColor: 'inherit',
         },
       },
     },

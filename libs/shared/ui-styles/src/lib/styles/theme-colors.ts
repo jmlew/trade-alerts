@@ -11,6 +11,7 @@ export const themeColors = {
   },
   background: '#061521',
   backgroundDark: '#0b121b',
+  backgroundDarkest: '#0a0d15',
   backgroundLight: '#0F2435',
   borderDark: '#253f5c',
 };

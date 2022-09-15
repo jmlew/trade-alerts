@@ -27,12 +27,12 @@ export function DashChartsLayout() {
     <Box sx={styles.root}>
       <Box sx={styles.chartPanel}>
         <Box sx={styles.chart}>
-          <Typography>Chart A here</Typography>
+          <Typography align="center">Trade Values</Typography>
         </Box>
       </Box>
       <Box sx={styles.chartPanel}>
         <Box sx={styles.chart}>
-          <Typography>Chart B here</Typography>
+          <Typography align="center">Trades Count</Typography>
         </Box>
       </Box>
     </Box>

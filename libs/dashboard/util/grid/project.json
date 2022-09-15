@@ -2,7 +2,7 @@
   "root": "libs/dashboard/util/grid",
   "sourceRoot": "libs/dashboard/util/grid/src",
   "projectType": "library",
-  "tags": [],
+  "tags": ["type:util", "domain:dashboard"],
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",

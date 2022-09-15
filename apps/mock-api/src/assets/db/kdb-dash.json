@@ -1,125 +1,214 @@
 {
-  "alertsInfo": {
-    "alertID": [
-      "1234001",
-      "1234002",
-      "1234003",
-      "1234004",
-      "1234034",
-      "1234037",
-      "1234047",
-      "1234048"
-    ],
-    "cif": ["86018218400", "86018218411", "86018218412"],
-    "cip": ["3205428633", "3205428633", "3205428633"],
-    "rmId": ["SC32989", "GR5422", "MS12229"],
-    "rmName": ["Sam Cook", "Green Robert", "Manish Singh"],
-    "advisoryCenter": ["1201", "1201", "1202"],
-    "bookingCenter": ["321", "323", "500"],
-    "aum": [25.67, 120, 200],
-    "vulnerableClient": [1, 1, 0],
-    "portfolio": ["3205428633", "3205428633", "3205428633"]
-  },
+  "alerts": [
+    {
+      "alertID": "1234001",
+      "cif": "86018218400",
+      "cip": "3205428633",
+      "rmId": "SC32989",
+      "rmName": "Sam Cook",
+      "advisoryCenter": "1201",
+      "bookingCenter": "321",
+      "aum": 25.67,
+      "vulnerableClient": 1,
+      "portfolio": "3205428633"
+    },
+    {
+      "alertID": "1234002",
+      "cif": "86018218411",
+      "cip": "3205428633",
+      "rmId": "GR5422",
+      "rmName": "Green Robert",
+      "advisoryCenter": "1201",
+      "bookingCenter": "323",
+      "aum": 120,
+      "vulnerableClient": 1,
+      "portfolio": "3205428633"
+    },
+    {
+      "alertID": "1234003",
+      "cif": "86018218412",
+      "cip": "3205428633",
+      "rmId": "MS12229",
+      "rmName": "Manish Singh",
+      "advisoryCenter": "1202",
+      "bookingCenter": "500",
+      "aum": 200,
+      "vulnerableClient": 0,
+      "portfolio": "3205428633"
+    }
+  ],
   "alertsTrans": [
     {
-      "orderId": [21986661, 21986662, 21986663, 21986664, 21986665, 21986666],
-      "tradeDate": [
-        "08/01/2022",
-        "08/02/2022",
-        "08/03/2022",
-        "08/04/2022",
-        "08/05/2022",
-        "08/12/2022"
-      ],
-      "secName": [
-        "Aavas Financiers",
-        "Aarti Ind",
-        "Abbott",
-        "Abb India Ltd.",
-        "Blue Dart Ex",
-        "Federal Bank"
-      ],
-      "isin": [
-        "INE423A01024",
-        "INE117A01022",
-        "INE358A01014",
-        "INE012A01025 ",
-        "INE482D01024 ",
-        "INE731H01025 "
-      ],
-      "productCategory": [
-        "Fixed Income",
-        "Equity",
-        "Equity",
-        "Equity",
-        "Equity",
-        "Fixed Income"
-      ],
-      "riskCategory": ["BBB-", "AAA", "BBB-", "AB+", "AB+", "AAA"],
-      "tradeValue": ["67,234", "12,349", "4,39,999", "86,43,321", "32,456", "8,73,212"],
-      "buySell": [1, 1, 1, 1, 0, 0]
+      "orderId": 21986661,
+      "tradeDate": "08/01/2022",
+      "secName": "Aavas Financiers",
+      "isin": "INE423A01024",
+      "productCategory": "Fixed Income",
+      "riskCategory": "BBB-",
+      "tradeValue": "67,34",
+      "buySell": 1
+    },
+    {
+      "orderId": 21986662,
+      "tradeDate": "08/02/2022",
+      "secName": "Aarti Ind",
+      "isin": "INE117A01022",
+      "productCategory": "Equity",
+      "riskCategory": "AAA",
+      "tradeValue": "12,49",
+      "buySell": 1
+    },
+    {
+      "orderId": 21986663,
+      "tradeDate": "08/03/2022",
+      "secName": "Abbott",
+      "isin": "INE358A01014",
+      "productCategory": "Equity",
+      "riskCategory": "BBB-",
+      "tradeValue": "4,9,99",
+      "buySell": 1
+    },
+    {
+      "orderId": 21986664,
+      "tradeDate": "08/04/2022",
+      "secName": "Abb India Ltd.",
+      "isin": "INE012A01025 ",
+      "productCategory": "Equity",
+      "riskCategory": "AB+",
+      "tradeValue": "86,3,21",
+      "buySell": 1
+    },
+    {
+      "orderId": 21986665,
+      "tradeDate": "08/05/2022",
+      "secName": "Blue Dart Ex",
+      "isin": "INE482D01024 ",
+      "productCategory": "Equity",
+      "riskCategory": "AB+",
+      "tradeValue": "32,56",
+      "buySell": 0
+    },
+    {
+      "orderId": 21986666,
+      "tradeDate": "08/12/2022",
+      "secName": "Federal Bank",
+      "isin": "INE731H01025 ",
+      "productCategory": "Fixed Income",
+      "riskCategory": "AAA",
+      "tradeValue": "8,3,12",
+      "buySell": 0
     }
   ],
   "accountsTrans": [
     {
-      "orderId": [21986661, 21986662, 21986663, 21986664, 21986665, 21986666],
-      "tradeDate": [
-        "08/01/2022",
-        "08/02/2022",
-        "08/03/2022",
-        "08/04/2022",
-        "08/05/2022",
-        "08/12/2022"
-      ],
-      "secName": [
-        "Aavas Financiers",
-        "Aarti Ind",
-        "Abbott",
-        "Abb India Ltd.",
-        "Blue Dart Ex",
-        "Federal Bank"
-      ],
-      "isin": [
-        "INE423A01024",
-        "INE117A01022",
-        "INE358A01014",
-        "INE012A01025 ",
-        "INE482D01024 ",
-        "INE731H01025 "
-      ],
-      "productCategory": [
-        "Fixed Income",
-        "Equity",
-        "Equity",
-        "Equity",
-        "Equity",
-        "Fixed Income"
-      ],
-      "riskCategory": ["BBB-", "AAA", "BBB-", "AB+", "AB+", "AAA"],
-      "tradeValue": ["67,234", "12,349", "4,39,999", "86,43,321", "32,456", "8,73,212"],
-      "buySell": [1, 1, 1, 1, 0, 0],
-      "portfolio": [
-        "sfp3205428633",
-        "trf3205428633",
-        "tft3205428633",
-        "spt3205428633",
-        "3205428633",
-        "3205428633"
-      ]
+      "orderId": 21986661,
+      "tradeDate": "08/01/2022",
+      "secName": "Aavas Financiers",
+      "isin": "INE423A01024",
+      "productCategory": "Fixed Income",
+      "riskCategory": "BBB-",
+      "tradeValue": "67,234",
+      "buySell": 1,
+      "portfolio": "sfp3205428633"
+    },
+    {
+      "orderId": 21986662,
+      "tradeDate": "08/02/2022",
+      "secName": "Aarti Ind",
+      "isin": "INE117A01022",
+      "productCategory": "Equity",
+      "riskCategory": "AAA",
+      "tradeValue": "12,349",
+      "buySell": 1,
+      "portfolio": "trf3205428633"
+    },
+    {
+      "orderId": 21986663,
+      "tradeDate": "08/03/2022",
+      "secName": "Abbott",
+      "isin": "INE358A01014",
+      "productCategory": "Equity",
+      "riskCategory": "BBB-",
+      "tradeValue": "4,39,999",
+      "buySell": 1,
+      "portfolio": "tft3205428633"
+    },
+    {
+      "orderId": 21986664,
+      "tradeDate": "08/04/2022",
+      "secName": "Abb India Ltd.",
+      "isin": "INE012A01025 ",
+      "productCategory": "Equity",
+      "riskCategory": "AB+",
+      "tradeValue": "86,43,321",
+      "buySell": 1,
+      "portfolio": "spt3205428633"
+    },
+    {
+      "orderId": 21986665,
+      "tradeDate": "08/05/2022",
+      "secName": "Blue Dart Ex",
+      "isin": "INE482D01024 ",
+      "productCategory": "Equity",
+      "riskCategory": "AB+",
+      "tradeValue": "32,456",
+      "buySell": 0,
+      "portfolio": "3205428633"
+    },
+    {
+      "orderId": 21986666,
+      "tradeDate": "08/12/2022",
+      "secName": "Federal Bank",
+      "isin": "INE731H01025 ",
+      "productCategory": "Fixed Income",
+      "riskCategory": "AAA",
+      "tradeValue": "8,73,212",
+      "buySell": 0,
+      "portfolio": "3205428633"
     }
   ],
-  "tradesInfo": {
-    "date": [
-      "08/01/2022",
-      "08/02/2022",
-      "08/03/2022",
-      "08/04/2022",
-      "08/05/2022",
-      "08/12/2022"
-    ],
-    "valueBuy": [1, 0.56, 1.2, 2, 0.92, 1.5],
-    "valueSell": [1, 0.56, 1.2, 2, 0.92, 1.5],
-    "countBuy": [39544, 1200, 2300, 43000, 98543, 65321],
-    "countSell": [39544, 1200, 2300, 43000, 98543, 65321]
-  }
+  "trades": [
+    {
+      "date": "08/01/2022",
+      "valueBuy": 1,
+      "valueSell": 1,
+      "countBuy": 39544,
+      "countSell": 39544
+    },
+    {
+      "date": "08/02/2022",
+      "valueBuy": 0.56,
+      "valueSell": 0.56,
+      "countBuy": 1200,
+      "countSell": 1200
+    },
+    {
+      "date": "08/03/2022",
+      "valueBuy": 1.2,
+      "valueSell": 1.2,
+      "countBuy": 2300,
+      "countSell": 2300
+    },
+    {
+      "date": "08/04/2022",
+      "valueBuy": 2,
+      "valueSell": 2,
+      "countBuy": 43000,
+      "countSell": 43000
+    },
+    {
+      "date": "08/05/2022",
+      "valueBuy": 0.92,
+      "valueSell": 0.92,
+      "countBuy": 98543,
+      "countSell": 98543
+    },
+    {
+      "date": "08/12/2022",
+      "valueBuy": 1.5,
+      "valueSell": 1.5,
+      "countBuy": 65321,
+      "countSell": 65321
+    }
+  ]
 }
