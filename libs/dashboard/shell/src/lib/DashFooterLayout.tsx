@@ -11,6 +11,6 @@ const styles = {
   },
 };
 
-export function ShellFooter() {
+export function DashFooterLayout() {
   return <Box sx={styles.root}>Dash Footer</Box>;
 }

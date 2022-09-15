@@ -30,7 +30,7 @@ const styles = {
   },
 };
 
-export function ShellHeader() {
+export function DashHeaderLayout() {
   const [searchParams] = useSearchParams();
   const [type, setType] = useState<FiltersType>(getInitialFilterType(searchParams));
 

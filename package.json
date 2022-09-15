@@ -6,9 +6,11 @@
   "scripts": {
     "----- SERVE --------------------": "",
     "start": "npm run serve:api & npm run serve:web",
-    "serve:web": "nx run web-app:serve",
-    "serve:api": "nx run mock-api:serve",
+    "serve:web": "kill:web & nx run web-app:serve",
+    "serve:api": "kill:api & nx run mock-api:serve",
     "serve:dist": "live-server dist/apps/web-app --no-browser --port=6600",
+    "kill:web": "kill $(lsof -t -i:4200)",
+    "kill:api": "kill $(lsof -t -i:3333)",
     "----- BUILD --------------------": "",
     "build": "nx build",
     "build:prod": "nx build --prod",

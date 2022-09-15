@@ -18,6 +18,6 @@ interface ShellContentProps {
   children: ReactNode;
 }
 
-export function ShellContent({ children }: ShellContentProps) {
+export function DashContentLayout({ children }: ShellContentProps) {
   return <Box sx={styles.root}>{children}</Box>;
 }

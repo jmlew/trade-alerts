@@ -1,12 +1,10 @@
-import {
-  DashboardDataProvider,
-  DataViewerContainer,
-} from '@kdb-dash/dashboard/feature/data-viewer';
+import { DashboardDataProvider } from '@kdb-dash/dashboard/feature/data-provider';
+import { DataViewerContainer } from '@kdb-dash/dashboard/feature/data-viewer';
 import { Theme } from '@mui/material';
 import Box from '@mui/material/Box';
 
-import { ShellContent } from './ShellContent';
-import { ShellHeader } from './ShellHeader';
+import { DashContentLayout } from './DashContentLayout';
+import { DashHeaderLayout } from './DashHeaderLayout';
 
 export const styles = {
   root: (theme: Theme) => ({
@@ -20,12 +18,12 @@ export const styles = {
 export function DashShell() {
   return (
     <Box sx={styles.root}>
-      <ShellHeader />
-      <ShellContent>
-        <DashboardDataProvider>
+      <DashboardDataProvider>
+        <DashHeaderLayout />
+        <DashContentLayout>
           <DataViewerContainer isErrorAlertsShown={true} />
-        </DashboardDataProvider>
-      </ShellContent>
+        </DashContentLayout>
+      </DashboardDataProvider>
     </Box>
   );
 }

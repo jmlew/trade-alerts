@@ -1,7 +1,6 @@
+import { useDashboardDataContext } from '@kdb-dash/dashboard/feature/data-provider';
 import { dashSectionBorder, themeColors } from '@kdb-dash/shared/ui-styles';
 import { Box, Typography } from '@mui/material';
-
-import { useDashboardDataContext } from '../context/dashboard-data.context';
 
 const styles = {
   root: {

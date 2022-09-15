@@ -3,6 +3,7 @@ import {
   alertInfoConfigs,
   transactionConfigs,
 } from '@kdb-dash/dashboard/domain';
+import { useDashboardDataContext } from '@kdb-dash/dashboard/feature/data-provider';
 import { DashboardGridMui } from '@kdb-dash/dashboard/ui/grids';
 import { themeColors } from '@kdb-dash/shared/ui-styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -14,7 +15,6 @@ import {
   Typography,
 } from '@mui/material';
 
-import { useDashboardDataContext } from '../context/dashboard-data.context';
 import { getTransactionConfigsMui } from '../utils/dashboard-grid-configs.utils';
 import { normaliseMuiGridData } from '../utils/dashboard-grid-data.util';
 
