@@ -10,3 +10,5 @@ export interface DateRange {
   from: number;
   to: number;
 }
+
+// Post is {alertId: 1234}

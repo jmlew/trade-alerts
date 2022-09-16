@@ -8,6 +8,36 @@ const styles = {
   root: { height: 420 },
   grid: {
     backgroundColor: themeColors.backgroundDarkest,
+    borderColor: themeColors.borderDark,
+    color: themeColors.primary.light,
+    fontWeight: 300,
+    fontSize: 13,
+    '& .MuiDataGrid-columnHeaders': {
+      color: themeColors.primary.main,
+      borderBottomColor: themeColors.borderDark,
+    },
+    '& .MuiDataGrid-columnSeparator': {
+      color: themeColors.borderDark,
+    },
+    '& .MuiDataGrid-cell': {
+      borderBottomColor: themeColors.borderDark,
+    },
+    '& .MuiDataGrid-row': {
+      '&:hover': {
+        backgroundColor: themeColors.backgroundDark,
+        color: themeColors.primary.main,
+      },
+    },
+    '& .MuiDataGrid-footerContainer': {
+      color: themeColors.primary.dark,
+      borderTopColor: themeColors.borderDark,
+    },
+    '& .MuiTablePagination-root': {
+      color: themeColors.primary.dark,
+    },
+    '& .MuiIconButton-root': {
+      color: themeColors.primary.main,
+    },
   },
 };
 
