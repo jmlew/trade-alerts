@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { FiltersType, getInitialFilterType } from '@kdb-dash/dashboard/domain';
+import { useDashboardDataContext } from '@kdb-dash/dashboard/feature/data-provider';
 import {
   DashSelectorContainer,
   DataLoaderContainer,
   DataSelectorContainer,
 } from '@kdb-dash/dashboard/feature/data-selector';
 import { FiltersTypeBtns } from '@kdb-dash/dashboard/ui/controls';
+import { ApiStateManager } from '@kdb-dash/shared/data-access';
 import { DividerVert } from '@kdb-dash/shared/ui-common';
 import { ExpandCircleDownOutlined } from '@mui/icons-material';
 import { Box } from '@mui/material';
@@ -33,7 +35,11 @@ const styles = {
 export function DashHeaderLayout() {
   const [searchParams] = useSearchParams();
   const [type, setType] = useState<FiltersType>(getInitialFilterType(searchParams));
-
+  // TODO: Remove context dependancy and add to container which handles showing the side
+  // panel and alert update containers.
+  const { dashDataState } = useDashboardDataContext();
+  const isPending: boolean =
+    dashDataState != null && ApiStateManager.isPending(dashDataState);
   return (
     <AppBar position="static">
       <Toolbar>
@@ -47,7 +53,13 @@ export function DashHeaderLayout() {
           <DataLoaderContainer />
         </Box>
         <SectionSpacer />
-        <IconButton edge="end" color="primary" aria-label="update-alert" sx={{ ml: 2 }}>
+        <IconButton
+          disabled={isPending}
+          edge="end"
+          color="primary"
+          aria-label="update-alert"
+          sx={{ ml: 2 }}
+        >
           <ExpandCircleDownOutlined sx={{ transform: 'rotate(90deg)' }} />
         </IconButton>
       </Toolbar>

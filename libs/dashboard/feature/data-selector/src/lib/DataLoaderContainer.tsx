@@ -26,7 +26,7 @@ export function DataLoaderContainer() {
 
   return (
     <BtnLoadData
-      isDisabled={dashDataState && ApiStateManager.isPending(dashDataState)}
+      isLoading={dashDataState && ApiStateManager.isPending(dashDataState)}
       onClick={handleLoadData}
     />
   );

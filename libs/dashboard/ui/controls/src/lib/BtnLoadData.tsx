@@ -1,26 +1,27 @@
 import { ChevronRight } from '@mui/icons-material';
-import { Button } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 
 const styles = {
   root: { whiteSpace: 'nowrap' },
 };
 
 interface BtnLoadDataProps {
-  isDisabled?: boolean;
+  isLoading?: boolean;
   onClick: () => void;
 }
 
-export function BtnLoadData({ isDisabled, onClick }: BtnLoadDataProps) {
+export function BtnLoadData({ isLoading, onClick }: BtnLoadDataProps) {
   return (
-    <Button
+    <LoadingButton
       sx={styles.root}
-      disabled={isDisabled}
+      loading={isLoading}
       onClick={onClick}
       variant="outlined"
       color="primary"
+      loadingPosition="end"
       endIcon={<ChevronRight />}
     >
       Load Data
-    </Button>
+    </LoadingButton>
   );
 }
