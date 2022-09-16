@@ -5,15 +5,17 @@ import { SxProps } from '@mui/system';
 
 interface JsonViewerProps {
   data: object;
+  isBaseShown?: boolean;
   sx?: SxProps;
 }
 
-export function JsonViewer({ data, sx }: JsonViewerProps) {
+export function JsonViewer({ data, isBaseShown, sx }: JsonViewerProps) {
   return (
     <Box sx={sx}>
       <ReactJson
+        style={isBaseShown ? {} : { background: 'transparent' }}
         src={data}
-        theme="hopscotch"
+        theme="brewer"
         onSelect={false}
         // collapsed={true}
         // collapseStringsAfterLength={15}

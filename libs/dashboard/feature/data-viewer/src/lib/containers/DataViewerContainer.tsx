@@ -37,12 +37,7 @@ export function DataViewerContainer({ isErrorAlertsShown }: DataViewerContainerP
     <>
       {isPending(dashDataState) && <Loading message="Loading Dashboard" />}
       {isFailed(dashDataState) && <ErrorMessage>{getError(dashDataState)}</ErrorMessage>}
-      {isCompleted(dashDataState) && dashData != null && (
-        <>
-          <DashLayout />
-          {/* <JsonViewer data={dashData as object} sx={{ width: 0.8 }} /> */}
-        </>
-      )}
+      {isCompleted(dashDataState) && dashData != null && <DashLayout />}
     </>
   );
 }
