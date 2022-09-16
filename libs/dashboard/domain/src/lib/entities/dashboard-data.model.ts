@@ -43,3 +43,8 @@ export interface TradesInfo {
   countBuy: number;
   countSell: number;
 }
+
+export interface AlertOverviewInfo {
+  heading: string;
+  values: (string | number)[];
+}

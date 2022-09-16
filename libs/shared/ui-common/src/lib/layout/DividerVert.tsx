@@ -1,18 +1,27 @@
-import { Box, Theme } from '@mui/material';
 import Divider from '@mui/material/Divider';
 
 const styles = {
-  root: (theme: Theme) => ({
+  root: {
     mx: 2,
-    borderColor: theme.palette.primary.dark,
+    borderColor: 'primary.dark',
     opacity: 0.3,
-  }),
+  },
 };
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface DividerVertProps {}
+interface DividerVertProps {
+  spacing?: number;
+}
 
 // eslint-disable-next-line no-empty-pattern
-export function DividerVert({}: DividerVertProps) {
-  return <Divider orientation="vertical" variant="middle" flexItem sx={styles.root} />;
+export function DividerVert({ spacing }: DividerVertProps) {
+  const custom = spacing == null ? {} : { mx: spacing };
+  return (
+    <Divider
+      orientation="vertical"
+      variant="middle"
+      flexItem
+      sx={{ ...styles.root, ...custom }}
+    />
+  );
 }

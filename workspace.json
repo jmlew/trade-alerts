@@ -8,6 +8,7 @@
     "dashboard-shell": "libs/dashboard/shell",
     "dashboard-ui-charts": "libs/dashboard/ui/charts",
     "dashboard-ui-controls": "libs/dashboard/ui/controls",
+    "dashboard-ui-details": "libs/dashboard/ui/details",
     "dashboard-ui-grids": "libs/dashboard/ui/grids",
     "dashboard-util-grid": "libs/dashboard/util/grid",
     "home-feature": "libs/home/feature",

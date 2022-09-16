@@ -9,6 +9,8 @@ export * from './lib/entities/dashboard-data.model';
 export * from './lib/entities/dashboard-data.enum';
 export * from './lib/entities/dashboard-data-configs.model';
 export * from './lib/entities/dashboard-data-configs.constants';
+export * from './lib/entities/dashboard-data-fields.enum';
+export * from './lib/entities/dashboard-data-labels.constants';
 
 // Expose the facade which encapsulates all data services.
 export * from './lib/application/dashboard-data.facade';

@@ -1,5 +1,6 @@
+import { AlertOverviewInfo } from '@kdb-dash/dashboard/domain';
 import { useDashboardDataContext } from '@kdb-dash/dashboard/feature/data-provider';
-import { JsonViewer } from '@kdb-dash/shared/ui-common';
+import { AlertOverviews } from '@kdb-dash/dashboard/ui/details';
 import { themeColors } from '@kdb-dash/shared/ui-styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
@@ -10,14 +11,18 @@ import {
   Typography,
 } from '@mui/material';
 
+import { getAlertOverviews } from '../utils/dashboard-overview-data.util';
+
 const styles = {
   root: { width: 1 },
-  overviewPanel: {
+  panel: {
     width: 1,
     backgroundColor: themeColors.backgroundLight,
     color: 'primary.main',
   },
-  overview: { width: 1, height: 200, overflow: 'hidden' },
+  panelContent: {
+    padding: '8px',
+  },
 };
 
 export function DashOverviewLayout() {
@@ -26,16 +31,15 @@ export function DashOverviewLayout() {
     return null;
   }
   const { alerts } = dashData;
+  const overviews: AlertOverviewInfo[] = getAlertOverviews(alerts);
   return (
     <Box sx={styles.root}>
-      <Accordion sx={styles.overviewPanel}>
+      <Accordion sx={styles.panel}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />} id="overview-header">
           <Typography>Alerts Overview</Typography>
         </AccordionSummary>
-        <AccordionDetails>
-          <Box sx={styles.overview}>
-            <JsonViewer data={alerts} sx={{ width: 0.8 }} />
-          </Box>
+        <AccordionDetails sx={styles.panelContent}>
+          <AlertOverviews overviews={overviews} />
         </AccordionDetails>
       </Accordion>
     </Box>
