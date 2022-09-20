@@ -19,6 +19,9 @@
     "paths": {
       "@custom-types": ["./types/index.ts"],
       "@kdb-dash/dashboard/domain": ["libs/dashboard/domain/src/index.ts"],
+      "@kdb-dash/dashboard/feature/alert-updater": [
+        "libs/dashboard/feature/alert-updater/src/index.ts"
+      ],
       "@kdb-dash/dashboard/feature/data-provider": [
         "libs/dashboard/feature/data-provider/src/index.ts"
       ],
