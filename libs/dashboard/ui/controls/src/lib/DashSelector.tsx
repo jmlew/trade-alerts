@@ -3,7 +3,13 @@ import { FormControl, MenuItem, Select, SelectChangeEvent, Theme } from '@mui/ma
 
 const styles = {
   root: { width: '25%', minWidth: 200, height: 38 },
-  select: (theme: Theme) => ({ height: 1, color: theme.palette.primary.main }),
+  select: (theme: Theme) => ({
+    height: 1,
+
+    '& .MuiSelect-icon': {
+      color: theme.palette.primary.main,
+    },
+  }),
 };
 
 interface DashSelectorProps {

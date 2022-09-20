@@ -95,6 +95,16 @@ const themeOptions: ThemeOptions = {
         expandIconWrapper: {
           color: themeColors.primary.dark,
         },
+        root: {
+          '&.Mui-expanded': {
+            minHeight: 48,
+          },
+        },
+        content: {
+          '&.Mui-expanded': {
+            margin: '12px 0',
+          },
+        },
       },
     },
     MuiTablePagination: {

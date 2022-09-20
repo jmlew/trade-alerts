@@ -20,10 +20,11 @@ const styles = {
   panel: {
     width: 1,
     backgroundColor: themeColors.backgroundLight,
-    color: 'primary.main',
+    color: 'white',
   },
   panelContent: {
     padding: '8px',
+    color: 'white',
   },
 };
 
@@ -45,7 +46,7 @@ export function DashOverviewLayout() {
     <Box sx={styles.root}>
       <Accordion sx={styles.panel} expanded={isOpen} onChange={handleToggleAccordian}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />} id="overview-header">
-          <Typography>Alerts Overview</Typography>
+          <Typography variant="body2">Alerts Overview</Typography>
         </AccordionSummary>
         <AccordionDetails sx={styles.panelContent}>
           <AlertOverviews overviews={overviews} />

@@ -20,7 +20,7 @@ import { normaliseMuiGridData } from '../utils/dashboard-grid-data.util';
 
 const styles = {
   root: { width: 1, color: 'primary.main', backgroundColor: themeColors.background },
-  gridPanel: { width: 1, backgroundColor: themeColors.backgroundDark },
+  gridPanel: { width: 1, backgroundColor: themeColors.backgroundDark, color: 'white' },
   grid: { width: 1 },
 };
 
@@ -37,7 +37,7 @@ export function DashGridsLayout() {
       {alerts != null && (
         <Accordion sx={styles.gridPanel}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />} id="grid-1-header">
-            <Typography>Alert Information</Typography>
+            <Typography variant="body2">Alert Information</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <DashboardGridMui
@@ -51,7 +51,7 @@ export function DashGridsLayout() {
       {alertsTrans != null && (
         <Accordion sx={styles.gridPanel}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />} id="grid-2-header">
-            <Typography>Alerted Transactions</Typography>
+            <Typography variant="body2">Alerted Transactions</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <DashboardGridMui
@@ -65,7 +65,7 @@ export function DashGridsLayout() {
       {accountsTrans != null && (
         <Accordion sx={styles.gridPanel}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />} id="grid-3-header">
-            <Typography>Account Transactions</Typography>
+            <Typography variant="body2">Account Transactions</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <DashboardGridMui
