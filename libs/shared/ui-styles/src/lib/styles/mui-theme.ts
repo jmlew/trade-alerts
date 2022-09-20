@@ -101,6 +101,8 @@ const themeOptions: ThemeOptions = {
           },
         },
         content: {
+          alignItems: 'center',
+          justifyContent: 'space-between',
           '&.Mui-expanded': {
             margin: '12px 0',
           },

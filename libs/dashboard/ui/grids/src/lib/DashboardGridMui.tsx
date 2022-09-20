@@ -1,12 +1,12 @@
 import { DashboardDataGridField } from '@kdb-dash/dashboard/domain';
 import { themeColors } from '@kdb-dash/shared/ui-styles';
-import { SxProps } from '@mui/material';
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
 const styles = {
-  root: { height: 420 },
+  root: { width: 1, height: 420 },
   grid: {
+    width: 1,
     backgroundColor: themeColors.backgroundDarkest,
     borderColor: themeColors.borderDark,
     color: themeColors.primary.light,
@@ -42,14 +42,13 @@ const styles = {
 };
 
 interface DashboardGridMuiProps {
-  sx: SxProps;
   data: DashboardDataGridField[];
   configs: GridColDef<DashboardDataGridField>[];
 }
 
-export function DashboardGridMui({ data, configs, sx }: DashboardGridMuiProps) {
+export function DashboardGridMui({ data, configs }: DashboardGridMuiProps) {
   return (
-    <Box sx={{ ...styles.root, ...sx }}>
+    <Box sx={styles.root}>
       <DataGrid
         sx={styles.grid}
         rows={data}

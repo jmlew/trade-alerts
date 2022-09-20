@@ -1,10 +1,6 @@
-import {
-  DashboardDataGridField,
-  alertInfoConfigs,
-  transactionConfigs,
-} from '@kdb-dash/dashboard/domain';
-import { useDashboardDataContext } from '@kdb-dash/dashboard/feature/data-provider';
-import { DashboardGridMui } from '@kdb-dash/dashboard/ui/grids';
+import { MouseEvent, SyntheticEvent, useState } from 'react';
+
+import { BtnDownloadData } from '@kdb-dash/dashboard/ui/controls';
 import { themeColors } from '@kdb-dash/shared/ui-styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
@@ -15,67 +11,86 @@ import {
   Typography,
 } from '@mui/material';
 
-import { getTransactionConfigsMui } from '../utils/dashboard-grid-configs.utils';
-import { normaliseMuiGridData } from '../utils/dashboard-grid-data.util';
+import { DashboardGridContainer } from '../containers/DashboardGridContainer';
+import { DashboardGrid } from '../enum/DashboardGrid.enum';
 
 const styles = {
   root: { width: 1, color: 'primary.main', backgroundColor: themeColors.background },
-  gridPanel: { width: 1, backgroundColor: themeColors.backgroundDark, color: 'white' },
-  grid: { width: 1 },
+  dashboardGrid: {
+    width: 1,
+    backgroundColor: themeColors.backgroundDark,
+    color: 'white',
+  },
+  panelContent: { pt: 0 },
 };
 
 export function DashGridsLayout() {
-  const { dashData } = useDashboardDataContext();
-  if (!dashData) {
-    return null;
+  const [panelExpandState, setPanelExpandState] = useState({
+    [DashboardGrid.AlertInformation]: false,
+    [DashboardGrid.AlertedTransactions]: false,
+    [DashboardGrid.AccountTransactions]: false,
+  });
+
+  function handleDownloadData(grid: DashboardGrid) {
+    console.log('Download CSV for ', grid);
   }
-  console.log('dashData', dashData);
-  const { alerts, alertsTrans, accountsTrans } = dashData;
+
+  function handleAccordianExpandChange(panel: DashboardGrid) {
+    return (event: SyntheticEvent, isExpanded: boolean) => {
+      return setPanelExpandState({ ...panelExpandState, [panel]: isExpanded });
+    };
+  }
 
   return (
     <Box sx={styles.root}>
-      {alerts != null && (
-        <Accordion sx={styles.gridPanel}>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />} id="grid-1-header">
-            <Typography variant="body2">Alert Information</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <DashboardGridMui
-              data={normaliseMuiGridData<DashboardDataGridField>(alerts)}
-              configs={getTransactionConfigsMui(alertInfoConfigs)}
-              sx={styles.grid}
-            />
-          </AccordionDetails>
-        </Accordion>
-      )}
-      {alertsTrans != null && (
-        <Accordion sx={styles.gridPanel}>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />} id="grid-2-header">
-            <Typography variant="body2">Alerted Transactions</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <DashboardGridMui
-              data={normaliseMuiGridData<DashboardDataGridField>(alertsTrans)}
-              configs={getTransactionConfigsMui(transactionConfigs)}
-              sx={styles.grid}
-            />
-          </AccordionDetails>
-        </Accordion>
-      )}
-      {accountsTrans != null && (
-        <Accordion sx={styles.gridPanel}>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />} id="grid-3-header">
-            <Typography variant="body2">Account Transactions</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <DashboardGridMui
-              data={normaliseMuiGridData<DashboardDataGridField>(accountsTrans)}
-              configs={getTransactionConfigsMui(transactionConfigs)}
-              sx={styles.grid}
-            />
-          </AccordionDetails>
-        </Accordion>
-      )}
+      <GridAccordian
+        grid={DashboardGrid.AlertInformation}
+        isExpanded={panelExpandState[DashboardGrid.AlertInformation]}
+        onChange={handleAccordianExpandChange(DashboardGrid.AlertInformation)}
+        onDownload={handleDownloadData}
+      />
+      <GridAccordian
+        grid={DashboardGrid.AlertedTransactions}
+        isExpanded={panelExpandState[DashboardGrid.AlertedTransactions]}
+        onChange={handleAccordianExpandChange(DashboardGrid.AlertedTransactions)}
+        onDownload={handleDownloadData}
+      />
+      <GridAccordian
+        grid={DashboardGrid.AccountTransactions}
+        isExpanded={panelExpandState[DashboardGrid.AccountTransactions]}
+        onChange={handleAccordianExpandChange(DashboardGrid.AccountTransactions)}
+        onDownload={handleDownloadData}
+      />
     </Box>
+  );
+}
+
+interface GridAccordianProps {
+  grid: DashboardGrid;
+  isExpanded: boolean;
+  onChange: (event: React.SyntheticEvent, expanded: boolean) => void;
+  onDownload: (grid: DashboardGrid) => void;
+}
+
+function GridAccordian({ grid, isExpanded, onChange, onDownload }: GridAccordianProps) {
+  function handleDownloadClick(event: MouseEvent<HTMLButtonElement>) {
+    event.stopPropagation();
+    onDownload(grid);
+  }
+
+  return (
+    <Accordion
+      TransitionProps={{ unmountOnExit: true }}
+      sx={styles.dashboardGrid}
+      onChange={onChange}
+    >
+      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+        <Typography variant="body2">{grid}</Typography>
+        {isExpanded && <BtnDownloadData onClick={handleDownloadClick} />}
+      </AccordionSummary>
+      <AccordionDetails sx={styles.panelContent}>
+        <DashboardGridContainer grid={DashboardGrid.AlertInformation} />
+      </AccordionDetails>
+    </Accordion>
   );
 }
