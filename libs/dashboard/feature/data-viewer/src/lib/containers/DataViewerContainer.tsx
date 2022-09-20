@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDashboardDataContext } from '@kdb-dash/dashboard/feature/data-provider';
 import { ApiStateManager } from '@kdb-dash/shared/data-access';
 import { useAlert } from '@kdb-dash/shared/feature-alert';
-import { ErrorMessage, JsonViewer, Loading } from '@kdb-dash/shared/ui-common';
+import { ErrorMessage, Loading } from '@kdb-dash/shared/ui-common';
 
 import { DashLayout } from '../components/DashLayout';
 
@@ -35,7 +35,7 @@ export function DataViewerContainer({ isErrorAlertsShown }: DataViewerContainerP
 
   return (
     <>
-      {isPending(dashDataState) && <Loading message="Loading Dashboard" />}
+      {isPending(dashDataState) && <Loading message="Loading Data" top={6} />}
       {isFailed(dashDataState) && <ErrorMessage>{getError(dashDataState)}</ErrorMessage>}
       {isCompleted(dashDataState) && dashData != null && <DashLayout />}
     </>

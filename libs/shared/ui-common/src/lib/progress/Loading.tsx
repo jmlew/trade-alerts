@@ -1,7 +1,8 @@
-import { Box, CircularProgress, Theme, Typography } from '@mui/material';
+import { Box, CircularProgress, Typography } from '@mui/material';
 
 const styles = {
-  root: (theme: Theme) => ({
+  root: (top?: number) => ({
+    pt: top == null ? 0 : top,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -10,11 +11,12 @@ const styles = {
 
 interface LoadingProps {
   message?: string;
+  top?: number;
 }
 
-export function Loading({ message }: LoadingProps) {
+export function Loading({ message, top }: LoadingProps) {
   return (
-    <Box sx={styles.root}>
+    <Box sx={styles.root(top)}>
       {!!message && (
         <Typography variant="body1" mr={2} color="primary.dark">
           {message}

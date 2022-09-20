@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { FiltersType, getInitialFilterType } from '@kdb-dash/dashboard/domain';
@@ -40,6 +40,12 @@ export function DashHeaderLayout() {
   const { dashDataState } = useDashboardDataContext();
   const isPending: boolean =
     dashDataState != null && ApiStateManager.isPending(dashDataState);
+
+  useEffect(() => {
+    if (isPending && isAlertUpdaterOpen) {
+      setAlertUpdaterOpen(false);
+    }
+  }, [isPending, isAlertUpdaterOpen]);
 
   function handleToggleDrawer() {
     setAlertUpdaterOpen(!isAlertUpdaterOpen);
