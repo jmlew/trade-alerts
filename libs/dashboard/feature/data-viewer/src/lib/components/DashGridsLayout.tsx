@@ -1,4 +1,4 @@
-import { MouseEvent, SyntheticEvent, useState } from 'react';
+import { ReactNode, SyntheticEvent, useState } from 'react';
 
 import { BtnDownloadData } from '@kdb-dash/dashboard/ui/controls';
 import { themeColors } from '@kdb-dash/shared/ui-styles';
@@ -21,11 +21,16 @@ const styles = {
     backgroundColor: themeColors.backgroundDark,
     color: 'white',
   },
-  panelContent: { pt: 0 },
 };
 
+interface GridShownState {
+  [DashboardGrid.AlertInformation]: boolean;
+  [DashboardGrid.AlertedTransactions]: boolean;
+  [DashboardGrid.AccountTransactions]: boolean;
+}
+
 export function DashGridsLayout() {
-  const [panelExpandState, setPanelExpandState] = useState({
+  const [gridShownState, setGridShownState] = useState<GridShownState>({
     [DashboardGrid.AlertInformation]: false,
     [DashboardGrid.AlertedTransactions]: false,
     [DashboardGrid.AccountTransactions]: false,
@@ -35,62 +40,74 @@ export function DashGridsLayout() {
     console.log('Download CSV for ', grid);
   }
 
-  function handleAccordianExpandChange(panel: DashboardGrid) {
-    return (event: SyntheticEvent, isExpanded: boolean) => {
-      return setPanelExpandState({ ...panelExpandState, [panel]: isExpanded });
-    };
-  }
-
   return (
     <Box sx={styles.root}>
       <GridAccordian
-        grid={DashboardGrid.AlertInformation}
-        isExpanded={panelExpandState[DashboardGrid.AlertInformation]}
-        onChange={handleAccordianExpandChange(DashboardGrid.AlertInformation)}
-        onDownload={handleDownloadData}
-      />
-      <GridAccordian
-        grid={DashboardGrid.AlertedTransactions}
-        isExpanded={panelExpandState[DashboardGrid.AlertedTransactions]}
-        onChange={handleAccordianExpandChange(DashboardGrid.AlertedTransactions)}
-        onDownload={handleDownloadData}
-      />
+        grid={DashboardGrid.AccountTransactions}
+        shownState={gridShownState}
+        setShownState={setGridShownState}
+        onDownloadClick={handleDownloadData}
+      >
+        <DashboardGridContainer grid={DashboardGrid.AlertInformation} />
+      </GridAccordian>
       <GridAccordian
         grid={DashboardGrid.AccountTransactions}
-        isExpanded={panelExpandState[DashboardGrid.AccountTransactions]}
-        onChange={handleAccordianExpandChange(DashboardGrid.AccountTransactions)}
-        onDownload={handleDownloadData}
-      />
+        shownState={gridShownState}
+        setShownState={setGridShownState}
+        onDownloadClick={handleDownloadData}
+      >
+        <DashboardGridContainer grid={DashboardGrid.AlertedTransactions} />
+      </GridAccordian>
+      <GridAccordian
+        grid={DashboardGrid.AccountTransactions}
+        shownState={gridShownState}
+        setShownState={setGridShownState}
+        onDownloadClick={handleDownloadData}
+      >
+        <DashboardGridContainer grid={DashboardGrid.AccountTransactions} />
+      </GridAccordian>
     </Box>
   );
 }
 
 interface GridAccordianProps {
+  children: ReactNode;
   grid: DashboardGrid;
-  isExpanded: boolean;
-  onChange: (event: React.SyntheticEvent, expanded: boolean) => void;
-  onDownload: (grid: DashboardGrid) => void;
+  shownState: GridShownState;
+  setShownState: (state: GridShownState) => void;
+  onDownloadClick: (grid: DashboardGrid) => void;
 }
 
-function GridAccordian({ grid, isExpanded, onChange, onDownload }: GridAccordianProps) {
-  function handleDownloadClick(event: MouseEvent<HTMLButtonElement>) {
-    event.stopPropagation();
-    onDownload(grid);
+function GridAccordian({
+  children,
+  grid,
+  shownState,
+  setShownState,
+  onDownloadClick,
+}: GridAccordianProps) {
+  const isExpanded: boolean = shownState[grid];
+
+  function handleChange() {
+    return (event: SyntheticEvent, isExpanded: boolean) => {
+      return setShownState({ ...shownState, [grid]: isExpanded });
+    };
+  }
+
+  function handleDownloadClick() {
+    onDownloadClick(grid);
   }
 
   return (
     <Accordion
       TransitionProps={{ unmountOnExit: true }}
       sx={styles.dashboardGrid}
-      onChange={onChange}
+      onChange={handleChange}
     >
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Typography variant="body2">{grid}</Typography>
         {isExpanded && <BtnDownloadData onClick={handleDownloadClick} />}
       </AccordionSummary>
-      <AccordionDetails sx={styles.panelContent}>
-        <DashboardGridContainer grid={DashboardGrid.AlertInformation} />
-      </AccordionDetails>
+      <AccordionDetails sx={{ pt: 0 }}>{children}</AccordionDetails>
     </Accordion>
   );
 }
