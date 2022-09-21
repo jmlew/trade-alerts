@@ -292,13 +292,30 @@
     "colId": "27b80a40-3ed0-4389-83b6-648478c96953",
     "containerId": "",
     "name": "DashboardData getDashboardData",
-    "url": "http://localhost:3333/api/dashboard",
+    "url": "http://localhost:4200/api/dashboard?type=1&alertId=4561232123121",
     "method": "GET",
     "sortNum": 20000,
     "created": "2022-09-08T09:33:23.445Z",
-    "modified": "2022-09-08T09:33:50.827Z",
+    "modified": "2022-09-21T06:20:29.791Z",
     "headers": [],
-    "params": [],
+    "params": [
+      {
+        "name": "type",
+        "value": "1",
+        "isPath": false
+      },
+      {
+        "name": "dateRange",
+        "value": "%7B%22from%22%3A1661148200210%2C%22to%22%3A1663740200215%7Dhttp://localhost:3333/api/dashboard",
+        "isDisabled": true,
+        "isPath": false
+      },
+      {
+        "name": "alertId",
+        "value": "4561232123121",
+        "isPath": false
+      }
+    ],
     "tests": []
   }
 ]

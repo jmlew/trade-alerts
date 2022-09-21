@@ -24,7 +24,7 @@ export interface TransInfo {
 }
 
 export interface AlertInfo {
-  alertID: string;
+  alertID: number;
   cif: string;
   cip: string;
   rmId: string;

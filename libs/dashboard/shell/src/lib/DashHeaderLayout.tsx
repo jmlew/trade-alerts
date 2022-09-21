@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { FiltersType, getInitialFilterType } from '@kdb-dash/dashboard/domain';
+import {
+  FiltersType,
+  getInitialFilterTypeFromSearchParams,
+} from '@kdb-dash/dashboard/domain';
 import { AlertUpdaterDrawer } from '@kdb-dash/dashboard/feature/alert-updater';
 import { useDashboardDataContext } from '@kdb-dash/dashboard/feature/data-provider';
 import {
@@ -34,7 +37,7 @@ const styles = {
 export function DashHeaderLayout() {
   const [searchParams] = useSearchParams();
   const [filtersType, setFiltersType] = useState<FiltersType>(
-    getInitialFilterType(searchParams)
+    getInitialFilterTypeFromSearchParams(searchParams)
   );
   const [isAlertUpdaterOpen, setAlertUpdaterOpen] = useState(false);
   const { dashDataState } = useDashboardDataContext();

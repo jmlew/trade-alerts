@@ -5,7 +5,7 @@ import { FilterSearchParam, FiltersType } from './data-filters.enum';
 import { DataFilters, DateRange } from './data-filters.model';
 
 export function getDataFiltersFromSearchParams(params: URLSearchParams): DataFilters {
-  const type: FiltersType = getInitialFilterType(params);
+  const type: FiltersType = getInitialFilterTypeFromSearchParams(params);
   switch (type) {
     case FiltersType.AlertId:
       return { type, alertId: getAlertIdFromSearchParams(params) || 0 };
@@ -23,7 +23,13 @@ export function getSearchParamsFromDataFilters(filters: DataFilters): URLSearchP
   return params;
 }
 
-export function getInitialFilterType(params: URLSearchParams): FiltersType {
+export function getDefaultFilterType(type: FiltersType): FiltersType {
+  return type === 1 ? FiltersType.AlertId : FiltersType.DateRange;
+}
+
+export function getInitialFilterTypeFromSearchParams(
+  params: URLSearchParams
+): FiltersType {
   return getAlertIdFromSearchParams(params) ? FiltersType.AlertId : FiltersType.DateRange;
 }
 
