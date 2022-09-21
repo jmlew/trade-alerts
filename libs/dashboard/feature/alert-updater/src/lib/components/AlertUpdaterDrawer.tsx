@@ -17,7 +17,7 @@ const styles = {
 
 interface AlertUpdaterDrawerProps {
   isOpen: boolean;
-  onClose: (isOpen: boolean) => void;
+  onClose: () => void;
 }
 
 export function AlertUpdaterDrawer({ isOpen, onClose }: AlertUpdaterDrawerProps) {
