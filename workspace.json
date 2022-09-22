@@ -11,7 +11,6 @@
     "dashboard-ui-controls": "libs/dashboard/ui/controls",
     "dashboard-ui-details": "libs/dashboard/ui/details",
     "dashboard-ui-grids": "libs/dashboard/ui/grids",
-    "dashboard-util-grid": "libs/dashboard/util/grid",
     "home-feature": "libs/home/feature",
     "mock-api": "apps/mock-api",
     "shared-data-access": "libs/shared/data-access",
