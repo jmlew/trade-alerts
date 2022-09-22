@@ -1,5 +1,6 @@
 import { Drawer } from '@mui/material';
 
+import { useAlertUpdaterDrawerContext } from '../context/alert-updater-drawer.context';
 import { AlertUpdaterLayout } from './AlertUpdaterLayout';
 
 const yPos = 65;
@@ -15,14 +16,14 @@ const styles = {
   },
 };
 
-interface AlertUpdaterDrawerProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
+export function AlertUpdaterDrawer() {
+  const { isDrawerOpen, setDrawerOpen } = useAlertUpdaterDrawerContext();
+  function closeDrawer() {
+    setDrawerOpen(false);
+  }
 
-export function AlertUpdaterDrawer({ isOpen, onClose }: AlertUpdaterDrawerProps) {
   return (
-    <Drawer sx={styles.root} anchor="right" open={isOpen} onClose={onClose}>
+    <Drawer sx={styles.root} anchor="right" open={isDrawerOpen} onClose={closeDrawer}>
       <AlertUpdaterLayout />
     </Drawer>
   );

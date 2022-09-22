@@ -1,3 +1,7 @@
+import {
+  AlertUpdaterDrawer,
+  AlertUpdaterDrawerProvider,
+} from '@kdb-dash/dashboard/feature/alert-updater';
 import { DashboardDataProvider } from '@kdb-dash/dashboard/feature/data-provider';
 import { DataViewerContainer } from '@kdb-dash/dashboard/feature/data-viewer';
 import { Theme } from '@mui/material';
@@ -19,10 +23,13 @@ export function DashShell() {
   return (
     <Box sx={styles.root}>
       <DashboardDataProvider>
-        <DashHeaderLayout />
-        <DashContentLayout>
-          <DataViewerContainer isErrorAlertsShown={true} />
-        </DashContentLayout>
+        <AlertUpdaterDrawerProvider>
+          <DashHeaderLayout />
+          <DashContentLayout>
+            <DataViewerContainer isErrorAlertsShown={true} />
+          </DashContentLayout>
+          <AlertUpdaterDrawer />
+        </AlertUpdaterDrawerProvider>
       </DashboardDataProvider>
     </Box>
   );

@@ -3,7 +3,7 @@ import { useDashboardDataContext } from '@kdb-dash/dashboard/feature/data-provid
 import { DashboardGridMui } from '@kdb-dash/dashboard/ui/grids';
 import { ErrorMessage } from '@kdb-dash/shared/ui-common';
 
-import { DashboardGrid } from '../enum/DashboardGrid.enum';
+import { DashboardGrid } from '../enum/dashboard-grid.enum';
 import {
   getGridDataConfigs,
   getMuiGridConfigs,

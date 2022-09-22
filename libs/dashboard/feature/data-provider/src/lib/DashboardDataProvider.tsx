@@ -26,7 +26,6 @@ export function DashboardDataProvider({ children }: DashboardDataProviderProps) 
   const dashDataState: ApiState | undefined = useObservable<ApiState>(
     dashboardDataFacade.dashDataState$
   );
-  console.info('dashDataState', dashDataState);
 
   const value: DashboardDataContextValue = useMemo(
     () => ({ dashData, dashDataState }),

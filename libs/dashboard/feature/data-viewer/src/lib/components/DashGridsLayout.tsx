@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 
 import { DashboardGridContainer } from '../containers/DashboardGridContainer';
-import { DashboardGrid } from '../enum/DashboardGrid.enum';
+import { DashboardGrid } from '../enum/dashboard-grid.enum';
 
 const styles = {
   root: { width: 1, color: 'primary.main', backgroundColor: themeColors.background },
@@ -43,7 +43,7 @@ export function DashGridsLayout() {
   return (
     <Box sx={styles.root}>
       <GridAccordian
-        grid={DashboardGrid.AccountTransactions}
+        grid={DashboardGrid.AlertInformation}
         shownState={gridShownState}
         setShownState={setGridShownState}
         onDownloadClick={handleDownloadData}
@@ -51,7 +51,7 @@ export function DashGridsLayout() {
         <DashboardGridContainer grid={DashboardGrid.AlertInformation} />
       </GridAccordian>
       <GridAccordian
-        grid={DashboardGrid.AccountTransactions}
+        grid={DashboardGrid.AlertedTransactions}
         shownState={gridShownState}
         setShownState={setGridShownState}
         onDownloadClick={handleDownloadData}

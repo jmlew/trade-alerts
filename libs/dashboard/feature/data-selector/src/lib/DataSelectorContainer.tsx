@@ -6,6 +6,7 @@ import {
   doAlertsExist,
   getInitialFilterTypeFromSearchParams,
 } from '@kdb-dash/dashboard/domain';
+import { useAlertUpdaterDrawerContext } from '@kdb-dash/dashboard/feature/alert-updater';
 import { useDashboardDataContext } from '@kdb-dash/dashboard/feature/data-provider';
 import { BtnSideExpand, FiltersTypeBtns } from '@kdb-dash/dashboard/ui/controls';
 import { ApiStateManager } from '@kdb-dash/shared/data-access';
@@ -33,20 +34,14 @@ const styles = {
 
 const { isPending, isCompleted } = ApiStateManager;
 
-interface DataSelectorContainerProps {
-  onOpenAlertUpdater: (isOpen: boolean) => void;
-  isAlertUpdaterOpen: boolean;
-}
-
-export function DataSelectorContainer({
-  onOpenAlertUpdater,
-  isAlertUpdaterOpen,
-}: DataSelectorContainerProps) {
+export function DataSelectorContainer() {
   const [searchParams] = useSearchParams();
   const [filtersType, setFiltersType] = useState<FiltersType>(
     getInitialFilterTypeFromSearchParams(searchParams)
   );
   const { dashData, dashDataState } = useDashboardDataContext();
+  const { isDrawerOpen, setDrawerOpen } = useAlertUpdaterDrawerContext();
+
   const isDataPending: boolean = dashDataState != null && isPending(dashDataState);
   const isAlertsAvailable: boolean =
     dashDataState != null &&
@@ -55,13 +50,13 @@ export function DataSelectorContainer({
     doAlertsExist(dashData);
 
   useEffect(() => {
-    if (isDataPending && isAlertUpdaterOpen) {
-      onOpenAlertUpdater(false);
+    if (isDataPending && isDrawerOpen) {
+      setDrawerOpen(false);
     }
-  }, [isDataPending, isAlertUpdaterOpen]);
+  }, [isDataPending, isDrawerOpen]);
 
   function toggleAlertUpdater() {
-    onOpenAlertUpdater(!isAlertUpdaterOpen);
+    setDrawerOpen(!isDrawerOpen);
   }
 
   return (
@@ -72,7 +67,7 @@ export function DataSelectorContainer({
       <SectionSpacer />
       <BtnSideExpand
         isDisabled={!isAlertsAvailable}
-        isExpanded={isAlertUpdaterOpen}
+        isExpanded={isDrawerOpen}
         onClick={toggleAlertUpdater}
       />
     </>

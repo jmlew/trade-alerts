@@ -4,7 +4,7 @@
 
 import { DashboardData, DashboardDataGridField } from '@kdb-dash/dashboard/domain';
 
-import { DashboardGrid } from '../enum/DashboardGrid.enum';
+import { DashboardGrid } from '../enum/dashboard-grid.enum';
 import { MuiGridData } from './dashboard-grid-data.model';
 
 export function normaliseMuiGridData<T>(items: T[]): MuiGridData<T>[] {
