@@ -1,5 +1,3 @@
-import { useDashboardDataContext } from '@kdb-dash/dashboard/feature/data-provider';
-import { JsonViewer } from '@kdb-dash/shared/ui-common';
 import {
   dashItemBorderRadius,
   dashItemPadding,
@@ -8,8 +6,11 @@ import {
 } from '@kdb-dash/shared/ui-styles';
 import { Box, Typography } from '@mui/material';
 
+import { DashboardChartContainer } from '../containers/TradesChartContainer';
+import { DashboardChart } from '../enum/DashboardChart.enum';
+
 const styles = {
-  root: { width: 1, height: 1, display: 'flex', flexDirection: 'row' },
+  root: { width: 1, display: 'flex', flexDirection: 'row' },
   chartPanel: {
     width: 0.5,
     backgroundColor: themeColors.backgroundDark,
@@ -19,28 +20,24 @@ const styles = {
       ml: dashItemPadding,
     },
   },
-  chart: { width: 1, height: 300, p: 2, color: 'primary.main', overflow: 'hidden' },
+  chart: { width: 1, p: 2, color: 'primary.main', overflow: 'hidden' },
 };
 
 export function DashChartsLayout() {
-  const { dashData } = useDashboardDataContext();
-  if (dashData == null) {
-    return null;
-  }
-  const { trades } = dashData;
-
   return (
     <Box sx={styles.root}>
       <Box sx={styles.chartPanel}>
         <Box sx={styles.chart}>
-          <Typography align="center">Trade Values</Typography>
-          <JsonViewer data={trades} sx={{ width: 0.8 }} />
+          <Typography align="center">{DashboardChart.TradeValue}</Typography>
+          {/* <JsonViewer data={trades} sx={{ width: 0.8 }} /> */}
+          <DashboardChartContainer chart={DashboardChart.TradeValue} />
         </Box>
       </Box>
       <Box sx={styles.chartPanel}>
         <Box sx={styles.chart}>
-          <Typography align="center">Trades Count</Typography>
-          <JsonViewer data={trades} sx={{ width: 0.8 }} />
+          <Typography align="center">{DashboardChart.TradeCount}</Typography>
+          {/* <JsonViewer data={trades} sx={{ width: 0.8 }} /> */}
+          <DashboardChartContainer chart={DashboardChart.TradeCount} />
         </Box>
       </Box>
     </Box>

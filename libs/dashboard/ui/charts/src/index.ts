@@ -1,1 +1,1 @@
-export * from './lib/dashboard-ui-charts';
+export * from './lib/TradesChart';
