@@ -8,7 +8,7 @@ import {
 } from '@kdb-dash/dashboard/domain';
 import { GridColDef } from '@mui/x-data-grid';
 
-import { DashboardGrid } from '../enum/dashboard-grid.enum';
+import { DashboardGrid } from './dashboard-grid.enum';
 
 /**
  * Returns the data configs to apply to a given grid.

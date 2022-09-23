@@ -2,8 +2,8 @@ import { useDashboardDataContext } from '@kdb-dash/dashboard/feature/data-provid
 import { TradesChart } from '@kdb-dash/dashboard/ui/charts';
 import { ErrorMessage } from '@kdb-dash/shared/ui-common';
 
-import { DashboardChart } from '../enum/dashboard-chart.enum';
-import { getChartDataKeys } from '../utils/dashboard-chart.util';
+import { DashboardChart } from '../entities/dashboard-chart.enum';
+import { getChartDataKeys } from '../entities/dashboard-chart.util';
 
 interface TradesChartContainerProps {
   chart: DashboardChart;

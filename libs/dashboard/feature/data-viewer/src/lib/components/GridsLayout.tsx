@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 
 import { GridContainer } from '../containers/GridContainer';
-import { DashboardGrid } from '../enum/dashboard-grid.enum';
+import { DashboardGrid } from '../entities/dashboard-grid.enum';
 
 const styles = {
   root: { width: 1, color: 'primary.main', backgroundColor: themeColors.background },

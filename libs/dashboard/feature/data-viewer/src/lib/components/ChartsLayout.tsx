@@ -7,7 +7,7 @@ import {
 import { Box, Typography } from '@mui/material';
 
 import { TradesChartContainer } from '../containers/TradesChartContainer';
-import { DashboardChart } from '../enum/dashboard-chart.enum';
+import { DashboardChart } from '../entities/dashboard-chart.enum';
 
 const styles = {
   root: { width: 1, display: 'flex', flexDirection: 'row' },

@@ -1,4 +1,4 @@
 export interface UiControlOption {
-  value: string;
+  value: string | number;
   label: string;
 }

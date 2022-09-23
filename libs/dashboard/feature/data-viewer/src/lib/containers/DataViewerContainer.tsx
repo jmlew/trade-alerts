@@ -2,13 +2,13 @@ import { useEffect } from 'react';
 
 import { doAlertsExist } from '@kdb-dash/dashboard/domain';
 import { useDashboardDataContext } from '@kdb-dash/dashboard/feature/data-provider';
+import { GenericMessagePanel } from '@kdb-dash/dashboard/ui/common';
 import { ApiStateManager } from '@kdb-dash/shared/data-access';
 import { useAlert } from '@kdb-dash/shared/feature-alert';
 import { ErrorMessage, Loading } from '@kdb-dash/shared/ui-common';
 import { Typography } from '@mui/material';
 
 import { DashLayout } from '../components/DashLayout';
-import { GenericMessagePanel } from '../components/GenericMessagePanel';
 
 const { getError, isCompleted, isFailed, isPending } = ApiStateManager;
 

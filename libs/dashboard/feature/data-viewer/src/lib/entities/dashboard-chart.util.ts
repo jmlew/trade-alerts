@@ -1,6 +1,6 @@
 import { TradeChartDataKeys } from '@kdb-dash/dashboard/ui/charts';
 
-import { DashboardChart } from '../enum/dashboard-chart.enum';
+import { DashboardChart } from './dashboard-chart.enum';
 
 export function getChartDataKeys(chart: DashboardChart): TradeChartDataKeys {
   switch (chart) {

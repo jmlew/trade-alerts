@@ -13,7 +13,7 @@ import { ApiStateManager } from '@kdb-dash/shared/data-access';
 import { DividerVert } from '@kdb-dash/shared/ui-common';
 import { Box } from '@mui/material';
 
-import { DashSelectorContainer } from './DashSelectorContainer';
+import { DashboardSelectorContainer } from './DashboardSelectorContainer';
 import { DataFiltersContainer } from './DataFiltersContainer';
 import { DataLoaderContainer } from './DataLoaderContainer';
 
@@ -23,7 +23,11 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
   },
-  selector: {
+  dashSelector: {
+    width: '25%',
+    minWidth: 200,
+  },
+  filterInputs: {
     mx: 4,
     minWidth: 400,
   },
@@ -61,7 +65,9 @@ export function DataSelectorContainer() {
 
   return (
     <>
-      <DashSelectorContainer />
+      <Box sx={styles.dashSelector}>
+        <DashboardSelectorContainer />
+      </Box>
       <SectionSpacer />
       <DataFilters filtersType={filtersType} setFiltersType={setFiltersType} />
       <SectionSpacer />
@@ -83,7 +89,7 @@ function DataFilters({ filtersType, setFiltersType }: DataFiltersProps) {
   return (
     <Box sx={styles.data}>
       <FiltersTypeBtns type={filtersType} onSetType={setFiltersType} />
-      <Box sx={styles.selector}>
+      <Box sx={styles.filterInputs}>
         <DataFiltersContainer type={filtersType} />
       </Box>
       <DataLoaderContainer />

@@ -23,6 +23,7 @@ const styles = {
 interface GenericMessagePanelProps {
   children: ReactNode;
 }
+
 export function GenericMessagePanel({ children }: GenericMessagePanelProps) {
   return (
     <Box sx={styles.root}>

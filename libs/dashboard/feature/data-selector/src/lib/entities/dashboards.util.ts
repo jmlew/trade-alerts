@@ -10,8 +10,6 @@ export function getDasboardOption(dashboardId: string): UiControlOption {
   );
 }
 
-export function getDashboardOptionFromSearchParams(
-  params: URLSearchParams
-): UiControlOption {
-  return getDasboardOption(params.get(FilterSearchParam.DashId) || '');
+export function getInitialDashboardFromSearchParams(params: URLSearchParams): string {
+  return params.get(FilterSearchParam.DashId) || (defaultDashboardOption.value as string);
 }

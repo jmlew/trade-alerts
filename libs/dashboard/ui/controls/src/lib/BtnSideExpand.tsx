@@ -12,18 +12,20 @@ export function BtnSideExpand({ isDisabled, isExpanded, onClick }: BtnSideExpand
   const buttonTooltip = (isExpanded ? 'Hide' : 'Show') + ' Alerts Panel';
   return (
     <Tooltip title={buttonTooltip} arrow>
-      <IconButton
-        disabled={isDisabled}
-        onClick={onClick}
-        edge="end"
-        color="primary"
-        aria-label="update-alert"
-        sx={{ ml: 2 }}
-      >
-        <ExpandCircleDownOutlined
-          sx={{ transform, transition: 'transform 150ms ease-out' }}
-        />
-      </IconButton>
+      <span>
+        <IconButton
+          disabled={isDisabled}
+          onClick={onClick}
+          edge="end"
+          color="primary"
+          aria-label="update-alert"
+          sx={{ ml: 2 }}
+        >
+          <ExpandCircleDownOutlined
+            sx={{ transform, transition: 'transform 150ms ease-out' }}
+          />
+        </IconButton>
+      </span>
     </Tooltip>
   );
 }

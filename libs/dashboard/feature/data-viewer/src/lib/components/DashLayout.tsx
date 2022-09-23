@@ -1,7 +1,7 @@
+import { DashPanelStack } from '@kdb-dash/dashboard/ui/common';
 import { Box } from '@mui/material';
 
 import { ChartsLayout } from './ChartsLayout';
-import { DashPanelStack } from './DashPanelStack';
 import { FooterLayout } from './FooterLayout';
 import { GridsLayout } from './GridsLayout';
 import { OverviewLayout } from './OverviewLayout';

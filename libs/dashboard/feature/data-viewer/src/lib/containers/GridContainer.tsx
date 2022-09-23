@@ -3,12 +3,12 @@ import { useDashboardDataContext } from '@kdb-dash/dashboard/feature/data-provid
 import { DashboardGridMui } from '@kdb-dash/dashboard/ui/grids';
 import { ErrorMessage } from '@kdb-dash/shared/ui-common';
 
-import { DashboardGrid } from '../enum/dashboard-grid.enum';
 import {
   getGridDataConfigs,
   getMuiGridConfigs,
-} from '../utils/dashboard-grid-configs.utils';
-import { getGridData, normaliseMuiGridData } from '../utils/dashboard-grid-data.util';
+} from '../entities/dashboard-grid-configs.util';
+import { getGridData, normaliseMuiGridData } from '../entities/dashboard-grid-data.util';
+import { DashboardGrid } from '../entities/dashboard-grid.enum';
 
 interface GridContainerProps {
   grid: DashboardGrid;

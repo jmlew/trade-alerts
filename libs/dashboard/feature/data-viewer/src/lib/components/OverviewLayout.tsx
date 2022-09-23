@@ -13,7 +13,7 @@ import {
   Typography,
 } from '@mui/material';
 
-import { getAlertOverviews } from '../utils/dashboard-overview-data.util';
+import { getAlertOverviews } from '../entities/dashboard-overview-data.util';
 
 const styles = {
   root: { width: 1 },

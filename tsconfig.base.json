@@ -33,6 +33,7 @@
       ],
       "@kdb-dash/dashboard/shell": ["libs/dashboard/shell/src/index.ts"],
       "@kdb-dash/dashboard/ui/charts": ["libs/dashboard/ui/charts/src/index.ts"],
+      "@kdb-dash/dashboard/ui/common": ["libs/dashboard/ui/common/src/index.ts"],
       "@kdb-dash/dashboard/ui/controls": ["libs/dashboard/ui/controls/src/index.ts"],
       "@kdb-dash/dashboard/ui/details": ["libs/dashboard/ui/details/src/index.ts"],
       "@kdb-dash/dashboard/ui/grids": ["libs/dashboard/ui/grids/src/index.ts"],

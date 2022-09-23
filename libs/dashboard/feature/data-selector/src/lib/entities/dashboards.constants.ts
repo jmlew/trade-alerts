@@ -2,16 +2,16 @@ import { UiControlOption } from '@kdb-dash/shared/data-access';
 
 export const dashboardOptions: UiControlOption[] = [
   {
-    value: 'SomeDashboard',
-    label: 'Some Dashboard',
+    value: 'ScenarioA',
+    label: 'Some Scenario',
   },
   {
-    value: 'OtherDashboard',
-    label: 'Other Dashboard',
+    value: 'ScenarioB',
+    label: 'Some Other Scenario',
   },
   {
-    value: 'AndAnotherDashboard',
-    label: 'And Another Dashboard',
+    value: 'ScenarioC',
+    label: 'And Another Scenario',
   },
 ];
 

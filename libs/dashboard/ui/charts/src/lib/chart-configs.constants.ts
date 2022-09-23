@@ -12,7 +12,7 @@ export const chartColors: Map<ChartAttribute, string> = new Map([
   [ChartAttribute.ValueA, '#FFB72C'],
   [ChartAttribute.ValueB, '#85C8FF'],
   [ChartAttribute.Average, 'grey'],
-  [ChartAttribute.Grid, themeColors.backgroundDark],
+  [ChartAttribute.Grid, themeColors.backgroundLight],
 ]);
 
 export const chartLabels: Map<keyof TradesInfo, string> = new Map([
