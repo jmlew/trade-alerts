@@ -25,7 +25,7 @@ const styles = {
   },
 };
 
-export function DashFooterLayout() {
+export function FooterLayout() {
   const { dashData } = useDashboardDataContext();
   return (
     <Box sx={styles.root}>

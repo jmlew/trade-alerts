@@ -28,7 +28,7 @@ const styles = {
   },
 };
 
-export function DashOverviewLayout() {
+export function OverviewLayout() {
   const { dashData } = useDashboardDataContext();
   const [isOpen, setOpen] = useState(true);
 

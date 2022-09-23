@@ -23,7 +23,7 @@ const styles = {
   chart: { width: 1, height: 400, p: 2, color: 'primary.main', overflow: 'hidden' },
 };
 
-export function DashChartsLayout() {
+export function ChartsLayout() {
   return (
     <Box sx={styles.root}>
       <Box sx={styles.chartPanel}>

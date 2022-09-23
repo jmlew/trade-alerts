@@ -10,11 +10,11 @@ import {
 } from '../utils/dashboard-grid-configs.utils';
 import { getGridData, normaliseMuiGridData } from '../utils/dashboard-grid-data.util';
 
-interface DashboardGridContainerProps {
+interface GridContainerProps {
   grid: DashboardGrid;
 }
 
-export function DashboardGridContainer({ grid }: DashboardGridContainerProps) {
+export function GridContainer({ grid }: GridContainerProps) {
   const { dashData } = useDashboardDataContext();
   const data: DashboardDataGridField[] | null = getGridData(grid, dashData);
   const configs: DashboardDataConfig[] = getGridDataConfigs(grid);

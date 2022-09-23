@@ -1,10 +1,10 @@
 import { Box } from '@mui/material';
 
-import { DashChartsLayout } from './DashChartsLayout';
-import { DashFooterLayout } from './DashFooterLayout';
-import { DashGridsLayout } from './DashGridsLayout';
-import { DashOverviewLayout } from './DashOverviewLayout';
+import { ChartsLayout } from './ChartsLayout';
 import { DashPanelStack } from './DashPanelStack';
+import { FooterLayout } from './FooterLayout';
+import { GridsLayout } from './GridsLayout';
+import { OverviewLayout } from './OverviewLayout';
 
 const styles = {
   root: { width: 1 },
@@ -19,17 +19,17 @@ export function DashLayout() {
     <Box sx={styles.root}>
       <DashPanelStack>
         <Box sx={styles.overview}>
-          <DashOverviewLayout />
+          <OverviewLayout />
         </Box>
         <Box sx={styles.charts}>
-          <DashChartsLayout />
+          <ChartsLayout />
         </Box>
         <Box sx={styles.grids}>
-          <DashGridsLayout />
+          <GridsLayout />
         </Box>
       </DashPanelStack>
       <Box sx={styles.footer}>
-        <DashFooterLayout />
+        <FooterLayout />
       </Box>
     </Box>
   );

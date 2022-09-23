@@ -11,7 +11,7 @@ import {
   Typography,
 } from '@mui/material';
 
-import { DashboardGridContainer } from '../containers/DashboardGridContainer';
+import { GridContainer } from '../containers/GridContainer';
 import { DashboardGrid } from '../enum/dashboard-grid.enum';
 
 const styles = {
@@ -29,7 +29,7 @@ interface GridShownState {
   [DashboardGrid.AccountTransactions]: boolean;
 }
 
-export function DashGridsLayout() {
+export function GridsLayout() {
   const [gridShownState, setGridShownState] = useState<GridShownState>({
     [DashboardGrid.AlertInformation]: false,
     [DashboardGrid.AlertedTransactions]: false,
@@ -48,7 +48,7 @@ export function DashGridsLayout() {
         setShownState={setGridShownState}
         onDownloadClick={handleDownloadData}
       >
-        <DashboardGridContainer grid={DashboardGrid.AlertInformation} />
+        <GridContainer grid={DashboardGrid.AlertInformation} />
       </GridAccordian>
       <GridAccordian
         grid={DashboardGrid.AlertedTransactions}
@@ -56,7 +56,7 @@ export function DashGridsLayout() {
         setShownState={setGridShownState}
         onDownloadClick={handleDownloadData}
       >
-        <DashboardGridContainer grid={DashboardGrid.AlertedTransactions} />
+        <GridContainer grid={DashboardGrid.AlertedTransactions} />
       </GridAccordian>
       <GridAccordian
         grid={DashboardGrid.AccountTransactions}
@@ -64,7 +64,7 @@ export function DashGridsLayout() {
         setShownState={setGridShownState}
         onDownloadClick={handleDownloadData}
       >
-        <DashboardGridContainer grid={DashboardGrid.AccountTransactions} />
+        <GridContainer grid={DashboardGrid.AccountTransactions} />
       </GridAccordian>
     </Box>
   );
