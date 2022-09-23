@@ -1,4 +1,4 @@
-import { DashOption } from '@kdb-dash/dashboard/domain';
+import { UiControlOption } from '@kdb-dash/shared/data-access';
 import { FormControl, MenuItem, Select, SelectChangeEvent, Theme } from '@mui/material';
 
 const styles = {
@@ -13,7 +13,7 @@ const styles = {
 };
 
 interface DashSelectorProps {
-  options: DashOption[];
+  options: UiControlOption[];
   value: string;
   setValue: (value: string) => void;
 }
@@ -26,7 +26,7 @@ export function DashSelector({ value, options, setValue }: DashSelectorProps) {
   return (
     <FormControl variant="standard" sx={styles.root}>
       <Select sx={styles.select} value={value} onChange={handleChange}>
-        {options.map((option: DashOption) => (
+        {options.map((option: UiControlOption) => (
           <MenuItem key={option.value} value={option.value}>
             {option.label}
           </MenuItem>

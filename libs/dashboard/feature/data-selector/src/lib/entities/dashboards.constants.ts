@@ -1,6 +1,6 @@
-import { DashOption } from './dashboards.model';
+import { UiControlOption } from '@kdb-dash/shared/data-access';
 
-export const dashboardOptions: DashOption[] = [
+export const dashboardOptions: UiControlOption[] = [
   {
     value: 'SomeDashboard',
     label: 'Some Dashboard',
@@ -15,4 +15,4 @@ export const dashboardOptions: DashOption[] = [
   },
 ];
 
-export const defaultDashboardOption: DashOption = dashboardOptions[0];
+export const defaultDashboardOption: UiControlOption = dashboardOptions[0];

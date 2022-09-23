@@ -1,4 +1,4 @@
-export interface DashOption {
+export interface UiControlOption {
   value: string;
   label: string;
 }

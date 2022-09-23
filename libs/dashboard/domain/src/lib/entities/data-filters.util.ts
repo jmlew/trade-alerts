@@ -1,5 +1,3 @@
-import { DashOption } from './dashboards.model';
-import { getDasboardOption } from './dashboards.util';
 import { defaultDateRange } from './data-filters.constants';
 import { FilterSearchParam, FiltersType } from './data-filters.enum';
 import { DataFilters, DateRange } from './data-filters.model';
@@ -43,8 +41,4 @@ export function getDateRangeFromSearchParams(params: URLSearchParams): DateRange
 export function getAlertIdFromSearchParams(params: URLSearchParams): number | null {
   const id: string | null = params.get(FilterSearchParam.AlertId) || null;
   return id != null ? parseInt(id, 10) : null;
-}
-
-export function getDashboardOptionFromSearchParams(params: URLSearchParams): DashOption {
-  return getDasboardOption(params.get(FilterSearchParam.DashId) || '');
 }
