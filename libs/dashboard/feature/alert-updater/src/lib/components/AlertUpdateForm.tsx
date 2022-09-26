@@ -10,13 +10,10 @@ import { AlertUpdateFormParams } from '../entities/alert-updater.model';
 import { getAlertActionOptions } from '../entities/alert-updater.util';
 
 const styles = {
-  root: { width: 1 },
+  root: (isPending: boolean) => ({ width: 1, opacity: isPending ? 0.5 : 1 }),
   comments: {
     mt: 1,
     color: 'white',
-  },
-  inputLabel: {
-    mb: 2,
   },
   actions: {
     display: 'flex',
@@ -61,20 +58,17 @@ export function AlertUpdateForm({
 
   const { action, comment } = values;
   return (
-    <Box sx={styles.root}>
-      <Typography sx={styles.inputLabel} variant="body2" color="primary.main">
+    <Box sx={styles.root(isPending)}>
+      <Typography sx={{ mb: 1 }} variant="body2" color="primary.main">
         Action Type
       </Typography>
       <DashSelector
         value={action}
+        isDisabled={isPending}
         onChange={handleActionChange}
         options={getAlertActionOptions()}
       />
-      <Typography
-        sx={{ ...styles.inputLabel, mt: 4 }}
-        variant="body2"
-        color="primary.main"
-      >
+      <Typography sx={{ mt: 4, mb: 2 }} variant="body2" color="primary.main">
         Comments (optional)
       </Typography>
       <Box sx={styles.comments}>
@@ -82,6 +76,7 @@ export function AlertUpdateForm({
           multiline
           fullWidth
           maxRows={6}
+          disabled={isPending}
           value={comment || ''}
           onChange={handleCommentChange}
         />

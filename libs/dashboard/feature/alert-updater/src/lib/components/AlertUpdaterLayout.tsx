@@ -6,7 +6,7 @@ import {
 import { Box, Typography } from '@mui/material';
 
 import { AlertSelectorContainer } from '../containers/AlertSelectorContainer';
-import { AlertUpdateFormContainer } from '../containers/AlertUpdateFormContainer';
+import { AlertUpdateContainer } from '../containers/AlertUpdateContainer';
 
 const styles = {
   root: {
@@ -21,7 +21,7 @@ const styles = {
     fontWeight: 'light',
   },
   selector: {
-    mt: 6,
+    mt: 5,
   },
   form: {
     mt: 7,
@@ -38,13 +38,13 @@ export function AlertUpdaterLayout() {
   return (
     <Box sx={styles.root}>
       <Typography sx={styles.title} variant="h5" color="primary.light">
-        Update Alerts
+        Update Alert
       </Typography>
       <Box sx={styles.selector}>
         <AlertSelectorContainer />
       </Box>
       <Box sx={styles.form}>
-        <AlertUpdateFormContainer />
+        <AlertUpdateContainer />
       </Box>
     </Box>
   );

@@ -20,7 +20,9 @@ export function AlertSelectorContainer() {
 
   function handleSelectChange(alertId: number) {
     const item: AlertInfo | null =
-      alerts!.find((item: AlertInfo) => item.alertID === alertId) || null;
+      alerts != null
+        ? alerts.find((item: AlertInfo) => item.alertID === alertId) || null
+        : null;
     setAlert(item);
   }
 

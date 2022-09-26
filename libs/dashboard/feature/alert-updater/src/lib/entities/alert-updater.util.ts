@@ -48,6 +48,14 @@ export function getDefaultAlertActionOption(): UiControlOption {
   return alertActionOptions[0];
 }
 
+export function getAlertActionLabel(action: AlertActionType): string {
+  const option: UiControlOption | undefined = alertActionOptions.find(
+    (option: UiControlOption) => option.value === action
+  );
+
+  return (option && option.label) || action.toString();
+}
+
 export function getInitialFormValues(): AlertUpdateFormParams {
   return {
     action: getDefaultAlertActionOption().value as AlertActionType,
