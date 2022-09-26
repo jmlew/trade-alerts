@@ -14,6 +14,7 @@ const fields: AlertInfoField[] = [
 
 export function getAlertOverviews(alerts: AlertInfo[]): AlertOverviewInfo[] {
   return fields.map((field: AlertInfoField) => ({
+    field,
     heading: alertInfoLabels.get(field) as string,
     values: alerts.map((alert: AlertInfo) => alert[field]),
   }));

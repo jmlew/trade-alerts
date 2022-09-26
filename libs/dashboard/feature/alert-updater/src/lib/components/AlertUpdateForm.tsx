@@ -10,7 +10,7 @@ import { AlertUpdateFormParams } from '../entities/alert-updater.model';
 import { getAlertActionOptions } from '../entities/alert-updater.util';
 
 const styles = {
-  root: (isPending: boolean) => ({ width: 1, opacity: isPending ? 0.5 : 1 }),
+  root: (isPending: boolean) => ({ width: 1, opacity: isPending ? 0.4 : 1 }),
   comments: {
     mt: 1,
     color: 'white',

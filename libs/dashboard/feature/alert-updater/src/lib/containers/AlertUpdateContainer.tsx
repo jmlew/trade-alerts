@@ -14,7 +14,7 @@ import {
 export function AlertUpdateContainer() {
   const { setAlert } = useAlert();
   const [initialValues, setInitialValues] = useState(getInitialFormValues());
-  const { alerts, currentAlert, setCurrentAlert } = useAlertUpdaterContext();
+  const { currentAlert, setDrawerOpen } = useAlertUpdaterContext();
   const [isPending, setIsPending] = useState(false);
 
   function handleSubmit(values: AlertUpdateFormParams) {
@@ -27,11 +27,12 @@ export function AlertUpdateContainer() {
       setAlert({ isShown: true, type: AlertType.Success, message });
       resetFormValues();
       setIsPending(false);
-    }, 1000);
+    }, 800);
   }
 
   function handleCancel() {
     resetFormValues();
+    setDrawerOpen(false);
   }
 
   function resetFormValues() {

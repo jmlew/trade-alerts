@@ -1,4 +1,4 @@
-import { AlertInfo } from '@kdb-dash/dashboard/domain';
+import { AlertInfo, getAlertById } from '@kdb-dash/dashboard/domain';
 import { GenericMessagePanel } from '@kdb-dash/dashboard/ui/common';
 import { DashSelector } from '@kdb-dash/dashboard/ui/controls';
 import { Typography } from '@mui/material';
@@ -10,10 +10,10 @@ export function AlertSelectorContainer() {
   const { alerts, currentAlert, setCurrentAlert } = useAlertUpdaterContext();
 
   function handleSelectChange(alertId: number) {
-    const item: AlertInfo | null =
-      alerts != null
-        ? alerts.find((item: AlertInfo) => item.alertID === alertId) || null
-        : null;
+    if (alerts == null) {
+      return;
+    }
+    const item: AlertInfo | null = getAlertById(alerts, alertId);
     if (item != null) {
       setCurrentAlert(item);
     }

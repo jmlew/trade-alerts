@@ -10,7 +10,7 @@ import { AlertUpdateContainer } from '../containers/AlertUpdateContainer';
 
 const styles = {
   root: {
-    width: 700,
+    width: 600,
     height: '100%',
     px: 4,
     py: 4,

@@ -45,6 +45,7 @@ export interface TradesInfo {
 }
 
 export interface AlertOverviewInfo {
+  field: keyof AlertInfo;
   heading: string;
   values: (string | number)[];
 }

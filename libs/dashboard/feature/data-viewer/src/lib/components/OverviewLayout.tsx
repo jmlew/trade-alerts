@@ -1,8 +1,5 @@
 import { SyntheticEvent, useState } from 'react';
 
-import { AlertOverviewInfo } from '@kdb-dash/dashboard/domain';
-import { useDashboardDataContext } from '@kdb-dash/dashboard/feature/data-provider';
-import { AlertOverviews } from '@kdb-dash/dashboard/ui/details';
 import { themeColors } from '@kdb-dash/shared/ui-styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
@@ -13,7 +10,7 @@ import {
   Typography,
 } from '@mui/material';
 
-import { getAlertOverviews } from '../entities/dashboard-overview-data.util';
+import { OverviewContainer } from '../containers/OverviewContainer';
 
 const styles = {
   root: { width: 1 },
@@ -29,19 +26,12 @@ const styles = {
 };
 
 export function OverviewLayout() {
-  const { dashData } = useDashboardDataContext();
   const [isOpen, setOpen] = useState(true);
 
   function handleToggleAccordian(event: SyntheticEvent) {
     setOpen(!isOpen);
   }
 
-  if (dashData == null) {
-    return null;
-  }
-
-  const { alerts } = dashData;
-  const overviews: AlertOverviewInfo[] = getAlertOverviews(alerts);
   return (
     <Box sx={styles.root}>
       <Accordion sx={styles.panel} expanded={isOpen} onChange={handleToggleAccordian}>
@@ -49,7 +39,7 @@ export function OverviewLayout() {
           <Typography variant="body2">Alerts Overview</Typography>
         </AccordionSummary>
         <AccordionDetails sx={styles.panelContent}>
-          <AlertOverviews overviews={overviews} />
+          <OverviewContainer />
         </AccordionDetails>
       </Accordion>
     </Box>

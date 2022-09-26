@@ -29,10 +29,8 @@ interface TradesChartProps {
 export function TradesChart({ data, dataKeys }: TradesChartProps) {
   const { dataKeyX, dataKeyYA, dataKeyYB } = dataKeys;
   return (
-    <ResponsiveContainer width="100%" height="94%">
+    <ResponsiveContainer width="100%" height="100%">
       <ComposedChart
-        width={500}
-        height={400}
         data={data}
         margin={{
           top: 10,
@@ -61,12 +59,12 @@ export function TradesChart({ data, dataKeys }: TradesChartProps) {
           fill={chartColors.get(ChartAttribute.ValueB)}
           maxBarSize={20}
         />
-        <Line
+        {/*  <Line
           type="monotone"
           dataKey={dataKeyYA}
           name={`Average`}
           stroke={chartColors.get(ChartAttribute.Average)}
-        />
+        /> */}
       </ComposedChart>
     </ResponsiveContainer>
   );
