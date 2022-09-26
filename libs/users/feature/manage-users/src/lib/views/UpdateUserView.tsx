@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 
-import { ErrorMessage } from '@kdb-dash/shared/ui-common';
+import { ErrorMessage } from '@trade-alerts/shared/ui-common';
 
 import { LoadUserContainer } from '../containers/LoadUserContainer';
 import { UpdateUserContainer } from '../containers/UpdateUserContainer';

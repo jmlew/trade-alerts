@@ -1,6 +1,6 @@
-import { useDashboardDataContext } from '@kdb-dash/dashboard/feature/data-provider';
-import { TradesChart } from '@kdb-dash/dashboard/ui/charts';
-import { ErrorMessage } from '@kdb-dash/shared/ui-common';
+import { useDashboardDataContext } from '@trade-alerts/dashboard/feature/data-provider';
+import { TradesChart } from '@trade-alerts/dashboard/ui/charts';
+import { ErrorMessage } from '@trade-alerts/shared/ui-common';
 
 import { DashboardChart } from '../entities/dashboard-chart.enum';
 import { getChartDataKeys } from '../entities/dashboard-chart.util';

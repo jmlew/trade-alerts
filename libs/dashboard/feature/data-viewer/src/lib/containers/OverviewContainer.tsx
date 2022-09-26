@@ -1,6 +1,10 @@
-import { AlertInfo, AlertOverviewInfo, getAlertById } from '@kdb-dash/dashboard/domain';
-import { useAlertUpdaterContext } from '@kdb-dash/dashboard/feature/alert-updater';
-import { AlertOverviews } from '@kdb-dash/dashboard/ui/details';
+import {
+  AlertInfo,
+  AlertOverviewInfo,
+  getAlertById,
+} from '@trade-alerts/dashboard/domain';
+import { useAlertUpdaterContext } from '@trade-alerts/dashboard/feature/alert-updater';
+import { AlertOverviews } from '@trade-alerts/dashboard/ui/details';
 
 import { getAlertOverviews } from '../entities/dashboard-overview-data.util';
 

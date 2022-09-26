@@ -1,10 +1,10 @@
+import { Box, Typography } from '@mui/material';
 import {
   dashItemBorderRadius,
   dashItemPadding,
   dashSectionBorder,
   themeColors,
-} from '@kdb-dash/shared/ui-styles';
-import { Box, Typography } from '@mui/material';
+} from '@trade-alerts/shared/ui-styles';
 
 import { TradesChartContainer } from '../containers/TradesChartContainer';
 import { DashboardChart } from '../entities/dashboard-chart.enum';

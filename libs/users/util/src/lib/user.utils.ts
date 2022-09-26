@@ -1,4 +1,4 @@
-import { User, UserDetails } from '@kdb-dash/users/domain';
+import { User, UserDetails } from '@trade-alerts/users/domain';
 
 export function getUserFormParams(user?: User): UserDetails {
   if (user == null) {

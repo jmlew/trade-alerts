@@ -7,8 +7,8 @@ import {
   FiltersType,
   getAlertIdFromSearchParams,
   getDateRangeFromSearchParams,
-} from '@kdb-dash/dashboard/domain';
-import { AlertIdInput, DateRangeInputs } from '@kdb-dash/dashboard/ui/controls';
+} from '@trade-alerts/dashboard/domain';
+import { AlertIdInput, DateRangeInputs } from '@trade-alerts/dashboard/ui/controls';
 
 interface DataSelectorContainerProps {
   type: FiltersType;

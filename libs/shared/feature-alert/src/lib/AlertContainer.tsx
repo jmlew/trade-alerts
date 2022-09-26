@@ -1,4 +1,4 @@
-import { AlertMessage } from '@kdb-dash/shared/ui-common';
+import { AlertMessage } from '@trade-alerts/shared/ui-common';
 
 import { useAlert } from './alert.context';
 

@@ -1,8 +1,8 @@
-import { AlertInfoField, AlertOverviewInfo } from '@kdb-dash/dashboard/domain';
-import { DividerVert } from '@kdb-dash/shared/ui-common';
-import { themeColors } from '@kdb-dash/shared/ui-styles';
 import { EditRounded } from '@mui/icons-material';
 import { Box, Button, Typography } from '@mui/material';
+import { AlertInfoField, AlertOverviewInfo } from '@trade-alerts/dashboard/domain';
+import { DividerVert } from '@trade-alerts/shared/ui-common';
+import { themeColors } from '@trade-alerts/shared/ui-styles';
 
 const styles = {
   root: {

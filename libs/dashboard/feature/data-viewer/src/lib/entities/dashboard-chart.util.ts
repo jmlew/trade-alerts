@@ -1,4 +1,4 @@
-import { TradeChartDataKeys } from '@kdb-dash/dashboard/ui/charts';
+import { TradeChartDataKeys } from '@trade-alerts/dashboard/ui/charts';
 
 import { DashboardChart } from './dashboard-chart.enum';
 

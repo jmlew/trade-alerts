@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
+import { Box } from '@mui/material';
 import {
   FiltersType,
   doAlertsExist,
   getInitialFilterTypeFromSearchParams,
-} from '@kdb-dash/dashboard/domain';
-import { useAlertUpdaterContext } from '@kdb-dash/dashboard/feature/alert-updater';
-import { useDashboardDataContext } from '@kdb-dash/dashboard/feature/data-provider';
-import { BtnSideExpand, FiltersTypeBtns } from '@kdb-dash/dashboard/ui/controls';
-import { ApiStateManager } from '@kdb-dash/shared/data-access';
-import { DividerVert } from '@kdb-dash/shared/ui-common';
-import { Box } from '@mui/material';
+} from '@trade-alerts/dashboard/domain';
+import { useAlertUpdaterContext } from '@trade-alerts/dashboard/feature/alert-updater';
+import { useDashboardDataContext } from '@trade-alerts/dashboard/feature/data-provider';
+import { BtnSideExpand, FiltersTypeBtns } from '@trade-alerts/dashboard/ui/controls';
+import { ApiStateManager } from '@trade-alerts/shared/data-access';
+import { DividerVert } from '@trade-alerts/shared/ui-common';
 
 import { DashboardSelectorContainer } from './DashboardSelectorContainer';
 import { DataFiltersContainer } from './DataFiltersContainer';

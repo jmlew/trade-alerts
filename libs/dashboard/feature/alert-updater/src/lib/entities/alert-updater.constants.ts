@@ -1,5 +1,5 @@
-import { AlertInfoField } from '@kdb-dash/dashboard/domain';
-import { UiControlOption } from '@kdb-dash/shared/data-access';
+import { AlertInfoField } from '@trade-alerts/dashboard/domain';
+import { UiControlOption } from '@trade-alerts/shared/data-access';
 
 import { AlertActionType } from './alert-updater.enum';
 

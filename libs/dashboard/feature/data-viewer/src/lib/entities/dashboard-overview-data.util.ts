@@ -3,7 +3,7 @@ import {
   AlertInfoField,
   AlertOverviewInfo,
   alertInfoLabels,
-} from '@kdb-dash/dashboard/domain';
+} from '@trade-alerts/dashboard/domain';
 
 const fields: AlertInfoField[] = [
   AlertInfoField.AlertId,

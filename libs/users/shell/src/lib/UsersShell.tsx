@@ -1,6 +1,6 @@
-import { UsersRoutes } from '@kdb-dash/users/feature/manage-users';
 import { Theme } from '@mui/material';
 import Box from '@mui/material/Box';
+import { UsersRoutes } from '@trade-alerts/users/feature/manage-users';
 
 import { ShellContent } from './ShellContent';
 import { ShellFooter } from './ShellFooter';

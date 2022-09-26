@@ -2,10 +2,10 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { ApiRequestType, useApiStateManager } from '@kdb-dash/shared/data-access';
-import { ErrorMessage, Loading } from '@kdb-dash/shared/ui-common';
-import { GetUserResponse, User, userFacade } from '@kdb-dash/users/domain';
 import { Button } from '@mui/material';
+import { ApiRequestType, useApiStateManager } from '@trade-alerts/shared/data-access';
+import { ErrorMessage, Loading } from '@trade-alerts/shared/ui-common';
+import { GetUserResponse, User, userFacade } from '@trade-alerts/users/domain';
 
 import { UserContextProvider } from '../context/UserContextProvider';
 

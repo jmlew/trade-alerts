@@ -6,8 +6,8 @@ import {
   ApiRequestMethod,
   AxiosApiService,
   EnvVar,
-} from '@kdb-dash/shared/data-access';
-import { getEnvVar, isDev, isUseMockInDev } from '@kdb-dash/shared/data-access';
+} from '@trade-alerts/shared/data-access';
+import { getEnvVar, isDev, isUseMockInDev } from '@trade-alerts/shared/data-access';
 
 import { UserApiUri } from './user-api.enum';
 

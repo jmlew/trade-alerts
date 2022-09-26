@@ -1,5 +1,6 @@
+import { Injectable } from '@nestjs/common';
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
-import * as fromUtilsLib from '@kdb-dash/shared/util-common';
+import * as fromUtilsLib from '@trade-alerts/shared/util-common';
 import {
   CreateUserResponse,
   DeleteUserResponse,
@@ -8,8 +9,7 @@ import {
   UpdateUserResponse,
   User,
   UserDetails,
-} from '@kdb-dash/users/domain';
-import { Injectable } from '@nestjs/common';
+} from '@trade-alerts/users/domain';
 
 import * as usersDb from '../../../assets/db/users.json';
 import { EntitiesApiBaseService } from '../../shared/services';

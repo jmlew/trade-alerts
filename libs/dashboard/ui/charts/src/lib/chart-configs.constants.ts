@@ -1,5 +1,5 @@
-import { TradesInfo } from '@kdb-dash/dashboard/domain';
-import { themeColors } from '@kdb-dash/shared/ui-styles';
+import { TradesInfo } from '@trade-alerts/dashboard/domain';
+import { themeColors } from '@trade-alerts/shared/ui-styles';
 
 export enum ChartAttribute {
   Grid,

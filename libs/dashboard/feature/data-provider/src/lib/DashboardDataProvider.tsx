@@ -1,8 +1,8 @@
 import { ReactNode, useMemo } from 'react';
 
-import { DashboardData, dashboardDataFacade } from '@kdb-dash/dashboard/domain';
-import { ApiState } from '@kdb-dash/shared/data-access';
-import { useObservable } from '@kdb-dash/shared/util-common';
+import { DashboardData, dashboardDataFacade } from '@trade-alerts/dashboard/domain';
+import { ApiState } from '@trade-alerts/shared/data-access';
+import { useObservable } from '@trade-alerts/shared/util-common';
 
 import {
   DashboardDataContext,

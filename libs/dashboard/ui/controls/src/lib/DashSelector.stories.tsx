@@ -1,5 +1,5 @@
-import { UiControlOption } from '@kdb-dash/shared/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { UiControlOption } from '@trade-alerts/shared/data-access';
 
 import { DashSelector } from './DashSelector';
 

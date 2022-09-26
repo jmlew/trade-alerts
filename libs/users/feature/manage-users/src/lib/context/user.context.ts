@@ -1,6 +1,6 @@
 import { Context, createContext, useContext } from 'react';
 
-import { User } from '@kdb-dash/users/domain';
+import { User } from '@trade-alerts/users/domain';
 
 export interface UserContextValue {
   user: User;

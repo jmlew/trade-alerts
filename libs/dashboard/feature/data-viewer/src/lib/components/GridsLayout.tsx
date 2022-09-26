@@ -1,7 +1,5 @@
 import { ReactNode, SyntheticEvent, useState } from 'react';
 
-import { BtnDownloadData } from '@kdb-dash/dashboard/ui/controls';
-import { themeColors } from '@kdb-dash/shared/ui-styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
   Accordion,
@@ -10,6 +8,8 @@ import {
   Box,
   Typography,
 } from '@mui/material';
+import { BtnDownloadData } from '@trade-alerts/dashboard/ui/controls';
+import { themeColors } from '@trade-alerts/shared/ui-styles';
 
 import { GridContainer } from '../containers/GridContainer';
 import { DashboardGrid } from '../entities/dashboard-grid.enum';

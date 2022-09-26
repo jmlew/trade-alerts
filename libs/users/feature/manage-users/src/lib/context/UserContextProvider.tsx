@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { User } from '@kdb-dash/users/domain';
+import { User } from '@trade-alerts/users/domain';
 
 import { UserContext, UserContextValue } from './user.context';
 

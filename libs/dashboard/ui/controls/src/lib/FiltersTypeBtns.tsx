@@ -1,5 +1,5 @@
-import { FiltersType } from '@kdb-dash/dashboard/domain';
 import { Button, ButtonGroup, Theme } from '@mui/material';
+import { FiltersType } from '@trade-alerts/dashboard/domain';
 
 const styles = {
   root: (theme: Theme) => ({ width: 1 }),

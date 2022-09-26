@@ -1,7 +1,7 @@
-import { DashboardDataGridField } from '@kdb-dash/dashboard/domain';
-import { themeColors } from '@kdb-dash/shared/ui-styles';
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { DashboardDataGridField } from '@trade-alerts/dashboard/domain';
+import { themeColors } from '@trade-alerts/shared/ui-styles';
 
 const styles = {
   root: { width: 1, height: 420 },

@@ -1,5 +1,5 @@
-import { AlertOverviewInfo } from '@kdb-dash/dashboard/domain';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { AlertOverviewInfo } from '@trade-alerts/dashboard/domain';
 
 import { AlertOverviews } from './AlertOverviews';
 

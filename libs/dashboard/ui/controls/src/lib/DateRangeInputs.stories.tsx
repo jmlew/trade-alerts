@@ -1,7 +1,7 @@
-import { DateRange } from '@kdb-dash/dashboard/domain';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { DateRange } from '@trade-alerts/dashboard/domain';
 
 import { DateRangeInputs } from './DateRangeInputs';
 

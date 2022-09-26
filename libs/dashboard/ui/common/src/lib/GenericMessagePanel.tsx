@@ -1,11 +1,11 @@
 import { ReactNode } from 'react';
 
+import { Box } from '@mui/material';
 import {
   dashItemBorderRadius,
   dashSectionBorder,
   themeColors,
-} from '@kdb-dash/shared/ui-styles';
-import { Box } from '@mui/material';
+} from '@trade-alerts/shared/ui-styles';
 
 import { DashPanelStack } from './DashPanelStack';
 

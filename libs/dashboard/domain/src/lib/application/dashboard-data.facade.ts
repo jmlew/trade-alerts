@@ -1,7 +1,11 @@
 import { BehaviorSubject, Observable, filter } from 'rxjs';
 
-import { ApiRequestType, ApiState, ApiStateManager } from '@kdb-dash/shared/data-access';
-import { isNonNull } from '@kdb-dash/shared/util-common';
+import {
+  ApiRequestType,
+  ApiState,
+  ApiStateManager,
+} from '@trade-alerts/shared/data-access';
+import { isNonNull } from '@trade-alerts/shared/util-common';
 
 import { DashboardData } from '../entities/dashboard-data.model';
 import { DataFilters } from '../entities/data-filters.model';

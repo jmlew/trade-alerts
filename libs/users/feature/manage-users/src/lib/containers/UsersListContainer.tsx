@@ -2,12 +2,12 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { ApiRequestType, useApiStateManager } from '@kdb-dash/shared/data-access';
-import { useAlert } from '@kdb-dash/shared/feature-alert';
-import { AlertType, ErrorMessage, Loading } from '@kdb-dash/shared/ui-common';
-import { objectsSortOnKey } from '@kdb-dash/shared/util-common';
-import { GetUsersResponse, User, userFacade } from '@kdb-dash/users/domain';
-import { UsersList } from '@kdb-dash/users/ui';
+import { ApiRequestType, useApiStateManager } from '@trade-alerts/shared/data-access';
+import { useAlert } from '@trade-alerts/shared/feature-alert';
+import { AlertType, ErrorMessage, Loading } from '@trade-alerts/shared/ui-common';
+import { objectsSortOnKey } from '@trade-alerts/shared/util-common';
+import { GetUsersResponse, User, userFacade } from '@trade-alerts/users/domain';
+import { UsersList } from '@trade-alerts/users/ui';
 
 interface UserContainerProps {
   pageIndex: number;

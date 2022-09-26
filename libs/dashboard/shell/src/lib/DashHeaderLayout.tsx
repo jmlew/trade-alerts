@@ -1,6 +1,6 @@
-import { DataSelectorContainer } from '@kdb-dash/dashboard/feature/data-selector';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
+import { DataSelectorContainer } from '@trade-alerts/dashboard/feature/data-selector';
 
 export function DashHeaderLayout() {
   return (

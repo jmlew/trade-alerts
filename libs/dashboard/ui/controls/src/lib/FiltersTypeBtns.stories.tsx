@@ -1,5 +1,5 @@
-import { FiltersType } from '@kdb-dash/dashboard/domain';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { FiltersType } from '@trade-alerts/dashboard/domain';
 
 import { FiltersTypeBtns } from './FiltersTypeBtns';
 

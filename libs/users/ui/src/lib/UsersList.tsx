@@ -1,4 +1,3 @@
-import { User } from '@kdb-dash/users/domain';
 import { Delete, Edit } from '@mui/icons-material';
 import {
   Avatar,
@@ -8,6 +7,7 @@ import {
   ListItemAvatar,
   ListItemText,
 } from '@mui/material';
+import { User } from '@trade-alerts/users/domain';
 
 export interface UsersListProps {
   users: User[];

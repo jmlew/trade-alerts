@@ -1,7 +1,7 @@
-import { AlertInfo, getAlertById } from '@kdb-dash/dashboard/domain';
-import { GenericMessagePanel } from '@kdb-dash/dashboard/ui/common';
-import { DashSelector } from '@kdb-dash/dashboard/ui/controls';
 import { Typography } from '@mui/material';
+import { AlertInfo, getAlertById } from '@trade-alerts/dashboard/domain';
+import { GenericMessagePanel } from '@trade-alerts/dashboard/ui/common';
+import { DashSelector } from '@trade-alerts/dashboard/ui/controls';
 
 import { useAlertUpdaterContext } from '../context/alert-updater.context';
 import { getAlertOptions, getAlertSelectorLabel } from '../entities/alert-updater.util';

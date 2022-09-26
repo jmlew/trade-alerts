@@ -5,10 +5,10 @@ import {
   DataFilters,
   dashboardDataFacade,
   getDataFiltersFromSearchParams,
-} from '@kdb-dash/dashboard/domain';
-import { useDashboardDataContext } from '@kdb-dash/dashboard/feature/data-provider';
-import { BtnLoadData } from '@kdb-dash/dashboard/ui/controls';
-import { ApiStateManager } from '@kdb-dash/shared/data-access';
+} from '@trade-alerts/dashboard/domain';
+import { useDashboardDataContext } from '@trade-alerts/dashboard/feature/data-provider';
+import { BtnLoadData } from '@trade-alerts/dashboard/ui/controls';
+import { ApiStateManager } from '@trade-alerts/shared/data-access';
 
 export function DataLoaderContainer() {
   const [searchParams] = useSearchParams();

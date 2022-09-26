@@ -1,4 +1,4 @@
-import { environment } from '@kdb-dash/shared/environments';
+import { environment } from '@trade-alerts/shared/environments';
 
 import { EnvVar } from './env-var.enum';
 

@@ -1,7 +1,7 @@
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { AjaxResponse, ajax } from 'rxjs/ajax';
 
-import { getAjaxApiErrorMessage } from '@kdb-dash/shared/util-common';
+import { getAjaxApiErrorMessage } from '@trade-alerts/shared/util-common';
 
 import { DashboardData } from '../entities/dashboard-data.model';
 import { DataFilters } from '../entities/data-filters.model';

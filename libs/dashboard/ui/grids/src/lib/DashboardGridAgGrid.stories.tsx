@@ -1,11 +1,11 @@
 import { ColDef } from 'ag-grid-community';
 
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import {
   AlertInfo,
   DashboardDataConfig,
   DashboardDataGridField,
-} from '@kdb-dash/dashboard/domain';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+} from '@trade-alerts/dashboard/domain';
 
 import { DashboardGridAgGrid } from './DashboardGridAgGrid';
 

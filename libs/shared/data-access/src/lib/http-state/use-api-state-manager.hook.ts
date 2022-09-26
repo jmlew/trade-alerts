@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { usePrevious } from '@kdb-dash/shared/util-common';
+import { usePrevious } from '@trade-alerts/shared/util-common';
 
 import { ApiStateManager } from './api-state-manager.util';
 import { ApiRequestType, ApiStatus } from './api-state.enum';

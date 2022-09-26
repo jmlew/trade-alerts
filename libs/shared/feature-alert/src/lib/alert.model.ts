@@ -1,4 +1,4 @@
-import { AlertAlign, AlertType } from '@kdb-dash/shared/ui-common';
+import { AlertAlign, AlertType } from '@trade-alerts/shared/ui-common';
 
 export interface AlertConfig {
   isShown: boolean;

@@ -1,9 +1,9 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 
-import { DashSelector } from '@kdb-dash/dashboard/ui/controls';
-import { themeColors } from '@kdb-dash/shared/ui-styles';
 import { LoadingButton } from '@mui/lab';
 import { Box, Button, TextField, Typography } from '@mui/material';
+import { DashSelector } from '@trade-alerts/dashboard/ui/controls';
+import { themeColors } from '@trade-alerts/shared/ui-styles';
 
 import { AlertActionType } from '../entities/alert-updater.enum';
 import { AlertUpdateFormParams } from '../entities/alert-updater.model';

@@ -1,10 +1,10 @@
 import { Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { DashShell } from '@kdb-dash/dashboard/shell';
-import { AppHome } from '@kdb-dash/home/feature';
-import { Loading } from '@kdb-dash/shared/ui-common';
-import { UsersShell } from '@kdb-dash/users/shell';
+import { DashShell } from '@trade-alerts/dashboard/shell';
+import { AppHome } from '@trade-alerts/home/feature';
+import { Loading } from '@trade-alerts/shared/ui-common';
+import { UsersShell } from '@trade-alerts/users/shell';
 
 import { AppShell } from './AppShell';
 import { PageNotFound } from './PageNotFound';

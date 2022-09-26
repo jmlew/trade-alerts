@@ -1,14 +1,6 @@
 import { useFormik } from 'formik';
 
 import {
-  FormParamUser,
-  createValidationSchema,
-  formAutocompleteMap,
-  formLabelMap,
-  isFieldError,
-} from '@kdb-dash/shared/util-form';
-import { User, UserDetails } from '@kdb-dash/users/domain';
-import {
   Button,
   Card,
   CardActions,
@@ -18,6 +10,14 @@ import {
 } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
+import {
+  FormParamUser,
+  createValidationSchema,
+  formAutocompleteMap,
+  formLabelMap,
+  isFieldError,
+} from '@trade-alerts/shared/util-form';
+import { User, UserDetails } from '@trade-alerts/users/domain';
 
 interface UserDetailsFormProps {
   user?: User;

@@ -18,41 +18,41 @@
     "baseUrl": ".",
     "paths": {
       "@custom-types": ["./types/index.ts"],
-      "@kdb-dash/dashboard/domain": ["libs/dashboard/domain/src/index.ts"],
-      "@kdb-dash/dashboard/feature/alert-updater": [
+      "@trade-alerts/dashboard/domain": ["libs/dashboard/domain/src/index.ts"],
+      "@trade-alerts/dashboard/feature/alert-updater": [
         "libs/dashboard/feature/alert-updater/src/index.ts"
       ],
-      "@kdb-dash/dashboard/feature/data-provider": [
+      "@trade-alerts/dashboard/feature/data-provider": [
         "libs/dashboard/feature/data-provider/src/index.ts"
       ],
-      "@kdb-dash/dashboard/feature/data-selector": [
+      "@trade-alerts/dashboard/feature/data-selector": [
         "libs/dashboard/feature/data-selector/src/index.ts"
       ],
-      "@kdb-dash/dashboard/feature/data-viewer": [
+      "@trade-alerts/dashboard/feature/data-viewer": [
         "libs/dashboard/feature/data-viewer/src/index.ts"
       ],
-      "@kdb-dash/dashboard/shell": ["libs/dashboard/shell/src/index.ts"],
-      "@kdb-dash/dashboard/ui/charts": ["libs/dashboard/ui/charts/src/index.ts"],
-      "@kdb-dash/dashboard/ui/common": ["libs/dashboard/ui/common/src/index.ts"],
-      "@kdb-dash/dashboard/ui/controls": ["libs/dashboard/ui/controls/src/index.ts"],
-      "@kdb-dash/dashboard/ui/details": ["libs/dashboard/ui/details/src/index.ts"],
-      "@kdb-dash/dashboard/ui/grids": ["libs/dashboard/ui/grids/src/index.ts"],
-      "@kdb-dash/form/util": ["libs/form/util/src/index.ts"],
-      "@kdb-dash/home/feature": ["libs/home/feature/src/index.ts"],
-      "@kdb-dash/shared/data-access": ["libs/shared/data-access/src/index.ts"],
-      "@kdb-dash/shared/environments": ["libs/shared/environments/src/index.ts"],
-      "@kdb-dash/shared/feature-alert": ["libs/shared/feature-alert/src/index.ts"],
-      "@kdb-dash/shared/ui-common": ["libs/shared/ui-common/src/index.ts"],
-      "@kdb-dash/shared/ui-styles": ["libs/shared/ui-styles/src/index.ts"],
-      "@kdb-dash/shared/util-common": ["libs/shared/util-common/src/index.ts"],
-      "@kdb-dash/shared/util-form": ["libs/shared/util-form/src/index.ts"],
-      "@kdb-dash/users/domain": ["libs/users/domain/src/index.ts"],
-      "@kdb-dash/users/feature/manage-users": [
+      "@trade-alerts/dashboard/shell": ["libs/dashboard/shell/src/index.ts"],
+      "@trade-alerts/dashboard/ui/charts": ["libs/dashboard/ui/charts/src/index.ts"],
+      "@trade-alerts/dashboard/ui/common": ["libs/dashboard/ui/common/src/index.ts"],
+      "@trade-alerts/dashboard/ui/controls": ["libs/dashboard/ui/controls/src/index.ts"],
+      "@trade-alerts/dashboard/ui/details": ["libs/dashboard/ui/details/src/index.ts"],
+      "@trade-alerts/dashboard/ui/grids": ["libs/dashboard/ui/grids/src/index.ts"],
+      "@trade-alerts/form/util": ["libs/form/util/src/index.ts"],
+      "@trade-alerts/home/feature": ["libs/home/feature/src/index.ts"],
+      "@trade-alerts/shared/data-access": ["libs/shared/data-access/src/index.ts"],
+      "@trade-alerts/shared/environments": ["libs/shared/environments/src/index.ts"],
+      "@trade-alerts/shared/feature-alert": ["libs/shared/feature-alert/src/index.ts"],
+      "@trade-alerts/shared/ui-common": ["libs/shared/ui-common/src/index.ts"],
+      "@trade-alerts/shared/ui-styles": ["libs/shared/ui-styles/src/index.ts"],
+      "@trade-alerts/shared/util-common": ["libs/shared/util-common/src/index.ts"],
+      "@trade-alerts/shared/util-form": ["libs/shared/util-form/src/index.ts"],
+      "@trade-alerts/users/domain": ["libs/users/domain/src/index.ts"],
+      "@trade-alerts/users/feature/manage-users": [
         "libs/users/feature/manage-users/src/index.ts"
       ],
-      "@kdb-dash/users/shell": ["libs/users/shell/src/index.ts"],
-      "@kdb-dash/users/ui": ["libs/users/ui/src/index.ts"],
-      "@kdb-dash/users/util": ["libs/users/util/src/index.ts"]
+      "@trade-alerts/users/shell": ["libs/users/shell/src/index.ts"],
+      "@trade-alerts/users/ui": ["libs/users/ui/src/index.ts"],
+      "@trade-alerts/users/util": ["libs/users/util/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

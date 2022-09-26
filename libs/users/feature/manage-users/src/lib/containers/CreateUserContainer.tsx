@@ -2,12 +2,12 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { ApiRequestType, useApiStateManager } from '@kdb-dash/shared/data-access';
-import { useAlert } from '@kdb-dash/shared/feature-alert';
-import { AlertType, Loading } from '@kdb-dash/shared/ui-common';
-import { CreateUserResponse, UserDetails, userFacade } from '@kdb-dash/users/domain';
-import { UserDetailsForm } from '@kdb-dash/users/ui';
-import { getUserFormParams } from '@kdb-dash/users/util';
+import { ApiRequestType, useApiStateManager } from '@trade-alerts/shared/data-access';
+import { useAlert } from '@trade-alerts/shared/feature-alert';
+import { AlertType, Loading } from '@trade-alerts/shared/ui-common';
+import { CreateUserResponse, UserDetails, userFacade } from '@trade-alerts/users/domain';
+import { UserDetailsForm } from '@trade-alerts/users/ui';
+import { getUserFormParams } from '@trade-alerts/users/util';
 
 export function CreateUserContainer() {
   const navigate = useNavigate();

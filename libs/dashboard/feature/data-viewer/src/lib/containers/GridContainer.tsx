@@ -1,7 +1,10 @@
-import { DashboardDataConfig, DashboardDataGridField } from '@kdb-dash/dashboard/domain';
-import { useDashboardDataContext } from '@kdb-dash/dashboard/feature/data-provider';
-import { DashboardGridMui } from '@kdb-dash/dashboard/ui/grids';
-import { ErrorMessage } from '@kdb-dash/shared/ui-common';
+import {
+  DashboardDataConfig,
+  DashboardDataGridField,
+} from '@trade-alerts/dashboard/domain';
+import { useDashboardDataContext } from '@trade-alerts/dashboard/feature/data-provider';
+import { DashboardGridMui } from '@trade-alerts/dashboard/ui/grids';
+import { ErrorMessage } from '@trade-alerts/shared/ui-common';
 
 import {
   getGridDataConfigs,

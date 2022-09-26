@@ -1,12 +1,12 @@
 import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import { MemoryStore } from '@custom-types';
-import { ApiRequestMethod } from '@kdb-dash/shared/data-access';
+import { ApiRequestMethod } from '@trade-alerts/shared/data-access';
 import {
   AxiosApiInterceptorsService,
   InterceptorsHandlers,
-} from '@kdb-dash/shared/data-access';
-import { normaliseAxiosApiErrorMessage } from '@kdb-dash/shared/util-common';
+} from '@trade-alerts/shared/data-access';
+import { normaliseAxiosApiErrorMessage } from '@trade-alerts/shared/util-common';
 
 import {
   CreateUserResponse,

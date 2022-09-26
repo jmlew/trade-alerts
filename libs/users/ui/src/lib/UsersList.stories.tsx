@@ -1,5 +1,5 @@
-import { User } from '@kdb-dash/users/domain';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { User } from '@trade-alerts/users/domain';
 
 import { UsersList } from './UsersList';
 

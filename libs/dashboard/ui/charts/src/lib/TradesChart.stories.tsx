@@ -1,6 +1,6 @@
-import { TradesInfo } from '@kdb-dash/dashboard/domain';
 import { Box } from '@mui/material';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { TradesInfo } from '@trade-alerts/dashboard/domain';
 
 import { TradeChartDataKeys, TradesChart } from './TradesChart';
 

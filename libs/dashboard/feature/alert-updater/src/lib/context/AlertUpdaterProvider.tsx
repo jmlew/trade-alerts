@@ -1,7 +1,7 @@
 import { ReactNode, useMemo, useState } from 'react';
 
-import { AlertInfo } from '@kdb-dash/dashboard/domain';
-import { useDashboardDataContext } from '@kdb-dash/dashboard/feature/data-provider';
+import { AlertInfo } from '@trade-alerts/dashboard/domain';
+import { useDashboardDataContext } from '@trade-alerts/dashboard/feature/data-provider';
 
 import { getAllAlerts, getInitialAlert } from '../entities/alert-updater.util';
 import { AlertUpdaterContext, AlertUpdaterContextValue } from './alert-updater.context';

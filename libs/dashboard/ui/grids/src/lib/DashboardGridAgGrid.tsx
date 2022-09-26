@@ -10,10 +10,10 @@ import '@fontsource/roboto';
 import { ColDef } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react'; // the AG Grid React Component
 
-import { DashboardDataGridField } from '@kdb-dash/dashboard/domain';
-import { themeColors } from '@kdb-dash/shared/ui-styles';
 import { SxProps } from '@mui/material';
 import Box from '@mui/material/Box';
+import { DashboardDataGridField } from '@trade-alerts/dashboard/domain';
+import { themeColors } from '@trade-alerts/shared/ui-styles';
 
 const styles = {
   root: { height: 420 },

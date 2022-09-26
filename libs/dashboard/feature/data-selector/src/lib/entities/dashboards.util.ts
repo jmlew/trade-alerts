@@ -1,5 +1,5 @@
-import { FilterSearchParam } from '@kdb-dash/dashboard/domain';
-import { UiControlOption } from '@kdb-dash/shared/data-access';
+import { FilterSearchParam } from '@trade-alerts/dashboard/domain';
+import { UiControlOption } from '@trade-alerts/shared/data-access';
 
 import { dashboardOptions, defaultDashboardOption } from './dashboards.constants';
 

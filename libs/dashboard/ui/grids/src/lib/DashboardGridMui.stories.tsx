@@ -1,10 +1,10 @@
+import { GridColDef } from '@mui/x-data-grid';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import {
   AlertInfo,
   DashboardDataConfig,
   DashboardDataGridField,
-} from '@kdb-dash/dashboard/domain';
-import { GridColDef } from '@mui/x-data-grid';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+} from '@trade-alerts/dashboard/domain';
 
 import { DashboardGridMui } from './DashboardGridMui';
 

@@ -1,5 +1,5 @@
-import { DashPanelStack } from '@kdb-dash/dashboard/ui/common';
 import { Box } from '@mui/material';
+import { DashPanelStack } from '@trade-alerts/dashboard/ui/common';
 
 import { ChartsLayout } from './ChartsLayout';
 import { FooterLayout } from './FooterLayout';

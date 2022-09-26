@@ -3,8 +3,8 @@ import {
   AlertInfoField,
   DashboardData,
   alertInfoLabels,
-} from '@kdb-dash/dashboard/domain';
-import { UiControlOption } from '@kdb-dash/shared/data-access';
+} from '@trade-alerts/dashboard/domain';
+import { UiControlOption } from '@trade-alerts/shared/data-access';
 
 import { alertActionOptions, alertSelectorLabelFields } from './alert-updater.constants';
 import { AlertActionType } from './alert-updater.enum';

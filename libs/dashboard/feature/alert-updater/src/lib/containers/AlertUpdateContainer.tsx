@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { useAlert } from '@kdb-dash/shared/feature-alert';
-import { AlertType } from '@kdb-dash/shared/ui-common';
+import { useAlert } from '@trade-alerts/shared/feature-alert';
+import { AlertType } from '@trade-alerts/shared/ui-common';
 
 import { AlertUpdateForm } from '../components/AlertUpdateForm';
 import { useAlertUpdaterContext } from '../context/alert-updater.context';

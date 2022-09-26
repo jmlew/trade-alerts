@@ -23,7 +23,7 @@ import {
   UpdateUserResponse,
   User,
   UserDetails,
-} from '@kdb-dash/users/domain';
+} from '@trade-alerts/users/domain';
 
 enum ErrorMessage {
   TestBadRequest = 'Sample response to simulate an invalid request.',

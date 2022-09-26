@@ -1,6 +1,6 @@
 import { Context, createContext, useContext } from 'react';
 
-import { AlertInfo } from '@kdb-dash/dashboard/domain';
+import { AlertInfo } from '@trade-alerts/dashboard/domain';
 
 export interface AlertUpdaterContextValue {
   isDrawerOpen: boolean;

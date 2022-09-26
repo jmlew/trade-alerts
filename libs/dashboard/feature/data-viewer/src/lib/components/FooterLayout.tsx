@@ -1,6 +1,6 @@
-import { useDashboardDataContext } from '@kdb-dash/dashboard/feature/data-provider';
-import { dashSectionBorder, themeColors } from '@kdb-dash/shared/ui-styles';
 import { Box, Typography } from '@mui/material';
+import { useDashboardDataContext } from '@trade-alerts/dashboard/feature/data-provider';
+import { dashSectionBorder, themeColors } from '@trade-alerts/shared/ui-styles';
 
 const styles = {
   root: {

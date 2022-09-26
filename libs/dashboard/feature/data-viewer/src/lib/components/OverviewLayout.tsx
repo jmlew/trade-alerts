@@ -1,6 +1,5 @@
 import { SyntheticEvent, useState } from 'react';
 
-import { themeColors } from '@kdb-dash/shared/ui-styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
   Accordion,
@@ -9,6 +8,7 @@ import {
   Box,
   Typography,
 } from '@mui/material';
+import { themeColors } from '@trade-alerts/shared/ui-styles';
 
 import { OverviewContainer } from '../containers/OverviewContainer';
 

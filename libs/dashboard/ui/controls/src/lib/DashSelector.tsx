@@ -1,4 +1,3 @@
-import { UiControlOption } from '@kdb-dash/shared/data-access';
 import {
   FormControl,
   InputLabel,
@@ -7,6 +6,7 @@ import {
   SelectChangeEvent,
   Theme,
 } from '@mui/material';
+import { UiControlOption } from '@trade-alerts/shared/data-access';
 
 const styles = {
   root: { width: 1, height: 38 },

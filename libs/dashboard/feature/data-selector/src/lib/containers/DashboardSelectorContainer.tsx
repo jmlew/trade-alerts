@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 
-import { FilterSearchParam } from '@kdb-dash/dashboard/domain';
-import { DashSelector } from '@kdb-dash/dashboard/ui/controls';
+import { FilterSearchParam } from '@trade-alerts/dashboard/domain';
+import { DashSelector } from '@trade-alerts/dashboard/ui/controls';
 
 import { dashboardOptions } from '../entities/dashboards.constants';
 import { getInitialDashboardFromSearchParams } from '../entities/dashboards.util';

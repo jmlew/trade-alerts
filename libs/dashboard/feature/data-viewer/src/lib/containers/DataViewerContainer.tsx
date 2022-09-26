@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 
-import { doAlertsExist } from '@kdb-dash/dashboard/domain';
-import { useDashboardDataContext } from '@kdb-dash/dashboard/feature/data-provider';
-import { GenericMessagePanel } from '@kdb-dash/dashboard/ui/common';
-import { ApiStateManager } from '@kdb-dash/shared/data-access';
-import { useAlert } from '@kdb-dash/shared/feature-alert';
-import { ErrorMessage, Loading } from '@kdb-dash/shared/ui-common';
 import { Typography } from '@mui/material';
+import { doAlertsExist } from '@trade-alerts/dashboard/domain';
+import { useDashboardDataContext } from '@trade-alerts/dashboard/feature/data-provider';
+import { GenericMessagePanel } from '@trade-alerts/dashboard/ui/common';
+import { ApiStateManager } from '@trade-alerts/shared/data-access';
+import { useAlert } from '@trade-alerts/shared/feature-alert';
+import { ErrorMessage, Loading } from '@trade-alerts/shared/ui-common';
 
 import { DashLayout } from '../components/DashLayout';
 

@@ -5,7 +5,7 @@ import {
   DataFilters,
   FiltersType,
   getDefaultFilterType,
-} from '@kdb-dash/dashboard/domain';
+} from '@trade-alerts/dashboard/domain';
 import {
   BadRequestException,
   Controller,

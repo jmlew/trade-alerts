@@ -1,12 +1,12 @@
 import { ColDef } from 'ag-grid-community';
 
+import { GridColDef } from '@mui/x-data-grid';
 import {
   DashboardDataConfig,
   DashboardDataGridField,
   alertInfoConfigs,
   transactionConfigs,
-} from '@kdb-dash/dashboard/domain';
-import { GridColDef } from '@mui/x-data-grid';
+} from '@trade-alerts/dashboard/domain';
 
 import { DashboardGrid } from './dashboard-grid.enum';
 

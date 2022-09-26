@@ -1,9 +1,9 @@
+import { Box, Typography } from '@mui/material';
 import {
   dashItemBorderRadius,
   dashSectionBorder,
   themeColors,
-} from '@kdb-dash/shared/ui-styles';
-import { Box, Typography } from '@mui/material';
+} from '@trade-alerts/shared/ui-styles';
 
 import { AlertSelectorContainer } from '../containers/AlertSelectorContainer';
 import { AlertUpdateContainer } from '../containers/AlertUpdateContainer';

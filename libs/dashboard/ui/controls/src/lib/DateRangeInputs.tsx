@@ -1,10 +1,10 @@
 import { DateTime } from 'luxon';
 
-import { DateRange, dateTimeFormat } from '@kdb-dash/dashboard/domain';
-import { defaultDateRange } from '@kdb-dash/dashboard/domain';
 import { ChevronRight } from '@mui/icons-material';
 import { Box, TextField, Theme } from '@mui/material';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { DateRange, dateTimeFormat } from '@trade-alerts/dashboard/domain';
+import { defaultDateRange } from '@trade-alerts/dashboard/domain';
 
 const styles = {
   root: {

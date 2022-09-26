@@ -1,7 +1,7 @@
-import { AlertInfo, DashboardData, DateRange } from '@kdb-dash/dashboard/domain';
 import { Injectable } from '@nestjs/common';
+import { AlertInfo, DashboardData, DateRange } from '@trade-alerts/dashboard/domain';
 
-import * as dashboardsDb from '../../../assets/db/mock-data-kdb-dash.json';
+import * as dashboardsDb from '../../../assets/db/mock-data-trade-alerts.json';
 
 @Injectable()
 export class DashboardDataService {

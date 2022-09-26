@@ -11,7 +11,7 @@ import {
   YAxis,
 } from 'recharts';
 
-import { TradesInfo } from '@kdb-dash/dashboard/domain';
+import { TradesInfo } from '@trade-alerts/dashboard/domain';
 
 import { ChartAttribute, chartColors, chartLabels } from './chart-configs.constants';
 
