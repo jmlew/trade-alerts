@@ -9,7 +9,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { DashboardGridMui } from './DashboardGridMui';
 
 export default {
-  title: 'Dash/grids/DashboardGridMui',
+  title: 'Dash/Grids/DashboardGridMui',
   component: DashboardGridMui,
 } as ComponentMeta<typeof DashboardGridMui>;
 

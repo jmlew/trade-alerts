@@ -1,4 +1,4 @@
-import { dashboardOptions } from '@kdb-dash/dashboard/domain';
+import { UiControlOption } from '@kdb-dash/shared/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { DashSelector } from './DashSelector';
@@ -13,7 +13,22 @@ const Template: ComponentStory<typeof DashSelector> = (args) => (
   <DashSelector {...args} />
 );
 
+export const options: UiControlOption[] = [
+  {
+    value: 'ScenarioA',
+    label: 'Some Scenario',
+  },
+  {
+    value: 'ScenarioB',
+    label: 'Some Other Scenario',
+  },
+  {
+    value: 'ScenarioC',
+    label: 'And Another Scenario',
+  },
+];
+
 export const Main = Template.bind({});
 Main.args = {
-  options: dashboardOptions,
+  options,
 };

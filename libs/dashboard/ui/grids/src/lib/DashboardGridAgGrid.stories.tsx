@@ -10,7 +10,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { DashboardGridAgGrid } from './DashboardGridAgGrid';
 
 export default {
-  title: 'Dash/grids/DashboardGridAgGrid',
+  title: 'Dash/Grids/DashboardGridAgGrid',
   component: DashboardGridAgGrid,
   decorators: [
     (Story) => (
@@ -34,7 +34,7 @@ Main.args = {
 function mockData(): AlertInfo[] {
   return [
     {
-      alertID: '1234001',
+      alertID: 1234001,
       cif: '86018218400',
       cip: '3205428633',
       rmId: 'SC32989',
@@ -46,7 +46,7 @@ function mockData(): AlertInfo[] {
       portfolio: '3205428633',
     },
     {
-      alertID: '1234002',
+      alertID: 1234002,
       cif: '86018218411',
       cip: '3205428633',
       rmId: 'GR5422',
@@ -58,7 +58,7 @@ function mockData(): AlertInfo[] {
       portfolio: '3205428633',
     },
     {
-      alertID: '1234003',
+      alertID: 1234003,
       cif: '86018218412',
       cip: '3205428633',
       rmId: 'MS12229',
