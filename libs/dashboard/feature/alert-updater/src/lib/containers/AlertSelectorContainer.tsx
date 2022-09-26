@@ -1,35 +1,28 @@
-import { useState } from 'react';
-
 import { AlertInfo } from '@kdb-dash/dashboard/domain';
-import { useDashboardDataContext } from '@kdb-dash/dashboard/feature/data-provider';
 import { GenericMessagePanel } from '@kdb-dash/dashboard/ui/common';
 import { DashSelector } from '@kdb-dash/dashboard/ui/controls';
 import { Typography } from '@mui/material';
 
-import {
-  getAlertOptions,
-  getAlertSelectorLabel,
-  getAllAlerts,
-  getInitialAlert,
-} from '../entities/alert-updater.util';
+import { useAlertUpdaterContext } from '../context/alert-updater.context';
+import { getAlertOptions, getAlertSelectorLabel } from '../entities/alert-updater.util';
 
 export function AlertSelectorContainer() {
-  const { dashData } = useDashboardDataContext();
-  const alerts: AlertInfo[] | null = getAllAlerts(dashData);
-  const [alert, setAlert] = useState<AlertInfo | null>(getInitialAlert(alerts));
+  const { alerts, currentAlert, setCurrentAlert } = useAlertUpdaterContext();
 
   function handleSelectChange(alertId: number) {
     const item: AlertInfo | null =
       alerts != null
         ? alerts.find((item: AlertInfo) => item.alertID === alertId) || null
         : null;
-    setAlert(item);
+    if (item != null) {
+      setCurrentAlert(item);
+    }
   }
 
   return alerts != null ? (
     <DashSelector
       label={getAlertSelectorLabel()}
-      value={alert?.alertID || ''}
+      value={currentAlert?.alertID || ''}
       onChange={handleSelectChange}
       options={getAlertOptions(alerts)}
     />

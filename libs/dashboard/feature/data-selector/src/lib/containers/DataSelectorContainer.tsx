@@ -6,7 +6,7 @@ import {
   doAlertsExist,
   getInitialFilterTypeFromSearchParams,
 } from '@kdb-dash/dashboard/domain';
-import { useAlertUpdaterDrawerContext } from '@kdb-dash/dashboard/feature/alert-updater';
+import { useAlertUpdaterContext } from '@kdb-dash/dashboard/feature/alert-updater';
 import { useDashboardDataContext } from '@kdb-dash/dashboard/feature/data-provider';
 import { BtnSideExpand, FiltersTypeBtns } from '@kdb-dash/dashboard/ui/controls';
 import { ApiStateManager } from '@kdb-dash/shared/data-access';
@@ -44,7 +44,7 @@ export function DataSelectorContainer() {
     getInitialFilterTypeFromSearchParams(searchParams)
   );
   const { dashData, dashDataState } = useDashboardDataContext();
-  const { isDrawerOpen, setDrawerOpen } = useAlertUpdaterDrawerContext();
+  const { isDrawerOpen, setDrawerOpen } = useAlertUpdaterContext();
 
   const isDataPending: boolean = dashDataState != null && isPending(dashDataState);
   const isAlertsAvailable: boolean =

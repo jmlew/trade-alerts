@@ -4,6 +4,7 @@ import { useAlert } from '@kdb-dash/shared/feature-alert';
 import { AlertType } from '@kdb-dash/shared/ui-common';
 
 import { AlertUpdateForm } from '../components/AlertUpdateForm';
+import { useAlertUpdaterContext } from '../context/alert-updater.context';
 import { AlertUpdateFormParams } from '../entities/alert-updater.model';
 import {
   getAlertActionLabel,
@@ -13,13 +14,16 @@ import {
 export function AlertUpdateContainer() {
   const { setAlert } = useAlert();
   const [initialValues, setInitialValues] = useState(getInitialFormValues());
+  const { alerts, currentAlert, setCurrentAlert } = useAlertUpdaterContext();
   const [isPending, setIsPending] = useState(false);
 
   function handleSubmit(values: AlertUpdateFormParams) {
     // TODO: implement CRUD and handle errors.
     setIsPending(true);
     setTimeout(() => {
-      const message = `Alert has been updated to ${getAlertActionLabel(values.action)}`;
+      const message = `Alert ${
+        currentAlert?.alertID
+      } has been updated to ${getAlertActionLabel(values.action)}`;
       setAlert({ isShown: true, type: AlertType.Success, message });
       resetFormValues();
       setIsPending(false);
