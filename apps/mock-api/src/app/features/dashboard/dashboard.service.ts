@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { AlertInfo, DashboardData, DateRange } from '@trade-alerts/dashboard/domain';
 
-import * as dashboardsDb from '../../../assets/db/mock-data-trade-alerts.json';
+import * as dashboardsDb from '../../../assets/db/mock-dash.json';
 
 @Injectable()
 export class DashboardDataService {
