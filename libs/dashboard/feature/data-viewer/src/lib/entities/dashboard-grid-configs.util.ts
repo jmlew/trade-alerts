@@ -1,6 +1,6 @@
 import { ColDef } from 'ag-grid-community';
 
-import { GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { GridColDef } from '@mui/x-data-grid';
 import {
   DashboardDataConfig,
   DashboardDataGridField,
@@ -8,6 +8,7 @@ import {
   alertInfoConfigs,
   alertsTransConfigs,
 } from '@trade-alerts/dashboard/domain';
+import { muiCellRenderer, muiCellValueGetter } from '@trade-alerts/dashboard/ui/grids';
 
 import { DashboardGrid } from './dashboard-grid.enum';
 
@@ -26,8 +27,7 @@ export function getGridDataConfigs(grid: DashboardGrid): DashboardDataConfig[] {
 }
 
 /**
- * Placeholder util to be filled in when the need to switch between different data grids
- * requires transforming the generic configs into a format which can be used by the MUI
+ * Transforms the given generic configs into a format which can be used by the MUI
  * data grid column definitions.
  */
 export function getMuiGridConfigs(
@@ -36,15 +36,11 @@ export function getMuiGridConfigs(
   return configs.map((item) => {
     return {
       ...item,
-      valueGetter: item.valueMap ? muiValueGetter(item.valueMap) : undefined,
+      valueGetter: item.valueMap != null ? muiCellValueGetter(item.valueMap) : undefined,
+      renderCell:
+        item.cellRenderType != null ? muiCellRenderer(item.cellRenderType) : undefined,
     };
   });
-}
-
-function muiValueGetter(
-  valueMap: Map<any, string>
-): (params: GridValueGetterParams<any, DashboardDataGridField>) => string {
-  return (params: GridValueGetterParams) => valueMap.get(params.value) || params.value;
 }
 
 /**

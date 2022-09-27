@@ -9,11 +9,16 @@ import { alertStatuses, binaryBooleans, buySellTypes } from './dashboard-data.co
 
 const defaultConfig: Partial<DashboardDataConfig> = { flex: 1 };
 
+export enum CellRenderType {
+  EditButton,
+}
+
 export const alertInfoConfigs: DashboardDataConfig[] = [
   {
     ...defaultConfig,
     field: AlertInfoField.AlertId,
     headerName: alertInfoLabels.get(AlertInfoField.AlertId),
+    cellRenderType: CellRenderType.EditButton,
   },
   {
     ...defaultConfig,

@@ -1,10 +1,15 @@
 import Box from '@mui/material/Box';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import {
+  DataGrid,
+  GridCellParams,
+  GridColDef,
+  GridEventListener,
+} from '@mui/x-data-grid';
 import { DashboardDataGridField } from '@trade-alerts/dashboard/domain';
 import { themeColors } from '@trade-alerts/shared/ui-styles';
 
 const styles = {
-  root: { width: 1, height: 420 },
+  root: { width: 1 },
   grid: {
     width: 1,
     backgroundColor: themeColors.backgroundDarkest,
@@ -44,17 +49,28 @@ const styles = {
 interface DashboardGridMuiProps {
   data: DashboardDataGridField[];
   configs: GridColDef<DashboardDataGridField>[];
+  onCellClick?: (field: string, value?: any) => void;
 }
 
-export function DashboardGridMui({ data, configs }: DashboardGridMuiProps) {
+export function DashboardGridMui({ data, configs, onCellClick }: DashboardGridMuiProps) {
+  const handleRowClick: GridEventListener<'cellClick'> = (params: GridCellParams) => {
+    onCellClick && onCellClick(params.field, params.value);
+  };
+
   return (
     <Box sx={styles.root}>
       <DataGrid
         sx={styles.grid}
         rows={data}
         columns={configs}
+        onCellClick={handleRowClick}
         pageSize={10}
         rowsPerPageOptions={[10]}
+        // density="compact"
+        rowHeight={36}
+        headerHeight={46}
+        autoHeight={true}
+        disableSelectionOnClick={true}
       />
     </Box>
   );
