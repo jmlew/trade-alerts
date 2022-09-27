@@ -1,64 +1,25 @@
 import { DashboardDataConfig } from './dashboard-data-configs.model';
 import { AlertInfoField, TransactionField } from './dashboard-data-fields.enum';
-import { alertInfoLabels, transactionLabels } from './dashboard-data-labels.constants';
+import {
+  accountsTransLabels,
+  alertInfoLabels,
+  commonTransLabels,
+} from './dashboard-data-labels.constants';
+import { alertStatuses, binaryBooleans, buySellTypes } from './dashboard-data.constants';
 
 const defaultConfig: Partial<DashboardDataConfig> = { flex: 1 };
-
-export const transactionConfigs: DashboardDataConfig[] = [
-  {
-    ...defaultConfig,
-    field: TransactionField.OrderId,
-    headerName: transactionLabels.get(TransactionField.OrderId),
-    type: 'number',
-  },
-  {
-    ...defaultConfig,
-    field: TransactionField.TradeDate,
-    headerName: transactionLabels.get(TransactionField.TradeDate),
-  },
-  {
-    ...defaultConfig,
-    field: TransactionField.SecName,
-    headerName: transactionLabels.get(TransactionField.SecName),
-  },
-  {
-    ...defaultConfig,
-    field: TransactionField.Isin,
-    headerName: transactionLabels.get(TransactionField.Isin),
-  },
-  {
-    ...defaultConfig,
-    field: TransactionField.ProductCategory,
-    headerName: transactionLabels.get(TransactionField.ProductCategory),
-  },
-  {
-    ...defaultConfig,
-    field: TransactionField.RiskCategory,
-    headerName: transactionLabels.get(TransactionField.RiskCategory),
-  },
-  {
-    ...defaultConfig,
-    field: TransactionField.TradeValue,
-    headerName: transactionLabels.get(TransactionField.TradeValue),
-  },
-  {
-    ...defaultConfig,
-    field: TransactionField.BuySell,
-    headerName: transactionLabels.get(TransactionField.BuySell),
-    type: 'number',
-  },
-  {
-    ...defaultConfig,
-    field: TransactionField.Portfolio,
-    headerName: transactionLabels.get(TransactionField.Portfolio),
-  },
-];
 
 export const alertInfoConfigs: DashboardDataConfig[] = [
   {
     ...defaultConfig,
     field: AlertInfoField.AlertId,
     headerName: alertInfoLabels.get(AlertInfoField.AlertId),
+  },
+  {
+    ...defaultConfig,
+    field: AlertInfoField.Status,
+    headerName: alertInfoLabels.get(AlertInfoField.Status),
+    valueMap: alertStatuses,
   },
   {
     ...defaultConfig,
@@ -99,10 +60,66 @@ export const alertInfoConfigs: DashboardDataConfig[] = [
     ...defaultConfig,
     field: AlertInfoField.VulnerableClient,
     headerName: alertInfoLabels.get(AlertInfoField.VulnerableClient),
+    valueMap: binaryBooleans,
   },
   {
     ...defaultConfig,
     field: AlertInfoField.Portfolio,
     headerName: alertInfoLabels.get(AlertInfoField.Portfolio),
+  },
+];
+
+const commonTransConfigs: DashboardDataConfig[] = [
+  {
+    ...defaultConfig,
+    field: TransactionField.OrderId,
+    headerName: commonTransLabels.get(TransactionField.OrderId),
+    type: 'number',
+  },
+  {
+    ...defaultConfig,
+    field: TransactionField.TradeDate,
+    headerName: commonTransLabels.get(TransactionField.TradeDate),
+  },
+  {
+    ...defaultConfig,
+    field: TransactionField.SecName,
+    headerName: commonTransLabels.get(TransactionField.SecName),
+  },
+  {
+    ...defaultConfig,
+    field: TransactionField.Isin,
+    headerName: commonTransLabels.get(TransactionField.Isin),
+  },
+  {
+    ...defaultConfig,
+    field: TransactionField.ProductCategory,
+    headerName: commonTransLabels.get(TransactionField.ProductCategory),
+  },
+  {
+    ...defaultConfig,
+    field: TransactionField.RiskCategory,
+    headerName: commonTransLabels.get(TransactionField.RiskCategory),
+  },
+  {
+    ...defaultConfig,
+    field: TransactionField.TradeValue,
+    headerName: commonTransLabels.get(TransactionField.TradeValue),
+  },
+  {
+    ...defaultConfig,
+    field: TransactionField.BuySell,
+    headerName: commonTransLabels.get(TransactionField.BuySell),
+    valueMap: buySellTypes,
+  },
+];
+
+export const alertsTransConfigs: DashboardDataConfig[] = [...commonTransConfigs];
+export const accountsTransConfigs: DashboardDataConfig[] = [
+  ...commonTransConfigs,
+  {
+    ...defaultConfig,
+    field: TransactionField.Portfolio,
+    headerName: accountsTransLabels.get(TransactionField.Portfolio),
   },
 ];

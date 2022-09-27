@@ -52,8 +52,12 @@ export function getAlertActionLabel(action: AlertStatus): string {
   return alertStatuses.get(action) || action.toString();
 }
 
-export function getInitialFormValues(): AlertUpdateFormParams {
-  const action: AlertStatus = Array.from(alertStatuses.keys())[0];
+export function getInitialFormValues(
+  currentAlert: AlertInfo | null
+): AlertUpdateFormParams {
+  const action: AlertStatus = currentAlert
+    ? currentAlert[AlertInfoField.Status]
+    : Array.from(alertStatuses.keys())[0];
   return {
     action,
     comment: null,

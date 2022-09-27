@@ -13,6 +13,7 @@ export enum TransactionField {
 
 export enum AlertInfoField {
   AlertId = 'alertID',
+  Status = 'status',
   Cif = 'cif',
   Cip = 'cip',
   RmId = 'rmId',

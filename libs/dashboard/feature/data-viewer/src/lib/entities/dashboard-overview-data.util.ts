@@ -9,7 +9,7 @@ const fields: AlertInfoField[] = [
   AlertInfoField.AlertId,
   AlertInfoField.RmId,
   AlertInfoField.Cif,
-  AlertInfoField.Portfolio,
+  // AlertInfoField.Portfolio,
 ];
 
 export function getAlertOverviews(alerts: AlertInfo[]): AlertOverviewInfo[] {

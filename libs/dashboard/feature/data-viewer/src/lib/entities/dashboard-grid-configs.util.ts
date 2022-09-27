@@ -1,11 +1,12 @@
 import { ColDef } from 'ag-grid-community';
 
-import { GridColDef } from '@mui/x-data-grid';
+import { GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import {
   DashboardDataConfig,
   DashboardDataGridField,
+  accountsTransConfigs,
   alertInfoConfigs,
-  transactionConfigs,
+  alertsTransConfigs,
 } from '@trade-alerts/dashboard/domain';
 
 import { DashboardGrid } from './dashboard-grid.enum';
@@ -18,9 +19,9 @@ export function getGridDataConfigs(grid: DashboardGrid): DashboardDataConfig[] {
     case DashboardGrid.AlertInformation:
       return alertInfoConfigs;
     case DashboardGrid.AccountTransactions:
+      return accountsTransConfigs;
     case DashboardGrid.AlertedTransactions:
-    default:
-      return transactionConfigs;
+      return alertsTransConfigs;
   }
 }
 
@@ -32,7 +33,18 @@ export function getGridDataConfigs(grid: DashboardGrid): DashboardDataConfig[] {
 export function getMuiGridConfigs(
   configs: DashboardDataConfig[]
 ): GridColDef<DashboardDataGridField>[] {
-  return configs as GridColDef<DashboardDataGridField>[];
+  return configs.map((item) => {
+    return {
+      ...item,
+      valueGetter: item.valueMap ? muiValueGetter(item.valueMap) : undefined,
+    };
+  });
+}
+
+function muiValueGetter(
+  valueMap: Map<any, string>
+): (params: GridValueGetterParams<any, DashboardDataGridField>) => string {
+  return (params: GridValueGetterParams) => valueMap.get(params.value) || params.value;
 }
 
 /**

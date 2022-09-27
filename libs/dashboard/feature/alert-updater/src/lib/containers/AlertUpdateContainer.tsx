@@ -14,7 +14,6 @@ import {
 
 export function AlertUpdateContainer() {
   const { setAlert } = useAlert();
-  const [initialValues, setInitialValues] = useState(getInitialFormValues());
   const { currentAlert, setDrawerOpen } = useAlertUpdaterContext();
   const [isPending, setIsPending] = useState(false);
 
@@ -31,17 +30,12 @@ export function AlertUpdateContainer() {
   }
 
   function handleCancel() {
-    resetFormValues();
     setDrawerOpen(false);
-  }
-
-  function resetFormValues() {
-    setInitialValues(getInitialFormValues());
   }
 
   return currentAlert != null ? (
     <AlertUpdateForm
-      initialValues={initialValues}
+      initialValues={getInitialFormValues(currentAlert)}
       isPending={isPending}
       onSubmit={handleSubmit}
       onCancel={handleCancel}

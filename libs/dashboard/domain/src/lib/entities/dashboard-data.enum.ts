@@ -1,8 +1,3 @@
-export enum ProductCategory {
-  Equity = 'Equity',
-  FixedIncome = 'Fixed Income',
-}
-
 export enum BuySell {
   Buy = 0,
   Sell = 1,

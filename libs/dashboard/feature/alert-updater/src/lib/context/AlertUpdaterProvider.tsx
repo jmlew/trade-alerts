@@ -1,4 +1,4 @@
-import { ReactNode, useMemo, useState } from 'react';
+import { ReactNode, useEffect, useMemo, useState } from 'react';
 
 import { AlertInfo } from '@trade-alerts/dashboard/domain';
 import { useDashboardDataContext } from '@trade-alerts/dashboard/feature/data-provider';
@@ -12,11 +12,17 @@ interface AlertUpdaterDrawerProviderProps {
 
 export function AlertUpdaterProvider({ children }: AlertUpdaterDrawerProviderProps) {
   const { dashData } = useDashboardDataContext();
-  const alerts: AlertInfo[] | null = getAllAlerts(dashData);
+  const [alerts, setAlerts] = useState<AlertInfo[] | null>(null);
+  const [currentAlert, setCurrentAlert] = useState<AlertInfo | null>(null);
   const [isDrawerOpen, setDrawerOpen] = useState(false);
-  const [currentAlert, setCurrentAlert] = useState<AlertInfo | null>(
-    getInitialAlert(alerts)
-  );
+
+  useEffect(() => {
+    setAlerts(getAllAlerts(dashData));
+  }, [dashData]);
+
+  useEffect(() => {
+    setCurrentAlert(getInitialAlert(alerts));
+  }, [alerts]);
 
   const value: AlertUpdaterContextValue = useMemo(
     () => ({ alerts, currentAlert, setCurrentAlert, isDrawerOpen, setDrawerOpen }),

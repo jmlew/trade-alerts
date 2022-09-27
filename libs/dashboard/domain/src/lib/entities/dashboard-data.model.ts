@@ -1,30 +1,19 @@
-import { BinaryBoolean, BuySell, ProductCategory } from './dashboard-data.enum';
+import { AlertStatus, BinaryBoolean, BuySell } from './dashboard-data.enum';
 
 export interface DashboardData {
   // Displayed as charts.
   trades: TradesInfo[];
   // Displayed as grids.
   alerts: AlertInfo[];
-  alertsTrans: TransInfo[];
-  accountsTrans: TransInfo[];
+  alertsTrans: AlertsTransInfo[];
+  accountsTrans: AccountsTransInfo[];
 }
 
-export type DashboardDataGridField = TradesInfo | AlertInfo | TransInfo;
-
-export interface TransInfo {
-  orderId: number;
-  tradeDate: string;
-  secName: string;
-  isin: string;
-  productCategory: ProductCategory;
-  riskCategory: string;
-  tradeValue: string;
-  buySell: BuySell;
-  portfolio?: string;
-}
+export type DashboardDataGridField = AlertInfo | AccountsTransInfo | AlertsTransInfo;
 
 export interface AlertInfo {
   alertID: number;
+  status: AlertStatus;
   cif: string;
   cip: string;
   rmId: string;
@@ -33,6 +22,23 @@ export interface AlertInfo {
   bookingCenter: string;
   aum: number;
   vulnerableClient: BinaryBoolean;
+  portfolio: string;
+}
+
+interface CommonTransInfo {
+  orderId: number;
+  tradeDate: string;
+  secName: string;
+  isin: string;
+  productCategory: string;
+  riskCategory: string;
+  tradeValue: string;
+  buySell: BuySell;
+}
+
+export type AlertsTransInfo = CommonTransInfo;
+
+export interface AccountsTransInfo extends CommonTransInfo {
   portfolio: string;
 }
 

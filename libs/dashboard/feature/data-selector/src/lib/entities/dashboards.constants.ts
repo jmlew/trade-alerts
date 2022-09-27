@@ -9,14 +9,10 @@ export const dashboardOptions: UiControlOption[] = [
   },
   {
     value: DashboardType.DashboardB,
-    label: 'Private Bank Dashboard A',
-  },
-  {
-    value: DashboardType.DashboardC,
     label: 'Other Scenario Dashboard B',
   },
   {
-    value: DashboardType.DashboardD,
+    value: DashboardType.DashboardC,
     label: 'Another Scenario Dashboard C',
   },
 ];
