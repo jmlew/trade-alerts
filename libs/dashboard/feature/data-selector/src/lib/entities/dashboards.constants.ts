@@ -1,17 +1,23 @@
 import { UiControlOption } from '@trade-alerts/shared/data-access';
 
+import { DashboardType } from './dashboards.enum';
+
 export const dashboardOptions: UiControlOption[] = [
   {
-    value: 'ScenarioA',
-    label: 'Some Scenario',
+    value: DashboardType.DashboardA,
+    label: 'Private Bank Dashboard A',
   },
   {
-    value: 'ScenarioB',
-    label: 'Some Other Scenario',
+    value: DashboardType.DashboardB,
+    label: 'Private Bank Dashboard A',
   },
   {
-    value: 'ScenarioC',
-    label: 'And Another Scenario',
+    value: DashboardType.DashboardC,
+    label: 'Other Scenario Dashboard B',
+  },
+  {
+    value: DashboardType.DashboardD,
+    label: 'Another Scenario Dashboard C',
   },
 ];
 

@@ -2,6 +2,7 @@
   "alerts": [
     {
       "alertID": 1234001,
+      "status": 0,
       "cif": "86018218400",
       "cip": "3205428633",
       "rmId": "SC32989",
@@ -14,6 +15,7 @@
     },
     {
       "alertID": 1234002,
+      "status": 2,
       "cif": "86018218411",
       "cip": "3205428633",
       "rmId": "GR5422",
@@ -26,6 +28,7 @@
     },
     {
       "alertID": 1234003,
+      "status": 1,
       "cif": "86018218412",
       "cip": "3205428633",
       "rmId": "MS12229",
@@ -33,6 +36,32 @@
       "advisoryCenter": "1202",
       "bookingCenter": "500",
       "aum": 200,
+      "vulnerableClient": 0,
+      "portfolio": "3205428633"
+    },
+    {
+      "alertID": 1234005,
+      "status": 2,
+      "cif": "86018218414",
+      "cip": "3205428633",
+      "rmId": "MS12230",
+      "rmName": "Jason Patrick",
+      "advisoryCenter": "1204",
+      "bookingCenter": "500",
+      "aum": 100,
+      "vulnerableClient": 1,
+      "portfolio": "3205428633"
+    },
+    {
+      "alertID": 1234006,
+      "status": 0,
+      "cif": "66018218411",
+      "cip": "3205428612",
+      "rmId": "MS12229",
+      "rmName": "Jon Roberts",
+      "advisoryCenter": "1206",
+      "bookingCenter": "500",
+      "aum": 400,
       "vulnerableClient": 0,
       "portfolio": "3205428633"
     }

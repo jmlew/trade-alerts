@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { Typography } from '@mui/material';
 import { useAlert } from '@trade-alerts/shared/feature-alert';
 import { AlertType } from '@trade-alerts/shared/ui-common';
 
@@ -25,9 +26,8 @@ export function AlertUpdateContainer() {
         currentAlert?.alertID
       } has been updated to ${getAlertActionLabel(values.action)}`;
       setAlert({ isShown: true, type: AlertType.Success, message });
-      resetFormValues();
       setIsPending(false);
-    }, 800);
+    }, 700);
   }
 
   function handleCancel() {
@@ -39,12 +39,16 @@ export function AlertUpdateContainer() {
     setInitialValues(getInitialFormValues());
   }
 
-  return (
+  return currentAlert != null ? (
     <AlertUpdateForm
       initialValues={initialValues}
       isPending={isPending}
       onSubmit={handleSubmit}
       onCancel={handleCancel}
     />
+  ) : (
+    <Typography variant="body1" color="primary.main">
+      Select an Alert
+    </Typography>
   );
 }

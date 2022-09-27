@@ -1,6 +1,6 @@
-import { AlertActionType } from './alert-updater.enum';
+import { AlertStatus } from '@trade-alerts/dashboard/domain';
 
 export interface AlertUpdateFormParams {
-  action: AlertActionType;
+  action: AlertStatus;
   comment: string | null;
 }

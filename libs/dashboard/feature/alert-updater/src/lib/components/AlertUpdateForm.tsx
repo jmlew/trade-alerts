@@ -2,10 +2,10 @@ import { ChangeEvent, useEffect, useState } from 'react';
 
 import { LoadingButton } from '@mui/lab';
 import { Box, Button, TextField, Typography } from '@mui/material';
+import { AlertStatus } from '@trade-alerts/dashboard/domain';
 import { DashSelector } from '@trade-alerts/dashboard/ui/controls';
 import { themeColors } from '@trade-alerts/shared/ui-styles';
 
-import { AlertActionType } from '../entities/alert-updater.enum';
 import { AlertUpdateFormParams } from '../entities/alert-updater.model';
 import { getAlertActionOptions } from '../entities/alert-updater.util';
 
@@ -48,7 +48,7 @@ export function AlertUpdateForm({
     onSubmit(values);
   }
 
-  function handleActionChange(action: AlertActionType) {
+  function handleActionChange(action: AlertStatus) {
     setValues({ ...values, action });
   }
 

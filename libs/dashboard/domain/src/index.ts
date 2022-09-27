@@ -3,6 +3,7 @@ export * from './lib/entities/dashboard-data-configs.constants';
 export * from './lib/entities/dashboard-data-configs.model';
 export * from './lib/entities/dashboard-data-fields.enum';
 export * from './lib/entities/dashboard-data-labels.constants';
+export * from './lib/entities/dashboard-data.constants';
 export * from './lib/entities/dashboard-data.enum';
 export * from './lib/entities/dashboard-data.model';
 export * from './lib/entities/dashboard-data.util';

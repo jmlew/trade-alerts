@@ -1,13 +1,14 @@
 import {
   AlertInfo,
   AlertInfoField,
+  AlertStatus,
   DashboardData,
   alertInfoLabels,
+  alertStatuses,
 } from '@trade-alerts/dashboard/domain';
 import { UiControlOption } from '@trade-alerts/shared/data-access';
 
-import { alertActionOptions, alertSelectorLabelFields } from './alert-updater.constants';
-import { AlertActionType } from './alert-updater.enum';
+import { alertSelectorLabelFields } from './alert-updater.constants';
 import { AlertUpdateFormParams } from './alert-updater.model';
 
 export function getInitialAlert(alerts: AlertInfo[] | null): AlertInfo | null {
@@ -41,24 +42,20 @@ export function getAlertSelectorLabel(): string {
 }
 
 export function getAlertActionOptions(): UiControlOption[] {
-  return alertActionOptions;
+  return Array.from(alertStatuses, ([key, value]) => ({
+    value: key,
+    label: value,
+  }));
 }
 
-export function getDefaultAlertActionOption(): UiControlOption {
-  return alertActionOptions[0];
-}
-
-export function getAlertActionLabel(action: AlertActionType): string {
-  const option: UiControlOption | undefined = alertActionOptions.find(
-    (option: UiControlOption) => option.value === action
-  );
-
-  return (option && option.label) || action.toString();
+export function getAlertActionLabel(action: AlertStatus): string {
+  return alertStatuses.get(action) || action.toString();
 }
 
 export function getInitialFormValues(): AlertUpdateFormParams {
+  const action: AlertStatus = Array.from(alertStatuses.keys())[0];
   return {
-    action: getDefaultAlertActionOption().value as AlertActionType,
+    action,
     comment: null,
   };
 }
