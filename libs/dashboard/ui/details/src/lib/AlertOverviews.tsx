@@ -1,6 +1,6 @@
-import { EditRounded } from '@mui/icons-material';
 import { Box, Button, Typography } from '@mui/material';
 import { AlertInfoField, AlertOverviewInfo } from '@trade-alerts/dashboard/domain';
+import { EditButtonSmall } from '@trade-alerts/shared/ui-common';
 import { DividerVert } from '@trade-alerts/shared/ui-common';
 import { themeColors } from '@trade-alerts/shared/ui-styles';
 
@@ -80,14 +80,8 @@ function DetailBtn({ value, onClick }: DetailBtnProps) {
   }
 
   return (
-    <Button
-      size="small"
-      variant="text"
-      onClick={handleClick}
-      endIcon={<EditRounded sx={{ fontSize: 10 }} />}
-      sx={{ mr: 1 }}
-    >
+    <EditButtonSmall onClick={handleClick} iconSize={14} sx={{ mr: 1 }}>
       {value}
-    </Button>
+    </EditButtonSmall>
   );
 }

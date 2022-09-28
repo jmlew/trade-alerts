@@ -1,9 +1,8 @@
 import { ReactNode } from 'react';
 
-import { EditRounded } from '@mui/icons-material';
-import { Button } from '@mui/material';
 import { GridRenderCellParams } from '@mui/x-data-grid';
 import { CellRenderType } from '@trade-alerts/dashboard/domain';
+import { EditButtonSmall } from '@trade-alerts/shared/ui-common';
 
 export function muiCellRenderer(
   type: CellRenderType
@@ -11,13 +10,7 @@ export function muiCellRenderer(
   switch (type) {
     case CellRenderType.EditButton:
       return (params: GridRenderCellParams) => (
-        <Button
-          variant="text"
-          size="small"
-          endIcon={<EditRounded sx={{ fontSize: 10 }} />}
-        >
-          {params.value}
-        </Button>
+        <EditButtonSmall>{params.value}</EditButtonSmall>
       );
   }
 }
