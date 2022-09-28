@@ -1,9 +1,7 @@
 import {
-  AlertInfo,
   AlertInfoField,
   DashboardDataConfig,
   DashboardDataGridField,
-  getAlertById,
 } from '@trade-alerts/dashboard/domain';
 import { useAlertUpdaterContext } from '@trade-alerts/dashboard/feature/alert-updater';
 import { useDashboardDataContext } from '@trade-alerts/dashboard/feature/data-provider';
@@ -23,22 +21,15 @@ interface GridContainerProps {
 
 export function GridContainer({ grid }: GridContainerProps) {
   const { dashData } = useDashboardDataContext();
-  // TODO: Move alert selection logic out of context providers to avoid injecting alert
-  // updater context into grid container.
-  const { alerts, setCurrentAlert, setDrawerOpen } = useAlertUpdaterContext();
+  const { setCurrentAlertId, setDrawerOpen } = useAlertUpdaterContext();
   const data: DashboardDataGridField[] | null = getGridData(grid, dashData);
   const configs: DashboardDataConfig[] = getGridDataConfigs(grid);
 
   function handleCellClick(field: string, value?: any) {
     if (field === AlertInfoField.AlertId) {
-      if (alerts == null) {
-        return;
-      }
-      const alert: AlertInfo | null = getAlertById(alerts, value);
-      if (alert) {
-        setCurrentAlert(alert);
-        setDrawerOpen(true);
-      }
+      const id: number = value as number;
+      setCurrentAlertId(id);
+      setDrawerOpen(true);
     }
   }
 

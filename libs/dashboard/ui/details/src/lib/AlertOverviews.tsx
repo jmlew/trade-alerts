@@ -26,7 +26,7 @@ const styles = {
 
 interface AlertOverviewsProps {
   overviews: AlertOverviewInfo[];
-  onSelectAlert: (value: string | number) => void;
+  onSelectAlert: (alertId: number) => void;
 }
 
 export function AlertOverviews({ overviews, onSelectAlert }: AlertOverviewsProps) {
@@ -43,7 +43,7 @@ export function AlertOverviews({ overviews, onSelectAlert }: AlertOverviewsProps
       <Box>
         {overviews.map((item: AlertOverviewInfo) =>
           item.field === AlertInfoField.AlertId ? (
-            item.values.map((value: number | string, index: number) => (
+            item.values.map((value: number, index: number) => (
               <DetailBtn value={value} onClick={onSelectAlert} key={index} />
             ))
           ) : (

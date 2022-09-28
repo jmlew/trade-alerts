@@ -1,5 +1,4 @@
 import { Typography } from '@mui/material';
-import { AlertInfo, getAlertById } from '@trade-alerts/dashboard/domain';
 import { GenericMessagePanel } from '@trade-alerts/dashboard/ui/common';
 import { DashSelector } from '@trade-alerts/dashboard/ui/controls';
 
@@ -7,22 +6,16 @@ import { useAlertUpdaterContext } from '../context/alert-updater.context';
 import { getAlertOptions, getAlertSelectorLabel } from '../entities/alert-updater.util';
 
 export function AlertSelectorContainer() {
-  const { alerts, currentAlert, setCurrentAlert } = useAlertUpdaterContext();
+  const { alerts, currentAlertId, setCurrentAlertId } = useAlertUpdaterContext();
 
   function handleSelectChange(alertId: number) {
-    if (alerts == null) {
-      return;
-    }
-    const item: AlertInfo | null = getAlertById(alerts, alertId);
-    if (item != null) {
-      setCurrentAlert(item);
-    }
+    setCurrentAlertId(alertId);
   }
 
   return alerts != null ? (
     <DashSelector
       label={getAlertSelectorLabel()}
-      value={currentAlert?.alertID || ''}
+      value={currentAlertId || ''}
       onChange={handleSelectChange}
       options={getAlertOptions(alerts)}
     />

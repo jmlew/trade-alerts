@@ -13,7 +13,7 @@ interface AlertUpdaterDrawerProviderProps {
 export function AlertUpdaterProvider({ children }: AlertUpdaterDrawerProviderProps) {
   const { dashData } = useDashboardDataContext();
   const [alerts, setAlerts] = useState<AlertInfo[] | null>(null);
-  const [currentAlert, setCurrentAlert] = useState<AlertInfo | null>(null);
+  const [currentAlertId, setCurrentAlertId] = useState<number | null>(null);
   const [isDrawerOpen, setDrawerOpen] = useState(false);
 
   useEffect(() => {
@@ -21,12 +21,14 @@ export function AlertUpdaterProvider({ children }: AlertUpdaterDrawerProviderPro
   }, [dashData]);
 
   useEffect(() => {
-    setCurrentAlert(getInitialAlert(alerts));
-  }, [alerts]);
+    const id: number | null =
+      currentAlertId != null ? currentAlertId : getInitialAlert(alerts)?.alertID || null;
+    setCurrentAlertId(id);
+  }, [alerts, currentAlertId]);
 
   const value: AlertUpdaterContextValue = useMemo(
-    () => ({ alerts, currentAlert, setCurrentAlert, isDrawerOpen, setDrawerOpen }),
-    [alerts, currentAlert, setCurrentAlert, isDrawerOpen, setDrawerOpen]
+    () => ({ alerts, currentAlertId, setCurrentAlertId, isDrawerOpen, setDrawerOpen }),
+    [alerts, currentAlertId, setCurrentAlertId, isDrawerOpen, setDrawerOpen]
   );
 
   return (

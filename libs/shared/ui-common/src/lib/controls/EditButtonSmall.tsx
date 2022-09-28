@@ -3,7 +3,7 @@ import { Button, ButtonProps } from '@mui/material';
 
 const styles = {
   root: (fontSize: number) => ({
-    '& .MuiButton-endIcon > *:first-child': { fontSize },
+    '& .MuiButton-endIcon > *:nth-of-type(1)': { fontSize },
   }),
 };
 

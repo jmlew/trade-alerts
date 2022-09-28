@@ -5,6 +5,7 @@ export enum DashApiUri {
   MockBase = 'api/',
   // API endpoints
   Dashboard = 'dashboard',
+  Alert = 'alert',
 }
 
 // ? May not be used, depending on endpoint shape.

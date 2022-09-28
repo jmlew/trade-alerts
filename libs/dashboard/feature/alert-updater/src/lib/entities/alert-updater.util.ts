@@ -2,6 +2,7 @@ import {
   AlertInfo,
   AlertInfoField,
   AlertStatus,
+  AlertUpdateParams,
   DashboardData,
   alertInfoLabels,
   alertStatuses,
@@ -62,4 +63,9 @@ export function getInitialFormValues(
     action,
     comment: null,
   };
+}
+
+// Placeholder for API serialisation.
+export function getAlertUpdateParams(values: AlertUpdateFormParams): AlertUpdateParams {
+  return values as AlertUpdateParams;
 }

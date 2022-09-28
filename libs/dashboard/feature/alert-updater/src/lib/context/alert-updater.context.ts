@@ -5,9 +5,9 @@ import { AlertInfo } from '@trade-alerts/dashboard/domain';
 export interface AlertUpdaterContextValue {
   isDrawerOpen: boolean;
   setDrawerOpen: (isOpen: boolean) => void;
-  currentAlert: AlertInfo | null;
   alerts: AlertInfo[] | null;
-  setCurrentAlert: (alert: AlertInfo) => void;
+  currentAlertId: number | null;
+  setCurrentAlertId: (id: number) => void;
 }
 
 export const AlertUpdaterContext: Context<AlertUpdaterContextValue> = createContext(

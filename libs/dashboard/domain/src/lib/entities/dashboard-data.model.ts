@@ -55,3 +55,14 @@ export interface AlertOverviewInfo {
   heading: string;
   values: (string | number)[];
 }
+
+export interface AlertUpdateParams {
+  action: AlertStatus;
+  comment: string | null;
+}
+
+export type AlertUpdateResponseStatus = 'success' | 'failed';
+export interface AlertUpdateResponse {
+  id: number;
+  status: AlertUpdateResponseStatus;
+}
