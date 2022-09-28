@@ -1,4 +1,4 @@
-import { ReactNode, SyntheticEvent, useState } from 'react';
+import { MouseEvent, ReactNode, SyntheticEvent, useEffect, useState } from 'react';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
@@ -46,7 +46,7 @@ export function GridsLayout() {
         grid={DashboardGrid.AlertInformation}
         shownState={gridShownState}
         setShownState={setGridShownState}
-        onDownloadClick={handleDownloadData}
+        onDownloadGrid={handleDownloadData}
       >
         <GridContainer grid={DashboardGrid.AlertInformation} />
       </GridAccordian>
@@ -54,7 +54,7 @@ export function GridsLayout() {
         grid={DashboardGrid.AlertedTransactions}
         shownState={gridShownState}
         setShownState={setGridShownState}
-        onDownloadClick={handleDownloadData}
+        onDownloadGrid={handleDownloadData}
       >
         <GridContainer grid={DashboardGrid.AlertedTransactions} />
       </GridAccordian>
@@ -62,7 +62,7 @@ export function GridsLayout() {
         grid={DashboardGrid.AccountTransactions}
         shownState={gridShownState}
         setShownState={setGridShownState}
-        onDownloadClick={handleDownloadData}
+        onDownloadGrid={handleDownloadData}
       >
         <GridContainer grid={DashboardGrid.AccountTransactions} />
       </GridAccordian>
@@ -75,7 +75,7 @@ interface GridAccordianProps {
   grid: DashboardGrid;
   shownState: GridShownState;
   setShownState: (state: GridShownState) => void;
-  onDownloadClick: (grid: DashboardGrid) => void;
+  onDownloadGrid: (grid: DashboardGrid) => void;
 }
 
 function GridAccordian({
@@ -83,18 +83,15 @@ function GridAccordian({
   grid,
   shownState,
   setShownState,
-  onDownloadClick,
+  onDownloadGrid,
 }: GridAccordianProps) {
-  const isExpanded: boolean = shownState[grid];
-
-  function handleChange() {
-    return (event: SyntheticEvent, isExpanded: boolean) => {
-      return setShownState({ ...shownState, [grid]: isExpanded });
-    };
+  function handleChange(event: SyntheticEvent, isExpanded: boolean) {
+    setShownState({ ...shownState, [grid]: isExpanded });
   }
 
-  function handleDownloadClick() {
-    onDownloadClick(grid);
+  function handleDownloadClick(event: MouseEvent<HTMLButtonElement>) {
+    event.stopPropagation();
+    onDownloadGrid(grid);
   }
 
   return (
@@ -105,7 +102,7 @@ function GridAccordian({
     >
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Typography variant="body2">{grid}</Typography>
-        {isExpanded && <BtnDownloadData onClick={handleDownloadClick} />}
+        {shownState[grid] && <BtnDownloadData onClick={handleDownloadClick} />}
       </AccordionSummary>
       <AccordionDetails sx={{ pt: 0 }}>{children}</AccordionDetails>
     </Accordion>
