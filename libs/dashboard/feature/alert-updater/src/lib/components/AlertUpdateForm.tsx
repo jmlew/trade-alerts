@@ -60,7 +60,7 @@ export function AlertUpdateForm({
   return (
     <Box sx={styles.root(isPending)}>
       <Typography sx={{ mb: 1 }} variant="body2" color="primary.main">
-        Action Type
+        Action
       </Typography>
       <DashSelector
         value={status}

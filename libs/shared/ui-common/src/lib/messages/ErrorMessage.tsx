@@ -1,18 +1,21 @@
 import { ReactNode } from 'react';
 
-import { Theme, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 
 const styles = {
-  root: (theme: Theme) => ({}),
+  root: (top?: number) => ({
+    pt: top == null ? 4 : top,
+  }),
 };
 
 interface ErrorMessageProps {
   children: ReactNode;
+  top?: number;
 }
 
-export function ErrorMessage({ children }: ErrorMessageProps) {
+export function ErrorMessage({ top, children }: ErrorMessageProps) {
   return (
-    <Typography sx={styles.root} variant="body1" mr={2} color="warning.main">
+    <Typography sx={styles.root(top)} variant="body1" color="warning.main">
       {children}
     </Typography>
   );

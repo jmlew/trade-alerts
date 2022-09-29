@@ -64,8 +64,6 @@ class DashboardDataFacade {
     });
   }
 
-  // Send update request and merge payload with current dashboard data, storing the rvious
-  // value to be reverted on error.
   updateAlert(id: number, params: AlertUpdateParams) {
     const requestType: ApiRequestType = ApiRequestType.Update;
     this.alertUpdateStateSubject.next(ApiStateManager.onPending(requestType));

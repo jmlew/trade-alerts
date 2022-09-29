@@ -10,7 +10,7 @@ import {
 import { useAlertUpdaterContext } from '@trade-alerts/dashboard/feature/alert-updater';
 import { useDashboardDataContext } from '@trade-alerts/dashboard/feature/data-provider';
 import { BtnSideExpand, FiltersTypeBtns } from '@trade-alerts/dashboard/ui/controls';
-import { ApiStateManager } from '@trade-alerts/shared/data-access';
+import { useApiStateReference } from '@trade-alerts/shared/data-access';
 import { DividerVert } from '@trade-alerts/shared/ui-common';
 
 import { DashboardSelectorContainer } from './DashboardSelectorContainer';
@@ -36,28 +36,26 @@ const styles = {
   },
 };
 
-const { isPending, isCompleted } = ApiStateManager;
-
 export function DataSelectorContainer() {
   const [searchParams] = useSearchParams();
   const [filtersType, setFiltersType] = useState<FiltersType>(
     getInitialFilterTypeFromSearchParams(searchParams)
   );
-  const { dashData, dashDataState } = useDashboardDataContext();
   const { isDrawerOpen, setDrawerOpen } = useAlertUpdaterContext();
+  const { dashData, dashDataState } = useDashboardDataContext();
+  const dashDataStateRef = useApiStateReference(dashDataState);
 
-  const isDataPending: boolean = dashDataState != null && isPending(dashDataState);
   const isAlertsAvailable: boolean =
     dashDataState != null &&
     dashData != null &&
-    isCompleted(dashDataState) &&
+    dashDataStateRef.isCompleted() &&
     doAlertsExist(dashData);
 
   useEffect(() => {
-    if (isDataPending && isDrawerOpen) {
+    if (dashDataStateRef.isPending() && isDrawerOpen) {
       setDrawerOpen(false);
     }
-  }, [isDataPending, isDrawerOpen]);
+  }, [dashDataStateRef, isDrawerOpen]);
 
   function toggleAlertUpdater() {
     setDrawerOpen(!isDrawerOpen);

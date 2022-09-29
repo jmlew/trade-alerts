@@ -6,11 +6,7 @@ import {
   dashboardDataFacade,
   getAlertById,
 } from '@trade-alerts/dashboard/domain';
-import {
-  ApiState,
-  ApiStateReference,
-  useApiStateReference,
-} from '@trade-alerts/shared/data-access';
+import { ApiState, useApiStateReference } from '@trade-alerts/shared/data-access';
 import { useAlert } from '@trade-alerts/shared/feature-alert';
 import { AlertType } from '@trade-alerts/shared/ui-common';
 import { useObservable } from '@trade-alerts/shared/util-common';
@@ -26,14 +22,15 @@ import {
 export function AlertUpdateContainer() {
   const { setAlert } = useAlert();
   const { alerts, currentAlertId, setDrawerOpen } = useAlertUpdaterContext();
-  const alertUpdateState: ApiState | undefined = useObservable<ApiState>(
-    dashboardDataFacade.alertUpdateState$
-  );
-  const updateStateReference: ApiStateReference = useApiStateReference(alertUpdateState);
   const [currentAlert, setCurrentAlert] = useState<AlertInfo | null>(null);
   const [initialValues, setInitialValues] = useState<AlertUpdateFormParams>(
     getInitialFormValues(currentAlert)
   );
+  const alertUpdateState: ApiState | undefined = useObservable<ApiState>(
+    dashboardDataFacade.alertUpdateState$
+  );
+  const alertUpdateStateRef = useApiStateReference(alertUpdateState);
+  const { isCompleted, wasPending, isPending, isFailed, getError } = alertUpdateStateRef;
 
   useEffect(() => {
     const alert: AlertInfo | null =
@@ -45,11 +42,14 @@ export function AlertUpdateContainer() {
   }, [alerts, currentAlertId]);
 
   useEffect(() => {
-    if (updateStateReference.isCompleted() && updateStateReference.wasPending()) {
+    if (isCompleted() && wasPending()) {
       const message = `Alert ${currentAlertId} has been updated`;
       setAlert({ isShown: true, type: AlertType.Success, duration: 1200, message });
     }
-  }, [updateStateReference, currentAlertId, setAlert]);
+    if (isFailed()) {
+      setAlert({ isShown: true, message: getError() || 'Alert update failed' });
+    }
+  }, [alertUpdateState, currentAlertId, setAlert]);
 
   function handleSubmit(values: AlertUpdateFormParams) {
     currentAlertId &&
@@ -63,7 +63,7 @@ export function AlertUpdateContainer() {
   return currentAlert != null ? (
     <AlertUpdateForm
       initialValues={initialValues}
-      isPending={updateStateReference.isPending()}
+      isPending={isPending()}
       onSubmit={handleSubmit}
       onCancel={handleCancel}
     />

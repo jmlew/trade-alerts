@@ -8,19 +8,15 @@ import {
   Box,
   Typography,
 } from '@mui/material';
-import { themeColors } from '@trade-alerts/shared/ui-styles';
+import { dashAccordianContent, themeColors } from '@trade-alerts/shared/ui-styles';
 
 import { OverviewContainer } from '../containers/OverviewContainer';
 
 const styles = {
   root: { width: 1 },
-  panel: {
+  accordian: {
     width: 1,
     backgroundColor: themeColors.backgroundLight,
-    color: 'white',
-  },
-  panelContent: {
-    padding: '8px',
     color: 'white',
   },
 };
@@ -34,11 +30,11 @@ export function OverviewLayout() {
 
   return (
     <Box sx={styles.root}>
-      <Accordion sx={styles.panel} expanded={isOpen} onChange={handleToggleAccordian}>
+      <Accordion sx={styles.accordian} expanded={isOpen} onChange={handleToggleAccordian}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />} id="overview-header">
           <Typography variant="body2">Alerts Overview</Typography>
         </AccordionSummary>
-        <AccordionDetails sx={styles.panelContent}>
+        <AccordionDetails sx={dashAccordianContent}>
           <OverviewContainer />
         </AccordionDetails>
       </Accordion>

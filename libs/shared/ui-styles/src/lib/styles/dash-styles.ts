@@ -7,3 +7,8 @@ export const dashSectionBorder = {
   borderStyle: 'solid',
   borderColor: themeColors.borderDark,
 };
+export const dashAccordianContent = {
+  px: '10px',
+  pb: '10px',
+  pt: 0,
+};

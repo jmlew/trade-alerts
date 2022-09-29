@@ -5,7 +5,16 @@ import {
   AlertUpdateResponse,
   DashApiUri,
 } from '@trade-alerts/dashboard/domain';
-import { BadRequestException, Body, Controller, Get, Param, Put } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpException,
+  Param,
+  Put,
+} from '@nestjs/common';
 
 import { toStreamWithDelay } from '../../shared/utils';
 import { DashboardDataService } from './dashboard.service';
@@ -35,6 +44,17 @@ export class AlertsDataController {
       throw new BadRequestException(ErrorMessage.NoAlertMatch);
     }
     return this.toStream(this.dataService.updateAlert(alertId, params), 1000);
+  }
+
+  /**
+   * Failed versions. Test the below by uncommenting the CRUD method decorator in the
+   * corresponding functions above to disable and use the below versions instead.
+   */
+
+  @Put(':id')
+  @HttpCode(400)
+  updateAlertFailed(): Observable<HttpException> {
+    return this.toStream(new BadRequestException(ErrorMessage.TestBadRequest), 1000);
   }
 
   private toStream<T>(data: T, delay = 400) {

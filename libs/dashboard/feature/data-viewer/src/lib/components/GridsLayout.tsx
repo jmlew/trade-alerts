@@ -9,14 +9,14 @@ import {
   Typography,
 } from '@mui/material';
 import { BtnDownloadData } from '@trade-alerts/dashboard/ui/controls';
-import { themeColors } from '@trade-alerts/shared/ui-styles';
+import { dashAccordianContent, themeColors } from '@trade-alerts/shared/ui-styles';
 
 import { GridContainer } from '../containers/GridContainer';
 import { DashboardGrid } from '../entities/dashboard-grid.enum';
 
 const styles = {
   root: { width: 1, color: 'primary.main', backgroundColor: themeColors.background },
-  dashboardGrid: {
+  accordian: {
     width: 1,
     backgroundColor: themeColors.backgroundDark,
     color: 'white',
@@ -97,14 +97,14 @@ function GridAccordian({
   return (
     <Accordion
       TransitionProps={{ unmountOnExit: true }}
-      sx={styles.dashboardGrid}
       onChange={handleChange}
+      sx={styles.accordian}
     >
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Typography variant="body2">{grid}</Typography>
         {shownState[grid] && <BtnDownloadData onClick={handleDownloadClick} />}
       </AccordionSummary>
-      <AccordionDetails sx={{ pt: 0 }}>{children}</AccordionDetails>
+      <AccordionDetails sx={dashAccordianContent}>{children}</AccordionDetails>
     </Accordion>
   );
 }

@@ -8,12 +8,13 @@ import {
 } from '@trade-alerts/dashboard/domain';
 import { useDashboardDataContext } from '@trade-alerts/dashboard/feature/data-provider';
 import { BtnLoadData } from '@trade-alerts/dashboard/ui/controls';
-import { ApiStateManager } from '@trade-alerts/shared/data-access';
+import { useApiStateReference } from '@trade-alerts/shared/data-access';
 
 export function DataLoaderContainer() {
   const [searchParams] = useSearchParams();
 
   const { dashDataState } = useDashboardDataContext();
+  const dashDataStateRef = useApiStateReference(dashDataState);
 
   useEffect(() => {
     handleLoadData();
@@ -25,9 +26,6 @@ export function DataLoaderContainer() {
   }
 
   return (
-    <BtnLoadData
-      isLoading={dashDataState && ApiStateManager.isPending(dashDataState)}
-      onClick={handleLoadData}
-    />
+    <BtnLoadData isLoading={dashDataStateRef.isPending()} onClick={handleLoadData} />
   );
 }
