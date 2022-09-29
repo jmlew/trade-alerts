@@ -292,30 +292,48 @@
     "colId": "27b80a40-3ed0-4389-83b6-648478c96953",
     "containerId": "",
     "name": "DashboardData getDashboardData",
-    "url": "http://localhost:4200/api/dashboard?type=1&alertId=4561232123121",
+    "url": "http://localhost:4200/api/dashboard?type=0&from=1661836913504&to=1663824113000",
     "method": "GET",
     "sortNum": 20000,
     "created": "2022-09-08T09:33:23.445Z",
-    "modified": "2022-09-21T06:20:29.791Z",
+    "modified": "2022-09-29T08:37:20.904Z",
     "headers": [],
     "params": [
       {
         "name": "type",
-        "value": "1",
+        "value": "0",
         "isPath": false
       },
       {
-        "name": "dateRange",
-        "value": "%7B%22from%22%3A1661148200210%2C%22to%22%3A1663740200215%7Dhttp://localhost:3333/api/dashboard",
-        "isDisabled": true,
+        "name": "from",
+        "value": "1661836913504",
         "isPath": false
       },
       {
-        "name": "alertId",
-        "value": "4561232123121",
+        "name": "to",
+        "value": "1663824113000",
         "isPath": false
       }
     ],
+    "tests": []
+  },
+  {
+    "_id": "6da7dda8-ba31-4d1a-89c4-c4eed5eb27a3",
+    "colId": "27b80a40-3ed0-4389-83b6-648478c96953",
+    "containerId": "",
+    "name": "Alert updateAlert",
+    "url": "http://localhost:3333/api/alert/1234001",
+    "method": "PUT",
+    "sortNum": 30000,
+    "created": "2022-09-29T05:56:38.391Z",
+    "modified": "2022-09-29T05:58:56.042Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"status\": 2,\n    \"comment\": \"Some comment here\"\n}",
+      "form": []
+    },
     "tests": []
   }
 ]

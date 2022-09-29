@@ -81,6 +81,6 @@ export class UsersService extends EntitiesApiBaseService<User, number> {
   }
 
   private timestamp(): string {
-    return fromUtilsLib.getUtcDateToIso();
+    return fromUtilsLib.getCurrentDateToIso();
   }
 }

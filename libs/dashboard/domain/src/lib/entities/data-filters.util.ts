@@ -1,5 +1,5 @@
 import { defaultDateRange } from './data-filters.constants';
-import { FilterSearchParam, FiltersType } from './data-filters.enum';
+import { FilterParam, FiltersType } from './data-filters.enum';
 import { DataFilters, DateRange } from './data-filters.model';
 
 export function getDataFiltersFromSearchParams(params: URLSearchParams): DataFilters {
@@ -8,8 +8,10 @@ export function getDataFiltersFromSearchParams(params: URLSearchParams): DataFil
     case FiltersType.AlertId:
       return { type, alertId: getAlertIdFromSearchParams(params) || 0 };
     case FiltersType.DateRange:
-    default:
-      return { type, dateRange: getDateRangeFromSearchParams(params) };
+    default: {
+      const dateRange: DateRange = getDateRangeFromSearchParams(params);
+      return { type, from: dateRange.from, to: dateRange.to };
+    }
   }
 }
 
@@ -32,13 +34,12 @@ export function getInitialFilterTypeFromSearchParams(
 }
 
 export function getDateRangeFromSearchParams(params: URLSearchParams): DateRange {
-  const from: string =
-    params.get(FilterSearchParam.DateFrom) || `${defaultDateRange.from}`;
-  const to: string = params.get(FilterSearchParam.DateTo) || `${defaultDateRange.to}`;
+  const from: string = params.get(FilterParam.DateFrom) || `${defaultDateRange.from}`;
+  const to: string = params.get(FilterParam.DateTo) || `${defaultDateRange.to}`;
   return { from: parseInt(from, 10), to: parseInt(to, 10) };
 }
 
 export function getAlertIdFromSearchParams(params: URLSearchParams): number | null {
-  const id: string | null = params.get(FilterSearchParam.AlertId) || null;
+  const id: string | null = params.get(FilterParam.AlertId) || null;
   return id != null ? parseInt(id, 10) : null;
 }

@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 
 import {
   DateRange,
-  FilterSearchParam,
+  FilterParam,
   FiltersType,
   getAlertIdFromSearchParams,
   getDateRangeFromSearchParams,
@@ -26,16 +26,16 @@ export function DataFiltersContainer({ type }: DataSelectorContainerProps) {
   useEffect(() => {
     switch (type) {
       case FiltersType.AlertId:
-        searchParams.set(FilterSearchParam.AlertId, alertId != null ? `${alertId}` : '');
-        searchParams.delete(FilterSearchParam.DateFrom);
-        searchParams.delete(FilterSearchParam.DateTo);
+        searchParams.set(FilterParam.AlertId, alertId != null ? `${alertId}` : '');
+        searchParams.delete(FilterParam.DateFrom);
+        searchParams.delete(FilterParam.DateTo);
         setSearchParams(searchParams);
         break;
       case FiltersType.DateRange:
       default:
-        searchParams.set(FilterSearchParam.DateFrom, `${dateRange.from}`);
-        searchParams.set(FilterSearchParam.DateTo, `${dateRange.to}`);
-        searchParams.delete(FilterSearchParam.AlertId);
+        searchParams.set(FilterParam.DateFrom, `${dateRange.from}`);
+        searchParams.set(FilterParam.DateTo, `${dateRange.to}`);
+        searchParams.delete(FilterParam.AlertId);
         setSearchParams(searchParams);
         break;
     }

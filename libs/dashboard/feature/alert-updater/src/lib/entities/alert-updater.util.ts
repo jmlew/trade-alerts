@@ -16,13 +16,6 @@ export function getInitialAlert(alerts: AlertInfo[] | null): AlertInfo | null {
   return (alerts && alerts[0]) || null;
 }
 
-export function getAllAlerts(dashData: DashboardData | undefined): AlertInfo[] | null {
-  if (dashData == null || dashData.alerts == null) {
-    return null;
-  }
-  return dashData.alerts;
-}
-
 export function getAlertOptions(alerts: AlertInfo[]): UiControlOption[] {
   return alerts.map((alert: AlertInfo) => ({
     value: alert.alertID,

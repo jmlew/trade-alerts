@@ -38,8 +38,8 @@ export class DashboardDataController {
 
   /**
    * Query params contain filtes of two alternatives:
-   * 1. Date Range: { type: '0', dateRange: '{"from":1661148200210,"to":1663740200215}' }
-   * 2. Alert: { type: '1', alertId: '4561232123121' }
+   * 1. Date Range: { type: '0', from:"1661148200210", to :"1663740200215"} }
+   * 2. Alert: { type: '1', alertId: "4561232123121" }
    */
   @Get()
   getDashboardData(@Query() filters: DataFilters): Observable<DashboardData> {
@@ -57,11 +57,11 @@ export class DashboardDataController {
         );
       }
       case FiltersType.DateRange: {
-        if (!filters.dateRange) {
+        if (!(filters.from && filters.to)) {
           throw new BadRequestException(ErrorMessage.NoDateRangeIncluded);
         }
         return this.toStream(
-          this.dataService.getDashboardDataFromDateRange(filters.dateRange)
+          this.dataService.getDashboardDataFromDateRange(filters.from, filters.to)
         );
       }
     }

@@ -2,6 +2,8 @@ import { useState } from 'react';
 
 import { ScreenRotation } from '@mui/icons-material';
 import { Box, IconButton, Tooltip, Typography } from '@mui/material';
+import { getDashTrades, getDashTradesLength } from '@trade-alerts/dashboard/domain';
+import { useDashboardDataContext } from '@trade-alerts/dashboard/feature/data-provider';
 import {
   dashItemBorderRadius,
   dashItemPadding,
@@ -10,12 +12,8 @@ import {
 } from '@trade-alerts/shared/ui-styles';
 
 import { TradesChartContainer } from '../containers/TradesChartContainer';
-import { DashboardChart } from '../entities/dashboard-chart.enum';
-
-enum ChartAxis {
-  Horizontal,
-  Vertical,
-}
+import { ChartAxis, DashboardChart } from '../entities/dashboard-chart.enum';
+import { getInitialChartAxis } from '../entities/dashboard-chart.util';
 
 const styles = {
   root: (axis: ChartAxis) => ({
@@ -52,7 +50,9 @@ const styles = {
 };
 
 export function ChartsLayout() {
-  const [axis, setAxis] = useState(ChartAxis.Horizontal);
+  // TODO: Move the reference to trades length to container.
+  const { dashData } = useDashboardDataContext();
+  const [axis, setAxis] = useState(getInitialChartAxis(getDashTradesLength(dashData)));
 
   function handleToggleAxis() {
     const updated: ChartAxis =

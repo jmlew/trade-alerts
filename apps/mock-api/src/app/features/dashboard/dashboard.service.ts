@@ -4,8 +4,15 @@ import {
   AlertUpdateParams,
   AlertUpdateResponse,
   DashboardData,
-  DateRange,
+  TradesInfo,
+  getDashTrades,
 } from '@trade-alerts/dashboard/domain';
+import {
+  getDateTimeFromMills,
+  getDurationAsDays,
+  getDurationFromMillsInDays,
+  getDurationFromTo,
+} from '@trade-alerts/shared/util-common';
 
 import * as dashboardsDb from '../../../assets/db/mock-dash.json';
 import { AlertsService } from './alerts.service';
@@ -29,13 +36,29 @@ export class DashboardDataService {
     const alerts: AlertInfo[] = data.alerts.filter(
       (item: AlertInfo) => Number(item.alertID) === Number(alertId)
     );
-    return { ...data, alerts };
+    const originalTrades: TradesInfo[] | null = getDashTrades(data) || [];
+    const trades: TradesInfo[] = originalTrades.filter(
+      (trade: TradesInfo, index: number) => index < 7
+    );
+    return { ...data, alerts, trades };
   }
 
-  // TODO: Return data filterd to collections of length relative to that of the date range.
-  getDashboardDataFromDateRange(range: DateRange): DashboardData {
+  // Returns data filterd to collections of length relative to that of the date range.
+  getDashboardDataFromDateRange(
+    from: number | string,
+    to: number | string
+  ): DashboardData {
+    const dateFrom = getDateTimeFromMills(Number(from));
+    const dateTo = getDateTimeFromMills(Number(to));
+    const durationInDays: number = getDurationAsDays(getDurationFromTo(dateFrom, dateTo));
+
     const data: DashboardData = this.db;
-    return { ...data };
+    const originalTrades: TradesInfo[] | null = getDashTrades(data) || [];
+    const trades: TradesInfo[] = originalTrades.filter(
+      (trade: TradesInfo, index: number) => index < durationInDays
+    );
+
+    return { ...data, trades };
   }
 
   updateAlert(id: number, params: AlertUpdateParams): AlertUpdateResponse {

@@ -1,6 +1,6 @@
 import { TradeChartDataKeys } from '@trade-alerts/dashboard/ui/charts';
 
-import { DashboardChart } from './dashboard-chart.enum';
+import { ChartAxis, DashboardChart } from './dashboard-chart.enum';
 
 export function getChartDataKeys(chart: DashboardChart): TradeChartDataKeys {
   switch (chart) {
@@ -18,4 +18,8 @@ export function getChartDataKeys(chart: DashboardChart): TradeChartDataKeys {
         dataKeyYB: 'valueSell',
       };
   }
+}
+
+export function getInitialChartAxis(tradesLength: number): ChartAxis {
+  return tradesLength < 24 ? ChartAxis.Horizontal : ChartAxis.Vertical;
 }

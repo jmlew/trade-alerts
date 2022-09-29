@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { FilterSearchParam } from '@trade-alerts/dashboard/domain';
+import { FilterParam } from '@trade-alerts/dashboard/domain';
 import { DashSelector } from '@trade-alerts/dashboard/ui/controls';
 
 import { dashboardOptions } from '../entities/dashboards.constants';
@@ -18,7 +18,7 @@ export function DashboardSelectorContainer() {
   }
 
   useEffect(() => {
-    searchParams.set(FilterSearchParam.DashId, dashboard);
+    searchParams.set(FilterParam.DashId, dashboard);
     setSearchParams(searchParams);
   }, [dashboard]);
 

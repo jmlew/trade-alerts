@@ -1,9 +1,9 @@
 import { ReactNode, useEffect, useMemo, useState } from 'react';
 
-import { AlertInfo } from '@trade-alerts/dashboard/domain';
+import { AlertInfo, getDashAlerts } from '@trade-alerts/dashboard/domain';
 import { useDashboardDataContext } from '@trade-alerts/dashboard/feature/data-provider';
 
-import { getAllAlerts, getInitialAlert } from '../entities/alert-updater.util';
+import { getInitialAlert } from '../entities/alert-updater.util';
 import { AlertUpdaterContext, AlertUpdaterContextValue } from './alert-updater.context';
 
 interface AlertUpdaterDrawerProviderProps {
@@ -17,7 +17,7 @@ export function AlertUpdaterProvider({ children }: AlertUpdaterDrawerProviderPro
   const [isDrawerOpen, setDrawerOpen] = useState(false);
 
   useEffect(() => {
-    setAlerts(getAllAlerts(dashData));
+    setAlerts(getDashAlerts(dashData));
   }, [dashData]);
 
   useEffect(() => {

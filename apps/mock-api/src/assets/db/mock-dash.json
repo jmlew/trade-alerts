@@ -126,176 +126,6 @@
       "riskCategory": "AAA",
       "tradeValue": "8,3,12",
       "buySell": 0
-    },
-    {
-      "orderId": 21986666,
-      "tradeDate": "08/12/2022",
-      "secName": "Federal Bank",
-      "isin": "INE731H01025 ",
-      "productCategory": "Fixed Income",
-      "riskCategory": "AAA",
-      "tradeValue": "8,3,12",
-      "buySell": 0
-    },
-    {
-      "orderId": 21986666,
-      "tradeDate": "08/12/2022",
-      "secName": "Federal Bank",
-      "isin": "INE731H01025 ",
-      "productCategory": "Fixed Income",
-      "riskCategory": "AAA",
-      "tradeValue": "8,3,12",
-      "buySell": 0
-    },
-    {
-      "orderId": 21986666,
-      "tradeDate": "08/12/2022",
-      "secName": "Federal Bank",
-      "isin": "INE731H01025 ",
-      "productCategory": "Fixed Income",
-      "riskCategory": "AAA",
-      "tradeValue": "8,3,12",
-      "buySell": 0
-    },
-    {
-      "orderId": 21986666,
-      "tradeDate": "08/12/2022",
-      "secName": "Federal Bank",
-      "isin": "INE731H01025 ",
-      "productCategory": "Fixed Income",
-      "riskCategory": "AAA",
-      "tradeValue": "8,3,12",
-      "buySell": 0
-    },
-    {
-      "orderId": 21986666,
-      "tradeDate": "08/12/2022",
-      "secName": "Federal Bank",
-      "isin": "INE731H01025 ",
-      "productCategory": "Fixed Income",
-      "riskCategory": "AAA",
-      "tradeValue": "8,3,12",
-      "buySell": 0
-    },
-    {
-      "orderId": 21986666,
-      "tradeDate": "08/12/2022",
-      "secName": "Federal Bank",
-      "isin": "INE731H01025 ",
-      "productCategory": "Fixed Income",
-      "riskCategory": "AAA",
-      "tradeValue": "8,3,12",
-      "buySell": 0
-    },
-    {
-      "orderId": 21986666,
-      "tradeDate": "08/12/2022",
-      "secName": "Federal Bank",
-      "isin": "INE731H01025 ",
-      "productCategory": "Fixed Income",
-      "riskCategory": "AAA",
-      "tradeValue": "8,3,12",
-      "buySell": 0
-    },
-    {
-      "orderId": 21986666,
-      "tradeDate": "08/12/2022",
-      "secName": "Federal Bank",
-      "isin": "INE731H01025 ",
-      "productCategory": "Fixed Income",
-      "riskCategory": "AAA",
-      "tradeValue": "8,3,12",
-      "buySell": 0
-    },
-    {
-      "orderId": 21986666,
-      "tradeDate": "08/12/2022",
-      "secName": "Federal Bank",
-      "isin": "INE731H01025 ",
-      "productCategory": "Fixed Income",
-      "riskCategory": "AAA",
-      "tradeValue": "8,3,12",
-      "buySell": 0
-    },
-    {
-      "orderId": 21986666,
-      "tradeDate": "08/12/2022",
-      "secName": "Federal Bank",
-      "isin": "INE731H01025 ",
-      "productCategory": "Fixed Income",
-      "riskCategory": "AAA",
-      "tradeValue": "8,3,12",
-      "buySell": 0
-    },
-    {
-      "orderId": 21986666,
-      "tradeDate": "08/12/2022",
-      "secName": "Federal Bank",
-      "isin": "INE731H01025 ",
-      "productCategory": "Fixed Income",
-      "riskCategory": "AAA",
-      "tradeValue": "8,3,12",
-      "buySell": 0
-    },
-    {
-      "orderId": 21986666,
-      "tradeDate": "08/12/2022",
-      "secName": "Federal Bank",
-      "isin": "INE731H01025 ",
-      "productCategory": "Fixed Income",
-      "riskCategory": "AAA",
-      "tradeValue": "8,3,12",
-      "buySell": 0
-    },
-    {
-      "orderId": 21986666,
-      "tradeDate": "08/12/2022",
-      "secName": "Federal Bank",
-      "isin": "INE731H01025 ",
-      "productCategory": "Fixed Income",
-      "riskCategory": "AAA",
-      "tradeValue": "8,3,12",
-      "buySell": 0
-    },
-    {
-      "orderId": 21986666,
-      "tradeDate": "08/12/2022",
-      "secName": "Federal Bank",
-      "isin": "INE731H01025 ",
-      "productCategory": "Fixed Income",
-      "riskCategory": "AAA",
-      "tradeValue": "8,3,12",
-      "buySell": 0
-    },
-    {
-      "orderId": 21986666,
-      "tradeDate": "08/12/2022",
-      "secName": "Federal Bank",
-      "isin": "INE731H01025 ",
-      "productCategory": "Fixed Income",
-      "riskCategory": "AAA",
-      "tradeValue": "8,3,12",
-      "buySell": 0
-    },
-    {
-      "orderId": 21986666,
-      "tradeDate": "08/12/2022",
-      "secName": "Federal Bank",
-      "isin": "INE731H01025 ",
-      "productCategory": "Fixed Income",
-      "riskCategory": "AAA",
-      "tradeValue": "8,3,12",
-      "buySell": 0
-    },
-    {
-      "orderId": 21986666,
-      "tradeDate": "08/12/2022",
-      "secName": "Federal Bank",
-      "isin": "INE731H01025 ",
-      "productCategory": "Fixed Income",
-      "riskCategory": "AAA",
-      "tradeValue": "8,3,12",
-      "buySell": 0
     }
   ],
   "accountsTrans": [
@@ -370,79 +200,205 @@
     {
       "date": "08/01/2022",
       "valueBuy": 1,
-      "valueSell": 1,
-      "countBuy": 29544,
-      "countSell": 39544
+      "valueSell": 1.5,
+      "countBuy": 39544,
+      "countSell": 16576
     },
     {
       "date": "08/02/2022",
-      "valueBuy": 0.56,
+      "valueBuy": 2.56,
       "valueSell": 0.56,
-      "countBuy": 4200,
-      "countSell": 1200
+      "countBuy": 1200,
+      "countSell": 1000
     },
     {
       "date": "08/03/2022",
       "valueBuy": 1.2,
-      "valueSell": 1.2,
-      "countBuy": 2300,
+      "valueSell": 2.2,
+      "countBuy": 2000,
       "countSell": 2300
     },
     {
       "date": "08/04/2022",
       "valueBuy": 2,
-      "valueSell": 2,
+      "valueSell": 5,
       "countBuy": 43000,
-      "countSell": 43000
+      "countSell": 13000
     },
     {
       "date": "08/05/2022",
-      "valueBuy": 0.92,
+      "valueBuy": 3.92,
       "valueSell": 0.92,
       "countBuy": 98543,
-      "countSell": 98543
-    },
-    {
-      "date": "08/06/2022",
-      "valueBuy": 0.52,
-      "valueSell": 0.32,
-      "countBuy": 58543,
       "countSell": 58543
     },
     {
+      "date": "08/06/2022",
+      "valueBuy": 4.5,
+      "valueSell": 1.5,
+      "countBuy": 65321,
+      "countSell": 35321
+    },
+    {
       "date": "08/07/2022",
-      "valueBuy": 0.72,
-      "valueSell": 0.72,
-      "countBuy": 56543,
-      "countSell": 56543
+      "valueBuy": 1,
+      "valueSell": 1.5,
+      "countBuy": 39544,
+      "countSell": 16576
     },
     {
       "date": "08/08/2022",
-      "valueBuy": 1.12,
-      "valueSell": 1.12,
-      "countBuy": 123543,
-      "countSell": 123543
+      "valueBuy": 2.56,
+      "valueSell": 0.56,
+      "countBuy": 1200,
+      "countSell": 1000
     },
     {
       "date": "08/09/2022",
-      "valueBuy": 0.842,
-      "valueSell": 0.842,
-      "countBuy": 23543,
-      "countSell": 23543
+      "valueBuy": 1.2,
+      "valueSell": 2.2,
+      "countBuy": 2000,
+      "countSell": 2300
     },
     {
       "date": "08/10/2022",
-      "valueBuy": 0.92,
-      "valueSell": 0.92,
-      "countBuy": 98543,
-      "countSell": 98543
+      "valueBuy": 2,
+      "valueSell": 5,
+      "countBuy": 63000,
+      "countSell": 13000
     },
     {
       "date": "08/11/2022",
-      "valueBuy": 1.5,
+      "valueBuy": 3.92,
+      "valueSell": 0.92,
+      "countBuy": 98543,
+      "countSell": 58543
+    },
+    {
+      "date": "08/12/2022",
+      "valueBuy": 4.5,
+      "valueSell": 1.5,
+      "countBuy": 65331,
+      "countSell": 35321
+    },
+    {
+      "date": "08/13/2022",
+      "valueBuy": 4.5,
+      "valueSell": 1.5,
+      "countBuy": 45321,
+      "countSell": 35321
+    },
+    {
+      "date": "08/14/2022",
+      "valueBuy": 1,
+      "valueSell": 1.5,
+      "countBuy": 39544,
+      "countSell": 16576
+    },
+    {
+      "date": "08/15/2022",
+      "valueBuy": 2.56,
+      "valueSell": 0.56,
+      "countBuy": 1200,
+      "countSell": 1000
+    },
+    {
+      "date": "08/16/2022",
+      "valueBuy": 1.2,
+      "valueSell": 2.2,
+      "countBuy": 1000,
+      "countSell": 2300
+    },
+    {
+      "date": "08/17/2022",
+      "valueBuy": 2,
+      "valueSell": 5,
+      "countBuy": 44000,
+      "countSell": 13000
+    },
+    {
+      "date": "08/18/2022",
+      "valueBuy": 3.92,
+      "valueSell": 0.92,
+      "countBuy": 91543,
+      "countSell": 58543
+    },
+    {
+      "date": "08/19/2022",
+      "valueBuy": 4.5,
+      "valueSell": 1.5,
+      "countBuy": 63321,
+      "countSell": 35321
+    },
+    {
+      "date": "08/20/2022",
+      "valueBuy": 2,
+      "valueSell": 5,
+      "countBuy": 63000,
+      "countSell": 13000
+    },
+    {
+      "date": "08/21/2022",
+      "valueBuy": 3.92,
+      "valueSell": 0.92,
+      "countBuy": 98543,
+      "countSell": 58543
+    },
+    {
+      "date": "08/22/2022",
+      "valueBuy": 4.5,
+      "valueSell": 1.5,
+      "countBuy": 65331,
+      "countSell": 35321
+    },
+    {
+      "date": "08/23/2022",
+      "valueBuy": 4.5,
+      "valueSell": 1.5,
+      "countBuy": 45321,
+      "countSell": 35321
+    },
+    {
+      "date": "08/24/2022",
+      "valueBuy": 2,
+      "valueSell": 5,
+      "countBuy": 43000,
+      "countSell": 13000
+    },
+    {
+      "date": "08/25/2022",
+      "valueBuy": 3.92,
+      "valueSell": 0.92,
+      "countBuy": 98543,
+      "countSell": 58543
+    },
+    {
+      "date": "08/26/2022",
+      "valueBuy": 4.5,
       "valueSell": 1.5,
       "countBuy": 65321,
-      "countSell": 65321
+      "countSell": 35321
+    },
+    {
+      "date": "08/27/2022",
+      "valueBuy": 1,
+      "valueSell": 1.5,
+      "countBuy": 39544,
+      "countSell": 16576
+    },
+    {
+      "date": "08/28/2022",
+      "valueBuy": 2.56,
+      "valueSell": 0.56,
+      "countBuy": 1200,
+      "countSell": 1000
+    },
+    {
+      "date": "08/29/2022",
+      "valueBuy": 1.2,
+      "valueSell": 2.2,
+      "countBuy": 2000,
+      "countSell": 2300
     }
   ]
 }

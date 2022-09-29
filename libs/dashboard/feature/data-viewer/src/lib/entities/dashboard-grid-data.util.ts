@@ -2,7 +2,13 @@
  * Extends data items to include numeric ids based on their index.
  */
 
-import { DashboardData, DashboardDataGridField } from '@trade-alerts/dashboard/domain';
+import {
+  DashboardData,
+  DashboardDataGridField,
+  getDashAccountsTrans,
+  getDashAlerts,
+  getDashAlertsTrans,
+} from '@trade-alerts/dashboard/domain';
 
 import { MuiGridData } from './dashboard-grid-data.model';
 import { DashboardGrid } from './dashboard-grid.enum';
@@ -21,11 +27,11 @@ export function getGridData(
 ): DashboardDataGridField[] | null {
   switch (grid) {
     case DashboardGrid.AlertInformation:
-      return dashData?.alerts || null;
+      return getDashAlerts(dashData);
     case DashboardGrid.AccountTransactions:
-      return dashData?.accountsTrans || null;
+      return getDashAccountsTrans(dashData);
     case DashboardGrid.AlertedTransactions:
-      return dashData?.alertsTrans || null;
+      return getDashAlertsTrans(dashData);
     default:
       return null;
   }

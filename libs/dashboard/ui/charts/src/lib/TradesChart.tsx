@@ -51,13 +51,13 @@ export function TradesChart({ data, dataKeys }: TradesChartProps) {
           dataKey={dataKeyYA}
           name={chartLabels.get(dataKeyYA)}
           fill={chartColors.get(ChartAttribute.ValueA)}
-          maxBarSize={40}
+          maxBarSize={30}
         />
         <Bar
           dataKey={dataKeyYB}
           name={chartLabels.get(dataKeyYB)}
           fill={chartColors.get(ChartAttribute.ValueB)}
-          maxBarSize={40}
+          maxBarSize={30}
         />
         {/*  <Line
           type="monotone"

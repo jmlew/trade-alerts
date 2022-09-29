@@ -3,8 +3,9 @@ import { DateTime } from 'luxon';
 import { ChevronRight } from '@mui/icons-material';
 import { Box, TextField, Theme } from '@mui/material';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-import { DateRange, dateTimeFormat } from '@trade-alerts/dashboard/domain';
+import { DateRange } from '@trade-alerts/dashboard/domain';
 import { defaultDateRange } from '@trade-alerts/dashboard/domain';
+import { getDateTimeToMills } from '@trade-alerts/shared/util-common';
 
 const styles = {
   root: {
@@ -36,17 +37,18 @@ interface DateRangeInputsProps {
 
 export function DateRangeInputs({ dateRange, onSetDateRange }: DateRangeInputsProps) {
   function handleChangeFrom(value: DateTime) {
-    const from: number = value ? value.toMillis() : defaultDateRange.from;
+    const from: number = value ? getDateTimeToMills(value) : defaultDateRange.from;
     onSetDateRange({ ...dateRange, from });
   }
 
   function handleChangeTo(value: DateTime) {
-    const to: number = value ? value.toMillis() : defaultDateRange.to;
+    const to: number = value ? getDateTimeToMills(value) : defaultDateRange.to;
     onSetDateRange({ ...dateRange, to });
   }
 
   const fromInput: DateTime = DateTime.fromMillis(dateRange.from);
   const toInput: DateTime = DateTime.fromMillis(dateRange.to);
+  const dateTimeFormat = 'dd LLL yyyy';
 
   return (
     <Box sx={styles.root}>

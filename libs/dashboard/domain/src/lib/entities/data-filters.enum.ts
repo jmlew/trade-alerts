@@ -3,7 +3,7 @@ export enum FiltersType {
   AlertId,
 }
 
-export enum FilterSearchParam {
+export enum FilterParam {
   DashId = 'dashid',
   AlertId = 'alertid',
   DateFrom = 'from',
