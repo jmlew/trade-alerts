@@ -3,11 +3,14 @@ import { useEffect, useState } from 'react';
 import { Typography } from '@mui/material';
 import {
   AlertInfo,
-  AlertUpdateParams,
   dashboardDataFacade,
   getAlertById,
 } from '@trade-alerts/dashboard/domain';
-import { ApiState, ApiStateManager, isPending } from '@trade-alerts/shared/data-access';
+import {
+  ApiState,
+  ApiStateReference,
+  useApiStateReference,
+} from '@trade-alerts/shared/data-access';
 import { useAlert } from '@trade-alerts/shared/feature-alert';
 import { AlertType } from '@trade-alerts/shared/ui-common';
 import { useObservable } from '@trade-alerts/shared/util-common';
@@ -16,7 +19,6 @@ import { AlertUpdateForm } from '../components/AlertUpdateForm';
 import { useAlertUpdaterContext } from '../context/alert-updater.context';
 import { AlertUpdateFormParams } from '../entities/alert-updater.model';
 import {
-  getAlertActionLabel,
   getAlertUpdateParams,
   getInitialFormValues,
 } from '../entities/alert-updater.util';
@@ -24,9 +26,13 @@ import {
 export function AlertUpdateContainer() {
   const { setAlert } = useAlert();
   const { alerts, currentAlertId, setDrawerOpen } = useAlertUpdaterContext();
-  const [currentAlert, setCurrentAlert] = useState<AlertInfo | null>(null);
   const alertUpdateState: ApiState | undefined = useObservable<ApiState>(
     dashboardDataFacade.alertUpdateState$
+  );
+  const updateStateReference: ApiStateReference = useApiStateReference(alertUpdateState);
+  const [currentAlert, setCurrentAlert] = useState<AlertInfo | null>(null);
+  const [initialValues, setInitialValues] = useState<AlertUpdateFormParams>(
+    getInitialFormValues(currentAlert)
   );
 
   useEffect(() => {
@@ -35,31 +41,29 @@ export function AlertUpdateContainer() {
         ? getAlertById(alerts, currentAlertId)
         : null;
     setCurrentAlert(alert);
+    setInitialValues(getInitialFormValues(alert));
   }, [alerts, currentAlertId]);
 
+  useEffect(() => {
+    if (updateStateReference.isCompleted() && updateStateReference.wasPending()) {
+      const message = `Alert ${currentAlertId} has been updated`;
+      setAlert({ isShown: true, type: AlertType.Success, duration: 1200, message });
+    }
+  }, [updateStateReference, currentAlertId, setAlert]);
+
   function handleSubmit(values: AlertUpdateFormParams) {
-    // TODO: implement CRUD and handle errors.
-    const params: AlertUpdateParams = getAlertUpdateParams(values);
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    dashboardDataFacade.updateAlert(currentAlertId!, params);
-    setTimeout(() => {
-      const message = `Alert ${currentAlertId} has been updated to ${getAlertActionLabel(
-        values.action
-      )}`;
-      setAlert({ isShown: true, type: AlertType.Success, message });
-    }, 700);
+    currentAlertId &&
+      dashboardDataFacade.updateAlert(currentAlertId, getAlertUpdateParams(values));
   }
 
   function handleCancel() {
     setDrawerOpen(false);
   }
 
-  const isPending: boolean =
-    (alertUpdateState && ApiStateManager.isPending(alertUpdateState)) || false;
   return currentAlert != null ? (
     <AlertUpdateForm
-      initialValues={getInitialFormValues(currentAlert)}
-      isPending={isPending}
+      initialValues={initialValues}
+      isPending={updateStateReference.isPending()}
       onSubmit={handleSubmit}
       onCancel={handleCancel}
     />

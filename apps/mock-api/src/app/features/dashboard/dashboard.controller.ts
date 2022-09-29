@@ -1,10 +1,10 @@
 import { Observable } from 'rxjs';
 
 import {
+  DashApiUri,
   DashboardData,
   DataFilters,
   FiltersType,
-  getDefaultFilterType,
 } from '@trade-alerts/dashboard/domain';
 import {
   BadRequestException,
@@ -26,7 +26,7 @@ enum ErrorMessage {
   NoDashboardMatch = 'Dashboard data does not exist in the Mock DB.',
 }
 
-@Controller('dashboard')
+@Controller(DashApiUri.Dashboard)
 export class DashboardDataController {
   constructor(private readonly dataService: DashboardDataService) {}
 

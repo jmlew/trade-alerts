@@ -1,6 +1,6 @@
 import { AlertStatus } from '@trade-alerts/dashboard/domain';
 
 export interface AlertUpdateFormParams {
-  action: AlertStatus;
+  status: AlertStatus;
   comment: string | null;
 }

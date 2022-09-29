@@ -57,7 +57,7 @@ export interface AlertOverviewInfo {
 }
 
 export interface AlertUpdateParams {
-  action: AlertStatus;
+  status: AlertStatus;
   comment: string | null;
 }
 

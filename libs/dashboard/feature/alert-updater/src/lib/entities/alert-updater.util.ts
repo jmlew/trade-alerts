@@ -42,25 +42,25 @@ export function getAlertSelectorLabel(): string {
     .join(' | ');
 }
 
-export function getAlertActionOptions(): UiControlOption[] {
+export function getAlertStatusOptions(): UiControlOption[] {
   return Array.from(alertStatuses, ([key, value]) => ({
     value: key,
     label: value,
   }));
 }
 
-export function getAlertActionLabel(action: AlertStatus): string {
-  return alertStatuses.get(action) || action.toString();
+export function getAlertStatusLabel(status: AlertStatus): string {
+  return alertStatuses.get(status) || status.toString();
 }
 
 export function getInitialFormValues(
   currentAlert: AlertInfo | null
 ): AlertUpdateFormParams {
-  const action: AlertStatus = currentAlert
+  const status: AlertStatus = currentAlert
     ? currentAlert[AlertInfoField.Status]
     : Array.from(alertStatuses.keys())[0];
   return {
-    action,
+    status,
     comment: null,
   };
 }

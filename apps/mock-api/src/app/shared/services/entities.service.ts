@@ -8,7 +8,7 @@ import {
 export class EntitiesService<T, K extends string | number>
   implements EntityAdapter<T, K>, EntitySelectors<T, K>
 {
-  constructor(private selectIdKey: string) {}
+  constructor(private selectIdKey: keyof T) {}
 
   createEntities(items: T[]): Entity<T> {
     return items.reduce(

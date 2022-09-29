@@ -1,11 +1,19 @@
 import { Injectable } from '@nestjs/common';
-import { AlertInfo, DashboardData, DateRange } from '@trade-alerts/dashboard/domain';
+import {
+  AlertInfo,
+  AlertUpdateParams,
+  AlertUpdateResponse,
+  DashboardData,
+  DateRange,
+} from '@trade-alerts/dashboard/domain';
 
 import * as dashboardsDb from '../../../assets/db/mock-dash.json';
+import { AlertsService } from './alerts.service';
 
 @Injectable()
 export class DashboardDataService {
   private db: DashboardData;
+  private alertsService: AlertsService;
 
   constructor() {
     this.initDb();
@@ -13,6 +21,7 @@ export class DashboardDataService {
 
   initDb() {
     this.db = { ...dashboardsDb } as DashboardData;
+    this.alertsService = new AlertsService(this.db);
   }
 
   getDashboardDataFromAlertId(alertId: number): DashboardData {
@@ -27,5 +36,20 @@ export class DashboardDataService {
   getDashboardDataFromDateRange(range: DateRange): DashboardData {
     const data: DashboardData = this.db;
     return { ...data };
+  }
+
+  updateAlert(id: number, params: AlertUpdateParams): AlertUpdateResponse {
+    this.alertsService.updateAlert(id, params);
+    this.updateDbWithAlerts();
+    return { id, status: 'success' };
+  }
+
+  private updateDbWithAlerts() {
+    const alerts: AlertInfo[] = this.alertsService.getAllAlerts();
+    this.db = { ...this.db, alerts };
+  }
+
+  doesAlertExist(id: number): boolean {
+    return this.alertsService.doesAlertExist(id);
   }
 }

@@ -3,12 +3,12 @@ import { AjaxResponse, ajax } from 'rxjs/ajax';
 
 import { getAjaxApiErrorMessage } from '@trade-alerts/shared/util-common';
 
+import { DashApiUri } from '../entities/dashboard-api.enum';
 import {
   AlertUpdateParams,
   AlertUpdateResponse,
   DashboardData,
 } from '../entities/dashboard-data.model';
-import { DashApiUri } from './dashboard-api.enum';
 
 /**
  * Data service to handle all HTTP requests for the domain.
@@ -25,10 +25,10 @@ export class DashboardDataService {
   }
 
   updateAlert(id: number, params: AlertUpdateParams): Observable<AlertUpdateResponse> {
-    const promise: Promise<AlertUpdateResponse> = new Promise((resolve, reject) => {
-      const response: AlertUpdateResponse = { id, status: 'success' };
-      setTimeout(() => resolve(response), 600);
-    });
-    return from(promise);
+    const url = `${this.urlBase}${DashApiUri.Alert}/${id}`;
+    return ajax.put(url, params).pipe(
+      map((response: AjaxResponse<AlertUpdateResponse>) => response.response),
+      catchError((error: any) => throwError(() => getAjaxApiErrorMessage(error)))
+    );
   }
 }

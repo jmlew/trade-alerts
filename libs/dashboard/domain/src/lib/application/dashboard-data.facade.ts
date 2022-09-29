@@ -8,10 +8,12 @@ import {
 import { isNonNull } from '@trade-alerts/shared/util-common';
 
 import {
+  AlertInfo,
   AlertUpdateParams,
   AlertUpdateResponse,
   DashboardData,
 } from '../entities/dashboard-data.model';
+import { mergeAlertUpdates } from '../entities/dashboard-data.util';
 import { DataFilters } from '../entities/data-filters.model';
 import { getSearchParamsFromDataFilters } from '../entities/data-filters.util';
 import { DashboardDataService } from '../infrastructure/dashboard-data.service';
@@ -61,6 +63,7 @@ class DashboardDataFacade {
       },
     });
   }
+
   // Send update request and merge payload with current dashboard data, storing the rvious
   // value to be reverted on error.
   updateAlert(id: number, params: AlertUpdateParams) {
@@ -68,14 +71,26 @@ class DashboardDataFacade {
     this.alertUpdateStateSubject.next(ApiStateManager.onPending(requestType));
     this.dataService.updateAlert(id, params).subscribe({
       next: (response: AlertUpdateResponse) => {
-        // TODO: Merge the alerts data with the response and update the status.
-        // this.dashDataSubject.next(data);
+        this.updateDashboardDataWithAlertParams(id, params);
         this.alertUpdateStateSubject.next(ApiStateManager.onCompleted(requestType));
       },
       error: (error: string) => {
         this.alertUpdateStateSubject.next(ApiStateManager.onFailed(error, requestType));
       },
     });
+  }
+
+  private updateDashboardDataWithAlertParams(id: number, params: AlertUpdateParams) {
+    const data: DashboardData | null = this.dashDataSubject.value;
+    if (data == null) {
+      return;
+    }
+    const alerts: AlertInfo[] | null = data.alerts
+      ? mergeAlertUpdates(data.alerts, id, params)
+      : null;
+    if (alerts) {
+      this.dashDataSubject.next({ ...data, alerts });
+    }
   }
 }
 

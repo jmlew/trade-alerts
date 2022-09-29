@@ -23,7 +23,13 @@ export function AlertUpdaterDrawer() {
   }
 
   return (
-    <Drawer sx={styles.root} anchor="right" open={isDrawerOpen} onClose={closeDrawer}>
+    <Drawer
+      sx={styles.root}
+      anchor="right"
+      open={isDrawerOpen}
+      hideBackdrop={false}
+      onClose={closeDrawer}
+    >
       <AlertUpdaterLayout />
     </Drawer>
   );

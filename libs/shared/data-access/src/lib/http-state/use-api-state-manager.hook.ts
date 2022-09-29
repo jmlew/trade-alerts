@@ -30,7 +30,7 @@ export const {
   getError,
 } = ApiStateManager;
 
-export interface ApiStateManagerMutable {
+export interface ApiStateReferenceManager extends ApiStateReference {
   onInit(): void;
   onPending(request: ApiRequestType): void;
   onCompleted(request: ApiRequestType): void;
@@ -40,6 +40,9 @@ export interface ApiStateManagerMutable {
   onCompletedMutable?(request: ApiRequestType): void;
   onFailedMutable?(error: string, request: ApiRequestType): void;
   onCancelledMutable?(request: ApiRequestType): void;
+}
+
+export interface ApiStateReference {
   isInit(): boolean;
   isPending(): boolean;
   isCompleted(): boolean;
@@ -64,12 +67,12 @@ export interface ApiStateManagerMutable {
 
 export function useApiStateManager(): {
   apiState: ApiState;
-  stateManager: ApiStateManagerMutable;
+  stateManager: ApiStateReferenceManager;
 } {
   const [apiState, setApiState] = useState<ApiState>(onInit());
   const prevApiState = usePrevious(apiState);
 
-  const stateManager: ApiStateManagerMutable = {
+  const stateManager: ApiStateReferenceManager = {
     // Setters to mutate the current API status based on a given request type.
     onInit: (): void => setApiState(onInit()),
     onPending: (request: ApiRequestType): void => setApiState(onPending(request)),
@@ -107,4 +110,38 @@ export function useApiStateManager(): {
   };
 
   return { apiState, stateManager };
+}
+
+export function useApiStateReference(apiState: ApiState | undefined): ApiStateReference {
+  const prevApiState = usePrevious(apiState);
+
+  return {
+    // Getters to return the current API status.
+    isInit: (): boolean => apiState != null && isInit(apiState),
+    isPending: (): boolean => apiState != null && isPending(apiState),
+    isCompleted: (): boolean => apiState != null && isCompleted(apiState),
+    isFailed: (): boolean => apiState != null && isFailed(apiState),
+    isCreate: (): boolean => apiState != null && isCreate(apiState),
+    isRead: (): boolean => apiState != null && isRead(apiState),
+    isUpdate: (): boolean => apiState != null && isUpdate(apiState),
+    isDelete: (): boolean => apiState != null && isDelete(apiState),
+
+    // Getters to return the previous API status.
+    wasInit: (): boolean => prevApiState != null && isInit(prevApiState),
+    wasPending: (): boolean => prevApiState != null && isPending(prevApiState),
+    wasCompleted: (): boolean => prevApiState != null && isCompleted(prevApiState),
+    wasFailed: (): boolean => prevApiState != null && isFailed(prevApiState),
+    wasCreate: (): boolean => prevApiState != null && isCreate(prevApiState),
+    wasRead: (): boolean => prevApiState != null && isRead(prevApiState),
+    wasUpdate: (): boolean => prevApiState != null && isUpdate(prevApiState),
+    wasDelete: (): boolean => prevApiState != null && isDelete(prevApiState),
+
+    // Getters to return each property of the Api State.
+    getStatus: (): ApiStatus => (apiState != null ? getStatus(apiState) : ApiStatus.Init),
+    getPrevStatus: (): ApiStatus =>
+      prevApiState != null ? getStatus(prevApiState) : ApiStatus.Init,
+    getRequest: (): ApiRequestType | null =>
+      apiState != null ? getRequest(apiState) : null,
+    getError: (): string | null => (apiState != null ? getError(apiState) : null),
+  };
 }

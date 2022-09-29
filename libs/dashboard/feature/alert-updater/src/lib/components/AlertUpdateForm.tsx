@@ -7,7 +7,7 @@ import { DashSelector } from '@trade-alerts/dashboard/ui/controls';
 import { themeColors } from '@trade-alerts/shared/ui-styles';
 
 import { AlertUpdateFormParams } from '../entities/alert-updater.model';
-import { getAlertActionOptions } from '../entities/alert-updater.util';
+import { getAlertStatusOptions } from '../entities/alert-updater.util';
 
 const styles = {
   root: (isPending: boolean) => ({ width: 1, opacity: isPending ? 0.4 : 1 }),
@@ -48,25 +48,25 @@ export function AlertUpdateForm({
     onSubmit(values);
   }
 
-  function handleActionChange(action: AlertStatus) {
-    setValues({ ...values, action });
+  function handleStatusChange(status: AlertStatus) {
+    setValues({ ...values, status });
   }
 
   const handleCommentChange = (event: ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, comment: event.target.value });
   };
 
-  const { action, comment } = values;
+  const { status, comment } = values;
   return (
     <Box sx={styles.root(isPending)}>
       <Typography sx={{ mb: 1 }} variant="body2" color="primary.main">
         Action Type
       </Typography>
       <DashSelector
-        value={action}
+        value={status}
         isDisabled={isPending}
-        onChange={handleActionChange}
-        options={getAlertActionOptions()}
+        onChange={handleStatusChange}
+        options={getAlertStatusOptions()}
       />
       <Typography sx={{ mt: 4, mb: 2 }} variant="body2" color="primary.main">
         Comments (optional)

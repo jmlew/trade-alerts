@@ -1,4 +1,5 @@
 // All domain entities exposed to other libs.
+export * from './lib/entities/dashboard-api.enum';
 export * from './lib/entities/dashboard-data-configs.constants';
 export * from './lib/entities/dashboard-data-configs.model';
 export * from './lib/entities/dashboard-data-fields.enum';
