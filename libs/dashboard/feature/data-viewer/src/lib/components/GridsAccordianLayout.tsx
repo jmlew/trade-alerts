@@ -1,4 +1,4 @@
-import { MouseEvent, ReactNode, SyntheticEvent, useEffect, useState } from 'react';
+import { MouseEvent, ReactNode, SyntheticEvent, useState } from 'react';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
@@ -12,6 +12,7 @@ import { BtnDownloadData } from '@trade-alerts/dashboard/ui/controls';
 import { dashAccordianContent, themeColors } from '@trade-alerts/shared/ui-styles';
 
 import { GridContainer } from '../containers/GridContainer';
+import { gridLabels } from '../entities/dashboard-grid.constants';
 import { DashboardGrid } from '../entities/dashboard-grid.enum';
 
 const styles = {
@@ -29,7 +30,7 @@ interface GridShownState {
   [DashboardGrid.AccountTransactions]: boolean;
 }
 
-export function GridsLayout() {
+export function GridsAccordianLayout() {
   const [gridShownState, setGridShownState] = useState<GridShownState>({
     [DashboardGrid.AlertInformation]: false,
     [DashboardGrid.AlertedTransactions]: false,
@@ -101,7 +102,7 @@ function GridAccordian({
       sx={styles.accordian}
     >
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography variant="body2">{grid}</Typography>
+        <Typography variant="body2">{gridLabels.get(grid)}</Typography>
         {shownState[grid] && <BtnDownloadData onClick={handleDownloadClick} />}
       </AccordionSummary>
       <AccordionDetails sx={dashAccordianContent}>{children}</AccordionDetails>

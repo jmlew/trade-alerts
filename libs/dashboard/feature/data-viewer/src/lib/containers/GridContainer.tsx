@@ -40,6 +40,6 @@ export function GridContainer({ grid }: GridContainerProps) {
       onCellClick={handleCellClick}
     />
   ) : (
-    <ErrorMessage>Can't get {grid} data</ErrorMessage>
+    <ErrorMessage>Can't get grid data</ErrorMessage>
   );
 }
