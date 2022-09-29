@@ -1,9 +1,12 @@
+import { useSearchParams } from 'react-router-dom';
+
 import { Box } from '@mui/material';
 import { DashPanelStack } from '@trade-alerts/dashboard/ui/common';
 
 import { ChartsLayout } from './ChartsLayout';
 import { FooterLayout } from './FooterLayout';
-import { GridsLayout } from './GridsLayout';
+import { GridsAccordianLayout } from './GridsAccordianLayout';
+import { GridsTabsLayout } from './GridsTabsLayout';
 import { OverviewLayout } from './OverviewLayout';
 
 const styles = {
@@ -14,7 +17,14 @@ const styles = {
   footer: { width: 1 },
 };
 
+enum GridStyle {
+  Tabs = 'tabs',
+  Panel = 'accordian',
+}
+
 export function DashLayout() {
+  const [searchParams] = useSearchParams();
+  const style: GridStyle | null = searchParams.get('style') as GridStyle;
   return (
     <Box sx={styles.root}>
       <DashPanelStack>
@@ -25,7 +35,7 @@ export function DashLayout() {
           <ChartsLayout />
         </Box>
         <Box sx={styles.grids}>
-          <GridsLayout />
+          {style === GridStyle.Tabs ? <GridsTabsLayout /> : <GridsAccordianLayout />}
         </Box>
       </DashPanelStack>
       <Box sx={styles.footer}>

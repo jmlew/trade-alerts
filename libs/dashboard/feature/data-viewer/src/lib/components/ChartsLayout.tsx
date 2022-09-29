@@ -24,13 +24,13 @@ const styles = {
   chartPanel: (axis: ChartAxis) => ({
     width: axis === ChartAxis.Horizontal ? 0.5 : 1,
     pt: 1,
-    backgroundColor: themeColors.backgroundDark,
-    ...dashSectionBorder,
-    borderRadius: dashItemBorderRadius,
     '&:not(:first-of-type)': {
       ml: axis === ChartAxis.Horizontal ? dashItemPadding : 0,
       mt: axis === ChartAxis.Vertical ? dashItemPadding : 0,
     },
+    backgroundColor: themeColors.backgroundDark,
+    ...dashSectionBorder,
+    borderRadius: dashItemBorderRadius,
   }),
   chart: { width: 1, height: 280, p: 1, overflow: 'hidden' },
   header: {

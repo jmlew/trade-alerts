@@ -43,7 +43,7 @@ export class AlertsDataController {
     if (!this.dataService.doesAlertExist(alertId)) {
       throw new BadRequestException(ErrorMessage.NoAlertMatch);
     }
-    return this.toStream(this.dataService.updateAlert(alertId, params), 1000);
+    return this.toStream(this.dataService.updateAlert(alertId, params));
   }
 
   /**
