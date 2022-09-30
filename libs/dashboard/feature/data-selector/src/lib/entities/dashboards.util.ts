@@ -1,5 +1,5 @@
-import { FilterParam } from '@trade-alerts/dashboard/domain';
 import { UiControlOption } from '@trade-alerts/shared/data-access';
+import { FilterParam } from '@trade-alerts/shared/util-filters';
 
 import { dashboardOptions, defaultDashboardOption } from './dashboards.constants';
 

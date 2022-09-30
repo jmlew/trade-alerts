@@ -1,11 +1,4 @@
 import { Observable } from 'rxjs';
-
-import {
-  DashApiUri,
-  DashboardData,
-  DataFilters,
-  FiltersType,
-} from '@trade-alerts/dashboard/domain';
 import {
   BadRequestException,
   Controller,
@@ -14,6 +7,9 @@ import {
   HttpException,
   Query,
 } from '@nestjs/common';
+
+import { DashApiUri, DashboardData } from '@trade-alerts/dashboard/domain';
+import { DataFilters, FiltersType } from '@trade-alerts/shared/util-filters';
 
 import { toStreamWithDelay } from '../../shared/utils';
 import { DashboardDataService } from './dashboard.service';

@@ -22,7 +22,7 @@ export function AlertUpdaterProvider({ children }: AlertUpdaterDrawerProviderPro
 
   useEffect(() => {
     const id: number | null =
-      currentAlertId != null ? currentAlertId : getInitialAlert(alerts)?.alertID || null;
+      currentAlertId ?? (getInitialAlert(alerts)?.alertID || null);
     setCurrentAlertId(id);
   }, [alerts, currentAlertId]);
 

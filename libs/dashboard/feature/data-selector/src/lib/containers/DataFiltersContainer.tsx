@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
+import { AlertIdInput, DateRangeInputs } from '@trade-alerts/dashboard/ui/controls';
 import {
   DateRange,
   FilterParam,
   FiltersType,
   getAlertIdFromSearchParams,
   getDateRangeFromSearchParams,
-} from '@trade-alerts/dashboard/domain';
-import { AlertIdInput, DateRangeInputs } from '@trade-alerts/dashboard/ui/controls';
+} from '@trade-alerts/shared/util-filters';
+
+import { defaultDateRange } from '../entities/dates.constants';
 
 interface DataSelectorContainerProps {
   type: FiltersType;
@@ -20,7 +22,7 @@ export function DataFiltersContainer({ type }: DataSelectorContainerProps) {
     getAlertIdFromSearchParams(searchParams)
   );
   const [dateRange, setDateRange] = useState<DateRange>(
-    getDateRangeFromSearchParams(searchParams)
+    getDateRangeFromSearchParams(searchParams, defaultDateRange)
   );
 
   useEffect(() => {
@@ -47,7 +49,13 @@ export function DataFiltersContainer({ type }: DataSelectorContainerProps) {
         return <AlertIdInput value={alertId} onSetValue={setAlertId} />;
       case FiltersType.DateRange:
       default:
-        return <DateRangeInputs dateRange={dateRange} onSetDateRange={setDateRange} />;
+        return (
+          <DateRangeInputs
+            dateRange={dateRange}
+            defaultDateRange={defaultDateRange}
+            onSetDateRange={setDateRange}
+          />
+        );
     }
   }
 

@@ -45,6 +45,7 @@
       "@trade-alerts/shared/ui-common": ["libs/shared/ui-common/src/index.ts"],
       "@trade-alerts/shared/ui-styles": ["libs/shared/ui-styles/src/index.ts"],
       "@trade-alerts/shared/util-common": ["libs/shared/util-common/src/index.ts"],
+      "@trade-alerts/shared/util-filters": ["libs/shared/util-filters/src/index.ts"],
       "@trade-alerts/shared/util-form": ["libs/shared/util-form/src/index.ts"],
       "@trade-alerts/users/domain": ["libs/users/domain/src/index.ts"],
       "@trade-alerts/users/feature/manage-users": [

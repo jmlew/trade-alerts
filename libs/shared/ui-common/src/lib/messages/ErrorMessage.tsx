@@ -4,7 +4,7 @@ import { Typography } from '@mui/material';
 
 const styles = {
   root: (top?: number) => ({
-    pt: top == null ? 4 : top,
+    pt: top ?? 4,
   }),
 };
 

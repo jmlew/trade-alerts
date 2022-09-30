@@ -45,7 +45,7 @@ export function AlertIdInput({ value, onSetValue }: AlertIdInputProps) {
       size="small"
       color="primary"
       sx={styles.root}
-      value={value == null ? '' : value}
+      value={value ?? ''}
       onChange={handleChange}
     />
   );

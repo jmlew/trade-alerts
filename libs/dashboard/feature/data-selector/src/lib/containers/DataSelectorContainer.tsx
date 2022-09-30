@@ -2,16 +2,16 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { Box } from '@mui/material';
-import {
-  FiltersType,
-  doAlertsExist,
-  getInitialFilterTypeFromSearchParams,
-} from '@trade-alerts/dashboard/domain';
+import { doAlertsExist } from '@trade-alerts/dashboard/domain';
 import { useAlertUpdaterContext } from '@trade-alerts/dashboard/feature/alert-updater';
 import { useDashboardDataContext } from '@trade-alerts/dashboard/feature/data-provider';
 import { BtnSideExpand, FiltersTypeBtns } from '@trade-alerts/dashboard/ui/controls';
 import { useApiStateReference } from '@trade-alerts/shared/data-access';
 import { DividerVert } from '@trade-alerts/shared/ui-common';
+import {
+  FiltersType,
+  getInitialFilterTypeFromSearchParams,
+} from '@trade-alerts/shared/util-filters';
 
 import { DashboardSelectorContainer } from './DashboardSelectorContainer';
 import { DataFiltersContainer } from './DataFiltersContainer';

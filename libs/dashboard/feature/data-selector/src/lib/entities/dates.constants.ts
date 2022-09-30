@@ -1,8 +1,7 @@
 import { DateTime } from 'luxon';
 
 import { getDateTimeToMills } from '@trade-alerts/shared/util-common';
-
-import { DateRange } from './data-filters.model';
+import { DateRange } from '@trade-alerts/shared/util-filters';
 
 const defaultFrom: DateTime = DateTime.now().minus({ days: 22 });
 const defaultTo: DateTime = DateTime.now();

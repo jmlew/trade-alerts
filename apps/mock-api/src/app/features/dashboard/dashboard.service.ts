@@ -10,7 +10,6 @@ import {
 import {
   getDateTimeFromMills,
   getDurationAsDays,
-  getDurationFromMillsInDays,
   getDurationFromTo,
 } from '@trade-alerts/shared/util-common';
 

@@ -24,15 +24,22 @@ export function getAlertOptions(alerts: AlertInfo[]): UiControlOption[] {
 }
 
 function getAlertSelectorOptionLabel(alert: AlertInfo): string {
-  return alertSelectorLabelFields
+  const initial: string | number = alert[alertSelectorLabelFields[0]];
+  const extras: string = alertSelectorLabelFields
+    .filter((_, index: number) => index > 0)
     .map((field: AlertInfoField) => alert[field])
     .join(' | ');
+  return `${initial} (${extras})`;
 }
 
 export function getAlertSelectorLabel(): string {
-  return alertSelectorLabelFields
+  const initial: string =
+    alertInfoLabels.get(alertSelectorLabelFields[0]) || alertSelectorLabelFields[0];
+  const extras: string = alertSelectorLabelFields
+    .filter((_, index: number) => index > 0)
     .map((field: AlertInfoField) => alertInfoLabels.get(field) || field)
     .join(' | ');
+  return `${initial} (${extras})`;
 }
 
 export function getAlertStatusOptions(): UiControlOption[] {

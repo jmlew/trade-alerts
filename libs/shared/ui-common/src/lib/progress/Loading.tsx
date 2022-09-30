@@ -2,7 +2,7 @@ import { Box, CircularProgress, Typography } from '@mui/material';
 
 const styles = {
   root: (top?: number) => ({
-    pt: top == null ? 0 : top,
+    pt: top ?? 0,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

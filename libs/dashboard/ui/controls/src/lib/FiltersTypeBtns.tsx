@@ -1,5 +1,5 @@
 import { Button, ButtonGroup, Theme } from '@mui/material';
-import { FiltersType } from '@trade-alerts/dashboard/domain';
+import { FiltersType } from '@trade-alerts/shared/util-filters';
 
 const styles = {
   root: (theme: Theme) => ({ width: 1 }),

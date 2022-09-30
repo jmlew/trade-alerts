@@ -14,8 +14,6 @@ import {
   DashboardData,
 } from '../entities/dashboard-data.model';
 import { mergeAlertUpdates } from '../entities/dashboard-data.util';
-import { DataFilters } from '../entities/data-filters.model';
-import { getSearchParamsFromDataFilters } from '../entities/data-filters.util';
 import { DashboardDataService } from '../infrastructure/dashboard-data.service';
 
 /**
@@ -48,9 +46,8 @@ class DashboardDataFacade {
     .asObservable()
     .pipe(filter(isNonNull));
 
-  loadDashData(filters: DataFilters) {
+  loadDashData(params: URLSearchParams) {
     const requestType: ApiRequestType = ApiRequestType.Read;
-    const params: URLSearchParams = getSearchParamsFromDataFilters(filters);
 
     this.dashDataStateSubject.next(ApiStateManager.onPending(requestType));
     this.dataService.getDashData(params).subscribe({

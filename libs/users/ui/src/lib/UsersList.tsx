@@ -28,7 +28,7 @@ export function UsersList({
         <UsersListItem
           key={user.id}
           user={user}
-          isControlsHidden={isControlsHidden == null ? false : isControlsHidden}
+          isControlsHidden={isControlsHidden ?? false}
           onEdit={() => onEditUser(user.id)}
           onDelete={() => onDeleteUser(user.id)}
         />

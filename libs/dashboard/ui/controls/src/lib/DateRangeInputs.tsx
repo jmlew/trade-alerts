@@ -3,9 +3,8 @@ import { DateTime } from 'luxon';
 import { ChevronRight } from '@mui/icons-material';
 import { Box, TextField, Theme } from '@mui/material';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-import { DateRange } from '@trade-alerts/dashboard/domain';
-import { defaultDateRange } from '@trade-alerts/dashboard/domain';
 import { getDateTimeToMills } from '@trade-alerts/shared/util-common';
+import { DateRange } from '@trade-alerts/shared/util-filters';
 
 const styles = {
   root: {
@@ -32,10 +31,15 @@ const styles = {
 
 interface DateRangeInputsProps {
   dateRange: DateRange;
+  defaultDateRange: DateRange;
   onSetDateRange: (dateRange: DateRange) => void;
 }
 
-export function DateRangeInputs({ dateRange, onSetDateRange }: DateRangeInputsProps) {
+export function DateRangeInputs({
+  dateRange,
+  defaultDateRange,
+  onSetDateRange,
+}: DateRangeInputsProps) {
   function handleChangeFrom(value: DateTime) {
     const from: number = value ? getDateTimeToMills(value) : defaultDateRange.from;
     onSetDateRange({ ...dateRange, from });
