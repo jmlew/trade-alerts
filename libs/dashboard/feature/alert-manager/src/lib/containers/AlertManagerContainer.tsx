@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Typography } from '@mui/material';
 import {
   AlertInfo,
-  dashboardDataFacade,
+  alertManagerFacade,
   getAlertById,
 } from '@trade-alerts/dashboard/domain';
 import { ApiState, useApiStateReference } from '@trade-alerts/shared/data-access';
@@ -27,7 +27,7 @@ export function AlertManagerContainer() {
     getInitialFormValues(currentAlert)
   );
   const alertUpdateState: ApiState | null = useObservable<ApiState>(
-    dashboardDataFacade.alertUpdateState$
+    alertManagerFacade.alertUpdateState$
   );
   const alertUpdateStateRef = useApiStateReference(alertUpdateState);
   const { isCompleted, wasPending, isPending, isFailed, getError } = alertUpdateStateRef;
@@ -53,7 +53,7 @@ export function AlertManagerContainer() {
 
   function handleSubmit(values: AlertUpdateFormParams) {
     currentAlertId &&
-      dashboardDataFacade.updateAlert(currentAlertId, getAlertUpdateParams(values));
+      alertManagerFacade.updateAlert(currentAlertId, getAlertUpdateParams(values));
   }
 
   function handleCancel() {

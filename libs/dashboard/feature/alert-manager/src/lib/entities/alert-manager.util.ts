@@ -3,7 +3,6 @@ import {
   AlertInfoField,
   AlertStatus,
   AlertUpdateParams,
-  DashboardData,
   alertInfoLabels,
   alertStatuses,
 } from '@trade-alerts/dashboard/domain';

@@ -47,13 +47,3 @@ export function getAlertId(alert: AlertInfo): number {
 export function getAlertById(alerts: AlertInfo[], id: number): AlertInfo | null {
   return alerts.find((item: AlertInfo) => getAlertId(item) === id) || null;
 }
-
-export function mergeAlertUpdates(
-  alerts: AlertInfo[],
-  id: number,
-  updates: AlertUpdateParams
-): AlertInfo[] {
-  return alerts.map((alert: AlertInfo) =>
-    getAlertId(alert) === id ? { ...alert, status: updates.status } : alert
-  );
-}
