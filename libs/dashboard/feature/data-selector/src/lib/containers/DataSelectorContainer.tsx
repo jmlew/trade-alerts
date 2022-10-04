@@ -42,14 +42,11 @@ export function DataSelectorContainer() {
     getInitialFilterTypeFromSearchParams(searchParams)
   );
   const { isDrawerOpen, setDrawerOpen } = useAlertUpdaterContext();
-  const { dashData, dashDataState } = useDashboardDataContext();
-  const dashDataStateRef = useApiStateReference(dashDataState);
+  const { alerts, dataState } = useDashboardDataContext();
+  const dashDataStateRef = useApiStateReference(dataState);
 
   const isAlertsAvailable: boolean =
-    dashDataState != null &&
-    dashData != null &&
-    dashDataStateRef.isCompleted() &&
-    doAlertsExist(dashData);
+    dataState != null && dashDataStateRef.isCompleted() && doAlertsExist(alerts);
 
   useEffect(() => {
     if (dashDataStateRef.isPending() && isDrawerOpen) {

@@ -3,11 +3,10 @@
  */
 
 import {
-  DashboardData,
+  AccountsTransInfo,
+  AlertInfo,
+  AlertsTransInfo,
   DashboardDataGridField,
-  getDashAccountsTrans,
-  getDashAlerts,
-  getDashAlertsTrans,
 } from '@trade-alerts/dashboard/domain';
 
 import { MuiGridData } from './dashboard-grid-data.model';
@@ -23,15 +22,19 @@ export function normaliseMuiGridData<T>(items: T[]): MuiGridData<T>[] {
 
 export function getGridData(
   grid: DashboardGrid,
-  dashData: DashboardData | undefined
+  data: {
+    alerts: AlertInfo[] | null;
+    alertsTrans: AlertsTransInfo[] | null;
+    accountsTrans: AccountsTransInfo[] | null;
+  }
 ): DashboardDataGridField[] | null {
   switch (grid) {
     case DashboardGrid.AlertInformation:
-      return getDashAlerts(dashData);
+      return data.alerts;
     case DashboardGrid.AccountTransactions:
-      return getDashAccountsTrans(dashData);
+      return data.accountsTrans;
     case DashboardGrid.AlertedTransactions:
-      return getDashAlertsTrans(dashData);
+      return data.alertsTrans;
     default:
       return null;
   }

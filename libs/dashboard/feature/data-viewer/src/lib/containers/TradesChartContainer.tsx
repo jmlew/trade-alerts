@@ -1,4 +1,3 @@
-import { getDashTrades } from '@trade-alerts/dashboard/domain';
 import { useDashboardDataContext } from '@trade-alerts/dashboard/feature/data-provider';
 import { TradesChart } from '@trade-alerts/dashboard/ui/charts';
 import { ErrorMessage } from '@trade-alerts/shared/ui-common';
@@ -11,8 +10,7 @@ interface TradesChartContainerProps {
 }
 
 export function TradesChartContainer({ chart }: TradesChartContainerProps) {
-  const { dashData } = useDashboardDataContext();
-  const trades = getDashTrades(dashData);
+  const { trades } = useDashboardDataContext();
 
   return trades != null ? (
     <TradesChart data={trades} dataKeys={getChartDataKeys(chart)} />

@@ -26,7 +26,7 @@ export const {
   getError,
 } = ApiStateManager;
 
-export function useApiStateReference(apiState: ApiState | undefined): ApiStateReference {
+export function useApiStateReference(apiState: ApiState | null): ApiStateReference {
   const prevApiState = usePrevious(apiState);
 
   return {

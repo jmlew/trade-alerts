@@ -16,8 +16,8 @@ interface DataViewerContainerProps {
 
 export function DataViewerContainer({ isErrorAlertsShown }: DataViewerContainerProps) {
   const { setAlert } = useAlert();
-  const { dashData, dashDataState } = useDashboardDataContext();
-  const dashDataStateRef = useApiStateReference(dashDataState);
+  const { alerts, dataState } = useDashboardDataContext();
+  const dashDataStateRef = useApiStateReference(dataState);
   const { isFailed, isPending, isCompleted, getError } = dashDataStateRef;
 
   // Show error alerts if enabled.
@@ -28,15 +28,14 @@ export function DataViewerContainer({ isErrorAlertsShown }: DataViewerContainerP
     if (isFailed()) {
       setAlert({ isShown: true, message: getError() || 'Request for data failed' });
     }
-  }, [dashDataState, isErrorAlertsShown]);
+  }, [dataState, isErrorAlertsShown]);
 
   return (
     <>
       {isPending() && <Loading message="Loading Data" top={6} />}
       {isFailed() && <ErrorMessage>{getError()}</ErrorMessage>}
       {isCompleted() &&
-        dashData != null &&
-        (doAlertsExist(dashData) ? <DashLayout /> : <NoAlertsFoundMessage />)}
+        (doAlertsExist(alerts) ? <DashLayout /> : <NoAlertsFoundMessage />)}
     </>
   );
 }

@@ -9,5 +9,5 @@ export function useObservable<T>(observable: Observable<T>) {
     return () => subscription.unsubscribe();
   }, [observable]);
 
-  return value;
+  return value ?? null;
 }

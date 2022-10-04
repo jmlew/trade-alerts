@@ -20,9 +20,13 @@ interface GridContainerProps {
 }
 
 export function GridContainer({ grid }: GridContainerProps) {
-  const { dashData } = useDashboardDataContext();
+  const { alerts, alertsTrans, accountsTrans } = useDashboardDataContext();
   const { setCurrentAlertId, setDrawerOpen } = useAlertUpdaterContext();
-  const data: DashboardDataGridField[] | null = getGridData(grid, dashData);
+  const data: DashboardDataGridField[] | null = getGridData(grid, {
+    alerts,
+    alertsTrans,
+    accountsTrans,
+  });
   const configs: DashboardDataConfig[] = getGridDataConfigs(grid);
 
   function handleCellClick(field: string, value?: any) {

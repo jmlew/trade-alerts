@@ -16,8 +16,8 @@ import { defaultDateRange } from '../entities/dates.constants';
 export function DataLoaderContainer() {
   const [searchParams] = useSearchParams();
 
-  const { dashDataState } = useDashboardDataContext();
-  const dashDataStateRef = useApiStateReference(dashDataState);
+  const { dataState } = useDashboardDataContext();
+  const dashDataStateRef = useApiStateReference(dataState);
 
   useEffect(() => {
     handleLoadData();

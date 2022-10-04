@@ -1,11 +1,19 @@
 import { Context, createContext, useContext } from 'react';
 
-import { DashboardData } from '@trade-alerts/dashboard/domain';
+import {
+  AccountsTransInfo,
+  AlertInfo,
+  AlertsTransInfo,
+  TradesInfo,
+} from '@trade-alerts/dashboard/domain';
 import { ApiState } from '@trade-alerts/shared/data-access';
 
 export interface DashboardDataContextValue {
-  dashData: DashboardData | undefined;
-  dashDataState: ApiState | undefined;
+  dataState: ApiState | null;
+  trades: TradesInfo[] | null;
+  alerts: AlertInfo[] | null;
+  alertsTrans: AlertsTransInfo[] | null;
+  accountsTrans: AccountsTransInfo[] | null;
 }
 
 export const DashboardDataContext: Context<DashboardDataContextValue> = createContext(

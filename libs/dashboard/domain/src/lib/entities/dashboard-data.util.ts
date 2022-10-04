@@ -20,11 +20,6 @@ export function getDashTrades(
   return dashData?.trades || null;
 }
 
-export function getDashTradesLength(dashData: DashboardData | undefined | null): number {
-  const trades = getDashTrades(dashData);
-  return trades != null ? trades.length : 0;
-}
-
 export function getDashAlertsTrans(
   dashData: DashboardData | undefined | null
 ): AlertsTransInfo[] | null {
@@ -37,8 +32,11 @@ export function getDashAccountsTrans(
   return dashData?.accountsTrans || null;
 }
 
-export function doAlertsExist(dashData: DashboardData): boolean {
-  const alerts: AlertInfo[] | null = getDashAlerts(dashData);
+export function getDashTradesLength(trades: TradesInfo[] | null): number {
+  return trades != null ? trades.length : 0;
+}
+
+export function doAlertsExist(alerts: AlertInfo[] | null): boolean {
   return alerts != null && alerts.length > 0;
 }
 

@@ -1,6 +1,13 @@
 import { ReactNode, useMemo } from 'react';
 
-import { DashboardData, dashboardDataFacade } from '@trade-alerts/dashboard/domain';
+import {
+  DashboardData,
+  dashboardDataFacade,
+  getDashAccountsTrans,
+  getDashAlerts,
+  getDashAlertsTrans,
+  getDashTrades,
+} from '@trade-alerts/dashboard/domain';
 import { ApiState } from '@trade-alerts/shared/data-access';
 import { useObservable } from '@trade-alerts/shared/util-common';
 
@@ -20,17 +27,22 @@ interface DashboardDataProviderProps {
 }
 
 export function DashboardDataProvider({ children }: DashboardDataProviderProps) {
-  const dashData: DashboardData | undefined = useObservable<DashboardData>(
+  const dashData: DashboardData | null = useObservable<DashboardData>(
     dashboardDataFacade.dashData$
   );
-  const dashDataState: ApiState | undefined = useObservable<ApiState>(
+  const dashDataState: ApiState | null = useObservable<ApiState>(
     dashboardDataFacade.dashDataState$
   );
 
-  const value: DashboardDataContextValue = useMemo(
-    () => ({ dashData, dashDataState }),
-    [dashData, dashDataState]
-  );
+  const value: DashboardDataContextValue = useMemo(() => {
+    return {
+      dataState: dashDataState,
+      trades: getDashTrades(dashData),
+      alerts: getDashAlerts(dashData),
+      alertsTrans: getDashAlertsTrans(dashData),
+      accountsTrans: getDashAccountsTrans(dashData),
+    };
+  }, [dashData, dashDataState]);
 
   return (
     <DashboardDataContext.Provider value={value}>
