@@ -9,8 +9,8 @@ import {
 } from '@trade-alerts/dashboard/domain';
 import { UiControlOption } from '@trade-alerts/shared/data-access';
 
-import { alertSelectorLabelFields } from './alert-updater.constants';
-import { AlertUpdateFormParams } from './alert-updater.model';
+import { alertSelectorLabelFields } from './alert-manager.constants';
+import { AlertUpdateFormParams } from './alert-manager.model';
 
 export function getInitialAlert(alerts: AlertInfo[] | null): AlertInfo | null {
   return (alerts && alerts[0]) || null;

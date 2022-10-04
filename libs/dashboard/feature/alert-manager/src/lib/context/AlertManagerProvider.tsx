@@ -2,14 +2,14 @@ import { ReactNode, useEffect, useMemo, useState } from 'react';
 
 import { useDashboardDataContext } from '@trade-alerts/dashboard/feature/data-provider';
 
-import { getInitialAlert } from '../entities/alert-updater.util';
-import { AlertUpdaterContext, AlertUpdaterContextValue } from './alert-updater.context';
+import { getInitialAlert } from '../entities/alert-manager.util';
+import { AlertManagerContext, AlertManagerContextValue } from './alert-manager.context';
 
-interface AlertUpdaterDrawerProviderProps {
+interface AlertManagerProviderProps {
   children: ReactNode;
 }
 
-export function AlertUpdaterProvider({ children }: AlertUpdaterDrawerProviderProps) {
+export function AlertManagerProvider({ children }: AlertManagerProviderProps) {
   const { alerts } = useDashboardDataContext();
   const [currentAlertId, setCurrentAlertId] = useState<number | null>(null);
   const [isDrawerOpen, setDrawerOpen] = useState(false);
@@ -20,12 +20,12 @@ export function AlertUpdaterProvider({ children }: AlertUpdaterDrawerProviderPro
     setCurrentAlertId(id);
   }, [alerts, currentAlertId]);
 
-  const value: AlertUpdaterContextValue = useMemo(
+  const value: AlertManagerContextValue = useMemo(
     () => ({ alerts, currentAlertId, setCurrentAlertId, isDrawerOpen, setDrawerOpen }),
     [alerts, currentAlertId, setCurrentAlertId, isDrawerOpen, setDrawerOpen]
   );
 
   return (
-    <AlertUpdaterContext.Provider value={value}>{children}</AlertUpdaterContext.Provider>
+    <AlertManagerContext.Provider value={value}>{children}</AlertManagerContext.Provider>
   );
 }

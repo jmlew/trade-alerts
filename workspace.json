@@ -2,7 +2,7 @@
   "version": 2,
   "projects": {
     "dashboard-domain": "libs/dashboard/domain",
-    "dashboard-feature-alert-updater": "libs/dashboard/feature/alert-updater",
+    "dashboard-feature-alert-manager": "libs/dashboard/feature/alert-manager",
     "dashboard-feature-data-provider": "libs/dashboard/feature/data-provider",
     "dashboard-feature-data-selector": "libs/dashboard/feature/data-selector",
     "dashboard-feature-data-viewer": "libs/dashboard/feature/data-viewer",

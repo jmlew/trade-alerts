@@ -12,16 +12,16 @@ import { AlertType } from '@trade-alerts/shared/ui-common';
 import { useObservable } from '@trade-alerts/shared/util-common';
 
 import { AlertUpdateForm } from '../components/AlertUpdateForm';
-import { useAlertUpdaterContext } from '../context/alert-updater.context';
-import { AlertUpdateFormParams } from '../entities/alert-updater.model';
+import { useAlertManagerContext } from '../context/alert-manager.context';
+import { AlertUpdateFormParams } from '../entities/alert-manager.model';
 import {
   getAlertUpdateParams,
   getInitialFormValues,
-} from '../entities/alert-updater.util';
+} from '../entities/alert-manager.util';
 
-export function AlertUpdateContainer() {
+export function AlertManagerContainer() {
   const { setAlert } = useAlert();
-  const { alerts, currentAlertId, setDrawerOpen } = useAlertUpdaterContext();
+  const { alerts, currentAlertId, setDrawerOpen } = useAlertManagerContext();
   const [currentAlert, setCurrentAlert] = useState<AlertInfo | null>(null);
   const [initialValues, setInitialValues] = useState<AlertUpdateFormParams>(
     getInitialFormValues(currentAlert)

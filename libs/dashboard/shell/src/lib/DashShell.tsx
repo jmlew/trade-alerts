@@ -1,9 +1,9 @@
 import { Theme } from '@mui/material';
 import Box from '@mui/material/Box';
 import {
-  AlertUpdaterDrawer,
-  AlertUpdaterProvider,
-} from '@trade-alerts/dashboard/feature/alert-updater';
+  AlertManagerDrawer,
+  AlertManagerProvider,
+} from '@trade-alerts/dashboard-feature-alert-manager';
 import { DashboardDataProvider } from '@trade-alerts/dashboard/feature/data-provider';
 import { DataViewerContainer } from '@trade-alerts/dashboard/feature/data-viewer';
 
@@ -23,13 +23,13 @@ export function DashShell() {
   return (
     <Box sx={styles.root}>
       <DashboardDataProvider>
-        <AlertUpdaterProvider>
+        <AlertManagerProvider>
           <DashHeaderLayout />
           <DashContentLayout>
             <DataViewerContainer isErrorAlertsShown={true} />
           </DashContentLayout>
-          <AlertUpdaterDrawer />
-        </AlertUpdaterProvider>
+          <AlertManagerDrawer />
+        </AlertManagerProvider>
       </DashboardDataProvider>
     </Box>
   );

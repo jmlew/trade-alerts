@@ -2,11 +2,11 @@ import { Typography } from '@mui/material';
 import { GenericMessagePanel } from '@trade-alerts/dashboard/ui/common';
 import { DashSelector } from '@trade-alerts/dashboard/ui/controls';
 
-import { useAlertUpdaterContext } from '../context/alert-updater.context';
-import { getAlertOptions, getAlertSelectorLabel } from '../entities/alert-updater.util';
+import { useAlertManagerContext } from '../context/alert-manager.context';
+import { getAlertOptions, getAlertSelectorLabel } from '../entities/alert-manager.util';
 
 export function AlertSelectorContainer() {
-  const { alerts, currentAlertId, setCurrentAlertId } = useAlertUpdaterContext();
+  const { alerts, currentAlertId, setCurrentAlertId } = useAlertManagerContext();
 
   function handleSelectChange(alertId: number) {
     setCurrentAlertId(alertId);

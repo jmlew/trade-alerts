@@ -1,9 +1,9 @@
+import { useAlertManagerContext } from '@trade-alerts/dashboard-feature-alert-manager';
 import {
   AlertInfoField,
   DashboardDataConfig,
   DashboardDataGridField,
 } from '@trade-alerts/dashboard/domain';
-import { useAlertUpdaterContext } from '@trade-alerts/dashboard/feature/alert-updater';
 import { useDashboardDataContext } from '@trade-alerts/dashboard/feature/data-provider';
 import { DashboardGridMui } from '@trade-alerts/dashboard/ui/grids';
 import { ErrorMessage } from '@trade-alerts/shared/ui-common';
@@ -21,7 +21,7 @@ interface GridContainerProps {
 
 export function GridContainer({ grid }: GridContainerProps) {
   const { alerts, alertsTrans, accountsTrans } = useDashboardDataContext();
-  const { setCurrentAlertId, setDrawerOpen } = useAlertUpdaterContext();
+  const { setCurrentAlertId, setDrawerOpen } = useAlertManagerContext();
   const data: DashboardDataGridField[] | null = getGridData(grid, {
     alerts,
     alertsTrans,

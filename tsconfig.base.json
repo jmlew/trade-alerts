@@ -18,10 +18,10 @@
     "baseUrl": ".",
     "paths": {
       "@custom-types": ["./types/index.ts"],
-      "@trade-alerts/dashboard/domain": ["libs/dashboard/domain/src/index.ts"],
-      "@trade-alerts/dashboard/feature/alert-updater": [
-        "libs/dashboard/feature/alert-updater/src/index.ts"
+      "@trade-alerts/dashboard-feature-alert-manager": [
+        "libs/dashboard/feature/alert-manager/src/index.ts"
       ],
+      "@trade-alerts/dashboard/domain": ["libs/dashboard/domain/src/index.ts"],
       "@trade-alerts/dashboard/feature/data-provider": [
         "libs/dashboard/feature/data-provider/src/index.ts"
       ],

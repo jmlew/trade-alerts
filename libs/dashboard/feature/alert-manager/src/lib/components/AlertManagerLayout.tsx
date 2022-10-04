@@ -5,8 +5,8 @@ import {
   themeColors,
 } from '@trade-alerts/shared/ui-styles';
 
+import { AlertManagerContainer } from '../containers/AlertManagerContainer';
 import { AlertSelectorContainer } from '../containers/AlertSelectorContainer';
-import { AlertUpdateContainer } from '../containers/AlertUpdateContainer';
 
 const styles = {
   root: {
@@ -34,7 +34,7 @@ const styles = {
   },
 };
 
-export function AlertUpdaterLayout() {
+export function AlertManagerLayout() {
   return (
     <Box sx={styles.root}>
       <Typography sx={styles.title} variant="h5" color="primary.light">
@@ -44,7 +44,7 @@ export function AlertUpdaterLayout() {
         <AlertSelectorContainer />
       </Box>
       <Box sx={styles.form}>
-        <AlertUpdateContainer />
+        <AlertManagerContainer />
       </Box>
     </Box>
   );

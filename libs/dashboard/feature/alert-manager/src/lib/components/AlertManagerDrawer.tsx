@@ -1,7 +1,7 @@
 import { Drawer } from '@mui/material';
 
-import { useAlertUpdaterContext } from '../context/alert-updater.context';
-import { AlertUpdaterLayout } from './AlertUpdaterLayout';
+import { useAlertManagerContext } from '../context/alert-manager.context';
+import { AlertManagerLayout } from './AlertManagerLayout';
 
 const yPos = 65;
 const styles = {
@@ -16,8 +16,8 @@ const styles = {
   },
 };
 
-export function AlertUpdaterDrawer() {
-  const { isDrawerOpen, setDrawerOpen } = useAlertUpdaterContext();
+export function AlertManagerDrawer() {
+  const { isDrawerOpen, setDrawerOpen } = useAlertManagerContext();
   function closeDrawer() {
     setDrawerOpen(false);
   }
@@ -30,7 +30,7 @@ export function AlertUpdaterDrawer() {
       hideBackdrop={false}
       onClose={closeDrawer}
     >
-      <AlertUpdaterLayout />
+      <AlertManagerLayout />
     </Drawer>
   );
 }
