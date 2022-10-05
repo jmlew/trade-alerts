@@ -1,4 +1,4 @@
-import { BehaviorSubject, Observable, filter } from 'rxjs';
+import { BehaviorSubject, Observable, filter, take } from 'rxjs';
 
 import {
   ApiRequestType,
@@ -50,15 +50,18 @@ class DashboardDataFacade implements IDashboardDataFacade {
     const requestType: ApiRequestType = ApiRequestType.Read;
 
     this.dashDataStateSubject.next(ApiStateManager.onPending(requestType));
-    this.dataService.getDashData(params).subscribe({
-      next: (data: DashboardData) => {
-        this.dashDataSubject.next(data);
-        this.dashDataStateSubject.next(ApiStateManager.onCompleted(requestType));
-      },
-      error: (error: string) => {
-        this.dashDataStateSubject.next(ApiStateManager.onFailed(error, requestType));
-      },
-    });
+    this.dataService
+      .getDashData(params)
+      .pipe(take(1))
+      .subscribe({
+        next: (data: DashboardData) => {
+          this.dashDataSubject.next(data);
+          this.dashDataStateSubject.next(ApiStateManager.onCompleted(requestType));
+        },
+        error: (error: string) => {
+          this.dashDataStateSubject.next(ApiStateManager.onFailed(error, requestType));
+        },
+      });
   }
 
   updateAlert(alert: AlertInfo) {

@@ -1,4 +1,4 @@
-import { BehaviorSubject, Observable, filter } from 'rxjs';
+import { BehaviorSubject, Observable, filter, take } from 'rxjs';
 
 import {
   ApiRequestType,
@@ -41,15 +41,18 @@ class AlertManagerFacade {
   updateAlert(id: number, params: AlertUpdateParams) {
     const requestType: ApiRequestType = ApiRequestType.Update;
     this.alertUpdateStateSubject.next(ApiStateManager.onPending(requestType));
-    this.dataService.updateAlert(id, params).subscribe({
-      next: (response: AlertUpdateResponse) => {
-        this.updateDashboardDataWithAlertParams(id, params);
-        this.alertUpdateStateSubject.next(ApiStateManager.onCompleted(requestType));
-      },
-      error: (error: string) => {
-        this.alertUpdateStateSubject.next(ApiStateManager.onFailed(error, requestType));
-      },
-    });
+    this.dataService
+      .updateAlert(id, params)
+      .pipe(take(1))
+      .subscribe({
+        next: (response: AlertUpdateResponse) => {
+          this.updateDashboardDataWithAlertParams(id, params);
+          this.alertUpdateStateSubject.next(ApiStateManager.onCompleted(requestType));
+        },
+        error: (error: string) => {
+          this.alertUpdateStateSubject.next(ApiStateManager.onFailed(error, requestType));
+        },
+      });
   }
 
   private updateDashboardDataWithAlertParams(id: number, params: AlertUpdateParams) {
