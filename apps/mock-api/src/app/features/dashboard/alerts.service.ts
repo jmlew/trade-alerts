@@ -5,11 +5,10 @@ import {
   AlertUpdateParams,
   DashboardData,
 } from '@trade-alerts/dashboard/domain';
-
-import { EntitiesApiBaseService } from '../../shared/services';
+import { EntitiesManagerService } from '@trade-alerts/shared/util-common';
 
 @Injectable()
-export class AlertsService extends EntitiesApiBaseService<AlertInfo, number> {
+export class AlertsService extends EntitiesManagerService<AlertInfo, number> {
   constructor(private dashboardData: DashboardData) {
     const primaryKey: keyof AlertInfo = AlertInfoField.AlertId;
     super(primaryKey);

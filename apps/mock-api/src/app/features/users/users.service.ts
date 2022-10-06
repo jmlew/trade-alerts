@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import * as fromUtilsLib from '@trade-alerts/shared/util-common';
+import { EntitiesManagerService } from '@trade-alerts/shared/util-common';
 import {
   CreateUserResponse,
   DeleteUserResponse,
@@ -12,10 +13,9 @@ import {
 } from '@trade-alerts/users/domain';
 
 import * as usersDb from '../../../assets/db/users.json';
-import { EntitiesApiBaseService } from '../../shared/services';
 
 @Injectable()
-export class UsersService extends EntitiesApiBaseService<User, number> {
+export class UsersService extends EntitiesManagerService<User, number> {
   constructor() {
     const primaryKey: keyof User = 'id';
     super(primaryKey);

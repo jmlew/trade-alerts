@@ -1,10 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { EntitiesService } from './entities.service';
+import { Entity } from './entity.model';
 
-import { Entity } from '../models/entity.model';
-import { EntitiesService } from '.';
-
-@Injectable()
-export class EntitiesApiBaseService<T, K extends string | number> {
+export class EntitiesManagerService<T, K extends string | number> {
   entityService: EntitiesService<T, K>;
   entities: Entity<T>;
   protected primaryKey: keyof T;
@@ -39,7 +36,7 @@ export class EntitiesApiBaseService<T, K extends string | number> {
   }
 
   protected selectOne(id: K): T {
-    return this.entities[id];
+    return this.entities[id] as T;
   }
 
   protected selectAll(): T[] {

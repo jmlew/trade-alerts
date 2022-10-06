@@ -1,9 +1,4 @@
-import {
-  Entity,
-  EntityAdapter,
-  EntitySelectors,
-  UpdateEntity,
-} from '../models/entity.model';
+import { Entity, EntityAdapter, EntitySelectors, UpdateEntity } from './entity.model';
 
 export class EntitiesService<T, K extends string | number>
   implements EntityAdapter<T, K>, EntitySelectors<T, K>
@@ -18,8 +13,8 @@ export class EntitiesService<T, K extends string | number>
   }
 
   createEntity(item: T): Entity<T> {
-    const id: K = item[this.selectIdKey as string];
-    return { [id]: item };
+    const id: unknown = item[this.selectIdKey];
+    return { [id as K]: item };
   }
 
   addOne(item: T, entities: Entity<T>): Entity<T> {
@@ -55,7 +50,7 @@ export class EntitiesService<T, K extends string | number>
   }
 
   upsertOne(item: T, entities: Entity<T>): Entity<T> {
-    const id: unknown = item[this.selectIdKey as string];
+    const id: unknown = item[this.selectIdKey];
     return id ? { ...entities, [id as K]: item } : this.addOne(item, entities);
   }
 

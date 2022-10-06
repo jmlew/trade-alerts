@@ -1,35 +1,31 @@
 import { isNumber } from './validate.util';
 
-export interface EntityNumItem {
-  id: number;
-}
-
-export interface EntityItem {
+interface EntityItem {
   id: string | number;
 }
 
-export function addToCollection<T extends EntityItem>(item: T, items: T[]): T[] {
-  return getCollectionIds(items).includes(item.id) ? items : [...items, item];
+export function addToArray<T extends EntityItem>(item: T, items: T[]): T[] {
+  return getArrayIds(items).includes(item.id) ? items : [...items, item];
 }
 
-export function removeFromCollection<T extends EntityItem>(item: T, items: T[]): T[] {
-  return getCollectionIds(items).includes(item.id)
+export function removeFromArray<T extends EntityItem>(item: T, items: T[]): T[] {
+  return getArrayIds(items).includes(item.id)
     ? items.filter((element: T) => element !== item)
     : items;
 }
 
-export function updateInCollection<T extends EntityItem>(item: T, items: T[]): T[] {
+export function updateInArray<T extends EntityItem>(item: T, items: T[]): T[] {
   return items.map((element: T) => (element.id === item.id ? item : element));
 }
 
-export function removeIdFromCollection<T extends EntityItem>(
+export function removeIdFromArray<T extends EntityItem>(
   id: string | number,
   items: T[]
 ): T[] {
   return items.filter((element: T) => !isIdMatch(id, element));
 }
 
-export function removeIdsFromCollection<T extends EntityItem>(
+export function removeIdsFromArray<T extends EntityItem>(
   ids: Array<string | number>,
   items: T[]
 ): T[] {
@@ -52,13 +48,11 @@ export function isIdMatch<T extends EntityItem>(id: string | number, item: T): b
   return isNumber(item.id) ? item.id === Number(id) : item.id === id;
 }
 
-export function getCollectionIds<T extends EntityItem>(
-  items: T[]
-): Array<string | number> {
+export function getArrayIds<T extends EntityItem>(items: T[]): Array<string | number> {
   return items.map((item: T) => item.id);
 }
 
-export function getNextCollectionId<T extends EntityNumItem>(items: T[]): number {
-  const ids: number[] = getCollectionIds(items) as number[];
+export function getNextArrayId<T extends EntityItem>(items: T[]): number {
+  const ids: number[] = getArrayIds(items) as number[];
   return Math.max(...ids) + 1;
 }
