@@ -1,7 +1,10 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import { useState } from 'react';
 
-import { ApiRequestType, useApiStateManager } from '@trade-alerts/shared/data-access';
+import {
+  ApiStateManagerHook,
+  useApiStateManager,
+} from '@trade-alerts/shared/data-access';
 import {
   CreateUserResponse,
   User,
@@ -9,9 +12,8 @@ import {
   userFacade,
 } from '@trade-alerts/users/domain';
 
-import { UserDataHook } from './user-hooks.model';
-
-interface UserCreatorHook extends UserDataHook {
+interface UserCreatorHook extends ApiStateManagerHook {
+  user: User | undefined;
   createUser: (params: UserDetails) => void;
 }
 

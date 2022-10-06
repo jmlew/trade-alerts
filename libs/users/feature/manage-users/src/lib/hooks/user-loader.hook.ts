@@ -1,12 +1,14 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import { useState } from 'react';
 
-import { ApiRequestType, useApiStateManager } from '@trade-alerts/shared/data-access';
+import {
+  ApiStateManagerHook,
+  useApiStateManager,
+} from '@trade-alerts/shared/data-access';
 import { GetUserResponse, User, userFacade } from '@trade-alerts/users/domain';
 
-import { UserDataHook } from './user-hooks.model';
-
-interface UserLoaderHook extends UserDataHook {
+interface UserLoaderHook extends ApiStateManagerHook {
+  user: User | undefined;
   loadUser: (userId: number) => void;
 }
 

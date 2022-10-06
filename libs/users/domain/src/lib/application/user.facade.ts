@@ -16,7 +16,7 @@ import { userService } from '../infrastructure/user-api.service';
   Hides details of state management, once this is integrated.
 */
 
-export class UserFacade {
+class UserFacade {
   getUser(userId: number): Promise<AxiosResponse<GetUserResponse>> {
     return userService.getUser(userId);
   }

@@ -1,12 +1,13 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import { useState } from 'react';
 
-import { useApiStateManager } from '@trade-alerts/shared/data-access';
+import {
+  ApiStateManagerHook,
+  useApiStateManager,
+} from '@trade-alerts/shared/data-access';
 import { userFacade } from '@trade-alerts/users/domain';
 
-import { ApiStateHook } from './user-hooks.model';
-
-interface UserDeleterHook extends ApiStateHook {
+interface UserDeleterHook extends ApiStateManagerHook {
   userId: number | undefined;
   deleteUser: (userId: number) => void;
 }

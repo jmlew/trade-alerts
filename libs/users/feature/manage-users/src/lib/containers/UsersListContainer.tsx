@@ -15,6 +15,7 @@ interface UserContainerProps {
 export function UsersListContainer({ pageIndex }: UserContainerProps) {
   const navigate = useNavigate();
   const { setAlert } = useAlert();
+
   const {
     users,
     getUsers,
@@ -55,10 +56,9 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
     navigate(`${userId}`);
   }
 
-  const { isCompleted, wasPending, wasCompleted, isPending, isFailed, getError } =
-    loadStateManager;
+  const { isCompleted, wasPending, wasCompleted, isFailed, getError } = loadStateManager;
   const isReady: boolean = isCompleted() && (wasPending() || wasCompleted());
-  if (isPending()) {
+  if (loadStateManager.isPending() || deleteStateManager.isPending()) {
     return <Loading />;
   } else {
     return (

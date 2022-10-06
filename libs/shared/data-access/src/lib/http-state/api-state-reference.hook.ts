@@ -7,6 +7,11 @@ import { ApiStateReference, ApiStateReferenceManager } from './api-state-referen
 import { ApiStatus } from './api-state.enum';
 import { ApiState } from './api-state.model';
 
+export interface ApiStateManagerHook {
+  apiState: ApiState;
+  stateManager: ApiStateReferenceManager;
+}
+
 export const {
   onInit,
   onPending,
@@ -45,10 +50,7 @@ export function useApiStateReference(apiState: ApiState | null): ApiStateReferen
   };
 }
 
-export function useApiStateManager(): {
-  apiState: ApiState;
-  stateManager: ApiStateReferenceManager;
-} {
+export function useApiStateManager(): ApiStateManagerHook {
   const [apiState, setApiState] = useState<ApiState>(onInit());
   const apiStateReference: ApiStateReference = useApiStateReference(apiState);
 
