@@ -15,7 +15,7 @@ interface LoadUserContainerProps {
 export function LoadUserContainer({ userId, children }: LoadUserContainerProps) {
   const navigate = useNavigate();
   const { user, loadUser, stateManager } = useUserLoader();
-  const { getError, isCompleted, isFailed, isPending, isRead, wasCompleted, wasPending } =
+  const { getError, isCompleted, isFailed, isPending, wasCompleted, wasPending } =
     stateManager;
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export function LoadUserContainer({ userId, children }: LoadUserContainerProps) 
   return (
     <>
       {isPending() && <Loading />}
-      {isFailed() && isRead() && (
+      {isFailed() && (
         <>
           <ErrorMessage>{getError()}</ErrorMessage>
           <Button variant="contained" onClick={goToList}>

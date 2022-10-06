@@ -17,18 +17,17 @@ export function useUsersLoader(pageIndex: number): UserwLoaderHook {
   const { onCompleted, onFailed, onPending } = stateManager;
 
   function getUsers() {
-    const request: ApiRequestType = ApiRequestType.Read;
-    onPending(request);
+    onPending();
     userFacade
       .getUsers(pageIndex)
       .then((res: AxiosResponse<GetUsersResponse>) => {
         const items: User[] = objectsSortOnKey(res.data.data, 'firstName');
         setUsers(items);
-        onCompleted(request);
+        onCompleted();
       })
       .catch((error: AxiosError) => {
         const { message } = error;
-        onFailed(message, request);
+        onFailed(message);
       });
   }
 

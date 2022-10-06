@@ -1,10 +1,6 @@
 import { BehaviorSubject, Observable, filter, take } from 'rxjs';
 
-import {
-  ApiRequestType,
-  ApiState,
-  ApiStateManager,
-} from '@trade-alerts/shared/data-access';
+import { ApiState, ApiStateManager } from '@trade-alerts/shared/data-access';
 import { isNonNull } from '@trade-alerts/shared/util-common';
 
 import { AlertInfo, DashboardData } from '../entities/dashboard-data.model';
@@ -47,19 +43,17 @@ class DashboardDataFacade implements IDashboardDataFacade {
   }
 
   loadDashData(params: URLSearchParams) {
-    const requestType: ApiRequestType = ApiRequestType.Read;
-
-    this.dashDataStateSubject.next(ApiStateManager.onPending(requestType));
+    this.dashDataStateSubject.next(ApiStateManager.onPending());
     this.dataService
       .getDashData(params)
       .pipe(take(1))
       .subscribe({
         next: (data: DashboardData) => {
           this.dashDataSubject.next(data);
-          this.dashDataStateSubject.next(ApiStateManager.onCompleted(requestType));
+          this.dashDataStateSubject.next(ApiStateManager.onCompleted());
         },
         error: (error: string) => {
-          this.dashDataStateSubject.next(ApiStateManager.onFailed(error, requestType));
+          this.dashDataStateSubject.next(ApiStateManager.onFailed(error));
         },
       });
   }

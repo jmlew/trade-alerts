@@ -1,11 +1,10 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import { useState } from 'react';
 
-import { ApiRequestType, useApiStateManager } from '@trade-alerts/shared/data-access';
-import { UserDetails, userFacade } from '@trade-alerts/users/domain';
+import { useApiStateManager } from '@trade-alerts/shared/data-access';
+import { userFacade } from '@trade-alerts/users/domain';
 
-import { useUserContext } from '../context/user.context';
-import { ApiStateHook, UserDataHook } from './user-hooks.model';
+import { ApiStateHook } from './user-hooks.model';
 
 interface UserDeleterHook extends ApiStateHook {
   userId: number | undefined;
@@ -18,17 +17,16 @@ export function useUserDeleter(): UserDeleterHook {
   const { onCompleted, onFailed, onPending } = stateManager;
 
   function deleteUser(userId: number) {
-    const request: ApiRequestType = ApiRequestType.Delete;
-    onPending(request);
+    onPending();
     userFacade
       .deleteUser(userId)
       .then((res: AxiosResponse<number>) => {
         setUserId(userId);
-        onCompleted(request);
+        onCompleted();
       })
       .catch((error: AxiosError) => {
         const { message } = error;
-        onFailed(message, request);
+        onFailed(message);
       });
   }
 

@@ -16,15 +16,14 @@ export function useUserLoader(): UserLoaderHook {
   const { onCompleted, onFailed, onPending } = stateManager;
 
   function loadUser(userId: number) {
-    const request: ApiRequestType = ApiRequestType.Read;
-    onPending(request);
+    onPending();
     userFacade
       .getUser(userId)
       .then((res: AxiosResponse<GetUserResponse>) => {
         setUser(res.data.data);
-        onCompleted(request);
+        onCompleted();
       })
-      .catch((error: AxiosError) => onFailed(error.message, request));
+      .catch((error: AxiosError) => onFailed(error.message));
   }
 
   return { user, loadUser, apiState, stateManager };

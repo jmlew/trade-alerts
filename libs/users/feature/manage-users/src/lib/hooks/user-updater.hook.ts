@@ -17,16 +17,15 @@ export function useUserUpdater(): UserUpdaterHook {
 
   function updateUser(values: UserDetails) {
     const userId: number = user.id;
-    const request: ApiRequestType = ApiRequestType.Update;
-    onPending(request);
+    onPending();
     userFacade
       .updateUser(userId, values)
       .then(() => {
-        onCompleted(request);
+        onCompleted();
       })
       .catch((error: AxiosError) => {
         const { message } = error;
-        onFailed(message, request);
+        onFailed(message);
       });
   }
 

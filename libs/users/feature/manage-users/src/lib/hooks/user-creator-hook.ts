@@ -21,17 +21,16 @@ export function useUserCreator(): UserCreatorHook {
   const { onCompleted, onFailed, onPending } = stateManager;
 
   function createUser(params: UserDetails) {
-    const request: ApiRequestType = ApiRequestType.Create;
-    onPending(request);
+    onPending();
     userFacade
       .createUser(params)
       .then((res: AxiosResponse<CreateUserResponse>) => {
         setUser(res.data);
-        onCompleted(request);
+        onCompleted();
       })
       .catch((error: AxiosError) => {
         const { message } = error;
-        onFailed(message, request);
+        onFailed(message);
       });
   }
   return { user, createUser, apiState, stateManager };

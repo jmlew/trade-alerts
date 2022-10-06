@@ -1,10 +1,6 @@
 import { BehaviorSubject, Observable, filter, take } from 'rxjs';
 
-import {
-  ApiRequestType,
-  ApiState,
-  ApiStateManager,
-} from '@trade-alerts/shared/data-access';
+import { ApiState, ApiStateManager } from '@trade-alerts/shared/data-access';
 import { isNonNull } from '@trade-alerts/shared/util-common';
 
 import {
@@ -39,18 +35,17 @@ class AlertManagerFacade {
     .pipe(filter(isNonNull));
 
   updateAlert(id: number, params: AlertUpdateParams) {
-    const requestType: ApiRequestType = ApiRequestType.Update;
-    this.alertUpdateStateSubject.next(ApiStateManager.onPending(requestType));
+    this.alertUpdateStateSubject.next(ApiStateManager.onPending());
     this.dataService
       .updateAlert(id, params)
       .pipe(take(1))
       .subscribe({
         next: (response: AlertUpdateResponse) => {
           this.updateDashboardDataWithAlertParams(id, params);
-          this.alertUpdateStateSubject.next(ApiStateManager.onCompleted(requestType));
+          this.alertUpdateStateSubject.next(ApiStateManager.onCompleted());
         },
         error: (error: string) => {
-          this.alertUpdateStateSubject.next(ApiStateManager.onFailed(error, requestType));
+          this.alertUpdateStateSubject.next(ApiStateManager.onFailed(error));
         },
       });
   }
