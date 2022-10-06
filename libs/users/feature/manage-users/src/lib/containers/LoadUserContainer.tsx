@@ -1,13 +1,11 @@
-import { AxiosError, AxiosResponse } from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@mui/material';
-import { ApiRequestType, useApiStateManager } from '@trade-alerts/shared/data-access';
 import { ErrorMessage, Loading } from '@trade-alerts/shared/ui-common';
-import { GetUserResponse, User, userFacade } from '@trade-alerts/users/domain';
 
 import { UserContextProvider } from '../context/UserContextProvider';
+import { useUserLoader } from '../hooks/user-loader.hook';
 
 interface LoadUserContainerProps {
   userId: number;
@@ -16,44 +14,19 @@ interface LoadUserContainerProps {
 
 export function LoadUserContainer({ userId, children }: LoadUserContainerProps) {
   const navigate = useNavigate();
-  const [userData, setUserData] = useState<User>();
-  const { stateManager } = useApiStateManager();
-  const {
-    getError,
-    isCompleted,
-    isFailed,
-    isPending,
-    isRead,
-    onCompleted,
-    onFailed,
-    onPending,
-    wasCompleted,
-    wasPending,
-  } = stateManager;
+  const { user, loadUser, stateManager } = useUserLoader();
+  const { getError, isCompleted, isFailed, isPending, isRead, wasCompleted, wasPending } =
+    stateManager;
 
   useEffect(() => {
-    getUser(userId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    loadUser(userId);
   }, []);
-
-  function getUser(userId: number) {
-    const request: ApiRequestType = ApiRequestType.Read;
-    onPending(request);
-    userFacade
-      .getUser(userId)
-      .then((res: AxiosResponse<GetUserResponse>) => {
-        setUserData(res.data.data);
-        onCompleted(request);
-      })
-      .catch((error: AxiosError) => onFailed(error.message, request));
-  }
 
   function goToList() {
     navigate(`/users`);
   }
 
-  const isDataReady: boolean = isCompleted() && (wasPending() || wasCompleted());
-
+  const isReady: boolean = isCompleted() && (wasPending() || wasCompleted());
   return (
     <>
       {isPending() && <Loading />}
@@ -65,8 +38,8 @@ export function LoadUserContainer({ userId, children }: LoadUserContainerProps) 
           </Button>
         </>
       )}
-      {isDataReady && userData != null && (
-        <UserContextProvider user={userData}>{children}</UserContextProvider>
+      {isReady && user != null && (
+        <UserContextProvider user={user}>{children}</UserContextProvider>
       )}
     </>
   );
