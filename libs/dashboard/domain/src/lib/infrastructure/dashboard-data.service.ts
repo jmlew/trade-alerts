@@ -7,7 +7,7 @@ import { DashApiUri } from '../entities/dashboard-api.enum';
 import {
   AlertUpdateParams,
   AlertUpdateResponse,
-  DashboardData,
+  DashboardApiData,
 } from '../entities/dashboard-data.model';
 
 /**
@@ -16,10 +16,10 @@ import {
 export class DashboardDataService {
   private urlBase = `${DashApiUri.Base}`;
 
-  getDashData(params: URLSearchParams): Observable<DashboardData> {
+  getDashData(params: URLSearchParams): Observable<DashboardApiData> {
     const url = `${this.urlBase}${DashApiUri.Dashboard}?${params.toString()}`;
     return ajax.get(url).pipe(
-      map((response: AjaxResponse<DashboardData>) => response.response),
+      map((response: AjaxResponse<DashboardApiData>) => response.response),
       catchError((error: any) => throwError(() => getAjaxApiErrorMessage(error)))
     );
   }

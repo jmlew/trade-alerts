@@ -3,13 +3,13 @@ import {
   AlertInfo,
   AlertInfoField,
   AlertUpdateParams,
-  DashboardData,
+  DashboardApiData,
 } from '@trade-alerts/dashboard/domain';
 import { EntitiesManagerService } from '@trade-alerts/shared/util-common';
 
 @Injectable()
 export class AlertsService extends EntitiesManagerService<AlertInfo, number> {
-  constructor(private dashboardData: DashboardData) {
+  constructor(private dashboardData: DashboardApiData) {
     const primaryKey: keyof AlertInfo = AlertInfoField.AlertId;
     super(primaryKey);
     this.initDb();

@@ -3,9 +3,8 @@ import {
   AlertInfo,
   AlertUpdateParams,
   AlertUpdateResponse,
-  DashboardData,
+  DashboardApiData,
   TradesInfo,
-  getDashTrades,
 } from '@trade-alerts/dashboard/domain';
 import {
   getDateTimeFromMills,
@@ -18,7 +17,7 @@ import { AlertsService } from './alerts.service';
 
 @Injectable()
 export class DashboardDataService {
-  private db: DashboardData;
+  private db: DashboardApiData;
   private alertsService: AlertsService;
 
   constructor() {
@@ -26,16 +25,16 @@ export class DashboardDataService {
   }
 
   initDb() {
-    this.db = { ...dashboardsDb } as DashboardData;
+    this.db = { ...dashboardsDb } as DashboardApiData;
     this.alertsService = new AlertsService(this.db);
   }
 
-  getDashboardDataFromAlertId(alertId: number): DashboardData {
-    const data: DashboardData = this.db;
+  getDashboardDataFromAlertId(alertId: number): DashboardApiData {
+    const data: DashboardApiData = this.db;
     const alerts: AlertInfo[] = data.alerts.filter(
       (item: AlertInfo) => Number(item.alertID) === Number(alertId)
     );
-    const originalTrades: TradesInfo[] | null = getDashTrades(data) || [];
+    const originalTrades: TradesInfo[] = data?.trades || [];
     const trades: TradesInfo[] = originalTrades.filter(
       (trade: TradesInfo, index: number) => index < 7
     );
@@ -46,13 +45,13 @@ export class DashboardDataService {
   getDashboardDataFromDateRange(
     from: number | string,
     to: number | string
-  ): DashboardData {
+  ): DashboardApiData {
     const dateFrom = getDateTimeFromMills(Number(from));
     const dateTo = getDateTimeFromMills(Number(to));
     const durationInDays: number = getDurationAsDays(getDurationFromTo(dateFrom, dateTo));
 
-    const data: DashboardData = this.db;
-    const originalTrades: TradesInfo[] | null = getDashTrades(data) || [];
+    const data: DashboardApiData = this.db;
+    const originalTrades: TradesInfo[] | null = data?.trades || [];
     const trades: TradesInfo[] = originalTrades.filter(
       (trade: TradesInfo, index: number) => index < durationInDays
     );

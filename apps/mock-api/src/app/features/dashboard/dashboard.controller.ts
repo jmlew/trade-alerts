@@ -8,7 +8,7 @@ import {
   Query,
 } from '@nestjs/common';
 
-import { DashApiUri, DashboardData } from '@trade-alerts/dashboard/domain';
+import { DashApiUri, DashboardApiData } from '@trade-alerts/dashboard/domain';
 import { DataFilters, FiltersType } from '@trade-alerts/shared/util-filters';
 
 import { toStreamWithDelay } from '../../shared/utils';
@@ -38,7 +38,7 @@ export class DashboardDataController {
    * 2. Alert: { type: '1', alertId: "4561232123121" }
    */
   @Get()
-  getDashboardData(@Query() filters: DataFilters): Observable<DashboardData> {
+  getDashboardData(@Query() filters: DataFilters): Observable<DashboardApiData> {
     if (filters.type == null) {
       throw new BadRequestException(ErrorMessage.NoTypeIncluded);
     }

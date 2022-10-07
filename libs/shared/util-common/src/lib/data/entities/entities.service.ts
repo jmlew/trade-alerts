@@ -1,3 +1,4 @@
+import * as fromUtils from './entities.util';
 import { Entity, EntityAdapter, EntitySelectors, UpdateEntity } from './entity.model';
 
 export class EntitiesService<T, K extends string | number>
@@ -6,63 +7,46 @@ export class EntitiesService<T, K extends string | number>
   constructor(private selectIdKey: keyof T) {}
 
   createEntities(items: T[]): Entity<T> {
-    return items.reduce(
-      (entities: Entity<T>, item: T) => this.addOne(item, entities),
-      {}
-    );
+    return fromUtils.createEntities<T, K>(items, this.selectIdKey);
   }
 
   createEntity(item: T): Entity<T> {
-    const id: unknown = item[this.selectIdKey];
-    return { [id as K]: item };
+    return fromUtils.createEntity<T, K>(item, this.selectIdKey);
   }
 
   addOne(item: T, entities: Entity<T>): Entity<T> {
-    const entitiy: Entity<T> = this.createEntity(item);
-    return { ...entities, ...entitiy };
+    return fromUtils.addOneToEntities<T, K>(item, entities, this.selectIdKey);
   }
 
   addMany(items: T[], entities: Entity<T>): Entity<T> {
-    const added: Entity<T> = this.createEntities(items);
-    return { ...entities, ...added };
+    return fromUtils.addManyToEntities<T, K>(items, entities, this.selectIdKey);
   }
 
   removeOne(id: K, entities: Entity<T>): Entity<T> {
-    const { [id as K]: removed, ...remaining } = entities;
-    return remaining;
+    return fromUtils.removeOneFromEntities<T, K>(id, entities);
   }
 
   removeMany(ids: K[], entities: Entity<T>): Entity<T> {
-    return ids.reduce(
-      (entities: Entity<T>, id: K) => this.removeOne(id, entities),
-      entities
-    );
+    return fromUtils.removeManyFromEntities<T, K>(ids, entities);
   }
 
   updateOne(update: UpdateEntity<T, K>, entities: Entity<T>): Entity<T> {
-    const { id, changes } = update;
-    if (entities[id]) {
-      const entity: T = entities[id] as T;
-      const updated: T = { ...entity, ...changes };
-      return { ...entities, [id]: updated };
-    }
-    return entities;
+    return fromUtils.updateOneInEntities<T, K>(update, entities);
   }
 
   upsertOne(item: T, entities: Entity<T>): Entity<T> {
-    const id: unknown = item[this.selectIdKey];
-    return id ? { ...entities, [id as K]: item } : this.addOne(item, entities);
+    return fromUtils.upsertOneInEntities<T, K>(item, entities, this.selectIdKey);
   }
 
   selectIds(entities: Entity<T>): K[] {
-    return Object.keys(entities) as K[];
+    return fromUtils.selectIdsFromEntities<T, K>(entities);
   }
 
   selectAll(entities: Entity<T>): T[] {
-    return this.selectIds(entities).map((id: K) => entities[id]) as T[];
+    return fromUtils.selectAllFromEntities<T, K>(entities);
   }
 
   selectTotal(entities: Entity<T>): number {
-    return this.selectIds(entities).length;
+    return fromUtils.selectTotalFromEntities<T, K>(entities);
   }
 }

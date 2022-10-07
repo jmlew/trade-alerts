@@ -2,6 +2,7 @@ export * from './lib/data/arrays.util';
 export * from './lib/data/convert.util';
 export * from './lib/data/entities/entities-manager.service';
 export * from './lib/data/entities/entities.service';
+export * from './lib/data/entities/entities.util';
 export * from './lib/data/entities/entity.model';
 export * from './lib/data/sort.util';
 export * from './lib/data/validate.util';

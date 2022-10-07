@@ -1,8 +1,9 @@
+import { selectAllFromEntities } from '@trade-alerts/shared/util-common';
+
 import { AlertInfoField } from './dashboard-data-fields.enum';
 import {
   AccountsTransInfo,
   AlertInfo,
-  AlertUpdateParams,
   AlertsTransInfo,
   DashboardData,
   TradesInfo,
@@ -11,7 +12,9 @@ import {
 export function getDashAlerts(
   dashData: DashboardData | undefined | null
 ): AlertInfo[] | null {
-  return dashData?.alerts || null;
+  return dashData?.alerts
+    ? selectAllFromEntities<AlertInfo, number>(dashData.alerts)
+    : null;
 }
 
 export function getDashTrades(

@@ -7,9 +7,7 @@ import {
   AlertInfo,
   AlertUpdateParams,
   AlertUpdateResponse,
-  DashboardData,
 } from '../entities/dashboard-data.model';
-import { getAlertId } from '../entities/dashboard-data.util';
 import { DashboardDataService } from '../infrastructure/dashboard-data.service';
 import { IDashboardDataFacade, dashboardDataFacade } from './dashboard-data.facade';
 
@@ -51,19 +49,8 @@ class AlertManagerFacade {
   }
 
   private updateDashboardDataWithAlertParams(id: number, params: AlertUpdateParams) {
-    const data: DashboardData | null = this.dashboardDataFacade.dashData;
-    if (!data?.alerts) {
-      return;
-    }
-
-    const alert: AlertInfo | undefined = data.alerts.find(
-      (item: AlertInfo) => getAlertId(item) === id
-    );
-    if (alert == null) {
-      return;
-    }
-    const { status } = params;
-    this.dashboardDataFacade.updateAlert({ ...alert, status });
+    const changes: Partial<AlertInfo> = params;
+    this.dashboardDataFacade.updateAlert(id, changes);
   }
 }
 

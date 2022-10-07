@@ -35,13 +35,15 @@ export function DashboardDataProvider({ children }: DashboardDataProviderProps) 
   );
 
   const value: DashboardDataContextValue = useMemo(() => {
-    return {
+    const current = {
       dataState: dashDataState,
       trades: getDashTrades(dashData),
       alerts: getDashAlerts(dashData),
       alertsTrans: getDashAlertsTrans(dashData),
       accountsTrans: getDashAccountsTrans(dashData),
     };
+    console.log('DashboardData', current);
+    return current;
   }, [dashData, dashDataState]);
 
   return (

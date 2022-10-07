@@ -1,10 +1,14 @@
 import { BehaviorSubject, Observable, filter, take } from 'rxjs';
 
 import { ApiState, ApiStateManager } from '@trade-alerts/shared/data-access';
-import { isNonNull } from '@trade-alerts/shared/util-common';
+import { EntitiesService, Entity, isNonNull } from '@trade-alerts/shared/util-common';
 
-import { AlertInfo, DashboardData } from '../entities/dashboard-data.model';
-import { getAlertId } from '../entities/dashboard-data.util';
+import { AlertInfoField } from '../entities/dashboard-data-fields.enum';
+import {
+  AlertInfo,
+  DashboardApiData,
+  DashboardData,
+} from '../entities/dashboard-data.model';
 import { DashboardDataService } from '../infrastructure/dashboard-data.service';
 
 /**
@@ -16,11 +20,17 @@ export interface IDashboardDataFacade {
   dashDataState$: Observable<ApiState>;
   dashData: DashboardData | null;
   loadDashData: (params: URLSearchParams) => void;
-  updateAlert: (alert: AlertInfo) => void;
+  updateAlert: (id: number, changes: Partial<AlertInfo>) => void;
 }
 
 class DashboardDataFacade implements IDashboardDataFacade {
-  constructor(private dataService: DashboardDataService) {}
+  private alertsEntitiesService: EntitiesService<AlertInfo, number>;
+
+  constructor(private dataService: DashboardDataService) {
+    this.alertsEntitiesService = new EntitiesService<AlertInfo, number>(
+      AlertInfoField.AlertId
+    );
+  }
 
   // Separate private subjects to handle data and current API states.
   private dashDataSubject: BehaviorSubject<DashboardData | null> = new BehaviorSubject(
@@ -48,8 +58,9 @@ class DashboardDataFacade implements IDashboardDataFacade {
       .getDashData(params)
       .pipe(take(1))
       .subscribe({
-        next: (data: DashboardData) => {
-          this.dashDataSubject.next(data);
+        next: (data: DashboardApiData) => {
+          const normalised: DashboardData = this.normaliseDashboardApiData(data);
+          this.dashDataSubject.next(normalised);
           this.dashDataStateSubject.next(ApiStateManager.onCompleted());
         },
         error: (error: string) => {
@@ -58,14 +69,21 @@ class DashboardDataFacade implements IDashboardDataFacade {
       });
   }
 
-  updateAlert(alert: AlertInfo) {
+  private normaliseDashboardApiData(data: DashboardApiData): DashboardData {
+    const alerts: Entity<AlertInfo> = data.alerts
+      ? this.alertsEntitiesService.createEntities(data.alerts)
+      : {};
+    return { ...data, alerts };
+  }
+
+  updateAlert(id: number, changes: Partial<AlertInfo>) {
     if (!this.dashData?.alerts) {
       return;
     }
-    const alerts: AlertInfo[] = this.dashData.alerts.map((item: AlertInfo) =>
-      getAlertId(item) === getAlertId(alert) ? alert : item
+    const alerts: Entity<AlertInfo> = this.alertsEntitiesService.updateOne(
+      { id, changes },
+      this.dashData.alerts
     );
-
     this.dashDataSubject.next({ ...this.dashData, alerts });
   }
 }
