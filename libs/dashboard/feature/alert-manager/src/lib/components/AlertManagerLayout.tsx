@@ -7,6 +7,7 @@ import {
 
 import { AlertManagerContainer } from '../containers/AlertManagerContainer';
 import { AlertSelectorContainer } from '../containers/AlertSelectorContainer';
+import { AlertManagerProvider } from '../context/AlertManagerProvider';
 
 const styles = {
   root: {
@@ -40,12 +41,14 @@ export function AlertManagerLayout() {
       <Typography sx={styles.title} variant="h5" color="primary.light">
         Update Alert
       </Typography>
-      <Box sx={styles.selector}>
-        <AlertSelectorContainer />
-      </Box>
-      <Box sx={styles.form}>
-        <AlertManagerContainer />
-      </Box>
+      <AlertManagerProvider>
+        <Box sx={styles.selector}>
+          <AlertSelectorContainer />
+        </Box>
+        <Box sx={styles.form}>
+          <AlertManagerContainer />
+        </Box>
+      </AlertManagerProvider>
     </Box>
   );
 }

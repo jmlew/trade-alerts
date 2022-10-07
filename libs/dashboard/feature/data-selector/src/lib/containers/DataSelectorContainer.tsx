@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { Box } from '@mui/material';
-import { useAlertManagerContext } from '@trade-alerts/dashboard-feature-alert-manager';
 import { doAlertsExist } from '@trade-alerts/dashboard/domain';
+import { useAlertManagerDrawerContext } from '@trade-alerts/dashboard/feature/alert-manager-drawer';
 import { useDashboardDataContext } from '@trade-alerts/dashboard/feature/data-provider';
 import { BtnSideExpand, FiltersTypeBtns } from '@trade-alerts/dashboard/ui/controls';
 import { useApiStateReference } from '@trade-alerts/shared/data-access';
@@ -41,7 +41,7 @@ export function DataSelectorContainer() {
   const [filtersType, setFiltersType] = useState<FiltersType>(
     getInitialFilterTypeFromSearchParams(searchParams)
   );
-  const { isDrawerOpen, setDrawerOpen } = useAlertManagerContext();
+  const { isDrawerOpen, setDrawerOpen } = useAlertManagerDrawerContext();
   const { alerts, dataState } = useDashboardDataContext();
   const dashDataStateRef = useApiStateReference(dataState);
 

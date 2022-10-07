@@ -1,8 +1,8 @@
-import { ReactNode, useEffect, useMemo, useState } from 'react';
+import { ReactNode, useMemo } from 'react';
 
-import { useDashboardDataContext } from '@trade-alerts/dashboard/feature/data-provider';
+import { AlertInfo, alertManagerFacade } from '@trade-alerts/dashboard/domain';
+import { useObservable } from '@trade-alerts/shared/util-common';
 
-import { getInitialAlert } from '../entities/alert-manager.util';
 import { AlertManagerContext, AlertManagerContextValue } from './alert-manager.context';
 
 interface AlertManagerProviderProps {
@@ -10,19 +10,16 @@ interface AlertManagerProviderProps {
 }
 
 export function AlertManagerProvider({ children }: AlertManagerProviderProps) {
-  const { alerts } = useDashboardDataContext();
-  const [currentAlertId, setCurrentAlertId] = useState<number | null>(null);
-  const [isDrawerOpen, setDrawerOpen] = useState(false);
-
-  useEffect(() => {
-    const id: number | null =
-      currentAlertId ?? (getInitialAlert(alerts)?.alertID || null);
-    setCurrentAlertId(id);
-  }, [alerts, currentAlertId]);
+  const alerts: AlertInfo[] | null = useObservable<AlertInfo[]>(
+    alertManagerFacade.alerts$
+  );
+  const currentAlertId: number | null = useObservable<number | null>(
+    alertManagerFacade.alertId$
+  );
 
   const value: AlertManagerContextValue = useMemo(
-    () => ({ alerts, currentAlertId, setCurrentAlertId, isDrawerOpen, setDrawerOpen }),
-    [alerts, currentAlertId, setCurrentAlertId, isDrawerOpen, setDrawerOpen]
+    () => ({ alerts, currentAlertId }),
+    [alerts, currentAlertId]
   );
 
   return (

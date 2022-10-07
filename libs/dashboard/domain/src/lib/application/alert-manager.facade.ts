@@ -1,12 +1,17 @@
-import { BehaviorSubject, Observable, filter, take } from 'rxjs';
+import { BehaviorSubject, Observable, filter, map, take } from 'rxjs';
 
 import { ApiState, ApiStateManager } from '@trade-alerts/shared/data-access';
-import { isNonNull } from '@trade-alerts/shared/util-common';
+import {
+  Entity,
+  isNonNull,
+  selectAllFromEntities,
+} from '@trade-alerts/shared/util-common';
 
 import {
   AlertInfo,
   AlertUpdateParams,
   AlertUpdateResponse,
+  DashboardData,
 } from '../entities/dashboard-data.model';
 import { AlertManagerDataService } from '../infrastructure/alert-manager-data.service';
 import { IDashboardDataFacade, dashboardDataFacade } from './dashboard-data.facade';
@@ -26,11 +31,21 @@ class AlertManagerFacade {
   private alertUpdateStateSubject: BehaviorSubject<ApiState> = new BehaviorSubject(
     ApiStateManager.onInit()
   );
+  private alertIdSubject: BehaviorSubject<number | null> = new BehaviorSubject(null);
 
   // Exposed as readonly observables with null values filtered out.
+  alerts$: Observable<AlertInfo[]> = this.dashboardDataFacade.dashData$.pipe(
+    map((data: DashboardData) => data.alerts),
+    map((alerts: Entity<AlertInfo>) => selectAllFromEntities<AlertInfo, number>(alerts))
+  );
   alertUpdateState$: Observable<ApiState> = this.alertUpdateStateSubject
     .asObservable()
     .pipe(filter(isNonNull));
+  alertId$: Observable<number | null> = this.alertIdSubject.asObservable();
+
+  setAlertId(id: number) {
+    this.alertIdSubject.next(id);
+  }
 
   updateAlert(id: number, params: AlertUpdateParams) {
     this.alertUpdateStateSubject.next(ApiStateManager.onPending());
@@ -54,7 +69,7 @@ class AlertManagerFacade {
    */
   private updateDashboardDataWithAlertParams(id: number, params: AlertUpdateParams) {
     const changes: Partial<AlertInfo> = { status: params.status };
-    this.dashboardDataFacade.updateAlert(id, changes);
+    this.dashboardDataFacade.updateDashDataWithAlert(id, changes);
   }
 }
 

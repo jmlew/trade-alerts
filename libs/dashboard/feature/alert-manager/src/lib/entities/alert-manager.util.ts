@@ -11,10 +11,6 @@ import { UiControlOption } from '@trade-alerts/shared/data-access';
 import { alertSelectorLabelFields } from './alert-manager.constants';
 import { AlertUpdateFormParams } from './alert-manager.model';
 
-export function getInitialAlert(alerts: AlertInfo[] | null): AlertInfo | null {
-  return (alerts && alerts[0]) || null;
-}
-
 export function getAlertOptions(alerts: AlertInfo[]): UiControlOption[] {
   return alerts.map((alert: AlertInfo) => ({
     value: alert.alertID,

@@ -20,7 +20,7 @@ export interface IDashboardDataFacade {
   dashDataState$: Observable<ApiState>;
   dashData: DashboardData | null;
   loadDashData: (params: URLSearchParams) => void;
-  updateAlert: (id: number, changes: Partial<AlertInfo>) => void;
+  updateDashDataWithAlert: (id: number, changes: Partial<AlertInfo>) => void;
 }
 
 class DashboardDataFacade implements IDashboardDataFacade {
@@ -69,7 +69,7 @@ class DashboardDataFacade implements IDashboardDataFacade {
       });
   }
 
-  updateAlert(id: number, changes: Partial<AlertInfo>) {
+  updateDashDataWithAlert(id: number, changes: Partial<AlertInfo>) {
     if (!this.dashData?.alerts) {
       return;
     }

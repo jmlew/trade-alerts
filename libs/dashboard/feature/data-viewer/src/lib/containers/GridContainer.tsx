@@ -1,9 +1,10 @@
-import { useAlertManagerContext } from '@trade-alerts/dashboard-feature-alert-manager';
 import {
   AlertInfoField,
   DashboardDataConfig,
   DashboardDataGridField,
+  alertManagerFacade,
 } from '@trade-alerts/dashboard/domain';
+import { useAlertManagerDrawerContext } from '@trade-alerts/dashboard/feature/alert-manager-drawer';
 import { useDashboardDataContext } from '@trade-alerts/dashboard/feature/data-provider';
 import { DashboardGridMui } from '@trade-alerts/dashboard/ui/grids';
 import { ErrorMessage } from '@trade-alerts/shared/ui-common';
@@ -21,7 +22,7 @@ interface GridContainerProps {
 
 export function GridContainer({ grid }: GridContainerProps) {
   const { alerts, alertsTrans, accountsTrans } = useDashboardDataContext();
-  const { setCurrentAlertId, setDrawerOpen } = useAlertManagerContext();
+  const { setDrawerOpen } = useAlertManagerDrawerContext();
   const data: DashboardDataGridField[] | null = getGridData(grid, {
     alerts,
     alertsTrans,
@@ -32,7 +33,7 @@ export function GridContainer({ grid }: GridContainerProps) {
   function handleCellClick(field: string, value?: any) {
     if (field === AlertInfoField.AlertId) {
       const id: number = value as number;
-      setCurrentAlertId(id);
+      alertManagerFacade.setAlertId(id);
       setDrawerOpen(true);
     }
   }

@@ -1,4 +1,5 @@
 import { Typography } from '@mui/material';
+import { alertManagerFacade } from '@trade-alerts/dashboard/domain';
 import { GenericMessagePanel } from '@trade-alerts/dashboard/ui/common';
 import { DashSelector } from '@trade-alerts/dashboard/ui/controls';
 
@@ -6,10 +7,10 @@ import { useAlertManagerContext } from '../context/alert-manager.context';
 import { getAlertOptions, getAlertSelectorLabel } from '../entities/alert-manager.util';
 
 export function AlertSelectorContainer() {
-  const { alerts, currentAlertId, setCurrentAlertId } = useAlertManagerContext();
+  const { alerts, currentAlertId } = useAlertManagerContext();
 
   function handleSelectChange(alertId: number) {
-    setCurrentAlertId(alertId);
+    alertManagerFacade.setAlertId(alertId);
   }
 
   return alerts != null ? (

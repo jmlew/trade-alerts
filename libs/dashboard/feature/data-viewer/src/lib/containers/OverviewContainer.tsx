@@ -1,14 +1,16 @@
-import { useAlertManagerContext } from '@trade-alerts/dashboard-feature-alert-manager';
-import { AlertOverviewInfo } from '@trade-alerts/dashboard/domain';
+import { AlertOverviewInfo, alertManagerFacade } from '@trade-alerts/dashboard/domain';
+import { useAlertManagerDrawerContext } from '@trade-alerts/dashboard/feature/alert-manager-drawer';
+import { useDashboardDataContext } from '@trade-alerts/dashboard/feature/data-provider';
 import { AlertOverviews } from '@trade-alerts/dashboard/ui/details';
 
 import { getAlertOverviews } from '../entities/dashboard-overview-data.util';
 
 export function OverviewContainer() {
-  const { alerts, setCurrentAlertId, setDrawerOpen } = useAlertManagerContext();
+  const { alerts } = useDashboardDataContext();
+  const { setDrawerOpen } = useAlertManagerDrawerContext();
 
   function handleSelectAlert(alertId: number) {
-    setCurrentAlertId(alertId);
+    alertManagerFacade.setAlertId(alertId);
     setDrawerOpen(true);
   }
 

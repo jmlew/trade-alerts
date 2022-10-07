@@ -3,6 +3,7 @@
   "projects": {
     "dashboard-domain": "libs/dashboard/domain",
     "dashboard-feature-alert-manager": "libs/dashboard/feature/alert-manager",
+    "dashboard-feature-alert-manager-drawer": "libs/dashboard/feature/alert-manager-drawer",
     "dashboard-feature-data-provider": "libs/dashboard/feature/data-provider",
     "dashboard-feature-data-selector": "libs/dashboard/feature/data-selector",
     "dashboard-feature-data-viewer": "libs/dashboard/feature/data-viewer",

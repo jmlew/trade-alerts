@@ -21,7 +21,7 @@ import {
 
 export function AlertManagerContainer() {
   const { setAlert } = useAlert();
-  const { alerts, currentAlertId, setDrawerOpen } = useAlertManagerContext();
+  const { alerts, currentAlertId } = useAlertManagerContext();
   const [currentAlert, setCurrentAlert] = useState<AlertInfo | null>(null);
   const [initialValues, setInitialValues] = useState<AlertUpdateFormParams>(
     getInitialFormValues(currentAlert)
@@ -57,7 +57,8 @@ export function AlertManagerContainer() {
   }
 
   function handleCancel() {
-    setDrawerOpen(false);
+    // TODO: open drawer via call to dashboard facade.
+    // setDrawerOpen(false);
   }
 
   return currentAlert != null ? (

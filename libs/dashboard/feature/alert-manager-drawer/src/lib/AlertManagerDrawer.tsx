@@ -1,7 +1,8 @@
+import { ReactNode } from 'react';
+
 import { Drawer } from '@mui/material';
 
-import { useAlertManagerContext } from '../context/alert-manager.context';
-import { AlertManagerLayout } from './AlertManagerLayout';
+import { useAlertManagerDrawerContext } from './context/alert-manager-drawer.context';
 
 const yPos = 65;
 const styles = {
@@ -16,8 +17,11 @@ const styles = {
   },
 };
 
-export function AlertManagerDrawer() {
-  const { isDrawerOpen, setDrawerOpen } = useAlertManagerContext();
+interface Props {
+  children: ReactNode;
+}
+export function AlertManagerDrawer({ children }: Props) {
+  const { isDrawerOpen, setDrawerOpen } = useAlertManagerDrawerContext();
   function closeDrawer() {
     setDrawerOpen(false);
   }
@@ -30,7 +34,7 @@ export function AlertManagerDrawer() {
       hideBackdrop={false}
       onClose={closeDrawer}
     >
-      <AlertManagerLayout />
+      {children}
     </Drawer>
   );
 }
