@@ -69,13 +69,6 @@ class DashboardDataFacade implements IDashboardDataFacade {
       });
   }
 
-  private normaliseDashboardApiData(data: DashboardApiData): DashboardData {
-    const alerts: Entity<AlertInfo> = data.alerts
-      ? this.alertsEntitiesService.createEntities(data.alerts)
-      : {};
-    return { ...data, alerts };
-  }
-
   updateAlert(id: number, changes: Partial<AlertInfo>) {
     if (!this.dashData?.alerts) {
       return;
@@ -85,6 +78,19 @@ class DashboardDataFacade implements IDashboardDataFacade {
       this.dashData.alerts
     );
     this.dashDataSubject.next({ ...this.dashData, alerts });
+  }
+
+  /**
+   * Normalises the given API response data into a format which is most effectively
+   * managed by the facade. The alerts collection is converted into an entities object to
+   * update in this facade and is normalised back into an array prior to being consumed by
+   * the dashboard views, preferrably through a memoised context provider.
+   */
+  private normaliseDashboardApiData(data: DashboardApiData): DashboardData {
+    const alerts: Entity<AlertInfo> = data.alerts
+      ? this.alertsEntitiesService.createEntities(data.alerts)
+      : {};
+    return { ...data, alerts };
   }
 }
 

@@ -2,7 +2,7 @@ import { Entity } from '@trade-alerts/shared/util-common';
 
 import { AlertStatus, BinaryBoolean, BuySell } from './dashboard-data.enum';
 
-// Dashboard data object returned by the api in a shape prior to normlisation for the app.
+// Dashboard data object returned by the api.
 export interface DashboardApiData {
   alerts: AlertInfo[];
   trades: TradesInfo[];
@@ -10,10 +10,11 @@ export interface DashboardApiData {
   accountsTrans: AccountsTransInfo[];
 }
 
-// Dashboard data object after normlisation for the app.
+// Dashboard data object after normalisation for the app.
 export interface DashboardData {
-  // Alerts are interacted with and updated through the app and are stored as entites.
+  // Alerts are stored as entites to facilliate managing the data in the facade.
   alerts: Entity<AlertInfo>;
+  // All other collections are readonly and consumed as arrays throughout the app.
   trades: TradesInfo[];
   alertsTrans: AlertsTransInfo[];
   accountsTrans: AccountsTransInfo[];

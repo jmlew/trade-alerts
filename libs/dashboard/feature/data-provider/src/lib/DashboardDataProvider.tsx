@@ -3,10 +3,7 @@ import { ReactNode, useMemo } from 'react';
 import {
   DashboardData,
   dashboardDataFacade,
-  getDashAccountsTrans,
-  getDashAlerts,
-  getDashAlertsTrans,
-  getDashTrades,
+  getAllAlertsFromEntities,
 } from '@trade-alerts/dashboard/domain';
 import { ApiState } from '@trade-alerts/shared/data-access';
 import { useObservable } from '@trade-alerts/shared/util-common';
@@ -37,10 +34,12 @@ export function DashboardDataProvider({ children }: DashboardDataProviderProps) 
   const value: DashboardDataContextValue = useMemo(() => {
     const current = {
       dataState: dashDataState,
-      trades: getDashTrades(dashData),
-      alerts: getDashAlerts(dashData),
-      alertsTrans: getDashAlertsTrans(dashData),
-      accountsTrans: getDashAccountsTrans(dashData),
+      trades: dashData?.trades || null,
+      alertsTrans: dashData?.alertsTrans || null,
+      accountsTrans: dashData?.accountsTrans || null,
+      // Alerts is converted from the entites collection stored in the facade into an
+      // array since all views in the dashboard consume the data in this shape.
+      alerts: dashData?.alerts ? getAllAlertsFromEntities(dashData.alerts) : null,
     };
     console.log('DashboardData', current);
     return current;

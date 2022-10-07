@@ -1,38 +1,13 @@
-import { selectAllFromEntities } from '@trade-alerts/shared/util-common';
+import { Entity, selectAllFromEntities } from '@trade-alerts/shared/util-common';
 
 import { AlertInfoField } from './dashboard-data-fields.enum';
-import {
-  AccountsTransInfo,
-  AlertInfo,
-  AlertsTransInfo,
-  DashboardData,
-  TradesInfo,
-} from './dashboard-data.model';
+import { AlertInfo, TradesInfo } from './dashboard-data.model';
 
-export function getDashAlerts(
-  dashData: DashboardData | undefined | null
-): AlertInfo[] | null {
-  return dashData?.alerts
-    ? selectAllFromEntities<AlertInfo, number>(dashData.alerts)
-    : null;
-}
-
-export function getDashTrades(
-  dashData: DashboardData | undefined | null
-): TradesInfo[] | null {
-  return dashData?.trades || null;
-}
-
-export function getDashAlertsTrans(
-  dashData: DashboardData | undefined | null
-): AlertsTransInfo[] | null {
-  return dashData?.alertsTrans || null;
-}
-
-export function getDashAccountsTrans(
-  dashData: DashboardData | undefined | null
-): AccountsTransInfo[] | null {
-  return dashData?.accountsTrans || null;
+/**
+ * Converts the given alerts entities object into an array.
+ */
+export function getAllAlertsFromEntities(alerts: Entity<AlertInfo>): AlertInfo[] {
+  return selectAllFromEntities<AlertInfo, number>(alerts);
 }
 
 export function getDashTradesLength(trades: TradesInfo[] | null): number {

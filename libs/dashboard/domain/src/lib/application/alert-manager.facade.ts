@@ -8,17 +8,17 @@ import {
   AlertUpdateParams,
   AlertUpdateResponse,
 } from '../entities/dashboard-data.model';
-import { DashboardDataService } from '../infrastructure/dashboard-data.service';
+import { AlertManagerDataService } from '../infrastructure/alert-manager-data.service';
 import { IDashboardDataFacade, dashboardDataFacade } from './dashboard-data.facade';
 
 /**
- * Facade to interface between containers / context providers and http services. Stores
- * results as observable streams through BevahiorSubjects.
+ * Facade to interface between containers / context providers and http services. Converts
+ * results to observable streams and acts as a reactive state management store.
  */
 
 class AlertManagerFacade {
   constructor(
-    private dataService: DashboardDataService,
+    private dataService: AlertManagerDataService,
     private dashboardDataFacade: IDashboardDataFacade
   ) {}
 
@@ -48,13 +48,17 @@ class AlertManagerFacade {
       });
   }
 
+  /**
+   * Updates the alert in the dashboard alerts collection which is managed through the
+   * dashboard facade.
+   */
   private updateDashboardDataWithAlertParams(id: number, params: AlertUpdateParams) {
-    const changes: Partial<AlertInfo> = params;
+    const changes: Partial<AlertInfo> = { status: params.status };
     this.dashboardDataFacade.updateAlert(id, changes);
   }
 }
 
 export const alertManagerFacade: AlertManagerFacade = new AlertManagerFacade(
-  new DashboardDataService(),
+  new AlertManagerDataService(),
   dashboardDataFacade
 );
