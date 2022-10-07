@@ -20,16 +20,7 @@ import { DashboardDataService } from '../infrastructure/dashboard-data.service';
  * Facade to interface between containers / context providers and http services. Stores
  * results as observable streams through BevahiorSubjects.
  */
-export interface IDashboardDataFacade {
-  dashData$: Observable<DashboardData>;
-  dashAlerts$: Observable<AlertInfo[]>;
-  dashDataState$: Observable<ApiState>;
-  dashData: DashboardData | null;
-  loadDashData: (params: URLSearchParams) => void;
-  updateDashDataWithAlert: (id: number, changes: Partial<AlertInfo>) => void;
-}
-
-class DashboardDataFacade implements IDashboardDataFacade {
+class DashboardDataFacade {
   private alertsEntitiesService: EntitiesService<AlertInfo, number>;
 
   constructor(private dataService: DashboardDataService) {

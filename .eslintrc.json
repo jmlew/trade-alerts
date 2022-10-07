@@ -25,8 +25,29 @@
                 ]
               },
               {
+                "sourceTag": "type:api",
+                "onlyDependOnLibsWithTags": [
+                  "type:shell",
+                  "type:domain-logic",
+                  "type:feature",
+                  "type:util",
+                  "type:ui"
+                ]
+              },
+              {
+                "sourceTag": "type:domain-logic",
+                "onlyDependOnLibsWithTags": [
+                  "type:api",
+                  "type:data-access",
+                  "type:domain-logic",
+                  "type:util",
+                  "type:env"
+                ]
+              },
+              {
                 "sourceTag": "type:feature",
                 "onlyDependOnLibsWithTags": [
+                  "type:api",
                   "type:data-access",
                   "type:domain-logic",
                   "type:feature",
@@ -37,7 +58,7 @@
               {
                 "sourceTag": "type:shell",
                 "onlyDependOnLibsWithTags": [
-                  "type:shell",
+                  "type:api",
                   "type:data-access",
                   "type:domain-logic",
                   "type:feature",
@@ -52,15 +73,6 @@
                   "type:shell",
                   "type:ui",
                   "type:util"
-                ]
-              },
-              {
-                "sourceTag": "type:domain-logic",
-                "onlyDependOnLibsWithTags": [
-                  "type:domain-logic",
-                  "type:data-access",
-                  "type:util",
-                  "type:env"
                 ]
               },
               {
@@ -85,7 +97,19 @@
               },
               {
                 "sourceTag": "domain:dashboard",
-                "onlyDependOnLibsWithTags": ["domain:dashboard", "domain:shared"]
+                "onlyDependOnLibsWithTags": [
+                  "domain:dashboard",
+                  "domain:shared",
+                  "domain:alert-manage/api"
+                ]
+              },
+              {
+                "sourceTag": "domain:alert-manage",
+                "onlyDependOnLibsWithTags": [
+                  "domain:alert-manage",
+                  "domain:shared",
+                  "domain:dashboard/api"
+                ]
               }
             ]
           }

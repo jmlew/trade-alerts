@@ -1,4 +1,5 @@
-import { AlertOverviewInfo, alertManagerFacade } from '@trade-alerts/dashboard/domain';
+import { setAlertId } from '@trade-alerts/alert-manage/api';
+import { AlertOverviewInfo } from '@trade-alerts/dashboard/domain';
 import { useAlertManagerDrawerContext } from '@trade-alerts/dashboard/feature/alert-manager-drawer';
 import { useDashboardDataContext } from '@trade-alerts/dashboard/feature/data-provider';
 import { AlertOverviews } from '@trade-alerts/dashboard/ui/details';
@@ -9,8 +10,8 @@ export function OverviewContainer() {
   const { alerts } = useDashboardDataContext();
   const { setDrawerOpen } = useAlertManagerDrawerContext();
 
-  function handleSelectAlert(alertId: number) {
-    alertManagerFacade.setAlertId(alertId);
+  function handleSelectAlert(id: number) {
+    setAlertId(id);
     setDrawerOpen(true);
   }
 

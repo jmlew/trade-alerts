@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 
 import { Box } from '@mui/material';
-import { DashPanelStack } from '@trade-alerts/dashboard/ui/common';
+import { PanelStack } from '@trade-alerts/shared/ui-common';
 
 import { ChartsLayout } from './ChartsLayout';
 import { FooterLayout } from './FooterLayout';
@@ -27,7 +27,7 @@ export function DashLayout() {
   const style: GridStyle | null = searchParams.get('style') as GridStyle;
   return (
     <Box sx={styles.root}>
-      <DashPanelStack>
+      <PanelStack>
         <Box sx={styles.overview}>
           <OverviewLayout />
         </Box>
@@ -37,7 +37,7 @@ export function DashLayout() {
         <Box sx={styles.grids}>
           {style === GridStyle.Tabs ? <GridsTabsLayout /> : <GridsAccordianLayout />}
         </Box>
-      </DashPanelStack>
+      </PanelStack>
       <Box sx={styles.footer}>
         <FooterLayout />
       </Box>

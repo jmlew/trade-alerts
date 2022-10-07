@@ -23,7 +23,7 @@ enum ErrorMessage {
 }
 
 @Controller(DashApiUri.Dashboard)
-export class DashboardDataController {
+export class DashboardController {
   constructor(private readonly dataService: DashboardDataService) {}
 
   @Get('reset')

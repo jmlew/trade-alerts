@@ -1,11 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import {
-  AlertInfo,
   AlertUpdateParams,
   AlertUpdateResponse,
-  DashboardApiData,
-  TradesInfo,
-} from '@trade-alerts/dashboard/domain';
+} from '@trade-alerts/alert-manage/domain';
+import { AlertInfo, DashboardApiData, TradesInfo } from '@trade-alerts/dashboard/domain';
 import {
   getDateTimeFromMills,
   getDurationAsDays,
@@ -13,12 +11,12 @@ import {
 } from '@trade-alerts/shared/util-common';
 
 import * as dashboardsDb from '../../../assets/db/mock-dash.json';
-import { AlertsService } from './alerts.service';
+import { AlertManageService } from './alert-manage.service';
 
 @Injectable()
 export class DashboardDataService {
   private db: DashboardApiData;
-  private alertsService: AlertsService;
+  private alertsService: AlertManageService;
 
   constructor() {
     this.initDb();
@@ -26,12 +24,13 @@ export class DashboardDataService {
 
   initDb() {
     this.db = { ...dashboardsDb } as DashboardApiData;
-    this.alertsService = new AlertsService(this.db);
+    this.alertsService = new AlertManageService(this.db);
   }
 
   getDashboardDataFromAlertId(alertId: number): DashboardApiData {
     const data: DashboardApiData = this.db;
-    const alerts: AlertInfo[] = data.alerts.filter(
+    const currentAlerts = this.alertsService.getAllAlerts();
+    const alerts: AlertInfo[] = currentAlerts.filter(
       (item: AlertInfo) => Number(item.alertID) === Number(alertId)
     );
     const originalTrades: TradesInfo[] = data?.trades || [];
@@ -55,8 +54,8 @@ export class DashboardDataService {
     const trades: TradesInfo[] = originalTrades.filter(
       (trade: TradesInfo, index: number) => index < durationInDays
     );
-
-    return { ...data, trades };
+    const alerts = this.alertsService.getAllAlerts();
+    return { ...data, trades, alerts };
   }
 
   updateAlert(id: number, params: AlertUpdateParams): AlertUpdateResponse {

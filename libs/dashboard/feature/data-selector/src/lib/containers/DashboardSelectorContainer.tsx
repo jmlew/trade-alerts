@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { DashSelector } from '@trade-alerts/dashboard/ui/controls';
+import { DashSelector } from '@trade-alerts/shared/ui-common';
 import { FilterParam } from '@trade-alerts/shared/util-filters';
 
 import { dashboardOptions } from '../entities/dashboards.constants';

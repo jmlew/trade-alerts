@@ -3,10 +3,13 @@ import { useEffect } from 'react';
 import { Typography } from '@mui/material';
 import { doAlertsExist } from '@trade-alerts/dashboard/domain';
 import { useDashboardDataContext } from '@trade-alerts/dashboard/feature/data-provider';
-import { GenericMessagePanel } from '@trade-alerts/dashboard/ui/common';
 import { useApiStateReference } from '@trade-alerts/shared/data-access';
 import { useAlert } from '@trade-alerts/shared/feature-alert';
-import { ErrorMessage, Loading } from '@trade-alerts/shared/ui-common';
+import {
+  ErrorMessage,
+  GenericMessagePanel,
+  Loading,
+} from '@trade-alerts/shared/ui-common';
 
 import { DashLayout } from '../components/DashLayout';
 

@@ -1,8 +1,8 @@
+import { setAlertId } from '@trade-alerts/alert-manage/api';
 import {
   AlertInfoField,
   DashboardDataConfig,
   DashboardDataGridField,
-  alertManagerFacade,
 } from '@trade-alerts/dashboard/domain';
 import { useAlertManagerDrawerContext } from '@trade-alerts/dashboard/feature/alert-manager-drawer';
 import { useDashboardDataContext } from '@trade-alerts/dashboard/feature/data-provider';
@@ -33,7 +33,7 @@ export function GridContainer({ grid }: GridContainerProps) {
   function handleCellClick(field: string, value?: any) {
     if (field === AlertInfoField.AlertId) {
       const id: number = value as number;
-      alertManagerFacade.setAlertId(id);
+      setAlertId(id);
       setDrawerOpen(true);
     }
   }

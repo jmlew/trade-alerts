@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/alert-manage/feature/manage-alerts/src",
+  "projectType": "library",
+  "tags": ["type:feature", "domain:alert-manage"],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/alert-manage/feature/manage-alerts/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/alert-manage/feature/manage-alerts"],
+      "options": {
+        "jestConfig": "libs/alert-manage/feature/manage-alerts/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}
