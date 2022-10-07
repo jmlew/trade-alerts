@@ -1,10 +1,10 @@
 import { Context, createContext, useContext } from 'react';
 
-import { AlertInfo } from '@trade-alerts/dashboard/domain';
+import { Alert } from '@trade-alerts/dashboard/domain';
 
 export interface AlertManagerContextValue {
-  alerts: AlertInfo[] | null;
-  currentAlertId: number | null;
+  alerts: Alert[] | null;
+  currentId: number | null;
 }
 
 export const AlertManagerContext: Context<AlertManagerContextValue> = createContext(

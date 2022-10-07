@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import {
   AlertUpdateParams,
   AlertUpdateResponse,
-  DashApiUri,
+  AlertManagerApiUri,
 } from '@trade-alerts/dashboard/domain';
 import {
   BadRequestException,
@@ -24,7 +24,7 @@ enum ErrorMessage {
   TestBadRequest = 'Sample response to simulate an invalid request.',
 }
 
-@Controller(DashApiUri.Alert)
+@Controller(AlertManagerApiUri.Alert)
 export class AlertsDataController {
   constructor(private readonly dataService: DashboardDataService) {}
 

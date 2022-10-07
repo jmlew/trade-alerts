@@ -1,38 +1,45 @@
 import {
-  AlertInfo,
-  AlertInfoField,
+  Alert,
+  AlertField,
   AlertStatus,
   AlertUpdateParams,
-  alertInfoLabels,
   alertStatuses,
 } from '@trade-alerts/dashboard/domain';
 import { UiControlOption } from '@trade-alerts/shared/data-access';
 
-import { alertSelectorLabelFields } from './alert-manager.constants';
+import { alertLabels, alertSelectorLabelFields } from './alert-manager.constants';
 import { AlertUpdateFormParams } from './alert-manager.model';
 
-export function getAlertOptions(alerts: AlertInfo[]): UiControlOption[] {
-  return alerts.map((alert: AlertInfo) => ({
+function getAlertId(alert: Alert): number {
+  return alert[AlertField.AlertId];
+}
+
+export function getAlertById(alerts: Alert[], id: number): Alert | null {
+  return alerts.find((item: Alert) => getAlertId(item) === id) || null;
+}
+
+export function getAlertOptions(alerts: Alert[]): UiControlOption[] {
+  return alerts.map((alert: Alert) => ({
     value: alert.alertID,
     label: getAlertSelectorOptionLabel(alert),
   }));
 }
 
-function getAlertSelectorOptionLabel(alert: AlertInfo): string {
+function getAlertSelectorOptionLabel(alert: Alert): string {
   const initial: string | number = alert[alertSelectorLabelFields[0]];
   const extras: string = alertSelectorLabelFields
     .filter((_, index: number) => index > 0)
-    .map((field: AlertInfoField) => alert[field])
+    .map((field: AlertField) => alert[field])
     .join(' | ');
   return `${initial} (${extras})`;
 }
 
 export function getAlertSelectorLabel(): string {
   const initial: string =
-    alertInfoLabels.get(alertSelectorLabelFields[0]) || alertSelectorLabelFields[0];
+    alertLabels.get(alertSelectorLabelFields[0]) || alertSelectorLabelFields[0];
   const extras: string = alertSelectorLabelFields
     .filter((_, index: number) => index > 0)
-    .map((field: AlertInfoField) => alertInfoLabels.get(field) || field)
+    .map((field: AlertField) => alertLabels.get(field) || field)
     .join(' | ');
   return `${initial} (${extras})`;
 }
@@ -48,11 +55,9 @@ export function getAlertStatusLabel(status: AlertStatus): string {
   return alertStatuses.get(status) || status.toString();
 }
 
-export function getInitialFormValues(
-  currentAlert: AlertInfo | null
-): AlertUpdateFormParams {
+export function getInitialFormValues(currentAlert: Alert | null): AlertUpdateFormParams {
   const status: AlertStatus = currentAlert
-    ? currentAlert[AlertInfoField.Status]
+    ? currentAlert[AlertField.Status]
     : Array.from(alertStatuses.keys())[0];
   return {
     status,

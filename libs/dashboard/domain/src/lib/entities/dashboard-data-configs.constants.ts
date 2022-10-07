@@ -1,3 +1,4 @@
+import { alertStatuses } from './alert-status.util';
 import { DashboardDataConfig } from './dashboard-data-configs.model';
 import { AlertInfoField, TransactionField } from './dashboard-data-fields.enum';
 import {
@@ -5,7 +6,7 @@ import {
   alertInfoLabels,
   commonTransLabels,
 } from './dashboard-data-labels.constants';
-import { alertStatuses, binaryBooleans, buySellTypes } from './dashboard-data.constants';
+import { binaryBooleans, buySellTypes } from './dashboard-data.constants';
 
 const defaultConfig: Partial<DashboardDataConfig> = { flex: 1 };
 

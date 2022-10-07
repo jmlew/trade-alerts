@@ -1,6 +1,6 @@
 import { ReactNode, useMemo } from 'react';
 
-import { AlertInfo, alertManagerFacade } from '@trade-alerts/dashboard/domain';
+import { Alert, alertManagerFacade } from '@trade-alerts/dashboard/domain';
 import { useObservable } from '@trade-alerts/shared/util-common';
 
 import { AlertManagerContext, AlertManagerContextValue } from './alert-manager.context';
@@ -10,16 +10,14 @@ interface AlertManagerProviderProps {
 }
 
 export function AlertManagerProvider({ children }: AlertManagerProviderProps) {
-  const alerts: AlertInfo[] | null = useObservable<AlertInfo[]>(
-    alertManagerFacade.alerts$
-  );
-  const currentAlertId: number | null = useObservable<number | null>(
+  const alerts: Alert[] | null = useObservable<Alert[]>(alertManagerFacade.alerts$);
+  const currentId: number | null = useObservable<number | null>(
     alertManagerFacade.alertId$
   );
 
   const value: AlertManagerContextValue = useMemo(
-    () => ({ alerts, currentAlertId }),
-    [alerts, currentAlertId]
+    () => ({ alerts, currentId }),
+    [alerts, currentId]
   );
 
   return (

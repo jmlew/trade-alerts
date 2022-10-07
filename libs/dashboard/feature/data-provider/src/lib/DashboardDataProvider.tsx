@@ -1,9 +1,9 @@
 import { ReactNode, useMemo } from 'react';
 
 import {
+  AlertInfo,
   DashboardData,
   dashboardDataFacade,
-  getAllAlertsFromEntities,
 } from '@trade-alerts/dashboard/domain';
 import { ApiState } from '@trade-alerts/shared/data-access';
 import { useObservable } from '@trade-alerts/shared/util-common';
@@ -27,6 +27,9 @@ export function DashboardDataProvider({ children }: DashboardDataProviderProps) 
   const dashData: DashboardData | null = useObservable<DashboardData>(
     dashboardDataFacade.dashData$
   );
+  const alerts: AlertInfo[] | null = useObservable<AlertInfo[]>(
+    dashboardDataFacade.dashAlerts$
+  );
   const dashDataState: ApiState | null = useObservable<ApiState>(
     dashboardDataFacade.dashDataState$
   );
@@ -37,9 +40,7 @@ export function DashboardDataProvider({ children }: DashboardDataProviderProps) 
       trades: dashData?.trades || null,
       alertsTrans: dashData?.alertsTrans || null,
       accountsTrans: dashData?.accountsTrans || null,
-      // Alerts is converted from the entites collection stored in the facade into an
-      // array since all views in the dashboard consume the data in this shape.
-      alerts: dashData?.alerts ? getAllAlertsFromEntities(dashData.alerts) : null,
+      alerts,
     };
     console.log('DashboardData', current);
     return current;

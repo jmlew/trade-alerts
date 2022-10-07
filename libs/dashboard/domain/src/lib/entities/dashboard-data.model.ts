@@ -1,6 +1,7 @@
 import { Entity } from '@trade-alerts/shared/util-common';
 
-import { AlertStatus, BinaryBoolean, BuySell } from './dashboard-data.enum';
+import { AlertStatus } from './alert-status.enum';
+import { BinaryBoolean, BuySell } from './dashboard-data.enum';
 
 // Dashboard data object returned by the api.
 export interface DashboardApiData {
@@ -65,15 +66,4 @@ export interface AlertOverviewInfo {
   field: keyof AlertInfo;
   heading: string;
   values: (string | number)[];
-}
-
-export interface AlertUpdateParams {
-  status: AlertStatus;
-  comment: string | null;
-}
-
-export type AlertUpdateResponseStatus = 'success' | 'failed';
-export interface AlertUpdateResponse {
-  id: number;
-  status: AlertUpdateResponseStatus;
 }

@@ -1,10 +1,4 @@
-import { AlertStatus, BinaryBoolean, BuySell } from './dashboard-data.enum';
-
-export const alertStatuses: Map<AlertStatus, string> = new Map([
-  [AlertStatus.StatusA, 'Close Alert'],
-  [AlertStatus.StatusB, 'Needs Investigation'],
-  [AlertStatus.StatusC, 'False Positive'],
-]);
+import { BinaryBoolean, BuySell } from './dashboard-data.enum';
 
 export const buySellTypes: Map<BuySell, string> = new Map([
   [BuySell.Buy, 'Buy'],

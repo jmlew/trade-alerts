@@ -7,7 +7,7 @@ import { useAlertManagerContext } from '../context/alert-manager.context';
 import { getAlertOptions, getAlertSelectorLabel } from '../entities/alert-manager.util';
 
 export function AlertSelectorContainer() {
-  const { alerts, currentAlertId } = useAlertManagerContext();
+  const { alerts, currentId } = useAlertManagerContext();
 
   function handleSelectChange(alertId: number) {
     alertManagerFacade.setAlertId(alertId);
@@ -16,7 +16,7 @@ export function AlertSelectorContainer() {
   return alerts != null ? (
     <DashSelector
       label={getAlertSelectorLabel()}
-      value={currentAlertId || ''}
+      value={currentId || ''}
       onChange={handleSelectChange}
       options={getAlertOptions(alerts)}
     />

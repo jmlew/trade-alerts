@@ -1,18 +1,14 @@
 import { BehaviorSubject, Observable, filter, map, take } from 'rxjs';
 
 import { ApiState, ApiStateManager } from '@trade-alerts/shared/data-access';
-import {
-  Entity,
-  isNonNull,
-  selectAllFromEntities,
-} from '@trade-alerts/shared/util-common';
+import { isNonNull } from '@trade-alerts/shared/util-common';
 
 import {
-  AlertInfo,
+  Alert,
   AlertUpdateParams,
   AlertUpdateResponse,
-  DashboardData,
-} from '../entities/dashboard-data.model';
+} from '../entities/alert-manager-data.model';
+import { AlertInfo } from '../entities/dashboard-data.model';
 import { AlertManagerDataService } from '../infrastructure/alert-manager-data.service';
 import { IDashboardDataFacade, dashboardDataFacade } from './dashboard-data.facade';
 
@@ -33,15 +29,21 @@ class AlertManagerFacade {
   );
   private alertIdSubject: BehaviorSubject<number | null> = new BehaviorSubject(null);
 
-  // Exposed as readonly observables with null values filtered out.
-  alerts$: Observable<AlertInfo[]> = this.dashboardDataFacade.dashData$.pipe(
-    map((data: DashboardData) => data.alerts),
-    map((alerts: Entity<AlertInfo>) => selectAllFromEntities<AlertInfo, number>(alerts))
-  );
+  // Exposed as readonly observables.
   alertUpdateState$: Observable<ApiState> = this.alertUpdateStateSubject
     .asObservable()
     .pipe(filter(isNonNull));
   alertId$: Observable<number | null> = this.alertIdSubject.asObservable();
+  // Accessing dashboard state through dedicated domain API.
+  // TODO: Create dedicated domain APIs.
+  alerts$: Observable<Alert[]> = this.dashboardDataFacade.dashAlerts$.pipe(
+    map((alerts: AlertInfo[]) =>
+      alerts.map((alert: AlertInfo) => {
+        const { alertID, status, cif, rmId } = alert;
+        return { alertID, status, cif, rmId };
+      })
+    )
+  );
 
   setAlertId(id: number) {
     this.alertIdSubject.next(id);

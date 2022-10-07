@@ -1,7 +1,12 @@
-import { BehaviorSubject, Observable, filter, take } from 'rxjs';
+import { BehaviorSubject, Observable, filter, map, take } from 'rxjs';
 
 import { ApiState, ApiStateManager } from '@trade-alerts/shared/data-access';
-import { EntitiesService, Entity, isNonNull } from '@trade-alerts/shared/util-common';
+import {
+  EntitiesService,
+  Entity,
+  isNonNull,
+  selectAllFromEntities,
+} from '@trade-alerts/shared/util-common';
 
 import { AlertInfoField } from '../entities/dashboard-data-fields.enum';
 import {
@@ -17,6 +22,7 @@ import { DashboardDataService } from '../infrastructure/dashboard-data.service';
  */
 export interface IDashboardDataFacade {
   dashData$: Observable<DashboardData>;
+  dashAlerts$: Observable<AlertInfo[]>;
   dashDataState$: Observable<ApiState>;
   dashData: DashboardData | null;
   loadDashData: (params: URLSearchParams) => void;
@@ -44,9 +50,17 @@ class DashboardDataFacade implements IDashboardDataFacade {
   dashData$: Observable<DashboardData> = this.dashDataSubject
     .asObservable()
     .pipe(filter(isNonNull));
+
   dashDataState$: Observable<ApiState> = this.dashDataStateSubject
     .asObservable()
     .pipe(filter(isNonNull));
+
+  // Alerts is converted from the entites collection stored in the facade into an
+  // array since all views in the dashboard consume the data in this shape.
+  dashAlerts$: Observable<AlertInfo[]> = this.dashData$.pipe(
+    map((data: DashboardData) => data.alerts),
+    map((alerts: Entity<AlertInfo>) => selectAllFromEntities<AlertInfo, number>(alerts))
+  );
 
   get dashData(): DashboardData | null {
     return this.dashDataSubject.value;
