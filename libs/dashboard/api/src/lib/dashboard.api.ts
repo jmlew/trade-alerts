@@ -19,4 +19,4 @@ export function updateDashDataWithAlert(id: number, changes: Partial<AlertInfo>)
 }
 export const dashAlerts$: Observable<AlertInfo[]> = dashboardDataFacade.dashAlerts$;
 
-export { AlertInfo, alertStatuses, AlertStatus };
+export { alertStatuses, AlertStatus };

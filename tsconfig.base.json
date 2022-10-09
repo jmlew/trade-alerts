@@ -18,12 +18,12 @@
     "baseUrl": ".",
     "paths": {
       "@custom-types": ["./types/index.ts"],
-      "@trade-alerts/alert-manage/api": ["libs/alert-manage/api/src/index.ts"],
-      "@trade-alerts/alert-manage/domain": ["libs/alert-manage/domain/src/index.ts"],
-      "@trade-alerts/alert-manage/feature/manage-alerts": [
-        "libs/alert-manage/feature/manage-alerts/src/index.ts"
+      "@trade-alerts/alert-manager/api": ["libs/alert-manager/api/src/index.ts"],
+      "@trade-alerts/alert-manager/domain": ["libs/alert-manager/domain/src/index.ts"],
+      "@trade-alerts/alert-manager/feature/manage-alerts": [
+        "libs/alert-manager/feature/manage-alerts/src/index.ts"
       ],
-      "@trade-alerts/alert-manage/shell": ["libs/alert-manage/shell/src/index.ts"],
+      "@trade-alerts/alert-manager/shell": ["libs/alert-manager/shell/src/index.ts"],
       "@trade-alerts/dashboard/api": ["libs/dashboard/api/src/index.ts"],
       "@trade-alerts/dashboard/domain": ["libs/dashboard/domain/src/index.ts"],
       "@trade-alerts/dashboard/feature/alert-manager-drawer": [

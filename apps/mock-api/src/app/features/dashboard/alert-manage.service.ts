@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AlertUpdateParams } from '@trade-alerts/alert-manage/domain';
+import { AlertUpdateParams } from '@trade-alerts/alert-manager/domain';
 import {
   AlertInfo,
   AlertInfoField,

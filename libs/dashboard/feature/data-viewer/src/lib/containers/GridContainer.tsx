@@ -1,4 +1,4 @@
-import { setAlertId } from '@trade-alerts/alert-manage/api';
+import { setAlertId } from '@trade-alerts/alert-manager/api';
 import {
   AlertInfoField,
   DashboardDataConfig,

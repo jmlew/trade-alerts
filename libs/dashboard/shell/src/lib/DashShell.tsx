@@ -1,6 +1,6 @@
 import { Theme } from '@mui/material';
 import Box from '@mui/material/Box';
-import { AlertManageShell } from '@trade-alerts/alert-manage/api';
+import { AlertManagerShell } from '@trade-alerts/alert-manager/api';
 import {
   AlertManagerDrawer,
   AlertManagerDrawerProvider,
@@ -30,7 +30,7 @@ export function DashShell() {
             <DataViewerContainer isErrorAlertsShown={true} />
           </DashContentLayout>
           <AlertManagerDrawer>
-            <AlertManageShell />
+            <AlertManagerShell />
           </AlertManagerDrawer>
         </AlertManagerDrawerProvider>
       </DashboardDataProvider>

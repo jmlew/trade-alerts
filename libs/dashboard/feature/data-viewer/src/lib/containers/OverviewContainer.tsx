@@ -1,4 +1,4 @@
-import { setAlertId } from '@trade-alerts/alert-manage/api';
+import { setAlertId } from '@trade-alerts/alert-manager/api';
 import { AlertOverviewInfo } from '@trade-alerts/dashboard/domain';
 import { useAlertManagerDrawerContext } from '@trade-alerts/dashboard/feature/alert-manager-drawer';
 import { useDashboardDataContext } from '@trade-alerts/dashboard/feature/data-provider';

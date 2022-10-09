@@ -4,7 +4,7 @@ import {
   AlertUpdateParams,
   AlertUpdateResponse,
   AlertManagerApiUri,
-} from '@trade-alerts/alert-manage/domain';
+} from '@trade-alerts/alert-manager/domain';
 import {
   BadRequestException,
   Body,

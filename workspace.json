@@ -1,10 +1,10 @@
 {
   "version": 2,
   "projects": {
-    "alert-manage-api": "libs/alert-manage/api",
-    "alert-manage-domain": "libs/alert-manage/domain",
-    "alert-manage-feature-manage-alerts": "libs/alert-manage/feature/manage-alerts",
-    "alert-manage-shell": "libs/alert-manage/shell",
+    "alert-manager-api": "libs/alert-manager/api",
+    "alert-manager-domain": "libs/alert-manager/domain",
+    "alert-manager-feature-manage-alerts": "libs/alert-manager/feature/manage-alerts",
+    "alert-manager-shell": "libs/alert-manager/shell",
     "dashboard-api": "libs/dashboard/api",
     "dashboard-domain": "libs/dashboard/domain",
     "dashboard-feature-alert-manager-drawer": "libs/dashboard/feature/alert-manager-drawer",

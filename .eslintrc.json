@@ -100,13 +100,13 @@
                 "onlyDependOnLibsWithTags": [
                   "domain:dashboard",
                   "domain:shared",
-                  "domain:alert-manage/api"
+                  "domain:alert-managerr/api"
                 ]
               },
               {
-                "sourceTag": "domain:alert-manage",
+                "sourceTag": "domain:alert-manager",
                 "onlyDependOnLibsWithTags": [
-                  "domain:alert-manage",
+                  "domain:alert-manager",
                   "domain:shared",
                   "domain:dashboard/api"
                 ]

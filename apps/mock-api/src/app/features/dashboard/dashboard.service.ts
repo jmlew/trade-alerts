@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import {
   AlertUpdateParams,
   AlertUpdateResponse,
-} from '@trade-alerts/alert-manage/domain';
+} from '@trade-alerts/alert-manager/domain';
 import { AlertInfo, DashboardApiData, TradesInfo } from '@trade-alerts/dashboard/domain';
 import {
   getDateTimeFromMills,
