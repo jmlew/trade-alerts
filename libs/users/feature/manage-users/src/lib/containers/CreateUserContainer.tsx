@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useAlert } from '@trade-alerts/shared/feature-alert';
-import { AlertType, Loading } from '@trade-alerts/shared/ui-common';
+import { useNotification } from '@trade-alerts/shared/feature/notification';
+import { Loading, NotificationType } from '@trade-alerts/shared/ui-common';
 import { UserDetailsForm } from '@trade-alerts/users/ui';
 import { getUserFormParams } from '@trade-alerts/users/util';
 
@@ -10,19 +10,19 @@ import { useUserCreator } from '../hooks/user-creator-hook';
 
 export function CreateUserContainer() {
   const navigate = useNavigate();
-  const { setAlert } = useAlert();
+  const { setNotification } = useNotification();
   const { user, createUser, apiState, stateManager } = useUserCreator();
   const { getError, isCompleted, isFailed, isPending } = stateManager;
 
   useEffect(() => {
     if (isCompleted() && user != null) {
       const message = `User ${user.firstName} ${user.lastName} has been created`;
-      setAlert({ isShown: true, message, type: AlertType.Success });
+      setNotification({ isShown: true, message, type: NotificationType.Success });
       goToList();
     }
     if (isFailed()) {
       const message = getError() || 'Update failed';
-      setAlert({ isShown: true, message });
+      setNotification({ isShown: true, message });
     }
   }, [apiState, user]);
 

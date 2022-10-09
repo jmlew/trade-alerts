@@ -1,11 +1,11 @@
-export enum AlertType {
+export enum NotificationType {
   Error = 'error',
   Info = 'info',
   Success = 'success',
   Warning = 'warning',
 }
 
-export enum AlertAlign {
+export enum NotificationAlign {
   TopCenter,
   BottomCenter,
 }

@@ -4,7 +4,7 @@ import { Typography } from '@mui/material';
 import { doAlertsExist } from '@trade-alerts/dashboard/domain';
 import { useDashboardDataContext } from '@trade-alerts/dashboard/feature/data-provider';
 import { useApiStateReference } from '@trade-alerts/shared/data-access';
-import { useAlert } from '@trade-alerts/shared/feature-alert';
+import { useNotification } from '@trade-alerts/shared/feature/notification';
 import {
   ErrorMessage,
   GenericMessagePanel,
@@ -18,7 +18,7 @@ interface DataViewerContainerProps {
 }
 
 export function DataViewerContainer({ isErrorAlertsShown }: DataViewerContainerProps) {
-  const { setAlert } = useAlert();
+  const { setNotification } = useNotification();
   const { alerts, dataState } = useDashboardDataContext();
   const dashDataStateRef = useApiStateReference(dataState);
   const { isFailed, isPending, isCompleted, getError } = dashDataStateRef;
@@ -29,7 +29,10 @@ export function DataViewerContainer({ isErrorAlertsShown }: DataViewerContainerP
       return;
     }
     if (isFailed()) {
-      setAlert({ isShown: true, message: getError() || 'Request for data failed' });
+      setNotification({
+        isShown: true,
+        message: getError() || 'Request for data failed',
+      });
     }
   }, [dataState, isErrorAlertsShown]);
 

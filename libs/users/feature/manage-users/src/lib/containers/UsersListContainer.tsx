@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useAlert } from '@trade-alerts/shared/feature-alert';
-import { AlertType, ErrorMessage, Loading } from '@trade-alerts/shared/ui-common';
+import { useNotification } from '@trade-alerts/shared/feature/notification';
+import { ErrorMessage, Loading, NotificationType } from '@trade-alerts/shared/ui-common';
 import { UsersList } from '@trade-alerts/users/ui';
 
 import { useUserDeleter } from '../hooks/user-deleter.hook';
@@ -14,7 +14,7 @@ interface UserContainerProps {
 
 export function UsersListContainer({ pageIndex }: UserContainerProps) {
   const navigate = useNavigate();
-  const { setAlert } = useAlert();
+  const { setNotification } = useNotification();
 
   const {
     users,
@@ -36,19 +36,19 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
     }
     if (loadStateManager.isFailed()) {
       const message = loadStateManager.getError() || 'Load users failed';
-      setAlert({ isShown: true, message });
+      setNotification({ isShown: true, message });
     }
   }, [loadState]);
 
   useEffect(() => {
     if (deleteStateManager.isCompleted()) {
       const message = `User ${userId} has been deleted`;
-      setAlert({ isShown: true, message, type: AlertType.Success });
+      setNotification({ isShown: true, message, type: NotificationType.Success });
       getUsers();
     }
     if (deleteStateManager.isFailed()) {
       const message = deleteStateManager.getError() || 'Delete user failed';
-      setAlert({ isShown: true, message });
+      setNotification({ isShown: true, message });
     }
   }, [deleteState]);
 

@@ -1,9 +1,9 @@
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import { AlertProvider } from '@trade-alerts/shared/feature-alert';
 import CssBaseline from '@mui/material/CssBaseline';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
+import { NotificationProvider } from '@trade-alerts/shared/feature/notification';
 
 import AppRoutes from './app.routes';
 
@@ -12,9 +12,9 @@ function App() {
     <CssBaseline>
       <Router>
         <LocalizationProvider dateAdapter={AdapterLuxon}>
-          <AlertProvider>
+          <NotificationProvider>
             <AppRoutes />
-          </AlertProvider>
+          </NotificationProvider>
         </LocalizationProvider>
       </Router>
     </CssBaseline>

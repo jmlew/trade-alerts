@@ -2,27 +2,27 @@ import { SyntheticEvent } from 'react';
 
 import { Alert, Snackbar, SnackbarCloseReason, SnackbarOrigin } from '@mui/material';
 
-import { AlertAlign, AlertType } from './alert.enum';
-import { getAlignment, getAlignmentByType } from './alert.util';
+import { NotificationAlign, NotificationType } from './notifications.enum';
+import { getAlignment, getAlignmentByType } from './notifications.util';
 
-interface AlertMessageProps {
+interface NotificationMessageProps {
   message: string;
   isShown: boolean;
   onClose: () => void;
-  type?: AlertType;
-  align?: AlertAlign;
+  type?: NotificationType;
+  align?: NotificationAlign;
   duration?: number;
 }
 
-export function AlertMessage({
+export function NotificationMessage({
   message,
   isShown,
   onClose,
   type,
   duration,
   align,
-}: AlertMessageProps) {
-  const severity: AlertType = type || AlertType.Error;
+}: NotificationMessageProps) {
+  const severity: NotificationType = type || NotificationType.Error;
   const anchorOrigin: SnackbarOrigin =
     align != null ? getAlignment(align) : getAlignmentByType(severity);
   function handleClose(event: SyntheticEvent, reason?: SnackbarCloseReason) {

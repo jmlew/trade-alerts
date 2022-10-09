@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { Typography } from '@mui/material';
 import { Alert, alertManagerFacade } from '@trade-alerts/alert-manage/domain';
 import { ApiState, useApiStateReference } from '@trade-alerts/shared/data-access';
-import { useAlert } from '@trade-alerts/shared/feature-alert';
-import { AlertType } from '@trade-alerts/shared/ui-common';
+import { useNotification } from '@trade-alerts/shared/feature/notification';
+import { NotificationType } from '@trade-alerts/shared/ui-common';
 import { useObservable } from '@trade-alerts/shared/util-common';
 
 import { AlertUpdateForm } from '../components/AlertUpdateForm';
@@ -17,7 +17,7 @@ import {
 } from '../entities/manager-alerts.util';
 
 export function UpdateAlertsContainer() {
-  const { setAlert } = useAlert();
+  const { setNotification } = useNotification();
   const { alerts, currentId } = useManageAlertsContext();
   const [currentAlert, setCurrentAlert] = useState<Alert | null>(null);
   const [initialValues, setInitialValues] = useState<AlertUpdateFormParams>(
@@ -39,12 +39,17 @@ export function UpdateAlertsContainer() {
   useEffect(() => {
     if (isCompleted() && wasPending()) {
       const message = `Alert ${currentId} has been updated`;
-      setAlert({ isShown: true, type: AlertType.Success, duration: 1200, message });
+      setNotification({
+        isShown: true,
+        type: NotificationType.Success,
+        duration: 1200,
+        message,
+      });
     }
     if (isFailed()) {
-      setAlert({ isShown: true, message: getError() || 'Alert update failed' });
+      setNotification({ isShown: true, message: getError() || 'Alert update failed' });
     }
-  }, [alertUpdateState, currentId, setAlert]);
+  }, [alertUpdateState, currentId, setNotification]);
 
   function handleSubmit(values: AlertUpdateFormParams) {
     currentId && alertManagerFacade.updateAlert(currentId, getAlertUpdateParams(values));

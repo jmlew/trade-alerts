@@ -1,5 +1,5 @@
-export * from './lib/alerts/alert.enum';
-export * from './lib/alerts/AlertMessage';
+export * from './lib/notifications/notifications.enum';
+export * from './lib/notifications/NotificationMessage';
 export * from './lib/controls/EditButtonSmall';
 export * from './lib/controls/DashSelector';
 export * from './lib/data-vis/JasonViewer';
