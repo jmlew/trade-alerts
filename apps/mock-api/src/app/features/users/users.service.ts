@@ -44,7 +44,7 @@ export class UsersService extends EntitiesManagerService<User, number> {
   }
 
   updateUser(id: number, params: User): UpdateUserResponse {
-    const user: UpdateUserResponse = this.normaliseEditedUser(params);
+    const user: UpdateUserResponse = this.normaliseEditedUser(id, params);
     this.updateEntity(id, user);
     return user;
   }
@@ -76,8 +76,8 @@ export class UsersService extends EntitiesManagerService<User, number> {
     return { ...params, id, createdAt: this.timestamp() };
   }
 
-  private normaliseEditedUser(user: User) {
-    return { ...user, updatedAt: this.timestamp() };
+  private normaliseEditedUser(id: number, user: User) {
+    return { ...user, id, updatedAt: this.timestamp() };
   }
 
   private timestamp(): string {
