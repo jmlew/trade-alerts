@@ -1,15 +1,11 @@
-import { BehaviorSubject, Observable, filter, map, take } from 'rxjs';
+import { Observable, map, take } from 'rxjs';
 
 import { dashAlerts$, updateDashDataWithAlert } from '@trade-alerts/dashboard/api';
-import { ApiState, ApiStateManager } from '@trade-alerts/shared/data-access';
-import { isNonNull } from '@trade-alerts/shared/util-common';
+import { ApiState } from '@trade-alerts/shared/data-access';
 
-import {
-  Alert,
-  AlertUpdateParams,
-  AlertUpdateResponse,
-} from '../entities/alert-manager-data.model';
+import { Alert, AlertUpdateParams } from '../entities/alert-manager-data.model';
 import { AlertManagerDataService } from '../infrastructure/alert-manager-data.service';
+import { alertManagerStore } from '../state/alert-manager.store';
 
 /**
  * Facade to interface between containers / context providers and http services. Converts
@@ -19,19 +15,12 @@ import { AlertManagerDataService } from '../infrastructure/alert-manager-data.se
 class AlertManagerFacade {
   constructor(private dataService: AlertManagerDataService) {}
 
-  // Private subject to handle current API states.
-  private alertUpdateStateSubject: BehaviorSubject<ApiState> = new BehaviorSubject(
-    ApiStateManager.onInit()
-  );
-  private alertIdSubject: BehaviorSubject<number | null> = new BehaviorSubject(null);
+  // Store values exposed as readonly observables.
+  alertManagerState$: Observable<ApiState> = alertManagerStore.selectApiState();
+  alertId$: Observable<number | null> = alertManagerStore.selectAlertId();
 
-  // Exposed as readonly observables.
-  alertUpdateState$: Observable<ApiState> = this.alertUpdateStateSubject
-    .asObservable()
-    .pipe(filter(isNonNull));
-  alertId$: Observable<number | null> = this.alertIdSubject.asObservable();
+  // Stream of simple alerts created from the dashboard alerts stream.
   alerts$: Observable<Alert[]> = dashAlerts$.pipe(
-    // Create a stream of alerts from the dashboard alerts stream in the dashboard facade.
     map((alerts: Alert[]) =>
       alerts.map((alert: Alert) => {
         const { alertID, status, cif, rmId } = alert;
@@ -41,22 +30,20 @@ class AlertManagerFacade {
   );
 
   setAlertId(id: number) {
-    this.alertIdSubject.next(id);
+    alertManagerStore.onSetAlertId(id);
   }
 
   updateAlert(id: number, params: AlertUpdateParams) {
-    this.alertUpdateStateSubject.next(ApiStateManager.onPending());
+    alertManagerStore.onPending();
     this.dataService
       .updateAlert(id, params)
       .pipe(take(1))
       .subscribe({
-        next: (response: AlertUpdateResponse) => {
+        next: () => {
           this.updateDashboardDataWithAlertParams(id, params);
-          this.alertUpdateStateSubject.next(ApiStateManager.onCompleted());
+          alertManagerStore.onCompleted();
         },
-        error: (error: string) => {
-          this.alertUpdateStateSubject.next(ApiStateManager.onFailed(error));
-        },
+        error: (error: string) => alertManagerStore.onFailed(error),
       });
   }
 

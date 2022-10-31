@@ -23,7 +23,7 @@ import { dashboardDataStore } from '../state/dashboard-data.store';
 class DashboardDataFacade {
   private alertsEntitiesService: EntitiesService<AlertInfo, number>;
 
-  // Data and API state streams as readonly observables.
+  // Store values exposed as readonly observables.
   dashData$: Observable<DashboardData> = dashboardDataStore.selectData();
   dashDataState$: Observable<ApiState> = dashboardDataStore.selectApiState();
 
@@ -48,7 +48,7 @@ class DashboardDataFacade {
       .subscribe({
         next: (data: DashboardApiData) =>
           dashboardDataStore.onCompleted(this.normaliseDashboardApiData(data)),
-        error: dashboardDataStore.onFailed,
+        error: (error: string) => dashboardDataStore.onFailed(error),
       });
   }
 

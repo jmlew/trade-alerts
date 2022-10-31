@@ -1,7 +1,7 @@
 import { Observable, catchError, map, throwError } from 'rxjs';
-import { AjaxResponse, ajax } from 'rxjs/ajax';
+import { AjaxError, AjaxResponse, ajax } from 'rxjs/ajax';
 
-import { getAjaxApiErrorMessage } from '@trade-alerts/shared/util-common';
+import { getRxjsAjaxApiErrorMessage } from '@trade-alerts/shared/data-access';
 
 import { AlertManagerApiUri } from '../entities/alert-manager-api.enum';
 import {
@@ -19,7 +19,9 @@ export class AlertManagerDataService {
     const url = `${this.urlBase}${AlertManagerApiUri.Alert}/${id}`;
     return ajax.put(url, params).pipe(
       map((response: AjaxResponse<AlertUpdateResponse>) => response.response),
-      catchError((error: any) => throwError(() => getAjaxApiErrorMessage(error)))
+      catchError((error: AjaxError) =>
+        throwError(() => getRxjsAjaxApiErrorMessage(error))
+      )
     );
   }
 }

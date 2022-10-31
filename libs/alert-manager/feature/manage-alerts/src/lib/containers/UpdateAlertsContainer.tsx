@@ -2,7 +2,11 @@ import { useEffect, useState } from 'react';
 
 import { Typography } from '@mui/material';
 import { Alert, alertManagerFacade } from '@trade-alerts/alert-manager/domain';
-import { ApiState, useApiStateReference } from '@trade-alerts/shared/data-access';
+import {
+  ApiState,
+  ApiStateReference,
+  useApiStateReference,
+} from '@trade-alerts/shared/data-access';
 import { useNotification } from '@trade-alerts/shared/feature/notification';
 import { NotificationType } from '@trade-alerts/shared/ui-common';
 import { useObservable } from '@trade-alerts/shared/util-common';
@@ -23,11 +27,11 @@ export function UpdateAlertsContainer() {
   const [initialValues, setInitialValues] = useState<AlertUpdateFormParams>(
     getInitialFormValues(currentAlert)
   );
-  const alertUpdateState: ApiState | null = useObservable<ApiState>(
-    alertManagerFacade.alertUpdateState$
+  const alertManagerState: ApiState | null = useObservable<ApiState>(
+    alertManagerFacade.alertManagerState$
   );
-  const alertUpdateStateRef = useApiStateReference(alertUpdateState);
-  const { isCompleted, wasPending, isPending, isFailed, getError } = alertUpdateStateRef;
+  const alertManagerStateRef: ApiStateReference = useApiStateReference(alertManagerState);
+  const { isCompleted, wasPending, isPending, isFailed, getError } = alertManagerStateRef;
 
   useEffect(() => {
     const alert: Alert | null =
@@ -49,7 +53,7 @@ export function UpdateAlertsContainer() {
     if (isFailed()) {
       setNotification({ isShown: true, message: getError() || 'Alert update failed' });
     }
-  }, [alertUpdateState, currentId, setNotification]);
+  }, [alertManagerState, currentId, setNotification]);
 
   function handleSubmit(values: AlertUpdateFormParams) {
     currentId && alertManagerFacade.updateAlert(currentId, getAlertUpdateParams(values));

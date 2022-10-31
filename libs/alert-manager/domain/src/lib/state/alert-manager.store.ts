@@ -7,27 +7,26 @@ import {
 } from '@trade-alerts/shared/data-access';
 import { isNonNull } from '@trade-alerts/shared/util-common';
 
-import { DashboardData } from '../entities/dashboard-data.model';
-
-interface State {
-  data: DashboardData | null;
+type State = {
   apiState: ApiState;
-}
+  alertId: number | null;
+};
 
 const initialState: State = {
-  data: null,
   apiState: ApiStateManager.onInit(),
+  alertId: null,
 };
 
 interface Store {
   onPending(): void;
   onFailed(error: unknown): void;
-  onCompleted(data: DashboardData): void;
-  selectData(): Observable<DashboardData>;
+  onCompleted(): void;
+  onSetAlertId(alertId: number): void;
   selectApiState(): Observable<ApiState>;
+  selectAlertId(): Observable<number | null>;
 }
 
-class DashboardDataStore extends ObservableStore<State> implements Store {
+class AlertManagerStore extends ObservableStore<State> implements Store {
   onPending() {
     this.state = { ...this.state, apiState: ApiStateManager.onPending() };
     this.subject.next(this.state);
@@ -38,22 +37,14 @@ class DashboardDataStore extends ObservableStore<State> implements Store {
     this.subject.next(this.state);
   }
 
-  onCompleted(data: DashboardData) {
-    this.state = { ...this.state, data, apiState: ApiStateManager.onCompleted() };
+  onCompleted() {
+    this.state = { ...this.state, apiState: ApiStateManager.onCompleted() };
     this.subject.next(this.state);
   }
 
-  onUpdateData(data: DashboardData) {
-    this.state = { ...this.state, data };
+  onSetAlertId(alertId: number) {
+    this.state = { ...this.state, alertId };
     this.subject.next(this.state);
-  }
-
-  selectData(): Observable<DashboardData> {
-    return this.selectState().pipe(
-      map((state: State) => state.data),
-      distinctUntilChanged(),
-      filter(isNonNull)
-    );
   }
 
   selectApiState(): Observable<ApiState> {
@@ -63,8 +54,13 @@ class DashboardDataStore extends ObservableStore<State> implements Store {
       filter(isNonNull)
     );
   }
+
+  selectAlertId(): Observable<number | null> {
+    return this.selectState().pipe(
+      map((state: State) => state.alertId),
+      distinctUntilChanged()
+    );
+  }
 }
 
-export const dashboardDataStore: DashboardDataStore = new DashboardDataStore(
-  initialState
-);
+export const alertManagerStore: AlertManagerStore = new AlertManagerStore(initialState);
