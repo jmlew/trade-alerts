@@ -7,10 +7,10 @@ import {
   ListItemAvatar,
   ListItemText,
 } from '@mui/material';
-import { User } from '@trade-alerts/users/domain';
+import { UserRecord } from '@trade-alerts/users/domain';
 
 export interface UsersListProps {
-  users: User[];
+  users: UserRecord[];
   isControlsHidden?: boolean;
   onEditUser: (userId: number) => void;
   onDeleteUser: (userId: number) => void;
@@ -24,7 +24,7 @@ export function UsersList({
 }: UsersListProps) {
   return (
     <List>
-      {users.map((user: User) => (
+      {users.map((user: UserRecord) => (
         <UsersListItem
           key={user.id}
           user={user}
@@ -38,7 +38,7 @@ export function UsersList({
 }
 
 interface UserItemProps {
-  user: User;
+  user: UserRecord;
   isControlsHidden: boolean;
   onEdit: () => void;
   onDelete: () => void;

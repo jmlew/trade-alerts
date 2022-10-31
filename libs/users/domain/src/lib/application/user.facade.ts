@@ -1,13 +1,9 @@
-import { AxiosResponse } from 'axios';
+import { Observable, map } from 'rxjs';
 
-import {
-  CreateUserResponse,
-  GetUserResponse,
-  GetUsersResponse,
-  UpdateUserResponse,
-  UserDetails,
-} from '../entities/user-data.model';
-import { userService } from '../infrastructure/user-api.service';
+import { objectsSortOnKey } from '@trade-alerts/shared/util-common';
+
+import { User, UserDetails } from '../entities/user.model';
+import { userApiRxjsAjaxService } from '../infrastructure/rxjs-ajax/user-api-rxjs-ajax.service';
 
 /*
   Facade for the Users domain which acts as a single API through which other feature
@@ -17,27 +13,26 @@ import { userService } from '../infrastructure/user-api.service';
 */
 
 class UserFacade {
-  getUser(userId: number): Promise<AxiosResponse<GetUserResponse>> {
-    return userService.getUser(userId);
+  getUser(userId: number): Observable<User> {
+    return userApiRxjsAjaxService.getUser(userId);
   }
 
-  getUsers(pageIndex: number): Promise<AxiosResponse<GetUsersResponse>> {
-    return userService.getUsers(pageIndex);
+  getUsers(pageIndex: number): Observable<User[]> {
+    return userApiRxjsAjaxService
+      .getUsers(pageIndex)
+      .pipe(map((items: User[]) => objectsSortOnKey<User>(items, 'firstName')));
   }
 
-  updateUser(
-    userId: number,
-    values: UserDetails
-  ): Promise<AxiosResponse<UpdateUserResponse>> {
-    return userService.updateUser(userId, values);
+  updateUser(userId: number, values: UserDetails): Observable<User> {
+    return userApiRxjsAjaxService.updateUser(userId, values);
   }
 
-  createUser(values: UserDetails): Promise<AxiosResponse<CreateUserResponse>> {
-    return userService.createUser(values);
+  createUser(values: UserDetails): Observable<User> {
+    return userApiRxjsAjaxService.createUser(values);
   }
 
-  deleteUser(userId: number): Promise<AxiosResponse<number>> {
-    return userService.deleteUser(userId);
+  deleteUser(userId: number): Observable<number> {
+    return userApiRxjsAjaxService.deleteUser(userId);
   }
 }
 

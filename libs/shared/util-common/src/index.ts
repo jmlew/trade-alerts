@@ -9,4 +9,3 @@ export * from './lib/data/validate.util';
 export * from './lib/date/date.util';
 export * from './lib/hooks/use-observable.hook';
 export * from './lib/hooks/use-previous.hook';
-export * from './lib/http/http.util';

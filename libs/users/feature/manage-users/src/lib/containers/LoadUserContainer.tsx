@@ -1,22 +1,22 @@
-import { useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@mui/material';
 import { ErrorMessage, Loading } from '@trade-alerts/shared/ui-common';
 
 import { UserContextProvider } from '../context/UserContextProvider';
-import { useUserLoader } from '../hooks/user-loader.hook';
+import { LoadUserViewModel as useVM } from './LoadUserViewModel';
 
 interface LoadUserContainerProps {
   userId: number;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export function LoadUserContainer({ userId, children }: LoadUserContainerProps) {
   const navigate = useNavigate();
-  const { user, loadUser, stateManager } = useUserLoader();
+  const { user, loadUser, apiStateManager } = useVM();
   const { getError, isCompleted, isFailed, isPending, wasCompleted, wasPending } =
-    stateManager;
+    apiStateManager;
 
   useEffect(() => {
     loadUser(userId);

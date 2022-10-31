@@ -5,8 +5,8 @@ import { useNotification } from '@trade-alerts/shared/feature/notification';
 import { ErrorMessage, Loading, NotificationType } from '@trade-alerts/shared/ui-common';
 import { UsersList } from '@trade-alerts/users/ui';
 
-import { useUserDeleter } from '../hooks/user-deleter.hook';
-import { useUsersLoader } from '../hooks/users-loader.hook';
+import { DeleteUserViewModel as useDeleteUserVM } from './DeleteUserViewModel';
+import { LoadUsersViewModel as useLoadUsersVM } from './LoadUsersViewModel';
 
 interface UserContainerProps {
   pageIndex: number;
@@ -18,21 +18,21 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
 
   const {
     users,
-    getUsers,
+    loadUsers,
     apiState: loadState,
-    stateManager: loadStateManager,
-  } = useUsersLoader(pageIndex);
+    apiStateManager: loadStateManager,
+  } = useLoadUsersVM(pageIndex);
 
   const {
     userId,
     deleteUser,
     apiState: deleteState,
-    stateManager: deleteStateManager,
-  } = useUserDeleter();
+    apiStateManager: deleteStateManager,
+  } = useDeleteUserVM();
 
   useEffect(() => {
     if (loadStateManager.isInit()) {
-      getUsers();
+      loadUsers();
     }
     if (loadStateManager.isFailed()) {
       const message = loadStateManager.getError() || 'Load users failed';
@@ -44,7 +44,7 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
     if (deleteStateManager.isCompleted()) {
       const message = `User ${userId} has been deleted`;
       setNotification({ isShown: true, message, type: NotificationType.Success });
-      getUsers();
+      loadUsers();
     }
     if (deleteStateManager.isFailed()) {
       const message = deleteStateManager.getError() || 'Delete user failed';

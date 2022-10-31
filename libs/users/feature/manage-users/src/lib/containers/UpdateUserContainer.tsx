@@ -6,18 +6,17 @@ import { Loading, NotificationType } from '@trade-alerts/shared/ui-common';
 import { UserDetailsForm } from '@trade-alerts/users/ui';
 import { getUserFormParams } from '@trade-alerts/users/util';
 
-import { useUserUpdater } from '../hooks/user-updater.hook';
+import { UpdateUserViewModel as useVM } from './UpdateUserViewModel';
 
 export function UpdateUserContainer() {
   const navigate = useNavigate();
   const { setNotification } = useNotification();
-  const { user, updateUser, apiState, stateManager } = useUserUpdater();
-  const { getError, isCompleted, isFailed, isPending } = stateManager;
+  const { user, updateUser, apiState, apiStateManager } = useVM();
+  const { getError, isCompleted, isFailed, isPending } = apiStateManager;
 
   useEffect(() => {
     if (isCompleted() && user != null) {
-      const userId: number = user.id;
-      const message = `User ${userId} has been updated`;
+      const message = `User ${user.id} has been updated`;
       setNotification({ isShown: true, message, type: NotificationType.Success });
       goToList();
     }

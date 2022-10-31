@@ -17,10 +17,10 @@ import {
   formLabelMap,
   isFieldError,
 } from '@trade-alerts/shared/util-form';
-import { User, UserDetails } from '@trade-alerts/users/domain';
+import { UserDetails, UserRecord } from '@trade-alerts/users/domain';
 
 interface UserDetailsFormProps {
-  user?: User;
+  user?: UserRecord;
   initialValues: UserDetails;
   onSubmit: (values: UserDetails) => void;
   onCancel: () => void;
@@ -34,14 +34,12 @@ export function UserDetailsForm({
 }: UserDetailsFormProps) {
   const formik = useFormik({
     initialValues,
+    onSubmit,
     validationSchema: createValidationSchema([
       FormParamUser.FirstName,
       FormParamUser.LastName,
       FormParamUser.Email,
     ]),
-    onSubmit: (values: UserDetails) => {
-      onSubmit(values);
-    },
   });
 
   if (!formik.isValid) {

@@ -9,9 +9,9 @@ import {
 } from '@trade-alerts/shared/data-access';
 import { getEnvVar, isDev, isUseMockInDev } from '@trade-alerts/shared/data-access';
 
-import { UserApiUri } from './user-api.enum';
+import { UserApiUri } from '../user-api.enum';
 
-export class UserAxiosApiService implements AxiosApiService {
+export class UserApiAxiosBaseService implements AxiosApiService {
   private axiosInstance: AxiosInstance;
   private cache: ISetupCache;
 
@@ -23,8 +23,8 @@ export class UserAxiosApiService implements AxiosApiService {
   createAxiosInstance() {
     return axios.create({
       baseURL: this.baseUrl,
-      adapter: this.cache.adapter,
-      timeout: 2000,
+      // adapter: this.cache.adapter,
+      timeout: 10000,
     });
   }
 

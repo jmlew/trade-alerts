@@ -1,2 +1,3 @@
 export * from './lib/application/user.facade';
-export * from './lib/entities/user-data.model';
+export * from './lib/entities/user.model';
+export * from './lib/infrastructure/user-api.model';

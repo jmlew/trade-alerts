@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { ReactNode, useMemo } from 'react';
 
 import { User } from '@trade-alerts/users/domain';
 
@@ -6,7 +6,7 @@ import { UserContext, UserContextValue } from './user.context';
 
 interface UserContextProviderProps {
   user: User;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export function UserContextProvider({ user, children }: UserContextProviderProps) {

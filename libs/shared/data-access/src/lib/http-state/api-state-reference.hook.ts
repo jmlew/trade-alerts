@@ -9,7 +9,7 @@ import { ApiState } from './api-state.model';
 
 export interface ApiStateManagerHook {
   apiState: ApiState;
-  stateManager: ApiStateReferenceManager;
+  apiStateManager: ApiStateReferenceManager;
 }
 
 export const {
@@ -54,7 +54,7 @@ export function useApiStateManager(): ApiStateManagerHook {
   const [apiState, setApiState] = useState<ApiState>(onInit());
   const apiStateReference: ApiStateReference = useApiStateReference(apiState);
 
-  const stateManager: ApiStateReferenceManager = {
+  const apiStateManager: ApiStateReferenceManager = {
     ...apiStateReference,
 
     // Setters to mutate the current API status.
@@ -65,5 +65,5 @@ export function useApiStateManager(): ApiStateManagerHook {
     onFailed: (error: string): void => setApiState(onFailed(error)),
   };
 
-  return { apiState, stateManager };
+  return { apiState, apiStateManager };
 }

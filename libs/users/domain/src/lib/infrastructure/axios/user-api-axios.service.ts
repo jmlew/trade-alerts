@@ -6,17 +6,17 @@ import {
   AxiosApiInterceptorsService,
   InterceptorsHandlers,
 } from '@trade-alerts/shared/data-access';
-import { normaliseAxiosApiErrorMessage } from '@trade-alerts/shared/util-common';
+import { normaliseAxiosApiErrorMessage } from '@trade-alerts/shared/data-access';
 
+import { UserDetails } from '../../entities/user.model';
+import { UserApiParam, UserApiUri } from '../user-api.enum';
 import {
   CreateUserResponse,
   GetUserResponse,
   GetUsersResponse,
   UpdateUserResponse,
-  UserDetails,
-} from '../entities/user-data.model';
-import { UserApiParam, UserApiUri } from './user-api.enum';
-import { UserAxiosApiService } from './user-axios-api.service';
+} from '../user-api.model';
+import { UserApiAxiosBaseService } from './user-api-axios-base.service';
 
 interface CacheEntry {
   all: boolean;
@@ -25,11 +25,11 @@ interface CacheEntry {
   };
 }
 
-export class UserApiService {
+export class UserApiAxiosService {
   private axios: AxiosInstance;
   private staleCacheEntry: CacheEntry;
 
-  constructor(private axiosApiService: UserAxiosApiService) {
+  constructor(private axiosApiService: UserApiAxiosBaseService) {
     this.axios = axiosApiService.instance;
     this.staleCacheEntry = { all: false, user: {} };
     this.addInterceptors();
@@ -144,5 +144,6 @@ export class UserApiService {
     interceptors.addHandlers(handlers);
   }
 }
-const axiosService: UserAxiosApiService = new UserAxiosApiService();
-export const userService: UserApiService = new UserApiService(axiosService);
+export const userApiAxiosService: UserApiAxiosService = new UserApiAxiosService(
+  new UserApiAxiosBaseService()
+);
