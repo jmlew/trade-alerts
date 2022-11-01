@@ -92,6 +92,14 @@ class UserFacade {
   clearCurrentUser() {
     userStore.onClearCurrentUser();
   }
+
+  resetReadState() {
+    userStore.onReadIdle();
+  }
+
+  resetWriteState() {
+    userStore.onWriteIdle();
+  }
 }
 
 export const userFacade: UserFacade = new UserFacade();

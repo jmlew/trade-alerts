@@ -69,6 +69,22 @@ class UserStore extends ObservableStore<State> {
     this.applyState();
   }
 
+  onReadIdle() {
+    this.state = {
+      ...this.state,
+      apiReadState: ApiStateManager.onIdle(),
+    };
+    this.applyState();
+  }
+
+  onWriteIdle() {
+    this.state = {
+      ...this.state,
+      apiWriteState: ApiStateManager.onIdle(),
+    };
+    this.applyState();
+  }
+
   onLoadUsersCompleted(data: User[]) {
     this.state = {
       ...this.state,

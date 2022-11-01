@@ -10,9 +10,10 @@ import { useUserContext } from '../context/user.context';
 
 interface Props {
   user: UserRecord;
-  updateUser: (values: UserDetails) => void;
   updateState: ApiState | null;
   updateStateRef: ApiStateReference;
+  updateUser: (values: UserDetails) => void;
+  resetUpdate: () => void;
 }
 
 export function UpdateUserViewModel(): Props {
@@ -26,5 +27,9 @@ export function UpdateUserViewModel(): Props {
     userFacade.updateUser(user.id, values);
   }
 
-  return { user, updateUser, updateState, updateStateRef };
+  function resetUpdate() {
+    userFacade.resetWriteState();
+  }
+
+  return { user, updateUser, resetUpdate, updateState, updateStateRef };
 }

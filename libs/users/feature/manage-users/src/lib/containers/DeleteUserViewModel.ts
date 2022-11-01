@@ -13,6 +13,7 @@ interface Props {
   deleteState: ApiState | null;
   deleteStateRef: ApiStateReference;
   deleteUser: (userId: number) => void;
+  resetDelete: () => void;
 }
 
 export function DeleteUserViewModel(): Props {
@@ -27,5 +28,9 @@ export function DeleteUserViewModel(): Props {
     userFacade.deleteUser(userId);
   }
 
-  return { deleteUserId, deleteUser, deleteState, deleteStateRef };
+  function resetDelete() {
+    userFacade.resetWriteState();
+  }
+
+  return { deleteUserId, deleteUser, resetDelete, deleteState, deleteStateRef };
 }

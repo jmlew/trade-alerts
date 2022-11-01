@@ -11,6 +11,7 @@ interface Props {
   loadState: ApiState | null;
   loadStateRef: ApiStateReference;
   loadUser: (userId: number) => void;
+  resetLoad: () => void;
 }
 
 export function LoadUserViewModel(userId: number): Props {
@@ -22,5 +23,9 @@ export function LoadUserViewModel(userId: number): Props {
     userFacade.loadUser(userId);
   }
 
-  return { user, loadUser, loadState, loadStateRef };
+  function resetLoad() {
+    userFacade.resetReadState();
+  }
+
+  return { user, loadUser, resetLoad, loadState, loadStateRef };
 }

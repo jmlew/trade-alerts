@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useNotification } from '@trade-alerts/shared/feature/notification';
@@ -11,20 +11,24 @@ import { UpdateUserViewModel as useVM } from './UpdateUserViewModel';
 export function UpdateUserContainer() {
   const navigate = useNavigate();
   const { setNotification } = useNotification();
-  const { user, updateUser, updateState, updateStateRef } = useVM();
-  const { getError, isCompleted, isFailed, isPending, wasPending } = updateStateRef;
+  const { user, updateUser, resetUpdate, updateState, updateStateRef } = useVM();
+  const { getError, isCompleted, isFailed, isPending } = updateStateRef;
 
   useEffect(() => {
-    if (wasPending() && isCompleted() && user != null) {
+    if (isCompleted() && user != null) {
       const message = `User ${user.id} has been updated`;
       setNotification({ isShown: true, message, type: NotificationType.Success });
       goToList();
     }
-    if (wasPending() && isFailed()) {
+    if (isFailed()) {
       const message = getError() || 'Update failed';
       setNotification({ isShown: true, message });
     }
   }, [updateState, user]);
+
+  useLayoutEffect(() => {
+    return () => resetUpdate();
+  }, []);
 
   function goToList() {
     navigate(`/users`);

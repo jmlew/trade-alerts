@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useNotification } from '@trade-alerts/shared/feature/notification';
@@ -17,15 +17,22 @@ export function UsersListContainer() {
   const navigate = useNavigate();
   const { setNotification } = useNotification();
   const { users, loadUsers, loadState, loadStateRef } = useLoadUsersVM();
-  const { deleteUserId, deleteUser, deleteState, deleteStateRef } = useDeleteUserVM();
+  const { deleteUserId, deleteUser, resetDelete, deleteState, deleteStateRef } =
+    useDeleteUserVM();
 
   // Handle upates to load users state.
+  useLayoutEffect(() => {
+    return () => {
+      resetDelete();
+    };
+  }, []);
+
   useEffect(() => {
-    const { isIdle, isFailed, wasPending, getError } = loadStateRef;
+    const { isIdle, isFailed, getError } = loadStateRef;
     if (isIdle()) {
       loadUsers();
     }
-    if (wasPending() && isFailed()) {
+    if (isFailed()) {
       const message = getError() || 'Load users failed';
       setNotification({ isShown: true, message });
     }
@@ -33,15 +40,15 @@ export function UsersListContainer() {
 
   // Handle upates to delete user state.
   useEffect(() => {
-    const { isCompleted, isFailed, wasPending, getError } = deleteStateRef;
-    if (wasPending() && isCompleted()) {
+    const { isCompleted, isFailed, getError } = deleteStateRef;
+    if (isCompleted()) {
       setNotification({
         isShown: true,
         message: `User ${deleteUserId} has been deleted`,
         type: NotificationType.Success,
       });
     }
-    if (wasPending() && isFailed()) {
+    if (isFailed()) {
       setNotification({ isShown: true, message: getError() || 'Delete user failed' });
     }
   }, [deleteState]);
@@ -50,15 +57,14 @@ export function UsersListContainer() {
     navigate(`${userId}`);
   }
 
-  const { isCompleted, wasPending, wasCompleted, isFailed, getError } = loadStateRef;
-  const isReady: boolean = isCompleted() && (wasPending() || wasCompleted());
+  const { isCompleted, isFailed, getError } = loadStateRef;
   if (loadStateRef.isPending() || deleteStateRef.isPending()) {
     return <Loading />;
   } else {
     return (
       <>
         {isFailed() && <ErrorMessage>{getError()}</ErrorMessage>}
-        {isReady &&
+        {isCompleted() &&
           (users?.length ? (
             <UsersList users={users} onEditUser={editUser} onDeleteUser={deleteUser} />
           ) : (

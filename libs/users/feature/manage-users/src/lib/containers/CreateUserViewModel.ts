@@ -12,6 +12,7 @@ interface Props {
   createStateRef: ApiStateReference;
   createUser: (params: UserDetails) => void;
   clearCurrentUser: () => void;
+  resetCreate: () => void;
 }
 
 export function CreateUserViewModel(): Props {
@@ -29,5 +30,16 @@ export function CreateUserViewModel(): Props {
     userFacade.clearCurrentUser();
   }
 
-  return { createdUser, createUser, clearCurrentUser, createState, createStateRef };
+  function resetCreate() {
+    userFacade.resetWriteState();
+  }
+
+  return {
+    createdUser,
+    createUser,
+    clearCurrentUser,
+    resetCreate,
+    createState,
+    createStateRef,
+  };
 }
