@@ -22,8 +22,8 @@ export class UsersService extends EntitiesManagerService<User, number> {
   }
 
   initDb() {
-    const db = { ...usersDb }.data as User[];
-    this.createEntities(db);
+    const items: User[] = { ...usersDb }.data;
+    this.setEntities(items);
   }
 
   getAllUsers(): GetUsersResponse {
@@ -38,7 +38,7 @@ export class UsersService extends EntitiesManagerService<User, number> {
 
   createUser(params: UserDetails): CreateUserResponse {
     const user: CreateUserResponse = this.normaliseNewUser(params);
-    this.addEntity(user);
+    this.setEntity(user);
     return user;
   }
 

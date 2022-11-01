@@ -9,20 +9,16 @@ export class EntitiesManagerService<T, K extends string | number> {
     this.entityService = new EntitiesService<T, K>(primaryKey);
   }
 
-  createEntities(db: T[]) {
-    this.entities = this.entityService.createEntities(db);
+  setEntities(items: T[]) {
+    this.entities = this.entityService.setAll(items);
   }
 
-  doesEntityExist(id: K): boolean {
-    return this.entities[id] !== undefined;
+  setEntity(item: T) {
+    this.entities = this.entityService.setOne(item, this.entities);
   }
 
   updateEntity(id: K, changes: Partial<T>) {
     this.entities = this.entityService.updateOne({ id, changes }, this.entities);
-  }
-
-  addEntity(user: T) {
-    this.entities = this.entityService.addOne(user, this.entities);
   }
 
   removeEntity(id: K) {
@@ -43,5 +39,9 @@ export class EntitiesManagerService<T, K extends string | number> {
 
   selectIds(): K[] {
     return this.entityService.selectIds(this.entities);
+  }
+
+  doesEntityExist(id: K): boolean {
+    return this.entities[id] !== undefined;
   }
 }

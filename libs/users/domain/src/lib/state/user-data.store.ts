@@ -72,7 +72,7 @@ class UserStore extends ObservableStore<State> {
   onLoadUsersCompleted(data: User[]) {
     this.state = {
       ...this.state,
-      users: this.entitiesService.createEntities(data),
+      users: this.entitiesService.setAll(data),
       apiReadState: ApiStateManager.onCompleted(),
     };
     this.applyState();
@@ -81,7 +81,7 @@ class UserStore extends ObservableStore<State> {
   onLoadUserCompleted(data: User) {
     this.state = {
       ...this.state,
-      users: this.entitiesService.upsertOne(data, this.state.users),
+      users: this.entitiesService.setOne(data, this.state.users),
       apiReadState: ApiStateManager.onCompleted(),
     };
     this.applyState();
@@ -99,7 +99,7 @@ class UserStore extends ObservableStore<State> {
   onCreateUserCompleted(data: User) {
     this.state = {
       ...this.state,
-      users: this.entitiesService.addOne(data, this.state.users),
+      users: this.entitiesService.setOne(data, this.state.users),
       currentUserId: data.id,
       apiWriteState: ApiStateManager.onCompleted(),
     };

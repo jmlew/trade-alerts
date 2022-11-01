@@ -17,7 +17,7 @@ export class AlertManageService extends EntitiesManagerService<AlertInfo, number
 
   initDb() {
     const { alerts } = this.db;
-    this.createEntities(alerts);
+    this.setEntities(alerts);
   }
 
   getAllAlerts(): AlertInfo[] {

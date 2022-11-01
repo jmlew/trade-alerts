@@ -1,15 +1,5 @@
 import { Entity, UpdateEntity } from './entity.model';
 
-export function createEntities<T, K extends string | number>(
-  items: T[],
-  selectIdKey: keyof T
-): Entity<T> {
-  return items.reduce(
-    (entities: Entity<T>, item: T) => addOneToEntities<T, K>(item, entities, selectIdKey),
-    {}
-  );
-}
-
 export function createEntity<T, K extends string | number>(
   item: T,
   selectIdKey: keyof T
@@ -18,7 +8,17 @@ export function createEntity<T, K extends string | number>(
   return { [id as K]: item };
 }
 
-export function addOneToEntities<T, K extends string | number>(
+export function createEntities<T, K extends string | number>(
+  items: T[],
+  selectIdKey: keyof T
+): Entity<T> {
+  return items.reduce(
+    (entities: Entity<T>, item: T) => setOneToEntities<T, K>(item, entities, selectIdKey),
+    {}
+  );
+}
+
+export function setOneToEntities<T, K extends string | number>(
   item: T,
   entities: Entity<T>,
   selectIdKey: keyof T
@@ -27,7 +27,7 @@ export function addOneToEntities<T, K extends string | number>(
   return { ...entities, ...entitiy };
 }
 
-export function addManyToEntities<T, K extends string | number>(
+export function setManyToEntities<T, K extends string | number>(
   items: T[],
   entities: Entity<T>,
   selectIdKey: keyof T
@@ -66,17 +66,6 @@ export function updateOneInEntities<T, K extends string | number>(
     return { ...entities, [id]: updated };
   }
   return entities;
-}
-
-export function upsertOneInEntities<T, K extends string | number>(
-  item: T,
-  entities: Entity<T>,
-  selectIdKey: keyof T
-): Entity<T> {
-  const id: unknown = item[selectIdKey];
-  return id
-    ? { ...entities, [id as K]: item }
-    : addOneToEntities<T, K>(item, entities, selectIdKey);
 }
 
 export function selectIdsFromEntities<T, K extends string | number>(

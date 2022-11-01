@@ -73,7 +73,7 @@ class DashboardDataFacade {
    */
   private normaliseDashboardApiData(data: DashboardApiData): DashboardData {
     const alerts: Entity<AlertInfo> = data.alerts
-      ? this.alertsEntitiesService.createEntities(data.alerts)
+      ? this.alertsEntitiesService.setAll(data.alerts)
       : {};
     return { ...data, alerts };
   }
