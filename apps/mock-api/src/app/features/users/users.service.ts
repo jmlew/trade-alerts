@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import * as fromUtilsLib from '@trade-alerts/shared/util-common';
 import { EntitiesManagerService } from '@trade-alerts/shared/util-common';
 import {
@@ -72,7 +71,7 @@ export class UsersService extends EntitiesManagerService<User, number> {
 
   private normaliseNewUser(params: UserDetails): CreateUserResponse {
     const ids: number[] = this.selectIds();
-    const id: number = Math.max(...ids) + 1;
+    const id: number = ids.length > 0 ? Math.max(...ids) + 1 : 1;
     return { ...params, id, createdAt: this.timestamp() };
   }
 
