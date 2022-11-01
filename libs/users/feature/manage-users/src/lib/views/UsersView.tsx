@@ -15,7 +15,7 @@ export function UsersView() {
       <Header />
       <Card>
         <CardContent>
-          <UsersListContainer pageIndex={pageIndex} />
+          <UsersListContainer />
         </CardContent>
       </Card>
     </Box>

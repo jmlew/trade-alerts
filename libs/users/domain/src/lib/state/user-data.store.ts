@@ -1,7 +1,8 @@
-import { Observable, distinctUntilChanged, filter, map, switchMap } from 'rxjs';
+import { Observable, filter, map, switchMap, distinctUntilKeyChanged } from 'rxjs';
 
 import {
   ApiState,
+  ApiStateField,
   ApiStateManager,
   ObservableStore,
 } from '@trade-alerts/shared/data-access';
@@ -12,7 +13,6 @@ import { User, UserDetails } from '../entities/user.model';
 interface State {
   users: Entity<User>;
   currentUserId: number | null;
-  areAllLoaded: boolean;
   apiReadState: ApiState;
   apiWriteState: ApiState;
 }
@@ -20,7 +20,9 @@ interface State {
 const initialState: State = {
   users: {},
   currentUserId: null,
-  areAllLoaded: false,
+
+  /* Read and write states are tracked separately for usecases which include both loading
+  from and updating the store. */
   apiReadState: ApiStateManager.onInit(),
   apiWriteState: ApiStateManager.onInit(),
 };
@@ -36,7 +38,18 @@ class UserStore extends ObservableStore<State> {
   }
 
   onReadPending() {
-    this.state = { ...this.state, apiReadState: ApiStateManager.onPending() };
+    this.state = {
+      ...this.state,
+      apiReadState: ApiStateManager.onPending(),
+    };
+    this.applyState();
+  }
+
+  onWritePending() {
+    this.state = {
+      ...this.state,
+      apiWriteState: ApiStateManager.onPending(),
+    };
     this.applyState();
   }
 
@@ -45,11 +58,6 @@ class UserStore extends ObservableStore<State> {
       ...this.state,
       apiReadState: ApiStateManager.onFailed(error),
     };
-    this.applyState();
-  }
-
-  onWritePending() {
-    this.state = { ...this.state, apiWriteState: ApiStateManager.onPending() };
     this.applyState();
   }
 
@@ -64,7 +72,6 @@ class UserStore extends ObservableStore<State> {
   onLoadUsersCompleted(data: User[]) {
     this.state = {
       ...this.state,
-      areAllLoaded: true,
       users: this.entitiesService.createEntities(data),
       apiReadState: ApiStateManager.onCompleted(),
     };
@@ -117,10 +124,11 @@ class UserStore extends ObservableStore<State> {
   }
 
   selectUserEntities(): Observable<Entity<User>> {
-    return this.selectState().pipe(
-      map((state: State) => state.users),
-      distinctUntilChanged()
-    );
+    return this.selectState().pipe(map((state: State) => state.users));
+  }
+
+  selectUserEntitiesValue(): Entity<User> {
+    return this.selectStateValue().users;
   }
 
   selectAllUsers(): Observable<User[]> {
@@ -141,6 +149,10 @@ class UserStore extends ObservableStore<State> {
     );
   }
 
+  selectUserValue(id: number): User | null {
+    return this.entitiesService.selectOne(id, this.selectUserEntitiesValue());
+  }
+
   selectCurrentUserId(): Observable<number | null> {
     return this.selectState().pipe(map((state: State) => state.currentUserId));
   }
@@ -154,7 +166,7 @@ class UserStore extends ObservableStore<State> {
   selectApiReadState(): Observable<ApiState> {
     return this.selectState().pipe(
       map((state: State) => state.apiReadState),
-      distinctUntilChanged(),
+      distinctUntilKeyChanged(ApiStateField.Status),
       filter(isNonNull)
     );
   }
@@ -162,7 +174,7 @@ class UserStore extends ObservableStore<State> {
   selectApiWriteState(): Observable<ApiState> {
     return this.selectState().pipe(
       map((state: State) => state.apiWriteState),
-      distinctUntilChanged(),
+      distinctUntilKeyChanged(ApiStateField.Status),
       filter(isNonNull)
     );
   }

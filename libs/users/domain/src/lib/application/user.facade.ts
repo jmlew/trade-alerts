@@ -26,6 +26,12 @@ class UserFacade {
 
   /* State API action handlers. */
   loadUser(userId: number) {
+    // Load the current user value from the store if it exists.
+    const userValue: User | null = userStore.selectUserValue(userId);
+    if (userValue) {
+      userStore.onLoadUserCompleted(userValue);
+      return;
+    }
     userStore.onReadPending();
     userApiRxjsAjaxService
       .getUser(userId)
@@ -36,10 +42,10 @@ class UserFacade {
       });
   }
 
-  loadUsers(pageIndex: number) {
+  loadUsers() {
     userStore.onReadPending();
     userApiRxjsAjaxService
-      .getUsers(pageIndex)
+      .getUsers()
       .pipe(
         map((items: User[]) => objectsSortOnKey<User>(items, 'firstName')),
         take(1)

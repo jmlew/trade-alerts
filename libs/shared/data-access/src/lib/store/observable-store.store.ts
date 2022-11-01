@@ -1,4 +1,4 @@
-import { BehaviorSubject, Observable, distinctUntilChanged, filter } from 'rxjs';
+import { BehaviorSubject, Observable, filter } from 'rxjs';
 
 import { isNonNull } from '@trade-alerts/shared/util-common';
 
@@ -23,16 +23,16 @@ export class ObservableStore<State> {
     }
   }
 
-  getStateValue(): State {
-    return this.subject.getValue();
-  }
-
   onClear() {
     this.state = { ...this.initialState };
     this.applyState();
   }
 
   selectState(): Observable<State> {
-    return this.subject.pipe(distinctUntilChanged(), filter(isNonNull));
+    return this.subject.pipe(filter(isNonNull));
+  }
+
+  selectStateValue(): State {
+    return this.subject.getValue();
   }
 }

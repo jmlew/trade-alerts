@@ -1,6 +1,3 @@
-import { useState } from 'react';
-import { take } from 'rxjs';
-
 import {
   ApiState,
   ApiStateReference,
@@ -16,13 +13,13 @@ interface Props {
   loadUsers: () => void;
 }
 
-export function LoadUsersViewModel(pageIndex: number): Props {
+export function LoadUsersViewModel(): Props {
   const users: User[] | null = useObservable<User[]>(userFacade.allUsers$);
   const loadState: ApiState | null = useObservable<ApiState>(userFacade.usersReadState$);
   const loadStateRef: ApiStateReference = useApiStateReference(loadState);
 
   function loadUsers() {
-    userFacade.loadUsers(pageIndex);
+    userFacade.loadUsers();
   }
 
   return { users, loadUsers, loadState, loadStateRef };

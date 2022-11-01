@@ -33,7 +33,6 @@ export function DashboardDataProvider({ children }: DashboardDataProviderProps) 
   const dashDataState: ApiState | null = useObservable<ApiState>(
     dashboardDataFacade.dashDataState$
   );
-
   const value: DashboardDataContextValue = useMemo(() => {
     const current = {
       dataState: dashDataState,
@@ -42,7 +41,6 @@ export function DashboardDataProvider({ children }: DashboardDataProviderProps) 
       accountsTrans: dashData?.accountsTrans || null,
       alerts,
     };
-    console.log('DashboardData', current);
     return current;
   }, [dashData, dashDataState]);
 

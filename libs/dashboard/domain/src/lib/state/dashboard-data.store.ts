@@ -1,7 +1,8 @@
-import { Observable, distinctUntilChanged, filter, map } from 'rxjs';
+import { Observable, filter, map, distinctUntilKeyChanged } from 'rxjs';
 
 import {
   ApiState,
+  ApiStateField,
   ApiStateManager,
   ObservableStore,
 } from '@trade-alerts/shared/data-access';
@@ -20,7 +21,7 @@ const initialState: State = {
 };
 
 class DashboardDataStore extends ObservableStore<State> {
-  override enableLogging = true;
+  override enableLogging = false;
 
   onPending() {
     this.state = { ...this.state, apiState: ApiStateManager.onPending() };
@@ -45,7 +46,6 @@ class DashboardDataStore extends ObservableStore<State> {
   selectData(): Observable<DashboardData> {
     return this.selectState().pipe(
       map((state: State) => state.data),
-      distinctUntilChanged(),
       filter(isNonNull)
     );
   }
@@ -53,7 +53,7 @@ class DashboardDataStore extends ObservableStore<State> {
   selectApiState(): Observable<ApiState> {
     return this.selectState().pipe(
       map((state: State) => state.apiState),
-      distinctUntilChanged(),
+      distinctUntilKeyChanged(ApiStateField.Status),
       filter(isNonNull)
     );
   }

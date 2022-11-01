@@ -1,3 +1,8 @@
+export enum ApiStateField {
+  Status = 'status',
+  Error = 'error',
+}
+
 /**
  * State flags to provide progress status.
  */

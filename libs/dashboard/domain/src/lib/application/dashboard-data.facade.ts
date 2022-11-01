@@ -17,9 +17,10 @@ import { DashboardDataService } from '../infrastructure/dashboard-data.service';
 import { dashboardDataStore } from '../state/dashboard-data.store';
 
 /**
- * Facade to interface between containers / context providers and http services. Stores
- * results as observable streams through BevahiorSubjects.
+ * Facade to interface between containers / context providers and http services.
+ * Exposes a simplified API for state management through custom observabe stores.
  */
+
 class DashboardDataFacade {
   private alertsEntitiesService: EntitiesService<AlertInfo, number>;
 
@@ -53,7 +54,7 @@ class DashboardDataFacade {
   }
 
   updateDashDataWithAlert(id: number, changes: Partial<AlertInfo>) {
-    const data: DashboardData | null = dashboardDataStore.getStateValue().data;
+    const data: DashboardData | null = dashboardDataStore.selectStateValue().data;
     if (!data?.alerts) {
       return;
     }

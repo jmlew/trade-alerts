@@ -13,14 +13,10 @@ import { UsersList } from '@trade-alerts/users/ui';
 import { DeleteUserViewModel as useDeleteUserVM } from './DeleteUserViewModel';
 import { LoadUsersViewModel as useLoadUsersVM } from './LoadUsersViewModel';
 
-interface UserContainerProps {
-  pageIndex: number;
-}
-
-export function UsersListContainer({ pageIndex }: UserContainerProps) {
+export function UsersListContainer() {
   const navigate = useNavigate();
   const { setNotification } = useNotification();
-  const { users, loadUsers, loadState, loadStateRef } = useLoadUsersVM(pageIndex);
+  const { users, loadUsers, loadState, loadStateRef } = useLoadUsersVM();
   const { deleteUserId, deleteUser, deleteState, deleteStateRef } = useDeleteUserVM();
 
   // Handle upates to load users state.

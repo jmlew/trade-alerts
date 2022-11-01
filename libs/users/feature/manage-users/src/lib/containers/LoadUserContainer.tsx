@@ -14,8 +14,7 @@ interface LoadUserContainerProps {
 export function LoadUserContainer({ userId, children }: LoadUserContainerProps) {
   const navigate = useNavigate();
   const { user, loadUser, loadStateRef } = useVM(userId);
-  const { getError, isCompleted, isFailed, isPending, wasCompleted, wasPending } =
-    loadStateRef;
+  const { getError, isCompleted, isFailed, isPending } = loadStateRef;
 
   useEffect(() => {
     loadUser(userId);
@@ -25,7 +24,6 @@ export function LoadUserContainer({ userId, children }: LoadUserContainerProps) 
     navigate(`/users`);
   }
 
-  const isReady: boolean = isCompleted() && (wasPending() || wasCompleted());
   return (
     <>
       {isPending() && <Loading />}
@@ -34,7 +32,7 @@ export function LoadUserContainer({ userId, children }: LoadUserContainerProps) 
           {getError()}
         </ErrorMessageWithButton>
       )}
-      {isReady && user != null && (
+      {isCompleted() && user != null && (
         <UserContextProvider user={user}>{children}</UserContextProvider>
       )}
     </>

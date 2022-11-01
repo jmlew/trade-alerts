@@ -1,7 +1,14 @@
-import { Observable, distinctUntilChanged, filter, map } from 'rxjs';
+import {
+  Observable,
+  distinctUntilChanged,
+  filter,
+  map,
+  distinctUntilKeyChanged,
+} from 'rxjs';
 
 import {
   ApiState,
+  ApiStateField,
   ApiStateManager,
   ObservableStore,
 } from '@trade-alerts/shared/data-access';
@@ -18,7 +25,7 @@ const initialState: State = {
 };
 
 class AlertManagerStore extends ObservableStore<State> {
-  override enableLogging = true;
+  override enableLogging = false;
 
   onPending() {
     this.state = { ...this.state, apiState: ApiStateManager.onPending() };
@@ -43,7 +50,7 @@ class AlertManagerStore extends ObservableStore<State> {
   selectApiState(): Observable<ApiState> {
     return this.selectState().pipe(
       map((state: State) => state.apiState),
-      distinctUntilChanged(),
+      distinctUntilKeyChanged(ApiStateField.Status),
       filter(isNonNull)
     );
   }

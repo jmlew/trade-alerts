@@ -40,9 +40,9 @@ export class UserApiRxjsAjaxService {
     );
   }
 
-  getUsers(pageIndex: number): Observable<User[]> {
+  getUsers(): Observable<User[]> {
     const params: URLSearchParams = new URLSearchParams();
-    params.append(UserApiParam.Page, `${pageIndex}`);
+    // params.append(UserApiParam.Page, `${pageIndex}`);
     const request: Observable<AjaxResponse<GetUsersResponse>> =
       ajax.get<GetUsersResponse>(`${this.basePath}?${params.toString()}`);
     return request.pipe(

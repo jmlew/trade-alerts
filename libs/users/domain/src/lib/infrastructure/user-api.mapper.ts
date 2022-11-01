@@ -5,6 +5,9 @@ import { UserRecord } from './user-api.model';
 
 export class UserApiMapper implements Mapper<UserRecord, User> {
   mapFrom(input: UserRecord): User {
+    if (input.id == null) {
+      console.error('User record has no primary ID', input);
+    }
     return {
       ...input,
     };
