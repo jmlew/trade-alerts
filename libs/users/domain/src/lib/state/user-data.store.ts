@@ -23,8 +23,8 @@ const initialState: State = {
 
   /* Read and write states are tracked separately for usecases which include both loading
   from and updating the store. */
-  apiReadState: ApiStateManager.onInit(),
-  apiWriteState: ApiStateManager.onInit(),
+  apiReadState: ApiStateManager.onIdle(),
+  apiWriteState: ApiStateManager.onIdle(),
 };
 
 class UserStore extends ObservableStore<State> {

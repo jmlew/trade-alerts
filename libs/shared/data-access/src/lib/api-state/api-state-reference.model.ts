@@ -1,7 +1,7 @@
 import { ApiStatus } from './api-state.enum';
 
 export interface ApiStateReferenceManager extends ApiStateReference {
-  onInit(): void;
+  onIdle(): void;
   onPending(): void;
   onCompleted(): void;
   onFailed(error: string): void;
@@ -9,11 +9,11 @@ export interface ApiStateReferenceManager extends ApiStateReference {
 }
 
 export interface ApiStateReference {
-  isInit(): boolean;
+  isIdle(): boolean;
   isPending(): boolean;
   isCompleted(): boolean;
   isFailed(): boolean;
-  wasInit(): boolean;
+  wasIdle(): boolean;
   wasPending(): boolean;
   wasCompleted(): boolean;
   wasFailed(): boolean;

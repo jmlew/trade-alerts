@@ -21,8 +21,8 @@ export function UsersListContainer() {
 
   // Handle upates to load users state.
   useEffect(() => {
-    const { isInit, isFailed, wasPending, getError } = loadStateRef;
-    if (isInit()) {
+    const { isIdle, isFailed, wasPending, getError } = loadStateRef;
+    if (isIdle()) {
       loadUsers();
     }
     if (wasPending() && isFailed()) {

@@ -8,9 +8,9 @@ import { ApiState } from './api-state.model';
  */
 
 export class ApiStateManager {
-  static onInit(): ApiState {
+  static onIdle(): ApiState {
     return {
-      status: ApiStatus.Init,
+      status: ApiStatus.Idle,
       error: null,
     };
   }
@@ -68,8 +68,8 @@ export class ApiStateManager {
     state.error = null;
   }
 
-  static isInit(state: ApiState): boolean {
-    return state.status === ApiStatus.Init;
+  static isIdle(state: ApiState): boolean {
+    return state.status === ApiStatus.Idle;
   }
 
   static isPending(state: ApiState): boolean {

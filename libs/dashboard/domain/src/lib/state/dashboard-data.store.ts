@@ -17,7 +17,7 @@ interface State {
 
 const initialState: State = {
   data: null,
-  apiState: ApiStateManager.onInit(),
+  apiState: ApiStateManager.onIdle(),
 };
 
 class DashboardDataStore extends ObservableStore<State> {

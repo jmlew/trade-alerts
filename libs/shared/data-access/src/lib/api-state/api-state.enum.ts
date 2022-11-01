@@ -7,7 +7,7 @@ export enum ApiStateField {
  * State flags to provide progress status.
  */
 export enum ApiStatus {
-  Init = 'Init', // process not started yet
+  Idle = 'Idle', // process not active
   Pending = 'Pending', // currently in progress
   Completed = 'Completed', // process completed
   Cancelled = 'Cancelled', // aborted due to cancelation

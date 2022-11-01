@@ -20,7 +20,7 @@ type State = {
 };
 
 const initialState: State = {
-  apiState: ApiStateManager.onInit(),
+  apiState: ApiStateManager.onIdle(),
   alertId: null,
 };
 
