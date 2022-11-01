@@ -88,7 +88,7 @@ export function selectIdsFromEntities<T, K extends string | number>(
 export function selectAllFromEntities<T, K extends string | number>(
   entities: Entity<T>
 ): T[] {
-  return selectIdsFromEntities<T, K>(entities).map((id: K) => entities[id]) as T[];
+  return selectIdsFromEntities<T, K>(entities).map((id: K) => entities[id] as T);
 }
 
 export function selectTotalFromEntities<T, K extends string | number>(

@@ -19,33 +19,27 @@ const initialState: State = {
   apiState: ApiStateManager.onInit(),
 };
 
-interface Store {
-  onPending(): void;
-  onFailed(error: unknown): void;
-  onCompleted(data: DashboardData): void;
-  selectData(): Observable<DashboardData>;
-  selectApiState(): Observable<ApiState>;
-}
+class DashboardDataStore extends ObservableStore<State> {
+  override enableLogging = true;
 
-class DashboardDataStore extends ObservableStore<State> implements Store {
   onPending() {
     this.state = { ...this.state, apiState: ApiStateManager.onPending() };
-    this.subject.next(this.state);
+    this.applyState();
   }
 
   onFailed(error: string) {
     this.state = { ...this.state, apiState: ApiStateManager.onFailed(error) };
-    this.subject.next(this.state);
+    this.applyState();
   }
 
   onCompleted(data: DashboardData) {
     this.state = { ...this.state, data, apiState: ApiStateManager.onCompleted() };
-    this.subject.next(this.state);
+    this.applyState();
   }
 
   onUpdateData(data: DashboardData) {
     this.state = { ...this.state, data };
-    this.subject.next(this.state);
+    this.applyState();
   }
 
   selectData(): Observable<DashboardData> {

@@ -17,34 +17,27 @@ const initialState: State = {
   alertId: null,
 };
 
-interface Store {
-  onPending(): void;
-  onFailed(error: unknown): void;
-  onCompleted(): void;
-  onSetAlertId(alertId: number): void;
-  selectApiState(): Observable<ApiState>;
-  selectAlertId(): Observable<number | null>;
-}
+class AlertManagerStore extends ObservableStore<State> {
+  override enableLogging = true;
 
-class AlertManagerStore extends ObservableStore<State> implements Store {
   onPending() {
     this.state = { ...this.state, apiState: ApiStateManager.onPending() };
-    this.subject.next(this.state);
+    this.applyState();
   }
 
   onFailed(error: string) {
     this.state = { ...this.state, apiState: ApiStateManager.onFailed(error) };
-    this.subject.next(this.state);
+    this.applyState();
   }
 
   onCompleted() {
     this.state = { ...this.state, apiState: ApiStateManager.onCompleted() };
-    this.subject.next(this.state);
+    this.applyState();
   }
 
   onSetAlertId(alertId: number) {
     this.state = { ...this.state, alertId };
-    this.subject.next(this.state);
+    this.applyState();
   }
 
   selectApiState(): Observable<ApiState> {

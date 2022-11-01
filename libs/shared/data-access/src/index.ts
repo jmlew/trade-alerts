@@ -1,4 +1,4 @@
-export * from './lib/api-state/api-state-manager.util';
+export * from './lib/api-state/api-state-manager';
 export * from './lib/api-state/api-state-reference.hook';
 export * from './lib/api-state/api-state-reference.model';
 export * from './lib/api-state/api-state.enum';
@@ -14,4 +14,4 @@ export * from './lib/http/mapper.model';
 export * from './lib/http/rxjs-ajax/http-rxjs-ajax.util';
 export * from './lib/http/use-axios.hook';
 export * from './lib/http/use-fetch.hook';
-export * from './lib/store/observable-store.util';
+export * from './lib/store/observable-store.store';

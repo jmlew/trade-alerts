@@ -2,7 +2,12 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useNotification } from '@trade-alerts/shared/feature/notification';
-import { ErrorMessage, Loading, NotificationType } from '@trade-alerts/shared/ui-common';
+import {
+  ErrorMessage,
+  GenericMessagePanel,
+  Loading,
+  NotificationType,
+} from '@trade-alerts/shared/ui-common';
 import { UsersList } from '@trade-alerts/users/ui';
 
 import { DeleteUserViewModel as useDeleteUserVM } from './DeleteUserViewModel';
@@ -15,40 +20,33 @@ interface UserContainerProps {
 export function UsersListContainer({ pageIndex }: UserContainerProps) {
   const navigate = useNavigate();
   const { setNotification } = useNotification();
+  const { users, loadUsers, loadState, loadStateRef } = useLoadUsersVM(pageIndex);
+  const { deleteUserId, deleteUser, deleteState, deleteStateRef } = useDeleteUserVM();
 
-  const {
-    users,
-    loadUsers,
-    apiState: loadState,
-    apiStateManager: loadStateManager,
-  } = useLoadUsersVM(pageIndex);
-
-  const {
-    userId,
-    deleteUser,
-    apiState: deleteState,
-    apiStateManager: deleteStateManager,
-  } = useDeleteUserVM();
-
+  // Handle upates to load users state.
   useEffect(() => {
-    if (loadStateManager.isInit()) {
+    const { isInit, isFailed, wasPending, getError } = loadStateRef;
+    if (isInit()) {
       loadUsers();
     }
-    if (loadStateManager.isFailed()) {
-      const message = loadStateManager.getError() || 'Load users failed';
+    if (wasPending() && isFailed()) {
+      const message = getError() || 'Load users failed';
       setNotification({ isShown: true, message });
     }
   }, [loadState]);
 
+  // Handle upates to delete user state.
   useEffect(() => {
-    if (deleteStateManager.isCompleted()) {
-      const message = `User ${userId} has been deleted`;
-      setNotification({ isShown: true, message, type: NotificationType.Success });
-      loadUsers();
+    const { isCompleted, isFailed, wasPending, getError } = deleteStateRef;
+    if (wasPending() && isCompleted()) {
+      setNotification({
+        isShown: true,
+        message: `User ${deleteUserId} has been deleted`,
+        type: NotificationType.Success,
+      });
     }
-    if (deleteStateManager.isFailed()) {
-      const message = deleteStateManager.getError() || 'Delete user failed';
-      setNotification({ isShown: true, message });
+    if (wasPending() && isFailed()) {
+      setNotification({ isShown: true, message: getError() || 'Delete user failed' });
     }
   }, [deleteState]);
 
@@ -56,17 +54,20 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
     navigate(`${userId}`);
   }
 
-  const { isCompleted, wasPending, wasCompleted, isFailed, getError } = loadStateManager;
+  const { isCompleted, wasPending, wasCompleted, isFailed, getError } = loadStateRef;
   const isReady: boolean = isCompleted() && (wasPending() || wasCompleted());
-  if (loadStateManager.isPending() || deleteStateManager.isPending()) {
+  if (loadStateRef.isPending() || deleteStateRef.isPending()) {
     return <Loading />;
   } else {
     return (
       <>
         {isFailed() && <ErrorMessage>{getError()}</ErrorMessage>}
-        {isReady && users != null && (
-          <UsersList users={users} onEditUser={editUser} onDeleteUser={deleteUser} />
-        )}
+        {isReady &&
+          (users?.length ? (
+            <UsersList users={users} onEditUser={editUser} onDeleteUser={deleteUser} />
+          ) : (
+            <GenericMessagePanel>Add a user to get started.</GenericMessagePanel>
+          ))}
       </>
     );
   }

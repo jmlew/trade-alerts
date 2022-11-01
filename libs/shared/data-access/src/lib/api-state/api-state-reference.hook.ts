@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { usePrevious } from '@trade-alerts/shared/util-common';
 
-import { ApiStateManager } from './api-state-manager.util';
+import { ApiStateManager } from './api-state-manager';
 import { ApiStateReference, ApiStateReferenceManager } from './api-state-reference.model';
 import { ApiStatus } from './api-state.enum';
 import { ApiState } from './api-state.model';

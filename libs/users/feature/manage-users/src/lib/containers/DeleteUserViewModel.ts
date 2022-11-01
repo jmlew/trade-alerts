@@ -1,35 +1,31 @@
 import { useState } from 'react';
-import { take } from 'rxjs';
 
 import {
-  ApiStateManagerHook,
-  useApiStateManager,
+  ApiState,
+  ApiStateReference,
+  useApiStateReference,
 } from '@trade-alerts/shared/data-access';
+import { useObservable } from '@trade-alerts/shared/util-common';
 import { userFacade } from '@trade-alerts/users/domain';
 
-interface Props extends ApiStateManagerHook {
-  userId: number | undefined;
+interface Props {
+  deleteUserId: number | null;
+  deleteState: ApiState | null;
+  deleteStateRef: ApiStateReference;
   deleteUser: (userId: number) => void;
 }
 
 export function DeleteUserViewModel(): Props {
-  const { apiState, apiStateManager } = useApiStateManager();
-  const [userId, setUserId] = useState<number>();
-  const { onCompleted, onFailed, onPending } = apiStateManager;
+  const [deleteUserId, setDeleteUserId] = useState<number | null>(null);
+  const deleteState: ApiState | null = useObservable<ApiState>(
+    userFacade.usersWriteState$
+  );
+  const deleteStateRef: ApiStateReference = useApiStateReference(deleteState);
 
   function deleteUser(userId: number) {
-    onPending();
-    userFacade
-      .deleteUser(userId)
-      .pipe(take(1))
-      .subscribe({
-        next: (id: number) => {
-          setUserId(id);
-          onCompleted();
-        },
-        error: onFailed,
-      });
+    setDeleteUserId(userId);
+    userFacade.deleteUser(userId);
   }
 
-  return { userId, deleteUser, apiState, apiStateManager };
+  return { deleteUserId, deleteUser, deleteState, deleteStateRef };
 }

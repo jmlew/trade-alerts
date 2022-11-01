@@ -1,35 +1,26 @@
-import { useState } from 'react';
-import { take } from 'rxjs';
-
 import {
-  ApiStateManagerHook,
-  useApiStateManager,
+  ApiState,
+  ApiStateReference,
+  useApiStateReference,
 } from '@trade-alerts/shared/data-access';
-import { User, UserRecord, userFacade } from '@trade-alerts/users/domain';
+import { useObservable } from '@trade-alerts/shared/util-common';
+import { User, userFacade } from '@trade-alerts/users/domain';
 
-interface Props extends ApiStateManagerHook {
-  user: UserRecord | undefined;
+interface Props {
+  user: User | null;
+  loadState: ApiState | null;
+  loadStateRef: ApiStateReference;
   loadUser: (userId: number) => void;
 }
 
-export function LoadUserViewModel(): Props {
-  const { apiState, apiStateManager } = useApiStateManager();
-  const [user, setUser] = useState<UserRecord>();
-  const { onCompleted, onFailed, onPending } = apiStateManager;
+export function LoadUserViewModel(userId: number): Props {
+  const user: User | null = useObservable<User | null>(userFacade.selectUser(userId));
+  const loadState: ApiState | null = useObservable<ApiState>(userFacade.usersReadState$);
+  const loadStateRef: ApiStateReference = useApiStateReference(loadState);
 
   function loadUser(userId: number) {
-    onPending();
-    userFacade
-      .getUser(userId)
-      .pipe(take(1))
-      .subscribe({
-        next: (user: User) => {
-          setUser(user);
-          onCompleted();
-        },
-        error: onFailed,
-      });
+    userFacade.loadUser(userId);
   }
 
-  return { user, loadUser, apiState, apiStateManager };
+  return { user, loadUser, loadState, loadStateRef };
 }

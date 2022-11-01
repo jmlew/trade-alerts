@@ -11,20 +11,24 @@ import { CreateUserViewModel as useVM } from './CreateUserViewModel';
 export function CreateUserContainer() {
   const navigate = useNavigate();
   const { setNotification } = useNotification();
-  const { user, createUser, apiState, apiStateManager } = useVM();
-  const { getError, isCompleted, isFailed, isPending } = apiStateManager;
+  const { createdUser, createUser, clearCurrentUser, createState, createStateRef } =
+    useVM();
+  const { getError, isCompleted, isFailed, isPending, wasPending } = createStateRef;
 
   useEffect(() => {
-    if (isCompleted() && user != null) {
-      const message = `User ${user.firstName} ${user.lastName} has been created`;
-      setNotification({ isShown: true, message, type: NotificationType.Success });
+    if (wasPending() && isCompleted() && createdUser != null) {
+      setNotification({
+        isShown: true,
+        message: `User ${createdUser.firstName} ${createdUser.lastName} has been created`,
+        type: NotificationType.Success,
+      });
+      clearCurrentUser();
       goToList();
     }
-    if (isFailed()) {
-      const message = getError() || 'Update failed';
-      setNotification({ isShown: true, message });
+    if (wasPending() && isFailed()) {
+      setNotification({ isShown: true, message: getError() || 'Update failed' });
     }
-  }, [apiState, user]);
+  }, [createState, createdUser]);
 
   function goToList() {
     navigate(`/users`);

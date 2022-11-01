@@ -1,38 +1,90 @@
-import { Observable, map } from 'rxjs';
+import { Observable, map, take } from 'rxjs';
 
+import { ApiState } from '@trade-alerts/shared/data-access';
 import { objectsSortOnKey } from '@trade-alerts/shared/util-common';
 
 import { User, UserDetails } from '../entities/user.model';
 import { userApiRxjsAjaxService } from '../infrastructure/rxjs-ajax/user-api-rxjs-ajax.service';
+import { userStore } from '../state/user-data.store';
 
 /*
   Facade for the Users domain which acts as a single API through which other feature
-  components can interact with this domain.
+  components can interact with this domain and its http services.
 
-  Hides details of state management, once this is integrated.
+  Exposes a simplified API for state management through custom observabe stores.
 */
 
 class UserFacade {
-  getUser(userId: number): Observable<User> {
-    return userApiRxjsAjaxService.getUser(userId);
+  /* State selectors. */
+  usersReadState$: Observable<ApiState> = userStore.selectApiReadState();
+  usersWriteState$: Observable<ApiState> = userStore.selectApiWriteState();
+  allUsers$: Observable<User[]> = userStore.selectAllUsers();
+  currentUser$: Observable<User | null> = userStore.selectCurrentUser();
+  selectUser(id: number): Observable<User | null> {
+    return userStore.selectUser(id);
   }
 
-  getUsers(pageIndex: number): Observable<User[]> {
-    return userApiRxjsAjaxService
+  /* State API action handlers. */
+  loadUser(userId: number) {
+    userStore.onReadPending();
+    userApiRxjsAjaxService
+      .getUser(userId)
+      .pipe(take(1))
+      .subscribe({
+        next: (data: User) => userStore.onLoadUserCompleted(data),
+        error: (error: string) => userStore.onReadFailed(error),
+      });
+  }
+
+  loadUsers(pageIndex: number) {
+    userStore.onReadPending();
+    userApiRxjsAjaxService
       .getUsers(pageIndex)
-      .pipe(map((items: User[]) => objectsSortOnKey<User>(items, 'firstName')));
+      .pipe(
+        map((items: User[]) => objectsSortOnKey<User>(items, 'firstName')),
+        take(1)
+      )
+      .subscribe({
+        next: (data: User[]) => userStore.onLoadUsersCompleted(data),
+        error: (error: string) => userStore.onReadFailed(error),
+      });
   }
 
-  updateUser(userId: number, values: UserDetails): Observable<User> {
-    return userApiRxjsAjaxService.updateUser(userId, values);
+  updateUser(userId: number, values: UserDetails) {
+    userStore.onWritePending();
+    userApiRxjsAjaxService
+      .updateUser(userId, values)
+      .pipe(take(1))
+      .subscribe({
+        next: (data: User) => userStore.onUpdateUserCompleted(userId, values),
+        error: (error: string) => userStore.onWriteFailed(error),
+      });
   }
 
-  createUser(values: UserDetails): Observable<User> {
-    return userApiRxjsAjaxService.createUser(values);
+  createUser(values: UserDetails) {
+    userStore.onWritePending();
+    userApiRxjsAjaxService
+      .createUser(values)
+      .pipe(take(1))
+      .subscribe({
+        next: (data: User) => userStore.onCreateUserCompleted(data),
+        error: (error: string) => userStore.onWriteFailed(error),
+      });
   }
 
-  deleteUser(userId: number): Observable<number> {
-    return userApiRxjsAjaxService.deleteUser(userId);
+  deleteUser(userId: number) {
+    userStore.onWritePending();
+    userApiRxjsAjaxService
+      .deleteUser(userId)
+      .pipe(take(1))
+      .subscribe({
+        next: (userId: number) => userStore.onDeleteUserCompleted(userId),
+        error: (error: string) => userStore.onWriteFailed(error),
+      });
+  }
+
+  clearCurrentUser() {
+    userStore.onClearCurrentUser();
   }
 }
 

@@ -2,34 +2,28 @@ import { useState } from 'react';
 import { take } from 'rxjs';
 
 import {
-  ApiStateManagerHook,
-  useApiStateManager,
+  ApiState,
+  ApiStateReference,
+  useApiStateReference,
 } from '@trade-alerts/shared/data-access';
+import { useObservable } from '@trade-alerts/shared/util-common';
 import { User, userFacade } from '@trade-alerts/users/domain';
 
-interface Props extends ApiStateManagerHook {
-  users: User[] | undefined;
+interface Props {
+  users: User[] | null;
+  loadState: ApiState | null;
+  loadStateRef: ApiStateReference;
   loadUsers: () => void;
 }
 
 export function LoadUsersViewModel(pageIndex: number): Props {
-  const { apiState, apiStateManager } = useApiStateManager();
-  const [users, setUsers] = useState<User[]>();
-  const { onCompleted, onFailed, onPending } = apiStateManager;
+  const users: User[] | null = useObservable<User[]>(userFacade.allUsers$);
+  const loadState: ApiState | null = useObservable<ApiState>(userFacade.usersReadState$);
+  const loadStateRef: ApiStateReference = useApiStateReference(loadState);
 
   function loadUsers() {
-    onPending();
-    userFacade
-      .getUsers(pageIndex)
-      .pipe(take(1))
-      .subscribe({
-        next: (users: User[]) => {
-          setUsers(users);
-          onCompleted();
-        },
-        error: onFailed,
-      });
+    userFacade.loadUsers(pageIndex);
   }
 
-  return { users, loadUsers, apiState, apiStateManager };
+  return { users, loadUsers, loadState, loadStateRef };
 }

@@ -46,6 +46,10 @@ export class EntitiesService<T, K extends string | number>
     return fromUtils.selectAllFromEntities<T, K>(entities);
   }
 
+  selectOne(id: K, entities: Entity<T>): T | null {
+    return entities[id] ?? null;
+  }
+
   selectTotal(entities: Entity<T>): number {
     return fromUtils.selectTotalFromEntities<T, K>(entities);
   }

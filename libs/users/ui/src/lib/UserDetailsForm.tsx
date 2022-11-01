@@ -42,7 +42,7 @@ export function UserDetailsForm({
     ]),
   });
 
-  if (!formik.isValid) {
+  if (!formik.isValid && formik.errors) {
     console.log(formik.errors);
   }
 

@@ -1,41 +1,33 @@
-import { AxiosError, AxiosResponse } from 'axios';
-import { useState } from 'react';
-import { take } from 'rxjs';
-
 import {
-  ApiStateManagerHook,
-  useApiStateManager,
+  ApiState,
+  ApiStateReference,
+  useApiStateReference,
 } from '@trade-alerts/shared/data-access';
-import {
-  CreateUserResponse,
-  User,
-  UserDetails,
-  UserRecord,
-  userFacade,
-} from '@trade-alerts/users/domain';
+import { useObservable } from '@trade-alerts/shared/util-common';
+import { User, UserDetails, userFacade } from '@trade-alerts/users/domain';
 
-interface Props extends ApiStateManagerHook {
-  user: UserRecord | undefined;
+interface Props {
+  createdUser: User | null;
+  createState: ApiState | null;
+  createStateRef: ApiStateReference;
   createUser: (params: UserDetails) => void;
+  clearCurrentUser: () => void;
 }
 
 export function CreateUserViewModel(): Props {
-  const { apiState, apiStateManager } = useApiStateManager();
-  const [user, setUser] = useState<UserRecord>();
-  const { onCompleted, onFailed, onPending } = apiStateManager;
+  const createdUser: User | null = useObservable<User | null>(userFacade.currentUser$);
+  const createState: ApiState | null = useObservable<ApiState>(
+    userFacade.usersWriteState$
+  );
+  const createStateRef: ApiStateReference = useApiStateReference(createState);
 
   function createUser(params: UserDetails) {
-    onPending();
-    userFacade
-      .createUser(params)
-      .pipe(take(1))
-      .subscribe({
-        next: (user: User) => {
-          setUser(user);
-          onCompleted();
-        },
-        error: onFailed,
-      });
+    userFacade.createUser(params);
   }
-  return { user, createUser, apiState, apiStateManager };
+
+  function clearCurrentUser() {
+    userFacade.clearCurrentUser();
+  }
+
+  return { createdUser, createUser, clearCurrentUser, createState, createStateRef };
 }

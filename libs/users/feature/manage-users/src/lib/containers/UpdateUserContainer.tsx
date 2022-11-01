@@ -11,20 +11,20 @@ import { UpdateUserViewModel as useVM } from './UpdateUserViewModel';
 export function UpdateUserContainer() {
   const navigate = useNavigate();
   const { setNotification } = useNotification();
-  const { user, updateUser, apiState, apiStateManager } = useVM();
-  const { getError, isCompleted, isFailed, isPending } = apiStateManager;
+  const { user, updateUser, updateState, updateStateRef } = useVM();
+  const { getError, isCompleted, isFailed, isPending, wasPending } = updateStateRef;
 
   useEffect(() => {
-    if (isCompleted() && user != null) {
+    if (wasPending() && isCompleted() && user != null) {
       const message = `User ${user.id} has been updated`;
       setNotification({ isShown: true, message, type: NotificationType.Success });
       goToList();
     }
-    if (isFailed()) {
+    if (wasPending() && isFailed()) {
       const message = getError() || 'Update failed';
       setNotification({ isShown: true, message });
     }
-  }, [apiState, user]);
+  }, [updateState, user]);
 
   function goToList() {
     navigate(`/users`);
