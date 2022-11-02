@@ -14,6 +14,8 @@
     "build:prod": "nx build --prod",
     "----- TEST --------------------": "",
     "test": "nx test",
+    "e2e": "nx e2e web-app-e2e",
+    "e2e:prod": "nx e2e web-app-e2e --configuration=production",
     "----- CODE --------------------": "",
     "format": "prettier --ignore-path .gitignore --write .",
     "lint": "nx affected --target=lint",

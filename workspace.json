@@ -30,7 +30,8 @@
     "users-feature-manage-users": "libs/users/feature/manage-users",
     "users-shell": "libs/users/shell",
     "users-ui": "libs/users/ui",
-    "web-app": "apps/web-app"
+    "web-app": "apps/web-app",
+    "web-app-e2e": "apps/web-app-e2e"
   },
   "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }
