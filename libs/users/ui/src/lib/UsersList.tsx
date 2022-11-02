@@ -48,13 +48,14 @@ function UsersListItem({ user, isControlsHidden, onEdit, onDelete }: UserItemPro
   return (
     <ListItem
       divider={false}
+      data-cy-list-item={user.id}
       secondaryAction={
         isControlsHidden ? null : (
           <>
-            <IconButton edge="start" aria-label="edit" onClick={onEdit}>
+            <IconButton edge="start" aria-label="edit" onClick={onEdit} data-btn-edit>
               <Edit />
             </IconButton>
-            <IconButton edge="end" aria-label="edit" onClick={onDelete}>
+            <IconButton edge="end" aria-label="edit" onClick={onDelete} data-btn-delete>
               <Delete />
             </IconButton>
           </>

@@ -1,10 +1,12 @@
 import { defineConfig } from 'cypress';
+
 import { nxE2EPreset } from '@nrwl/cypress/plugins/cypress-preset';
 
 const cypressJsonConfig = {
   fileServerFolder: '.',
   fixturesFolder: './src/fixtures',
   video: true,
+  videoCompression: 40,
   videosFolder: '../../dist/cypress/apps/web-app-e2e/videos',
   screenshotsFolder: '../../dist/cypress/apps/web-app-e2e/screenshots',
   chromeWebSecurity: false,
@@ -12,8 +14,14 @@ const cypressJsonConfig = {
   supportFile: 'src/support/e2e.ts',
 };
 export default defineConfig({
+  projectId: '7fq9n6',
   e2e: {
     ...nxE2EPreset(__dirname),
     ...cypressJsonConfig,
+  },
+  env: {
+    dash_url: '/dash',
+    users_url: '/users',
+    reset_mock_users_url: 'http://localhost:3333/api/users/reset',
   },
 });
