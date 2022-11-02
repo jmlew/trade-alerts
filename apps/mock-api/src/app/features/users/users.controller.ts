@@ -51,7 +51,7 @@ export class UsersController {
     return this.toStream(this.userService.getAllUsers());
   }
 
-  // @Get(':id')
+  @Get(':id')
   getUser(@Param('id') id: string): Observable<GetUserResponse> {
     const userId: number = parseInt(id, 10);
     if (!this.userService.doesUserExist(userId)) {
@@ -68,7 +68,7 @@ export class UsersController {
     return this.toStream(this.userService.createUser(params));
   }
 
-  // @Put(':id')
+  @Put(':id')
   updateUser(
     @Param('id') id: string,
     @Body() params: User
@@ -80,7 +80,7 @@ export class UsersController {
     return this.toStream(this.userService.updateUser(userId, params), 1000);
   }
 
-  // @Delete(':id')
+  @Delete(':id')
   deleteUser(@Param('id') id: string): Observable<DeleteUserResponse> {
     const userId: number = parseInt(id, 10);
     if (!this.userService.doesUserExist(userId)) {

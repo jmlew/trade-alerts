@@ -1,11 +1,10 @@
-import { Observable, map, take } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { ApiState } from '@trade-alerts/shared/data-access';
-import { objectsSortOnKey } from '@trade-alerts/shared/util-common';
 
 import { User, UserDetails } from '../entities/user.model';
-import { userApiRxjsAjaxService } from '../infrastructure/rxjs-ajax/user-api-rxjs-ajax.service';
-import { userStore } from '../state/user-data.store';
+import { userEffects } from '../state/user.effects';
+import { userStore } from '../state/user.store';
 
 /*
   Facade for the Users domain which acts as a single API through which other feature
@@ -26,85 +25,27 @@ class UserFacade {
 
   /* State API action handlers. */
   loadUser(userId: number) {
-    // Load the current user value from the store if it exists.
-    const userValue: User | null = userStore.selectUserValue(userId);
-    if (userValue) {
-      userStore.onLoadUserCompleted(userValue);
-      return;
-    }
-    userStore.onReadPending();
-    userApiRxjsAjaxService
-      .getUser(userId)
-      .pipe(take(1))
-      .subscribe({
-        next: (data: User) => userStore.onLoadUserCompleted(data),
-        error: (error: string) => userStore.onReadFailed(error),
-      });
+    userEffects.loadUser(userId);
   }
 
   loadUsers() {
-    userStore.onReadPending();
-    userApiRxjsAjaxService
-      .getUsers()
-      .pipe(
-        map((items: User[]) => objectsSortOnKey<User>(items, 'firstName')),
-        take(1)
-      )
-      .subscribe({
-        next: (data: User[]) => userStore.onLoadUsersCompleted(data),
-        error: (error: string) => userStore.onReadFailed(error),
-      });
+    userEffects.loadUsers();
   }
 
   createUser(values: UserDetails) {
-    userStore.onWritePending();
-    userApiRxjsAjaxService
-      .createUser(values)
-      .pipe(take(1))
-      .subscribe({
-        next: (data: User) => userStore.onCreateUserCompleted(data),
-        error: (error: string) => userStore.onWriteFailed(error),
-      });
+    userEffects.createUser(values);
   }
 
   updateUser(userId: number, values: UserDetails, isOptimistic = false) {
-    // Optimistically update the store while awaiting for the server response.
     isOptimistic
-      ? userStore.onUpdateUserCompleted(userId, values)
-      : userStore.onWritePending();
-    userApiRxjsAjaxService
-      .updateUser(userId, values)
-      .pipe(take(1))
-      .subscribe({
-        next: (data: User) => {
-          // Successful response is ignored if update is handled optimistically.
-          !isOptimistic && userStore.onUpdateUserCompleted(userId, values);
-        },
-        error: (error: string) => {
-          userStore.onWriteFailed(error);
-          // Revert optimistic update on failed response by reloading all users.
-          isOptimistic && this.loadUsers();
-        },
-      });
+      ? userEffects.updateUserOptimistic(userId, values)
+      : userEffects.updateUser(userId, values);
   }
 
   deleteUser(userId: number, isOptimistic = false) {
-    // Optimistically update the store while awaiting for the server response.
-    isOptimistic ? userStore.onDeleteUserCompleted(userId) : userStore.onWritePending();
-    userApiRxjsAjaxService
-      .deleteUser(userId)
-      .pipe(take(1))
-      .subscribe({
-        next: (userId: number) => {
-          // Successful response is ignored since update is handled optimistically.
-          !isOptimistic && userStore.onDeleteUserCompleted(userId);
-        },
-        error: (error: string) => {
-          userStore.onWriteFailed(error);
-          // Revert optimistic update on failed response by reloading all users.
-          isOptimistic && this.loadUsers();
-        },
-      });
+    isOptimistic
+      ? userEffects.deleteUserOptimistic(userId)
+      : userEffects.deleteUser(userId);
   }
 
   clearCurrentUser() {
