@@ -40,8 +40,8 @@ export function UsersListContainer() {
 
   // Handle upates to delete user state.
   useEffect(() => {
-    const { isCompleted, isFailed, getError } = deleteStateRef;
-    if (isCompleted()) {
+    const { isCompleted, isFailed, getError, wasPending } = deleteStateRef;
+    if (wasPending() && isCompleted()) {
       setNotification({
         isShown: true,
         message: `User ${deleteUserId} has been deleted`,

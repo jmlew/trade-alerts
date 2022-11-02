@@ -24,7 +24,7 @@ export function UpdateUserViewModel(): Props {
   const updateStateRef: ApiStateReference = useApiStateReference(updateState);
 
   function updateUser(values: UserDetails) {
-    userFacade.updateUser(user.id, values);
+    userFacade.updateUser(user.id, values, true);
   }
 
   function resetUpdate() {

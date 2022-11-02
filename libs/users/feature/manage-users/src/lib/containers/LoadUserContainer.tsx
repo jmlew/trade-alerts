@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { ErrorMessageWithButton, Loading } from '@trade-alerts/shared/ui-common';
@@ -18,10 +18,10 @@ export function LoadUserContainer({ userId, children }: LoadUserContainerProps) 
 
   useEffect(() => {
     loadUser(userId);
-    // return () => resetLoad();
   }, []);
 
   function goToList() {
+    isFailed() && resetLoad();
     navigate(`/users`);
   }
 

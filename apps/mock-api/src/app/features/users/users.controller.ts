@@ -26,6 +26,10 @@ import {
 } from '@trade-alerts/users/domain';
 
 enum ErrorMessage {
+  BadUpdate = 'Update failed! Sample server error for a failed update request.',
+  BadCreate = 'Create failed! Sample server error for a failed create request.',
+  BadDelete = 'Delete failed! Sample server error for a failed delete request.',
+  BadRead = 'Read failed! Sample server error for a failed read request.',
   TestBadRequest = 'Sample response to simulate an invalid request.',
   NoUserMatch = 'User does not exist in the Mock DB.',
   DuplicateEmail = 'Duplicate email in Mock CRM DB.',
@@ -47,7 +51,7 @@ export class UsersController {
     return this.toStream(this.userService.getAllUsers());
   }
 
-  @Get(':id')
+  // @Get(':id')
   getUser(@Param('id') id: string): Observable<GetUserResponse> {
     const userId: number = parseInt(id, 10);
     if (!this.userService.doesUserExist(userId)) {
@@ -64,7 +68,7 @@ export class UsersController {
     return this.toStream(this.userService.createUser(params));
   }
 
-  @Put(':id')
+  // @Put(':id')
   updateUser(
     @Param('id') id: string,
     @Body() params: User
@@ -76,7 +80,7 @@ export class UsersController {
     return this.toStream(this.userService.updateUser(userId, params), 1000);
   }
 
-  @Delete(':id')
+  // @Delete(':id')
   deleteUser(@Param('id') id: string): Observable<DeleteUserResponse> {
     const userId: number = parseInt(id, 10);
     if (!this.userService.doesUserExist(userId)) {
@@ -93,19 +97,19 @@ export class UsersController {
   @Get()
   @HttpCode(400)
   getUsersFailed(): Observable<HttpException> {
-    return this.toStream(new BadRequestException(ErrorMessage.TestBadRequest), 1000);
+    return this.toStream(new BadRequestException(ErrorMessage.BadRead), 1000);
   }
 
   @Get(':id')
   @HttpCode(400)
   getUserFailed(@Param('id') id: string): Observable<HttpException> {
-    return this.toStream(new BadRequestException(ErrorMessage.TestBadRequest), 1000);
+    return this.toStream(new BadRequestException(ErrorMessage.BadRead), 1000);
   }
 
   @Post()
   @HttpCode(400)
   createUserFailed(@Body() params: UserDetails): Observable<HttpException> {
-    return this.toStream(new BadRequestException(ErrorMessage.TestBadRequest), 1000);
+    return this.toStream(new BadRequestException(ErrorMessage.BadCreate), 1000);
   }
 
   @Put(':id')
@@ -115,14 +119,14 @@ export class UsersController {
     @Body() params: User
   ): Observable<HttpException> {
     // throw new BadRequestException(ErrorMessage.TestBadRequest);
-    return this.toStream(new BadRequestException(ErrorMessage.TestBadRequest), 1000);
+    return this.toStream(new BadRequestException(ErrorMessage.BadUpdate), 1000);
   }
 
   @Delete(':id')
   @HttpCode(400)
   deleteUserFailed(@Param('id') id: string): Observable<HttpException> {
     // throw new BadRequestException(ErrorMessage.TestBadRequest);
-    return this.toStream(new BadRequestException(ErrorMessage.TestBadRequest), 1000);
+    return this.toStream(new BadRequestException(ErrorMessage.BadDelete), 1000);
   }
 
   private toStream<T>(data: T, delay = 500) {

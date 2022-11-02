@@ -56,17 +56,6 @@ class UserFacade {
       });
   }
 
-  updateUser(userId: number, values: UserDetails) {
-    userStore.onWritePending();
-    userApiRxjsAjaxService
-      .updateUser(userId, values)
-      .pipe(take(1))
-      .subscribe({
-        next: (data: User) => userStore.onUpdateUserCompleted(userId, values),
-        error: (error: string) => userStore.onWriteFailed(error),
-      });
-  }
-
   createUser(values: UserDetails) {
     userStore.onWritePending();
     userApiRxjsAjaxService
@@ -78,14 +67,43 @@ class UserFacade {
       });
   }
 
-  deleteUser(userId: number) {
-    userStore.onWritePending();
+  updateUser(userId: number, values: UserDetails, isOptimistic = false) {
+    // Optimistically update the store while awaiting for the server response.
+    isOptimistic
+      ? userStore.onUpdateUserCompleted(userId, values)
+      : userStore.onWritePending();
+    userApiRxjsAjaxService
+      .updateUser(userId, values)
+      .pipe(take(1))
+      .subscribe({
+        next: (data: User) => {
+          // Successful response is ignored if update is handled optimistically.
+          !isOptimistic && userStore.onUpdateUserCompleted(userId, values);
+        },
+        error: (error: string) => {
+          userStore.onWriteFailed(error);
+          // Revert optimistic update on failed response by reloading all users.
+          isOptimistic && this.loadUsers();
+        },
+      });
+  }
+
+  deleteUser(userId: number, isOptimistic = false) {
+    // Optimistically update the store while awaiting for the server response.
+    isOptimistic ? userStore.onDeleteUserCompleted(userId) : userStore.onWritePending();
     userApiRxjsAjaxService
       .deleteUser(userId)
       .pipe(take(1))
       .subscribe({
-        next: (userId: number) => userStore.onDeleteUserCompleted(userId),
-        error: (error: string) => userStore.onWriteFailed(error),
+        next: (userId: number) => {
+          // Successful response is ignored since update is handled optimistically.
+          !isOptimistic && userStore.onDeleteUserCompleted(userId);
+        },
+        error: (error: string) => {
+          userStore.onWriteFailed(error);
+          // Revert optimistic update on failed response by reloading all users.
+          isOptimistic && this.loadUsers();
+        },
       });
   }
 

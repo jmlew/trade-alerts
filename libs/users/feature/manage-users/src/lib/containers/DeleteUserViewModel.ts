@@ -25,7 +25,7 @@ export function DeleteUserViewModel(): Props {
 
   function deleteUser(userId: number) {
     setDeleteUserId(userId);
-    userFacade.deleteUser(userId);
+    userFacade.deleteUser(userId, true);
   }
 
   function resetDelete() {

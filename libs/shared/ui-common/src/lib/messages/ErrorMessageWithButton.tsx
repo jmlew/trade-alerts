@@ -15,7 +15,7 @@ export function ErrorMessageWithButton({ top, label, children, onClick }: Props)
   return (
     <>
       <ErrorMessage top={top}>{children}</ErrorMessage>
-      <Button variant="contained" onClick={onClick}>
+      <Button variant="contained" onClick={onClick} sx={{ mt: 3 }}>
         {label}
       </Button>
     </>
