@@ -6,6 +6,8 @@ import { isDev } from '../env/env-var.util';
 
 export class ObservableStore<State> {
   protected enableLogging: boolean;
+  protected extraLoggingKeys: (keyof State)[];
+
   protected state: State;
   protected initialState: State;
   protected subject: BehaviorSubject<State>;
@@ -16,10 +18,10 @@ export class ObservableStore<State> {
     this.subject = new BehaviorSubject(initialState);
   }
 
-  applyState() {
+  protected applyState() {
     this.subject.next(this.state);
     if (this.enableLogging && isDev()) {
-      console.log(`${this.constructor.name}:`, this.state);
+      this.logState();
     }
   }
 
@@ -34,5 +36,19 @@ export class ObservableStore<State> {
 
   selectStateValue(): State {
     return this.subject.getValue();
+  }
+
+  private logState() {
+    const extras: (string | State[keyof State])[] = this.extraLoggingKeys
+      ? this.extraLoggingKeys.reduce(
+          (accum: (string | State[keyof State])[], key: keyof State) => [
+            ...accum,
+            `\n| ${String(key)}:`,
+            this.state[key],
+          ],
+          []
+        )
+      : [];
+    console.log(`${this.constructor.name}:`, ...extras, this.state);
   }
 }

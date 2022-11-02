@@ -22,6 +22,7 @@ const initialState: State = {
 
 class DashboardDataStore extends ObservableStore<State> {
   override enableLogging = false;
+  override extraLoggingKeys: (keyof State)[] = ['apiState'];
 
   onPending() {
     this.state = { ...this.state, apiState: ApiStateManager.onPending() };

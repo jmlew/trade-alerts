@@ -29,12 +29,29 @@ const initialState: State = {
 
 class UserStore extends ObservableStore<State> {
   override enableLogging = true;
+  override extraLoggingKeys: (keyof State)[] = ['apiReadState', 'apiWriteState'];
 
   constructor(
     initialState: State,
     private entitiesService: EntitiesService<User, number>
   ) {
     super(initialState);
+  }
+
+  onReadIdle() {
+    this.state = {
+      ...this.state,
+      apiReadState: ApiStateManager.onIdle(),
+    };
+    this.applyState();
+  }
+
+  onWriteIdle() {
+    this.state = {
+      ...this.state,
+      apiWriteState: ApiStateManager.onIdle(),
+    };
+    this.applyState();
   }
 
   onReadPending() {
@@ -65,22 +82,6 @@ class UserStore extends ObservableStore<State> {
     this.state = {
       ...this.state,
       apiWriteState: ApiStateManager.onFailed(error),
-    };
-    this.applyState();
-  }
-
-  onReadIdle() {
-    this.state = {
-      ...this.state,
-      apiReadState: ApiStateManager.onIdle(),
-    };
-    this.applyState();
-  }
-
-  onWriteIdle() {
-    this.state = {
-      ...this.state,
-      apiWriteState: ApiStateManager.onIdle(),
     };
     this.applyState();
   }
