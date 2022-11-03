@@ -18,6 +18,7 @@
     "dashboard-ui-grids": "libs/dashboard/ui/grids",
     "home-feature": "libs/home/feature",
     "mock-api": "apps/mock-api",
+    "mocks": "libs/mocks",
     "shared-data-access": "libs/shared/data-access",
     "shared-environments": "libs/shared/environments",
     "shared-feature-notification": "libs/shared/feature-notification",

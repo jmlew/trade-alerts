@@ -21,7 +21,8 @@
                   "type:feature",
                   "type:ui",
                   "type:util",
-                  "type:env"
+                  "type:env",
+                  "type:mock"
                 ]
               },
               {
@@ -31,6 +32,16 @@
                   "type:domain-logic",
                   "type:feature",
                   "type:util",
+                  "type:ui"
+                ]
+              },
+              {
+                "sourceTag": "type:shell",
+                "onlyDependOnLibsWithTags": [
+                  "type:api",
+                  "type:data-access",
+                  "type:domain-logic",
+                  "type:feature",
                   "type:ui"
                 ]
               },
@@ -56,16 +67,6 @@
                 ]
               },
               {
-                "sourceTag": "type:shell",
-                "onlyDependOnLibsWithTags": [
-                  "type:api",
-                  "type:data-access",
-                  "type:domain-logic",
-                  "type:feature",
-                  "type:ui"
-                ]
-              },
-              {
                 "sourceTag": "type:ui",
                 "onlyDependOnLibsWithTags": [
                   "type:data-access",
@@ -82,6 +83,10 @@
               {
                 "sourceTag": "type:util",
                 "onlyDependOnLibsWithTags": ["type:util"]
+              },
+              {
+                "sourceTag": "type:e2e",
+                "onlyDependOnLibsWithTags": ["type:mock"]
               },
               {
                 "sourceTag": "domain:shared",

@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { users } from '@trade-alerts/mocks';
 import * as fromUtilsLib from '@trade-alerts/shared/util-common';
 import { EntitiesManagerService } from '@trade-alerts/shared/util-common';
 import {
@@ -11,8 +12,6 @@ import {
   UserDetails,
 } from '@trade-alerts/users/domain';
 
-import * as usersDb from '../../../assets/db/users.json';
-
 @Injectable()
 export class UsersService extends EntitiesManagerService<User, number> {
   constructor() {
@@ -22,7 +21,7 @@ export class UsersService extends EntitiesManagerService<User, number> {
   }
 
   initDb() {
-    const items: User[] = { ...usersDb }.data;
+    const items: User[] = { ...users }.data;
     this.setEntities(items);
   }
 

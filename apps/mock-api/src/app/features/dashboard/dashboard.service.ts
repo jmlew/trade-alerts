@@ -4,13 +4,13 @@ import {
   AlertUpdateResponse,
 } from '@trade-alerts/alert-manager/domain';
 import { AlertInfo, DashboardApiData, TradesInfo } from '@trade-alerts/dashboard/domain';
+import { dashboard } from '@trade-alerts/mocks';
 import {
   getDateTimeFromMills,
   getDurationAsDays,
   getDurationFromTo,
 } from '@trade-alerts/shared/util-common';
 
-import * as dashboardsDb from '../../../assets/db/mock-dash.json';
 import { AlertManageService } from './alert-manage.service';
 
 @Injectable()
@@ -23,7 +23,7 @@ export class DashboardDataService {
   }
 
   initDb() {
-    this.db = { ...dashboardsDb } as DashboardApiData;
+    this.db = { ...dashboard } as DashboardApiData;
     this.alertsService = new AlertManageService(this.db);
   }
 

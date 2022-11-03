@@ -45,6 +45,7 @@
       "@trade-alerts/dashboard/ui/grids": ["libs/dashboard/ui/grids/src/index.ts"],
       "@trade-alerts/form/util": ["libs/form/util/src/index.ts"],
       "@trade-alerts/home/feature": ["libs/home/feature/src/index.ts"],
+      "@trade-alerts/mocks": ["libs/mocks/src/index.ts"],
       "@trade-alerts/shared/data-access": ["libs/shared/data-access/src/index.ts"],
       "@trade-alerts/shared/environments": ["libs/shared/environments/src/index.ts"],
       "@trade-alerts/shared/feature/notification": [
