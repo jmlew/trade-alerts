@@ -60,8 +60,7 @@
         "libs/users/feature/manage-users/src/index.ts"
       ],
       "@trade-alerts/users/shell": ["libs/users/shell/src/index.ts"],
-      "@trade-alerts/users/ui": ["libs/users/ui/src/index.ts"],
-      "@trade-alerts/users/util": ["libs/users/util/src/index.ts"]
+      "@trade-alerts/users/ui": ["libs/users/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

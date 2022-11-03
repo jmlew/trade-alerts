@@ -6,8 +6,11 @@ import {
 import { useObservable } from '@trade-alerts/shared/util-common';
 import { User, UserDetails, userFacade } from '@trade-alerts/users/domain';
 
+import { getUserFormParams } from '../entities/user-params.utils';
+
 interface Props {
-  createdUser: User | null;
+  user: User | null;
+  formParams: UserDetails;
   createState: ApiState | null;
   createStateRef: ApiStateReference;
   createUser: (params: UserDetails) => void;
@@ -16,11 +19,12 @@ interface Props {
 }
 
 export function CreateUserViewModel(): Props {
-  const createdUser: User | null = useObservable<User | null>(userFacade.currentUser$);
+  const user: User | null = useObservable<User | null>(userFacade.currentUser$);
   const createState: ApiState | null = useObservable<ApiState>(
     userFacade.usersWriteState$
   );
   const createStateRef: ApiStateReference = useApiStateReference(createState);
+  const formParams: UserDetails = getUserFormParams();
 
   function createUser(params: UserDetails) {
     userFacade.createUser(params);
@@ -35,7 +39,8 @@ export function CreateUserViewModel(): Props {
   }
 
   return {
-    createdUser,
+    user,
+    formParams,
     createUser,
     clearCurrentUser,
     resetCreate,

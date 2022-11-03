@@ -1,10 +1,9 @@
-export interface UserDetails {
+export interface User {
+  id: number;
   email: string;
   firstName: string;
   lastName: string;
   avatar?: string;
 }
 
-export interface User extends UserDetails {
-  id: number;
-}
+export type UserDetails = Omit<User, 'id'>;

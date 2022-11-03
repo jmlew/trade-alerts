@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { useNotification } from '@trade-alerts/shared/feature/notification';
 import { Loading, NotificationType } from '@trade-alerts/shared/ui-common';
 import { UserDetailsForm } from '@trade-alerts/users/ui';
-import { getUserFormParams } from '@trade-alerts/users/util';
 
 import { CreateUserViewModel as useVM } from './CreateUserViewModel';
 
@@ -12,7 +11,8 @@ export function CreateUserContainer() {
   const navigate = useNavigate();
   const { setNotification } = useNotification();
   const {
-    createdUser,
+    user,
+    formParams,
     createUser,
     clearCurrentUser,
     resetCreate,
@@ -22,10 +22,10 @@ export function CreateUserContainer() {
   const { getError, isCompleted, isFailed, isPending } = createStateRef;
 
   useEffect(() => {
-    if (isCompleted() && createdUser != null) {
+    if (isCompleted() && user != null) {
       setNotification({
         isShown: true,
-        message: `User ${createdUser.firstName} ${createdUser.lastName} has been created`,
+        message: `User ${user.firstName} ${user.lastName} has been created`,
         type: NotificationType.Success,
       });
       clearCurrentUser();
@@ -34,7 +34,7 @@ export function CreateUserContainer() {
     if (isFailed()) {
       setNotification({ isShown: true, message: getError() || 'Update failed' });
     }
-  }, [createState, createdUser]);
+  }, [createState, user]);
 
   useLayoutEffect(() => {
     return () => resetCreate();
@@ -50,7 +50,7 @@ export function CreateUserContainer() {
       <UserDetailsForm
         onSubmit={createUser}
         onCancel={goToList}
-        initialValues={getUserFormParams()}
+        initialValues={formParams}
       />
     </>
   );

@@ -7,9 +7,11 @@ import { useObservable } from '@trade-alerts/shared/util-common';
 import { UserDetails, UserRecord, userFacade } from '@trade-alerts/users/domain';
 
 import { useUserContext } from '../context/user.context';
+import { getUserFormParams } from '../entities/user-params.utils';
 
 interface Props {
   user: UserRecord;
+  formParams: UserDetails;
   updateState: ApiState | null;
   updateStateRef: ApiStateReference;
   updateUser: (values: UserDetails) => void;
@@ -22,6 +24,7 @@ export function UpdateUserViewModel(): Props {
     userFacade.usersWriteState$
   );
   const updateStateRef: ApiStateReference = useApiStateReference(updateState);
+  const formParams: UserDetails = getUserFormParams(user);
 
   function updateUser(values: UserDetails) {
     userFacade.updateUser(user.id, values, true);
@@ -31,5 +34,5 @@ export function UpdateUserViewModel(): Props {
     userFacade.resetWriteState();
   }
 
-  return { user, updateUser, resetUpdate, updateState, updateStateRef };
+  return { user, formParams, updateUser, resetUpdate, updateState, updateStateRef };
 }

@@ -17,9 +17,9 @@ class AlertManagerFacade {
   alertManagerState$: Observable<ApiState> = alertManagerStore.selectApiState();
   alertId$: Observable<number | null> = alertManagerStore.selectAlertId();
 
-  // Stream of simple alerts created from the dashboard alerts stream.
+  // Stream of domain alerts converted from the Dashboard domain's alerts.
   alerts$: Observable<Alert[]> = dashAlerts$.pipe(
-    map((alerts: Alert[]) => this.mapToAlerts(alerts))
+    map((alerts: Alert[]) => this.mapToDomainAlerts(alerts))
   );
 
   constructor(private dataService: AlertManagerDataService) {}
@@ -50,7 +50,11 @@ class AlertManagerFacade {
     updateDashDataWithAlert(id, changes);
   }
 
-  private mapToAlerts(alerts: Alert[]): Alert[] {
+  /**
+   * Maps the full Alert as used in the Dashboard domain to a simplified model which
+   * includes a subset of filds as used in this domain.
+   */
+  private mapToDomainAlerts(alerts: Alert[]): Alert[] {
     return alerts.map((alert: Alert) => {
       const { alertID, status, cif, rmId } = alert;
       return { alertID, status, cif, rmId };
