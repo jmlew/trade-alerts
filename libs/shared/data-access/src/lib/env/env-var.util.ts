@@ -24,3 +24,7 @@ export function isDev(): boolean {
 export function isUseMockInDev(): boolean {
   return environment.useMockInDev;
 }
+
+export function isCypress(): boolean {
+  return (window as any).Cypress;
+}

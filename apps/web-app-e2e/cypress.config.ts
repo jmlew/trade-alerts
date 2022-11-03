@@ -12,6 +12,7 @@ const cypressJsonConfig = {
   chromeWebSecurity: false,
   specPattern: 'src/e2e/**/*.cy.{js,jsx,ts,tsx}',
   supportFile: 'src/support/e2e.ts',
+  baseUrl: 'http://localhost:4200',
 };
 export default defineConfig({
   projectId: '7fq9n6',
@@ -22,6 +23,6 @@ export default defineConfig({
   env: {
     dash_url: '/dash',
     users_url: '/users',
-    reset_mock_users_url: 'http://localhost:3333/api/users/reset',
+    reset_mock_users_url: 'http://localhost:4200/api/users/reset',
   },
 });

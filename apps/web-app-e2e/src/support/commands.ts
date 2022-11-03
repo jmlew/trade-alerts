@@ -12,21 +12,45 @@
 declare namespace Cypress {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface Chainable<Subject> {
-    dataCy(attrValue: string): Chainable<JQuery<HTMLElement>>;
-    dataCyLike(attrValue: string): Chainable<JQuery<HTMLElement>>;
-    attrByIndex(attr: string, index: number): Chainable<JQuery<HTMLElement>>;
+    /**
+     * Selects elements with attributes named 'data-cy'.
+     * @example cy.dataCy('foo') returns element with data-cy="foo".
+     */
+    dataCySel(selector: string): Chainable<JQuery<HTMLElement>>;
+    /**
+     * Selects elements with attributes prefixed with 'data-cy'.
+     * @example cy.dataCy('foo') returns element with data-cy-foo="foo".
+     */
+    dataCyLikeSel(selector: string): Chainable<JQuery<HTMLElement>>;
+    /**
+     * Selects elements with attributes named with a given @param attr.
+     * @example cy.attrByIndex('data-cy-foo') returns elements with attributes named
+     * includes data-cy-foo.
+     */
+    attrSel(attr: string): Chainable<JQuery<HTMLElement>>;
+    /**
+     * Selects element with attributes named with a given @param attr of a given @param
+     * index.
+     * @example cy.attrByIndex('data-cy-foo', 2) returns the 2nd sibling element with an
+     * attribute name which includes data-cy-foo.
+     */
+    attrSelByIndex(attr: string, index: number): Chainable<JQuery<HTMLElement>>;
   }
 }
 
-Cypress.Commands.add('dataCy', (attrValue) => {
-  return cy.get(`[data-cy=${attrValue}]`);
+Cypress.Commands.add('dataCySel', (selector) => {
+  return cy.get(`[data-cy=${selector}]`);
 });
 
-Cypress.Commands.add('dataCyLike', (attrValue) => {
-  return cy.get(`[data-cy-*=${attrValue}]`);
+Cypress.Commands.add('dataCyLikeSel', (selector) => {
+  return cy.get(`[data-cy-*=${selector}]`);
 });
 
-Cypress.Commands.add('attrByIndex', (attr, index) => {
+Cypress.Commands.add('attrSel', (attr) => {
+  return cy.get(`[${attr}]`);
+});
+
+Cypress.Commands.add('attrSelByIndex', (attr, index) => {
   return cy.get(`[${attr}]:nth-child(${index})`);
 });
 
