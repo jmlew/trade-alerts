@@ -54,7 +54,7 @@ Use the below convenience methods to generate boilerplate code structure of the 
 
 For libraries which are dependant on the React library: Features, UIs, Shells.
 
-`nx g lib <some-lib> --directory=<some-domain>/<lib-type> --tags='type:<lib-type>, domain:<some-domain>' --dry-run`
+Run `nx g lib <some-lib> --directory=<some-domain>/<lib-type> --tags='type:<lib-type>, domain:<some-domain>' --dry-run`
 
 _Example: `nx g lib manage-users --directory=users/feature --tags='type:feature, domain:users'`_
 
@@ -62,7 +62,7 @@ _Example: `nx g lib manage-users --directory=users/feature --tags='type:feature,
 
 For libraries which do not have a direct dependancy on the React library: Domains, Utils, UIs.
 
-`nx g @nrwl/workspace:lib <some-lib> --directory=<some-domain>/<lib-type> --tags='type:<lib-type>, domain:<some-domain>' --dry-run`
+Run `nx g @nrwl/workspace:lib <some-lib> --directory=<some-domain>/<lib-type> --tags='type:<lib-type>, domain:<some-domain>' --dry-run`
 
 _Example: `nx g lib domain --directory=users --tags='type:domain-logic, domain:users'`_
 
@@ -97,6 +97,25 @@ Run `npm run build:prod` to build the production-ready project.
 ### Serve Build files locally
 
 Run `npm run serve:dist` to serve and test the built application which was generated using the BUILD command above using the `live-server` library. Navigate to `http://localhost:6600/`
+
+## Testing
+
+### Cypress: e2e Tests
+
+TODO: Add documentation.
+
+### Cypress: Component Tests
+
+To add Cypress component testing to a library, use the below commands. Note, the bills target for the web app should be used in cases where the given library is set up without one (which is usually the case for libraries in this workspace which are not configured to build separately).
+
+Run `nx g @nrwl/react:cypress-component-configuration --build-target=<main-web-app>:build --project=<some-lib>`
+
+_Example: `nx g @nrwl/react:cypress-component-configuration --build-target=web-app:build --project=users-feature-manage-users'`_
+
+Run `nx component-test <some-lib>` to run tests headless mode.
+Run `nx component-test <some-lib> --watch` to run tests headled mode (in the browser).
+
+_Example: `nx component-test users-feature-manage-users --watch'`_
 
 ## Understand your workspace
 

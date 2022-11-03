@@ -2,21 +2,39 @@
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/users/feature/manage-users/src",
   "projectType": "library",
-  "tags": ["type:feature", "domain:users"],
+  "tags": [
+    "type:feature",
+    "domain:users"
+  ],
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["libs/users/feature/manage-users/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": [
+          "libs/users/feature/manage-users/**/*.{ts,tsx,js,jsx}"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/libs/users/feature/manage-users"],
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/users/feature/manage-users"
+      ],
       "options": {
         "jestConfig": "libs/users/feature/manage-users/jest.config.ts",
         "passWithNoTests": true
+      }
+    },
+    "component-test": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "libs/users/feature/manage-users/cypress.config.ts",
+        "testingType": "component",
+        "devServerTarget": "web-app:build",
+        "skipServe": true
       }
     }
   }

@@ -1,4 +1,5 @@
-// Note: type definitions are added to custom cypress.d.ts.
+// Note: type definitions are added to custom cypress.d.ts ("../../types/cypress.d.ts")
+// referenced in the tsconfig.
 
 Cypress.Commands.add('dataCySel', (selector) => {
   return cy.get(`[data-cy=${selector}]`);
