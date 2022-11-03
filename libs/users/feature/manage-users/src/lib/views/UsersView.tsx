@@ -35,7 +35,7 @@ const Header = () => (
       Users
     </Typography>
     <Fab component={Link} to="new" size="medium" color="primary" aria-label="new user">
-      <Add />
+      <Add data-cy-btn-new />
     </Fab>
   </Box>
 );

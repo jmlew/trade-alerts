@@ -52,9 +52,19 @@ Use the below convenience methods to generate boilerplate code structure of the 
 
 ### Generate a React library
 
+For libraries which are dependant on the React library: Features, UIs, Shells.
+
 `nx g lib <some-lib> --directory=<some-domain>/<lib-type> --tags='type:<lib-type>, domain:<some-domain>' --dry-run`
 
 _Example: `nx g lib manage-users --directory=users/feature --tags='type:feature, domain:users'`_
+
+### Generate a Workspace (Typescript) library
+
+For libraries which do not have a direct dependancy on the React library: Domains, Utils, UIs.
+
+`nx g @nrwl/workspace:lib <some-lib> --directory=<some-domain>/<lib-type> --tags='type:<lib-type>, domain:<some-domain>' --dry-run`
+
+_Example: `nx g lib domain --directory=users --tags='type:domain-logic, domain:users'`_
 
 ## Storybook
 

@@ -21,8 +21,8 @@ export default defineConfig({
     ...cypressJsonConfig,
   },
   env: {
-    dash_url: '/dash',
-    users_url: '/users',
-    reset_mock_users_url: 'http://localhost:4200/api/users/reset',
+    dash_url: 'dash',
+    users_url: 'users',
+    reset_mock_users_url: '/api/users/reset',
   },
 });

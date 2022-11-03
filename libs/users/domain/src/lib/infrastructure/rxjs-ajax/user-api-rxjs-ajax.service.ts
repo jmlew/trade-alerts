@@ -8,7 +8,7 @@ import {
 } from '@trade-alerts/shared/data-access';
 
 import { User, UserDetails } from '../../entities/user.model';
-import { UserApiParam, UserApiUri } from '../user-api.enum';
+import { UserApiUri } from '../user-api.enum';
 import { UserApiMapper } from '../user-api.mapper';
 import {
   CreateUserResponse,
