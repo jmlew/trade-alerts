@@ -15,7 +15,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/alert-manager/feature/manage-alerts"],
+      "outputs": ["{workspaceRoot}/coverage/libs/alert-manager/feature/manage-alerts"],
       "options": {
         "jestConfig": "libs/alert-manager/feature/manage-alerts/jest.config.ts",
         "passWithNoTests": true

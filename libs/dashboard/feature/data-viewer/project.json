@@ -13,7 +13,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/dashboard/feature/data-viewer"],
+      "outputs": ["{workspaceRoot}/coverage/libs/dashboard/feature/data-viewer"],
       "options": {
         "jestConfig": "libs/dashboard/feature/data-viewer/jest.config.ts",
         "passWithNoTests": true

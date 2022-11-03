@@ -5,13 +5,15 @@
   "tags": ["type:app"],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:webpack",
+      "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/mock-api",
         "main": "apps/mock-api/src/main.ts",
         "tsConfig": "apps/mock-api/tsconfig.app.json",
-        "assets": ["apps/mock-api/src/assets"]
+        "assets": ["apps/mock-api/src/assets"],
+        "target": "node",
+        "compiler": "tsc"
       },
       "configurations": {
         "production": {
@@ -42,7 +44,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/mock-api"],
+      "outputs": ["{workspaceRoot}/coverage/apps/mock-api"],
       "options": {
         "jestConfig": "apps/mock-api/jest.config.ts",
         "passWithNoTests": true

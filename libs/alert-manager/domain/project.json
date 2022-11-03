@@ -12,7 +12,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/alert-manager/domain"],
+      "outputs": ["{workspaceRoot}/coverage/libs/alert-manager/domain"],
       "options": {
         "jestConfig": "libs/alert-manager/domain/jest.config.ts",
         "passWithNoTests": true
