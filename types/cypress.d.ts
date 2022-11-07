@@ -1,13 +1,20 @@
-import { mount } from 'cypress/react';
+import { MountOptions, MountReturn } from 'cypress/react';
+import { MountOptions, MountReturn } from 'cypress/react';
+import { ReactNode } from 'react';
+import { MemoryRouterProps } from 'react-router-dom';
 
-// Augment the Cypress namespace to include type definitions for
-// your custom command.
-// Alternatively, can be defined in cypress/support/component.d.ts
-// with a <reference path="./component" /> at the top of your spec.
 declare global {
   namespace Cypress {
     interface Chainable {
-      mount: typeof mount;
+      /**
+       * Mounts a React node
+       * @param component React Node to mount
+       * @param options Additional options to pass into mount
+       */
+      mount(
+        component: ReactNode,
+        options?: MountOptions & { routerProps?: MemoryRouterProps }
+      ): Chainable<MountReturn>;
       /**
        * Selects elements with attributes named 'data-cy'.
        * @example cy.dataCy('foo') returns element with data-cy="foo".

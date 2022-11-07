@@ -1,5 +1,6 @@
 describe('Users List', () => {
   const attrListItem = 'list-item';
+
   beforeEach(() => {
     cy.request(Cypress.env('reset_mock_users_url'));
     cy.visit(Cypress.env('users_url'));
@@ -26,8 +27,8 @@ describe('Users List', () => {
       cy.get('@firstListItem').find('[data-cy-btn-delete]').click();
       // Verify the number of list items has decreased by 1.
       cy.dataCyAttr(attrListItem)
-        .its('length')
-        .should('equal', $items.length - 1);
+        .siblings()
+        .should('have.length', $items.length - 1);
       // Verify the original list item is gone.
       cy.get('@firstListItemUserId').then((id) => {
         cy.dataCyAttrSel(attrListItem, String(id)).should('not.exist');

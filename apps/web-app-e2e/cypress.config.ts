@@ -23,6 +23,6 @@ export default defineConfig({
   env: {
     dash_url: 'dash',
     users_url: 'users',
-    reset_mock_users_url: '/api/users/reset',
+    reset_mock_users_url: 'api/users/reset',
   },
 });

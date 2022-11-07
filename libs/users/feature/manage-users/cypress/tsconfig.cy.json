@@ -7,6 +7,7 @@
   },
   "include": [
     "support/**/*.ts",
+    "support/**/*.tsx",
     "../cypress.config.ts",
     "../../../../../types/cypress.d.ts",
     "../**/*.cy.ts",
