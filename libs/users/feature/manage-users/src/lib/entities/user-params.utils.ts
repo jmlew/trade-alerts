@@ -1,6 +1,6 @@
-import { UserDetails, UserRecord } from '@trade-alerts/users/domain';
+import { User, UserDetails, UserRecord } from '@trade-alerts/users/domain';
 
-export function getUserFormParams(user?: UserRecord): UserDetails {
+export function getUserFormParams(user?: UserRecord | User): UserDetails {
   if (user == null) {
     return {
       firstName: '',
@@ -8,7 +8,7 @@ export function getUserFormParams(user?: UserRecord): UserDetails {
       email: '',
     };
   } else {
-    const { id: remove, ...initialValues } = user;
-    return initialValues;
+    const { email, firstName, lastName } = user;
+    return { email, firstName, lastName };
   }
 }
