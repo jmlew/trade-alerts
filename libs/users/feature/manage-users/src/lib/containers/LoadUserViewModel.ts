@@ -4,9 +4,9 @@ import {
   useApiStateReference,
 } from '@trade-alerts/shared/data-access';
 import { useObservable } from '@trade-alerts/shared/util-common';
-import { User, userFacade } from '@trade-alerts/users/domain';
+import { User, UserFacade } from '@trade-alerts/users/domain';
 
-interface Props {
+interface ViewModel {
   user: User | null;
   loadState: ApiState | null;
   loadStateRef: ApiStateReference;
@@ -14,7 +14,7 @@ interface Props {
   resetLoad: () => void;
 }
 
-export function LoadUserViewModel(userId: number): Props {
+export function LoadUserViewModel(userFacade: UserFacade, userId: number): ViewModel {
   const user: User | null = useObservable<User | null>(userFacade.selectUser(userId));
   const loadState: ApiState | null = useObservable<ApiState>(userFacade.usersReadState$);
   const loadStateRef: ApiStateReference = useApiStateReference(loadState);

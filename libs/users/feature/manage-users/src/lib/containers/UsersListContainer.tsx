@@ -8,6 +8,7 @@ import {
   Loading,
   NotificationType,
 } from '@trade-alerts/shared/ui-common';
+import { userFacade } from '@trade-alerts/users/domain';
 import { UsersList } from '@trade-alerts/users/ui';
 
 import { DeleteUserViewModel as useDeleteUserVM } from './DeleteUserViewModel';
@@ -16,9 +17,9 @@ import { LoadUsersViewModel as useLoadUsersVM } from './LoadUsersViewModel';
 export function UsersListContainer() {
   const navigate = useNavigate();
   const { setNotification } = useNotification();
-  const { users, loadUsers, loadState, loadStateRef } = useLoadUsersVM();
+  const { users, loadUsers, loadState, loadStateRef } = useLoadUsersVM(userFacade);
   const { deleteUserId, deleteUser, resetDelete, deleteState, deleteStateRef } =
-    useDeleteUserVM();
+    useDeleteUserVM(userFacade);
 
   // Handle upates to load users state.
   useLayoutEffect(() => {

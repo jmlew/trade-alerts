@@ -1,7 +1,8 @@
-import { ReactNode, useEffect, useLayoutEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { ErrorMessageWithButton, Loading } from '@trade-alerts/shared/ui-common';
+import { userFacade } from '@trade-alerts/users/domain';
 
 import { UserContextProvider } from '../context/UserContextProvider';
 import { LoadUserViewModel as useVM } from './LoadUserViewModel';
@@ -13,7 +14,7 @@ interface LoadUserContainerProps {
 
 export function LoadUserContainer({ userId, children }: LoadUserContainerProps) {
   const navigate = useNavigate();
-  const { user, loadUser, resetLoad, loadStateRef } = useVM(userId);
+  const { user, loadUser, resetLoad, loadStateRef } = useVM(userFacade, userId);
   const { getError, isCompleted, isFailed, isPending } = loadStateRef;
 
   useEffect(() => {

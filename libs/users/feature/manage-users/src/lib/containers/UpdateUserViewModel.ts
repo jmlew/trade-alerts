@@ -4,12 +4,12 @@ import {
   useApiStateReference,
 } from '@trade-alerts/shared/data-access';
 import { useObservable } from '@trade-alerts/shared/util-common';
-import { UserDetails, UserRecord, userFacade } from '@trade-alerts/users/domain';
+import { UserDetails, UserFacade, UserRecord } from '@trade-alerts/users/domain';
 
 import { useUserContext } from '../context/user.context';
 import { getUserFormParams } from '../entities/user-params.utils';
 
-interface Props {
+interface ViewModel {
   user: UserRecord;
   formParams: UserDetails;
   updateState: ApiState | null;
@@ -18,7 +18,7 @@ interface Props {
   resetUpdate: () => void;
 }
 
-export function UpdateUserViewModel(): Props {
+export function UpdateUserViewModel(userFacade: UserFacade): ViewModel {
   const { user } = useUserContext();
   const updateState: ApiState | null = useObservable<ApiState>(
     userFacade.usersWriteState$

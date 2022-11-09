@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useNotification } from '@trade-alerts/shared/feature/notification';
 import { Loading, NotificationType } from '@trade-alerts/shared/ui-common';
+import { userFacade } from '@trade-alerts/users/domain';
 import { UserDetailsForm } from '@trade-alerts/users/ui';
 
 import { UpdateUserViewModel as useVM } from './UpdateUserViewModel';
@@ -11,7 +12,7 @@ export function UpdateUserContainer() {
   const navigate = useNavigate();
   const { setNotification } = useNotification();
   const { user, formParams, updateUser, resetUpdate, updateState, updateStateRef } =
-    useVM();
+    useVM(userFacade);
   const { getError, isCompleted, isFailed, isPending } = updateStateRef;
 
   useEffect(() => {

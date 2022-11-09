@@ -13,7 +13,7 @@ import { userStore } from '../state/user.store';
   Exposes a simplified API for state management through custom observabe stores.
 */
 
-class UserFacade {
+export class UserFacade {
   /* State selectors. */
   usersReadState$: Observable<ApiState> = userStore.selectApiReadState();
   usersWriteState$: Observable<ApiState> = userStore.selectApiWriteState();

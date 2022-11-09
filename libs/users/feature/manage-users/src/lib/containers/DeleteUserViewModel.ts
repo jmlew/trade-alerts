@@ -6,9 +6,9 @@ import {
   useApiStateReference,
 } from '@trade-alerts/shared/data-access';
 import { useObservable } from '@trade-alerts/shared/util-common';
-import { userFacade } from '@trade-alerts/users/domain';
+import { UserFacade } from '@trade-alerts/users/domain';
 
-interface Props {
+interface ViewModel {
   deleteUserId: number | null;
   deleteState: ApiState | null;
   deleteStateRef: ApiStateReference;
@@ -16,7 +16,7 @@ interface Props {
   resetDelete: () => void;
 }
 
-export function DeleteUserViewModel(): Props {
+export function DeleteUserViewModel(userFacade: UserFacade): ViewModel {
   const [deleteUserId, setDeleteUserId] = useState<number | null>(null);
   const deleteState: ApiState | null = useObservable<ApiState>(
     userFacade.usersWriteState$
