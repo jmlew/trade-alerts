@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "projects": {
     "alert-manager-api": "libs/alert-manager/api",
     "alert-manager-domain": "libs/alert-manager/domain",
@@ -33,6 +34,5 @@
     "users-ui": "libs/users/ui",
     "web-app": "apps/web-app",
     "web-app-e2e": "apps/web-app-e2e"
-  },
-  "$schema": "./node_modules/nx/schemas/workspace-schema.json"
+  }
 }
