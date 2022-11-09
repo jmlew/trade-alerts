@@ -1,5 +1,4 @@
 import { MountOptions, MountReturn } from 'cypress/react';
-import { MountOptions, MountReturn } from 'cypress/react';
 import { ReactNode } from 'react';
 import { MemoryRouterProps } from 'react-router-dom';
 
@@ -16,24 +15,44 @@ declare global {
         options?: MountOptions & { routerProps?: MemoryRouterProps }
       ): Chainable<MountReturn>;
       /**
-       * Selects elements with attributes named 'data-cy'.
-       * @example cy.dataCy('foo') returns element with data-cy="foo".
+       * Selects all elements with attributes named 'data-cy'.
+       * @example cy.dataCy('foo') returns elements with data-cy="foo".
        */
-      dataCySel(selector: string): Chainable<JQuery<HTMLElement>>;
+      getDataCySel(selector: string): Chainable<JQuery<HTMLElement>>;
 
       /**
-       * Selects elements with attributes prefixed with 'data-cy' and includes a given
+       * Selects found child element with attributes named 'data-cy'.
+       * @example cy.dataCy('foo') returns elements with data-cy="foo".
+       */
+      findDataCySel(selector: string): Chainable<JQuery<HTMLElement>>;
+
+      /**
+       * Selects all elements with attributes prefixed with 'data-cy' and includes a given
+       * @param custom.
+       * @example cy.dataCy('bar', 'foo') returns elements with data-cy-bar="foo".
+       */
+      getDataCyAttrSel(attr: string, selector: string): Chainable<JQuery<HTMLElement>>;
+
+      /**
+       * Selects found child element with attributes prefixed with 'data-cy' and includes a given
        * @param custom.
        * @example cy.dataCy('bar', 'foo') returns element with data-cy-bar="foo".
        */
-      dataCyAttrSel(attr: string, selector: string): Chainable<JQuery<HTMLElement>>;
+      findDataCyAttrSel(attr: string, selector: string): Chainable<JQuery<HTMLElement>>;
 
       /**
-       * Selects elements with attributes named with a given @param attr.
+       * Selects all elements with attributes named with a given @param attr.
        * @example cy.attrByIndex('foo') returns elements with attributes named
        * includes data-cy-foo.
        */
-      dataCyAttr(attr: string): Chainable<JQuery<HTMLElement>>;
+      getDataCyAttr(attr: string): Chainable<JQuery<HTMLElement>>;
+
+      /**
+       * Selects found child element with attributes named with a given @param attr.
+       * @example cy.attrByIndex('foo') returns element with attributes named
+       * includes data-cy-foo.
+       */
+      findDataCyAttr(attr: string): Chainable<JQuery<HTMLElement>>;
 
       /**
        * Selects element with attributes named with a given @param attr of a given @param
@@ -41,7 +60,19 @@ declare global {
        * @example cy.attrByIndex('foo', 2) returns the 2nd sibling element with an
        * attribute name which includes data-cy-foo.
        */
-      dataCyAttrByIndex(attr: string, index: number): Chainable<JQuery<HTMLElement>>;
+      getDataCyAttrByIndex(attr: string, index: number): Chainable<JQuery<HTMLElement>>;
+
+      /**
+       * Selects all elements with 'aria-label' attributes set to a given selector.
+       * @example cy.ariaLabelSel('foo') returns elements with aria-label="foo".
+       */
+      getAriaLabelSel(selector: string): Chainable<JQuery<HTMLElement>>;
+
+      /**
+       * Selects found child elements with 'aria-label' attributes set to a given selector.
+       * @example cy.ariaLabelSel('foo') returns element with aria-label="foo".
+       */
+      findAriaLabelSel(selector: string): Chainable<JQuery<HTMLElement>>;
     }
   }
 }

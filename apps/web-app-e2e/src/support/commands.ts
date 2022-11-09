@@ -1,30 +1,59 @@
 // Note: type definitions are added to custom cypress.d.ts ("../../types/cypress.d.ts")
 // referenced in the tsconfig.
 
-Cypress.Commands.add('dataCySel', (selector) => {
-  return cy.get(`[data-cy=${selector}]`);
+Cypress.Commands.add('getDataCySel', { prevSubject: 'optional' }, (subject, selector) => {
+  const source = subject ? cy.wrap(subject) : cy;
+  return source.get(`[data-cy="${selector}]"`);
 });
 
-Cypress.Commands.add('dataCyAttrSel', (attr, selector) => {
-  return cy.get(`[data-cy-${attr}=${selector}]`);
+Cypress.Commands.add('findDataCySel', { prevSubject: true }, (subject, selector) => {
+  return cy.wrap(subject).find(`[data-cy="${selector}]"`);
 });
 
-Cypress.Commands.add('dataCyAttr', (attr) => {
-  return cy.get(`[data-cy-${attr}]`);
+Cypress.Commands.add(
+  'getDataCyAttrSel',
+  { prevSubject: 'optional' },
+  (subject, attr, selector) => {
+    const source = subject ? cy.wrap(subject) : cy;
+    return source.get(`[data-cy-${attr}="${selector}]"`);
+  }
+);
+
+Cypress.Commands.add(
+  'findDataCyAttrSel',
+  { prevSubject: true },
+  (subject, attr, selector) => {
+    return cy.wrap(subject).find(`[data-cy-${attr}="${selector}]"`);
+  }
+);
+
+Cypress.Commands.add('getDataCyAttr', { prevSubject: 'optional' }, (subject, attr) => {
+  const source = subject ? cy.wrap(subject) : cy;
+  return source.get(`[data-cy-${attr}]`);
 });
 
-Cypress.Commands.add('dataCyAttrByIndex', (attr, index) => {
-  return cy.get(`[data-cy-${attr}]:nth-child(${index})`);
+Cypress.Commands.add('findDataCyAttr', { prevSubject: true }, (subject, attr) => {
+  return cy.wrap(subject).find(`[data-cy-${attr}]`);
 });
 
-//
-// -- This is a child command --
-// Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+Cypress.Commands.add(
+  'getDataCyAttrByIndex',
+  { prevSubject: 'optional' },
+  (subject, attr, index) => {
+    const source = subject ? cy.wrap(subject) : cy;
+    return source.get(`[data-cy-${attr}]:nth-child(${index})`);
+  }
+);
+
+Cypress.Commands.add(
+  'getAriaLabelSel',
+  { prevSubject: 'optional' },
+  (subject, selector) => {
+    const source = subject ? cy.wrap(subject) : cy;
+    return source.get(`[aria-label="${selector}"]`);
+  }
+);
+
+Cypress.Commands.add('findAriaLabelSel', { prevSubject: true }, (subject, selector) => {
+  return cy.wrap(subject).find(`[aria-label="${selector}"]`);
+});

@@ -23,7 +23,7 @@ export function UsersList({
   onDeleteUser,
 }: UsersListProps) {
   return (
-    <List>
+    <List data-testid="list">
       {users.map((user: UserRecord) => (
         <UsersListItem
           key={user.id}
@@ -52,15 +52,10 @@ function UsersListItem({ user, isControlsHidden, onEdit, onDelete }: UserItemPro
       secondaryAction={
         isControlsHidden ? null : (
           <>
-            <IconButton edge="start" aria-label="edit" onClick={onEdit} data-cy-btn-edit>
+            <IconButton edge="start" onClick={onEdit} aria-label="edit">
               <Edit />
             </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="edit"
-              onClick={onDelete}
-              data-cy-btn-delete
-            >
+            <IconButton edge="end" onClick={onDelete} aria-label="delete">
               <Delete />
             </IconButton>
           </>

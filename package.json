@@ -6,14 +6,16 @@
   "scripts": {
     "----- SERVE --------------------": "",
     "start": "npm run serve:api & npm run serve:web",
-    "serve:web": "kill:web & nx run web-app:serve",
-    "serve:api": "kill:api & nx run mock-api:serve",
+    "serve:web": "npm run kill:web & nx run web-app:serve",
+    "serve:api": "npm run kill:api & nx run mock-api:serve",
     "serve:dist": "live-server dist/apps/web-app --no-browser --port=6600",
     "----- BUILD --------------------": "",
     "build": "nx build",
     "build:prod": "nx build --prod",
     "----- TEST --------------------": "",
-    "test": "nx test",
+    "test": "nx run-many --target=test --all",
+    "test:coverage": "nx run-many --target=test --all --coverage",
+    "test:ci": "nx run-many --target=test --all --coverage --ci",
     "e2e": "nx e2e web-app-e2e",
     "e2e:watch": "nx e2e web-app-e2e --watch",
     "e2e:prod": "nx e2e web-app-e2e --configuration=production",
@@ -135,4 +137,3 @@
     "url-loader": "^3.0.0"
   }
 }
-

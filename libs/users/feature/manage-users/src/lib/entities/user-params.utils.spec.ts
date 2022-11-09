@@ -15,14 +15,18 @@ describe('User Feature Entities', () => {
       createdAt: '2018-07-16T07:32:20.421Z',
       updatedAt: '2018-07-16T07:32:20.421Z',
     };
-    expect(getUserFormParams(userRecord)).toEqual(userDetails);
+    const formParams = getUserFormParams(userRecord);
+    expect(formParams).toMatchSnapshot();
+    expect(formParams).toEqual(userDetails);
   });
   it('Returns user form params from existing user', () => {
     const user: User = {
       ...userDetails,
       id: 1,
     };
-    expect(getUserFormParams(user)).toEqual(userDetails);
+    const formParams = getUserFormParams(user);
+    expect(formParams).toMatchSnapshot();
+    expect(formParams).toEqual(userDetails);
   });
   it('Returns user form params from empty user', () => {
     const empty: UserDetails = {
@@ -30,6 +34,8 @@ describe('User Feature Entities', () => {
       lastName: '',
       email: '',
     };
-    expect(getUserFormParams(undefined)).toEqual(empty);
+    const formParams = getUserFormParams(undefined);
+    expect(formParams).toMatchSnapshot();
+    expect(formParams).toEqual(empty);
   });
 });

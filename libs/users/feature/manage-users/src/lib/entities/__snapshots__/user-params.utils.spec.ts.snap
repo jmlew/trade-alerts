@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`User Feature Entities Returns user form params from empty user 1`] = `
+Object {
+  "email": "",
+  "firstName": "",
+  "lastName": "",
+}
+`;
+
+exports[`User Feature Entities Returns user form params from existing user 1`] = `
+Object {
+  "email": "john@sampleuser.com",
+  "firstName": "John",
+  "lastName": "Smith",
+}
+`;
+
+exports[`User Feature Entities Returns user form params from existing user record 1`] = `
+Object {
+  "email": "john@sampleuser.com",
+  "firstName": "John",
+  "lastName": "Smith",
+}
+`;
