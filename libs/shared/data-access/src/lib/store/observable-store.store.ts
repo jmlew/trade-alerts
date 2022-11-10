@@ -2,7 +2,7 @@ import { BehaviorSubject, Observable, filter } from 'rxjs';
 
 import { isNonNull } from '@trade-alerts/shared/util-common';
 
-import { isCypress, isDev } from '../env/env-var.util';
+import { isCypress, isDev, isJest } from '../env/env-var.util';
 
 export class ObservableStore<State> {
   protected enableLogging: boolean;
@@ -20,7 +20,7 @@ export class ObservableStore<State> {
 
   protected applyState() {
     this.subject.next(this.state);
-    if (this.enableLogging && isDev() && !isCypress()) {
+    if (this.enableLogging && isDev() && !isCypress() && !isJest()) {
       this.logState();
     }
   }

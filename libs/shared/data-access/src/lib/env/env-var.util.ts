@@ -2,7 +2,7 @@ import { environment } from '@trade-alerts/shared/environments';
 
 import { EnvVar } from './env-var.enum';
 
-export function getEnvVar(envVar: EnvVar): string {
+export function getEnvVar(envVar: EnvVar | string): string {
   const value = process.env[envVar];
   console.log('getEnvVar', envVar, value);
   if (value == null) {
@@ -27,4 +27,8 @@ export function isUseMockInDev(): boolean {
 
 export function isCypress(): boolean {
   return (window as any).Cypress;
+}
+
+export function isJest(): boolean {
+  return process.env['JEST_WORKER_ID'] !== undefined;
 }
