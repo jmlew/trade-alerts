@@ -8,29 +8,27 @@ import {
 import { useObservable } from '@trade-alerts/shared/util-common';
 import { UserFacade } from '@trade-alerts/users/domain';
 
-interface ViewModel {
+export interface DeleteUserViewModelResult {
   deleteUserId: number | null;
-  deleteState: ApiState | null;
-  deleteStateRef: ApiStateReference;
+  apiState: ApiState | null;
+  apiStateRef: ApiStateReference;
   deleteUser: (userId: number) => void;
-  resetDelete: () => void;
+  resetApiState: () => void;
 }
 
-export function DeleteUserViewModel(userFacade: UserFacade): ViewModel {
+export function DeleteUserViewModel(userFacade: UserFacade): DeleteUserViewModelResult {
   const [deleteUserId, setDeleteUserId] = useState<number | null>(null);
-  const deleteState: ApiState | null = useObservable<ApiState>(
-    userFacade.usersWriteState$
-  );
-  const deleteStateRef: ApiStateReference = useApiStateReference(deleteState);
+  const apiState: ApiState | null = useObservable<ApiState>(userFacade.usersWriteState$);
+  const apiStateRef: ApiStateReference = useApiStateReference(apiState);
 
   function deleteUser(userId: number) {
     setDeleteUserId(userId);
     userFacade.deleteUser(userId, true);
   }
 
-  function resetDelete() {
+  function resetApiState() {
     userFacade.resetWriteState();
   }
 
-  return { deleteUserId, deleteUser, resetDelete, deleteState, deleteStateRef };
+  return { deleteUserId, deleteUser, resetApiState, apiState, apiStateRef };
 }

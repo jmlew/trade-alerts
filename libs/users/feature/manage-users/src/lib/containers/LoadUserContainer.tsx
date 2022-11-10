@@ -14,15 +14,15 @@ interface LoadUserContainerProps {
 
 export function LoadUserContainer({ userId, children }: LoadUserContainerProps) {
   const navigate = useNavigate();
-  const { user, loadUser, resetLoad, loadStateRef } = useVM(userFacade, userId);
-  const { getError, isCompleted, isFailed, isPending } = loadStateRef;
+  const { user, loadUser, resetApiState, apiStateRef } = useVM(userFacade, userId);
+  const { getError, isCompleted, isFailed, isPending } = apiStateRef;
 
   useEffect(() => {
     loadUser(userId);
   }, []);
 
   function goToList() {
-    isFailed() && resetLoad();
+    isFailed() && resetApiState();
     navigate(`/users`);
   }
 

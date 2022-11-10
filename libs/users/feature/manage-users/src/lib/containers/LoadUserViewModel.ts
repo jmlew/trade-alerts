@@ -6,26 +6,29 @@ import {
 import { useObservable } from '@trade-alerts/shared/util-common';
 import { User, UserFacade } from '@trade-alerts/users/domain';
 
-interface ViewModel {
+export interface LoadUserViewModelResult {
   user: User | null;
-  loadState: ApiState | null;
-  loadStateRef: ApiStateReference;
+  apiState: ApiState | null;
+  apiStateRef: ApiStateReference;
   loadUser: (userId: number) => void;
-  resetLoad: () => void;
+  resetApiState: () => void;
 }
 
-export function LoadUserViewModel(userFacade: UserFacade, userId: number): ViewModel {
+export function LoadUserViewModel(
+  userFacade: UserFacade,
+  userId: number
+): LoadUserViewModelResult {
   const user: User | null = useObservable<User | null>(userFacade.selectUser(userId));
-  const loadState: ApiState | null = useObservable<ApiState>(userFacade.usersReadState$);
-  const loadStateRef: ApiStateReference = useApiStateReference(loadState);
+  const apiState: ApiState | null = useObservable<ApiState>(userFacade.usersReadState$);
+  const apiStateRef: ApiStateReference = useApiStateReference(apiState);
 
   function loadUser(userId: number) {
     userFacade.loadUser(userId);
   }
 
-  function resetLoad() {
+  function resetApiState() {
     userFacade.resetReadState();
   }
 
-  return { user, loadUser, resetLoad, loadState, loadStateRef };
+  return { user, loadUser, resetApiState, apiState, apiStateRef };
 }

@@ -9,30 +9,28 @@ import { UserDetails, UserFacade, UserRecord } from '@trade-alerts/users/domain'
 import { useUserContext } from '../context/user.context';
 import { getUserFormParams } from '../entities/user-params.utils';
 
-interface ViewModel {
+export interface UpdateUserViewModelResult {
   user: UserRecord;
   formParams: UserDetails;
-  updateState: ApiState | null;
-  updateStateRef: ApiStateReference;
+  apiState: ApiState | null;
+  apiStateRef: ApiStateReference;
   updateUser: (values: UserDetails) => void;
-  resetUpdate: () => void;
+  resetApiState: () => void;
 }
 
-export function UpdateUserViewModel(userFacade: UserFacade): ViewModel {
+export function UpdateUserViewModel(userFacade: UserFacade): UpdateUserViewModelResult {
   const { user } = useUserContext();
-  const updateState: ApiState | null = useObservable<ApiState>(
-    userFacade.usersWriteState$
-  );
-  const updateStateRef: ApiStateReference = useApiStateReference(updateState);
+  const apiState: ApiState | null = useObservable<ApiState>(userFacade.usersWriteState$);
+  const apiStateRef: ApiStateReference = useApiStateReference(apiState);
   const formParams: UserDetails = getUserFormParams(user);
 
   function updateUser(values: UserDetails) {
     userFacade.updateUser(user.id, values, true);
   }
 
-  function resetUpdate() {
+  function resetApiState() {
     userFacade.resetWriteState();
   }
 
-  return { user, formParams, updateUser, resetUpdate, updateState, updateStateRef };
+  return { user, formParams, updateUser, resetApiState, apiState, apiStateRef };
 }

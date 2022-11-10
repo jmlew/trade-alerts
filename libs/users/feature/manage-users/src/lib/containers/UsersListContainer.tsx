@@ -17,14 +17,24 @@ import { LoadUsersViewModel as useLoadUsersVM } from './LoadUsersViewModel';
 export function UsersListContainer() {
   const navigate = useNavigate();
   const { setNotification } = useNotification();
-  const { users, loadUsers, loadState, loadStateRef } = useLoadUsersVM(userFacade);
-  const { deleteUserId, deleteUser, resetDelete, deleteState, deleteStateRef } =
-    useDeleteUserVM(userFacade);
+  const {
+    users,
+    loadUsers,
+    apiState: loadState,
+    apiStateRef: loadStateRef,
+  } = useLoadUsersVM(userFacade);
+  const {
+    deleteUserId,
+    deleteUser,
+    resetApiState: resetDeleteState,
+    apiState: deleteState,
+    apiStateRef: deleteStateRef,
+  } = useDeleteUserVM(userFacade);
 
   // Handle upates to load users state.
   useLayoutEffect(() => {
     return () => {
-      resetDelete();
+      resetDeleteState();
     };
   }, []);
 

@@ -8,22 +8,20 @@ import { User, UserDetails, UserFacade } from '@trade-alerts/users/domain';
 
 import { getUserFormParams } from '../entities/user-params.utils';
 
-interface ViewModel {
+export interface CreateUserViewModelResult {
   user: User | null;
   formParams: UserDetails;
-  createState: ApiState | null;
-  createStateRef: ApiStateReference;
+  apiState: ApiState | null;
+  apiStateRef: ApiStateReference;
   createUser: (params: UserDetails) => void;
   clearCurrentUser: () => void;
-  resetCreate: () => void;
+  resetApiState: () => void;
 }
 
-export function CreateUserViewModel(userFacade: UserFacade): ViewModel {
+export function CreateUserViewModel(userFacade: UserFacade): CreateUserViewModelResult {
   const user: User | null = useObservable<User | null>(userFacade.currentUser$);
-  const createState: ApiState | null = useObservable<ApiState>(
-    userFacade.usersWriteState$
-  );
-  const createStateRef: ApiStateReference = useApiStateReference(createState);
+  const apiState: ApiState | null = useObservable<ApiState>(userFacade.usersWriteState$);
+  const apiStateRef: ApiStateReference = useApiStateReference(apiState);
   const formParams: UserDetails = getUserFormParams();
 
   function createUser(params: UserDetails) {
@@ -34,7 +32,7 @@ export function CreateUserViewModel(userFacade: UserFacade): ViewModel {
     userFacade.clearCurrentUser();
   }
 
-  function resetCreate() {
+  function resetApiState() {
     userFacade.resetWriteState();
   }
 
@@ -43,8 +41,8 @@ export function CreateUserViewModel(userFacade: UserFacade): ViewModel {
     formParams,
     createUser,
     clearCurrentUser,
-    resetCreate,
-    createState,
-    createStateRef,
+    resetApiState,
+    apiState,
+    apiStateRef,
   };
 }

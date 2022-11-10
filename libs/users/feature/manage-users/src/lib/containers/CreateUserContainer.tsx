@@ -16,11 +16,11 @@ export function CreateUserContainer() {
     formParams,
     createUser,
     clearCurrentUser,
-    resetCreate,
-    createState,
-    createStateRef,
+    resetApiState,
+    apiState,
+    apiStateRef,
   } = useVM(userFacade);
-  const { getError, isCompleted, isFailed, isPending } = createStateRef;
+  const { getError, isCompleted, isFailed, isPending } = apiStateRef;
 
   useEffect(() => {
     if (isCompleted() && user != null) {
@@ -35,10 +35,10 @@ export function CreateUserContainer() {
     if (isFailed()) {
       setNotification({ isShown: true, message: getError() || 'Update failed' });
     }
-  }, [createState, user]);
+  }, [apiState, user]);
 
   useLayoutEffect(() => {
-    return () => resetCreate();
+    return () => resetApiState();
   }, []);
 
   function goToList() {
