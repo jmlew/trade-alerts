@@ -4,28 +4,30 @@ import { objectsSortOnKey } from '@trade-alerts/shared/util-common';
 
 import { User, UserDetails } from '../entities/user.model';
 import { userApiRxjsAjaxService } from '../infrastructure/rxjs-ajax/user-api-rxjs-ajax.service';
-import { userStore } from './user.store';
+import { UserStore, userStore } from './user.store';
 
-class UserEffects {
+export class UserEffects {
+  constructor(private userStore: UserStore) {}
+
   loadUser(userId: number) {
     // Load the current user value from the store if it exists.
-    const userValue: User | null = userStore.selectUserValue(userId);
+    const userValue: User | null = this.userStore.selectUserValue(userId);
     if (userValue) {
-      userStore.onLoadUserCompleted(userValue);
+      this.userStore.onLoadUserCompleted(userValue);
       return;
     }
-    userStore.onReadPending();
+    this.userStore.onReadPending();
     userApiRxjsAjaxService
       .getUser(userId)
       .pipe(take(1))
       .subscribe({
-        next: (data: User) => userStore.onLoadUserCompleted(data),
-        error: (error: string) => userStore.onReadFailed(error),
+        next: (data: User) => this.userStore.onLoadUserCompleted(data),
+        error: (error: string) => this.userStore.onReadFailed(error),
       });
   }
 
   loadUsers() {
-    userStore.onReadPending();
+    this.userStore.onReadPending();
     userApiRxjsAjaxService
       .getUsers()
       .pipe(
@@ -33,33 +35,33 @@ class UserEffects {
         take(1)
       )
       .subscribe({
-        next: (data: User[]) => userStore.onLoadUsersCompleted(data),
-        error: (error: string) => userStore.onReadFailed(error),
+        next: (data: User[]) => this.userStore.onLoadUsersCompleted(data),
+        error: (error: string) => this.userStore.onReadFailed(error),
       });
   }
 
   createUser(values: UserDetails) {
-    userStore.onWritePending();
+    this.userStore.onWritePending();
     userApiRxjsAjaxService
       .createUser(values)
       .pipe(take(1))
       .subscribe({
-        next: (data: User) => userStore.onCreateUserCompleted(data),
-        error: (error: string) => userStore.onWriteFailed(error),
+        next: (data: User) => this.userStore.onCreateUserCompleted(data),
+        error: (error: string) => this.userStore.onWriteFailed(error),
       });
   }
 
   updateUser(userId: number, values: UserDetails) {
-    userStore.onWritePending();
+    this.userStore.onWritePending();
     userApiRxjsAjaxService
       .updateUser(userId, values)
       .pipe(take(1))
       .subscribe({
         next: (data: User) => {
-          userStore.onUpdateUserCompleted(userId, values);
+          this.userStore.onUpdateUserCompleted(userId, values);
         },
         error: (error: string) => {
-          userStore.onWriteFailed(error);
+          this.userStore.onWriteFailed(error);
         },
       });
   }
@@ -69,29 +71,29 @@ class UserEffects {
    * responses are ignored and failed response revert state by reloading all users.
    */
   updateUserOptimistic(userId: number, values: UserDetails) {
-    userStore.onUpdateUserCompleted(userId, values);
+    this.userStore.onUpdateUserCompleted(userId, values);
     userApiRxjsAjaxService
       .updateUser(userId, values)
       .pipe(take(1))
       .subscribe({
         error: (error: string) => {
-          userStore.onWriteFailed(error);
+          this.userStore.onWriteFailed(error);
           this.loadUsers();
         },
       });
   }
 
   deleteUser(userId: number) {
-    userStore.onWritePending();
+    this.userStore.onWritePending();
     userApiRxjsAjaxService
       .deleteUser(userId)
       .pipe(take(1))
       .subscribe({
         next: (userId: number) => {
-          userStore.onDeleteUserCompleted(userId);
+          this.userStore.onDeleteUserCompleted(userId);
         },
         error: (error: string) => {
-          userStore.onWriteFailed(error);
+          this.userStore.onWriteFailed(error);
         },
       });
   }
@@ -101,17 +103,17 @@ class UserEffects {
    * responses are ignored and failed response revert state by reloading all users.
    */
   deleteUserOptimistic(userId: number) {
-    userStore.onDeleteUserCompleted(userId);
+    this.userStore.onDeleteUserCompleted(userId);
     userApiRxjsAjaxService
       .deleteUser(userId)
       .pipe(take(1))
       .subscribe({
         error: (error: string) => {
-          userStore.onWriteFailed(error);
+          this.userStore.onWriteFailed(error);
           this.loadUsers();
         },
       });
   }
 }
 
-export const userEffects: UserEffects = new UserEffects();
+export const userEffects: UserEffects = new UserEffects(userStore);

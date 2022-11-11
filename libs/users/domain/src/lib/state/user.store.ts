@@ -17,7 +17,7 @@ interface State {
   apiWriteState: ApiState;
 }
 
-const initialState: State = {
+export const initialUserState: State = {
   users: {},
   currentUserId: null,
 
@@ -27,7 +27,8 @@ const initialState: State = {
   apiWriteState: ApiStateManager.onIdle(),
 };
 
-class UserStore extends ObservableStore<State> {
+// TODO: convert to singleton.
+export class UserStore extends ObservableStore<State> {
   override enableLogging = true;
   override extraLoggingKeys: (keyof State)[] = ['apiReadState', 'apiWriteState'];
 
@@ -198,4 +199,4 @@ class UserStore extends ObservableStore<State> {
 }
 
 const entitiesService: EntitiesService<User, number> = new EntitiesService('id');
-export const userStore: UserStore = new UserStore(initialState, entitiesService);
+export const userStore: UserStore = new UserStore(initialUserState, entitiesService);

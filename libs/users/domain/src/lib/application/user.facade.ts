@@ -3,8 +3,8 @@ import { Observable } from 'rxjs';
 import { ApiState } from '@trade-alerts/shared/data-access';
 
 import { User, UserDetails } from '../entities/user.model';
-import { userEffects } from '../state/user.effects';
-import { userStore } from '../state/user.store';
+import { UserEffects, userEffects } from '../state/user.effects';
+import { UserStore, userStore } from '../state/user.store';
 
 /*
   Facade for the Users domain which acts as a single API through which other feature
@@ -14,51 +14,52 @@ import { userStore } from '../state/user.store';
 */
 
 export class UserFacade {
+  constructor(private userStore: UserStore, private userEffects: UserEffects) {}
   /* State selectors. */
-  usersReadState$: Observable<ApiState> = userStore.selectApiReadState();
-  usersWriteState$: Observable<ApiState> = userStore.selectApiWriteState();
-  allUsers$: Observable<User[]> = userStore.selectAllUsers();
-  currentUser$: Observable<User | null> = userStore.selectCurrentUser();
+  usersReadState$: Observable<ApiState> = this.userStore.selectApiReadState();
+  usersWriteState$: Observable<ApiState> = this.userStore.selectApiWriteState();
+  allUsers$: Observable<User[]> = this.userStore.selectAllUsers();
+  currentUser$: Observable<User | null> = this.userStore.selectCurrentUser();
   selectUser(id: number): Observable<User | null> {
-    return userStore.selectUser(id);
+    return this.userStore.selectUser(id);
   }
 
   /* State API action handlers. */
   loadUser(userId: number) {
-    userEffects.loadUser(userId);
+    this.userEffects.loadUser(userId);
   }
 
   loadUsers() {
-    userEffects.loadUsers();
+    this.userEffects.loadUsers();
   }
 
   createUser(values: UserDetails) {
-    userEffects.createUser(values);
+    this.userEffects.createUser(values);
   }
 
   updateUser(userId: number, values: UserDetails, isOptimistic = false) {
     isOptimistic
-      ? userEffects.updateUserOptimistic(userId, values)
-      : userEffects.updateUser(userId, values);
+      ? this.userEffects.updateUserOptimistic(userId, values)
+      : this.userEffects.updateUser(userId, values);
   }
 
   deleteUser(userId: number, isOptimistic = false) {
     isOptimistic
-      ? userEffects.deleteUserOptimistic(userId)
-      : userEffects.deleteUser(userId);
+      ? this.userEffects.deleteUserOptimistic(userId)
+      : this.userEffects.deleteUser(userId);
   }
 
   clearCurrentUser() {
-    userStore.onClearCurrentUser();
+    this.userStore.onClearCurrentUser();
   }
 
   resetReadState() {
-    userStore.onReadIdle();
+    this.userStore.onReadIdle();
   }
 
   resetWriteState() {
-    userStore.onWriteIdle();
+    this.userStore.onWriteIdle();
   }
 }
 
-export const userFacade: UserFacade = new UserFacade();
+export const userFacade: UserFacade = new UserFacade(userStore, userEffects);
