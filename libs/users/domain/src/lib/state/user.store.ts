@@ -10,14 +10,14 @@ import { EntitiesService, Entity, isNonNull } from '@trade-alerts/shared/util-co
 
 import { User, UserDetails } from '../entities/user.model';
 
-interface State {
+interface UserState {
   users: Entity<User>;
   currentUserId: number | null;
   apiReadState: ApiState;
   apiWriteState: ApiState;
 }
 
-export const initialUserState: State = {
+const initialState: UserState = {
   users: {},
   currentUserId: null,
 
@@ -27,16 +27,26 @@ export const initialUserState: State = {
   apiWriteState: ApiStateManager.onIdle(),
 };
 
-// TODO: convert to singleton.
-export class UserStore extends ObservableStore<State> {
-  override enableLogging = true;
-  override extraLoggingKeys: (keyof State)[] = ['apiReadState', 'apiWriteState'];
+/**
+ * User Observable Store implemented as a singleton to manage user state.
+ */
+export class UserStore extends ObservableStore<UserState> {
+  private static instance: UserStore;
+  private entitiesService: EntitiesService<User, number>;
 
-  constructor(
-    initialState: State,
-    private entitiesService: EntitiesService<User, number>
-  ) {
+  override enableLogging = true;
+  override extraLoggingKeys: (keyof UserState)[] = ['apiReadState', 'apiWriteState'];
+
+  private constructor() {
     super(initialState);
+    this.entitiesService = new EntitiesService('id');
+  }
+
+  static getInstance() {
+    if (!this.instance) {
+      this.instance = new UserStore();
+    }
+    return this.instance;
   }
 
   onReadIdle() {
@@ -142,7 +152,7 @@ export class UserStore extends ObservableStore<State> {
   }
 
   selectUserEntities(): Observable<Entity<User>> {
-    return this.selectState().pipe(map((state: State) => state.users));
+    return this.selectState().pipe(map((state: UserState) => state.users));
   }
 
   selectUserEntitiesValue(): Entity<User> {
@@ -172,7 +182,7 @@ export class UserStore extends ObservableStore<State> {
   }
 
   selectCurrentUserId(): Observable<number | null> {
-    return this.selectState().pipe(map((state: State) => state.currentUserId));
+    return this.selectState().pipe(map((state: UserState) => state.currentUserId));
   }
 
   selectCurrentUser(): Observable<User | null> {
@@ -183,7 +193,7 @@ export class UserStore extends ObservableStore<State> {
 
   selectApiReadState(): Observable<ApiState> {
     return this.selectState().pipe(
-      map((state: State) => state.apiReadState),
+      map((state: UserState) => state.apiReadState),
       distinctUntilKeyChanged(ApiStateField.Status),
       filter(isNonNull)
     );
@@ -191,12 +201,11 @@ export class UserStore extends ObservableStore<State> {
 
   selectApiWriteState(): Observable<ApiState> {
     return this.selectState().pipe(
-      map((state: State) => state.apiWriteState),
+      map((state: UserState) => state.apiWriteState),
       distinctUntilKeyChanged(ApiStateField.Status),
       filter(isNonNull)
     );
   }
 }
 
-const entitiesService: EntitiesService<User, number> = new EntitiesService('id');
-export const userStore: UserStore = new UserStore(initialUserState, entitiesService);
+export const userStore: UserStore = UserStore.getInstance();

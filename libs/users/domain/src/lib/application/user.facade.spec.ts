@@ -1,19 +1,22 @@
 import { firstValueFrom, of } from 'rxjs';
 
 import { ApiStatus } from '@trade-alerts/shared/data-access';
-import { EntitiesService, Entity } from '@trade-alerts/shared/util-common';
+import { Entity } from '@trade-alerts/shared/util-common';
 
 import { User, UserDetails } from '../entities/user.model';
 import { UserEffects } from '../state/user.effects';
-import { UserStore, initialUserState } from '../state/user.store';
+import { UserStore } from '../state/user.store';
 import { UserFacade } from './user.facade';
 
 /**
- * Istantiates all dependancies for mocking the facade. To be called after spies and mocks
- * have been applied to the relevant methods on the class prototypes for each test.
+ * Instantiates all dependancies for mocking the facade. To be called after spies and
+ * mocks have been applied to the relevant methods on the class prototypes for each test.
  */
 function instantiateMocks() {
-  userStore = new UserStore(initialUserState, new EntitiesService('id'));
+  // Clear previous store state on current instance.
+  userStore && userStore.onClear();
+  // Instantiate user store instance.
+  userStore = UserStore.getInstance();
   userEffects = new UserEffects(userStore);
   userFacade = new UserFacade(userStore, userEffects);
 }
