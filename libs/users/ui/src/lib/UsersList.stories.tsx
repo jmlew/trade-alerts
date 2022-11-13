@@ -4,24 +4,9 @@ import { User } from '@trade-alerts/users/domain';
 import { UsersList } from './UsersList';
 
 const sampleUsers: User[] = [
-  {
-    id: 1,
-    firstName: 'Jason',
-    lastName: 'Lewis',
-    email: 'jason@localhost.com',
-  },
-  {
-    id: 2,
-    firstName: 'System',
-    lastName: 'Infra',
-    email: 'system@localhost.com',
-  },
-  {
-    id: 3,
-    firstName: 'Administrator',
-    lastName: 'Main',
-    email: 'admin@localhost.com',
-  },
+  { id: 1, firstName: 'Jason', lastName: 'Lewis', email: 'jason@localhost.com' },
+  { id: 2, firstName: 'System', lastName: 'Infra', email: 'system@localhost.com' },
+  { id: 3, firstName: 'Administrator', lastName: 'Main', email: 'admin@localhost.com' },
 ];
 
 export default {
