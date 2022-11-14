@@ -14,12 +14,14 @@ import { UserStore, userStore } from '../state/user.store';
 */
 
 export class UserFacade {
-  constructor(private userStore: UserStore, private userEffects: UserEffects) {}
   /* State selectors. */
   usersReadState$: Observable<ApiState> = this.userStore.selectApiReadState();
   usersWriteState$: Observable<ApiState> = this.userStore.selectApiWriteState();
   allUsers$: Observable<User[]> = this.userStore.selectAllUsers();
   currentUser$: Observable<User | null> = this.userStore.selectCurrentUser();
+
+  constructor(private userStore: UserStore, private userEffects: UserEffects) {}
+
   selectUser(id: number): Observable<User | null> {
     return this.userStore.selectUser(id);
   }

@@ -17,8 +17,8 @@ import { DashboardDataStore, dashboardDataStore } from '../state/dashboard-data.
 
 class DashboardDataFacade {
   // Store values exposed as readonly observables.
-  dashData$: Observable<DashboardData> = dashboardDataStore.selectData();
-  dashDataState$: Observable<ApiState> = dashboardDataStore.selectApiState();
+  dashData$: Observable<DashboardData> = this.dataStore.selectData();
+  dashDataState$: Observable<ApiState> = this.dataStore.selectApiState();
 
   // Alerts is converted from the entites collection stored in the facade into an
   // array since all views in the dashboard consume the data in this shape.

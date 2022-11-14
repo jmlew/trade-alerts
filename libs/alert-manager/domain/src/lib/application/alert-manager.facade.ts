@@ -14,8 +14,8 @@ import { AlertManagerStore, alertManagerStore } from '../state/alert-manager.sto
 
 class AlertManagerFacade {
   // Store values exposed as readonly observables.
-  alertManagerState$: Observable<ApiState> = alertManagerStore.selectApiState();
-  alertId$: Observable<number | null> = alertManagerStore.selectAlertId();
+  alertManagerState$: Observable<ApiState> = this.store.selectApiState();
+  alertId$: Observable<number | null> = this.store.selectAlertId();
 
   // Stream of domain alerts converted from the Dashboard domain's alerts.
   alerts$: Observable<Alert[]> = dashAlerts$.pipe(
