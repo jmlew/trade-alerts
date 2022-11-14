@@ -10,19 +10,31 @@ import { isNonNull } from '@trade-alerts/shared/util-common';
 
 import { DashboardData } from '../entities/dashboard-data.model';
 
-interface State {
+interface DashboardState {
   data: DashboardData | null;
   apiState: ApiState;
 }
 
-const initialState: State = {
+const initialState: DashboardState = {
   data: null,
   apiState: ApiStateManager.onIdle(),
 };
 
-class DashboardDataStore extends ObservableStore<State> {
-  override enableLogging = false;
-  override extraLoggingKeys: (keyof State)[] = ['apiState'];
+export class DashboardDataStore extends ObservableStore<DashboardState> {
+  private static instance: DashboardDataStore;
+  override enableLogging = true;
+  override extraLoggingKeys: (keyof DashboardState)[] = ['apiState'];
+
+  private constructor() {
+    super(initialState);
+  }
+
+  static getInstance() {
+    if (!this.instance) {
+      this.instance = new DashboardDataStore();
+    }
+    return this.instance;
+  }
 
   onPending() {
     this.state = { ...this.state, apiState: ApiStateManager.onPending() };
@@ -46,20 +58,18 @@ class DashboardDataStore extends ObservableStore<State> {
 
   selectData(): Observable<DashboardData> {
     return this.selectState().pipe(
-      map((state: State) => state.data),
+      map((state: DashboardState) => state.data),
       filter(isNonNull)
     );
   }
 
   selectApiState(): Observable<ApiState> {
     return this.selectState().pipe(
-      map((state: State) => state.apiState),
+      map((state: DashboardState) => state.apiState),
       distinctUntilKeyChanged(ApiStateField.Status),
       filter(isNonNull)
     );
   }
 }
 
-export const dashboardDataStore: DashboardDataStore = new DashboardDataStore(
-  initialState
-);
+export const dashboardDataStore: DashboardDataStore = DashboardDataStore.getInstance();
