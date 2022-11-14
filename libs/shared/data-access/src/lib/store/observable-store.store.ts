@@ -8,47 +8,45 @@ export class ObservableStore<State> {
   protected enableLogging: boolean;
   protected extraLoggingKeys: (keyof State)[];
 
-  protected state: State;
   protected initialState: State;
   protected subject: BehaviorSubject<State>;
 
   constructor(initialState: State) {
     this.initialState = initialState;
-    this.state = { ...initialState };
     this.subject = new BehaviorSubject(initialState);
   }
 
-  protected applyState() {
-    this.subject.next(this.state);
+  protected update(state: State) {
+    this.subject.next(state);
     if (this.enableLogging && isDev() && !isCypress() && !isJest()) {
       this.logState();
     }
   }
 
   onClear() {
-    this.state = { ...this.initialState };
-    this.applyState();
+    this.update({ ...this.initialState });
   }
 
   selectState(): Observable<State> {
     return this.subject.pipe(filter(isNonNull));
   }
 
-  selectStateValue(): State {
+  getState(): State {
     return this.subject.getValue();
   }
 
   private logState() {
+    const state: State = this.getState();
     const extras: (string | State[keyof State])[] = this.extraLoggingKeys
       ? this.extraLoggingKeys.reduce(
           (accum: (string | State[keyof State])[], key: keyof State) => [
             ...accum,
             `\n| ${String(key)}:`,
-            this.state[key],
+            state[key],
           ],
           []
         )
       : [];
-    console.log(`${this.constructor.name}:`, ...extras, this.state);
+    console.log(`${this.constructor.name}:`, ...extras, state);
   }
 }

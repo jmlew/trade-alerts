@@ -14,42 +14,42 @@ import {
 } from '@trade-alerts/shared/data-access';
 import { isNonNull } from '@trade-alerts/shared/util-common';
 
-type State = {
+interface AlertState {
   apiState: ApiState;
   alertId: number | null;
-};
+}
 
-const initialState: State = {
+const initialState: AlertState = {
   apiState: ApiStateManager.onIdle(),
   alertId: null,
 };
 
-class AlertManagerStore extends ObservableStore<State> {
+class AlertManagerStore extends ObservableStore<AlertState> {
   override enableLogging = false;
 
   onPending() {
-    this.state = { ...this.state, apiState: ApiStateManager.onPending() };
-    this.applyState();
+    const state: AlertState = this.getState();
+    this.update({ ...state, apiState: ApiStateManager.onPending() });
   }
 
   onFailed(error: string) {
-    this.state = { ...this.state, apiState: ApiStateManager.onFailed(error) };
-    this.applyState();
+    const state: AlertState = this.getState();
+    this.update({ ...state, apiState: ApiStateManager.onFailed(error) });
   }
 
   onCompleted() {
-    this.state = { ...this.state, apiState: ApiStateManager.onCompleted() };
-    this.applyState();
+    const state: AlertState = this.getState();
+    this.update({ ...state, apiState: ApiStateManager.onCompleted() });
   }
 
   onSetAlertId(alertId: number) {
-    this.state = { ...this.state, alertId };
-    this.applyState();
+    const state: AlertState = this.getState();
+    this.update({ ...state, alertId });
   }
 
   selectApiState(): Observable<ApiState> {
     return this.selectState().pipe(
-      map((state: State) => state.apiState),
+      map((state: AlertState) => state.apiState),
       distinctUntilKeyChanged(ApiStateField.Status),
       filter(isNonNull)
     );
@@ -57,7 +57,7 @@ class AlertManagerStore extends ObservableStore<State> {
 
   selectAlertId(): Observable<number | null> {
     return this.selectState().pipe(
-      map((state: State) => state.alertId),
+      map((state: AlertState) => state.alertId),
       distinctUntilChanged()
     );
   }

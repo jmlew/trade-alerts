@@ -50,105 +50,84 @@ export class UserStore extends ObservableStore<UserState> {
   }
 
   onReadIdle() {
-    this.state = {
-      ...this.state,
-      apiReadState: ApiStateManager.onIdle(),
-    };
-    this.applyState();
+    const state: UserState = this.getState();
+    this.update({ ...state, apiReadState: ApiStateManager.onIdle() });
   }
 
   onWriteIdle() {
-    this.state = {
-      ...this.state,
-      apiWriteState: ApiStateManager.onIdle(),
-    };
-    this.applyState();
+    const state: UserState = this.getState();
+    this.update({ ...state, apiWriteState: ApiStateManager.onIdle() });
   }
 
   onReadPending() {
-    this.state = {
-      ...this.state,
-      apiReadState: ApiStateManager.onPending(),
-    };
-    this.applyState();
+    const state: UserState = this.getState();
+    this.update({ ...state, apiReadState: ApiStateManager.onPending() });
   }
 
   onWritePending() {
-    this.state = {
-      ...this.state,
-      apiWriteState: ApiStateManager.onPending(),
-    };
-    this.applyState();
+    const state: UserState = this.getState();
+    this.update({ ...state, apiWriteState: ApiStateManager.onPending() });
   }
 
   onReadFailed(error: string) {
-    this.state = {
-      ...this.state,
-      apiReadState: ApiStateManager.onFailed(error),
-    };
-    this.applyState();
+    const state: UserState = this.getState();
+    this.update({ ...state, apiReadState: ApiStateManager.onFailed(error) });
   }
 
   onWriteFailed(error: string) {
-    this.state = {
-      ...this.state,
-      apiWriteState: ApiStateManager.onFailed(error),
-    };
-    this.applyState();
+    const state: UserState = this.getState();
+    this.update({ ...state, apiWriteState: ApiStateManager.onFailed(error) });
   }
 
   onLoadUsersCompleted(data: User[]) {
-    this.state = {
-      ...this.state,
+    const state: UserState = this.getState();
+    this.update({
+      ...state,
       users: this.entitiesService.setAll(data),
       apiReadState: ApiStateManager.onCompleted(),
-    };
-    this.applyState();
+    });
   }
 
   onLoadUserCompleted(data: User) {
-    this.state = {
-      ...this.state,
-      users: this.entitiesService.setOne(data, this.state.users),
+    const state: UserState = this.getState();
+    this.update({
+      ...state,
+      users: this.entitiesService.setOne(data, state.users),
       apiReadState: ApiStateManager.onCompleted(),
-    };
-    this.applyState();
+    });
   }
 
   onUpdateUserCompleted(id: number, changes: UserDetails) {
-    this.state = {
-      ...this.state,
-      users: this.entitiesService.updateOne({ id, changes }, this.state.users),
+    const state: UserState = this.getState();
+    this.update({
+      ...state,
+      users: this.entitiesService.updateOne({ id, changes }, state.users),
       apiWriteState: ApiStateManager.onCompleted(),
-    };
-    this.applyState();
+    });
   }
 
   onCreateUserCompleted(data: User) {
-    this.state = {
-      ...this.state,
-      users: this.entitiesService.setOne(data, this.state.users),
+    const state: UserState = this.getState();
+    this.update({
+      ...state,
+      users: this.entitiesService.setOne(data, state.users),
       currentUserId: data.id,
       apiWriteState: ApiStateManager.onCompleted(),
-    };
-    this.applyState();
+    });
   }
 
   onDeleteUserCompleted(id: number) {
-    this.state = {
-      ...this.state,
-      users: this.entitiesService.removeOne(id, this.state.users),
+    const state: UserState = this.getState();
+    this.update({
+      ...state,
+      users: this.entitiesService.removeOne(id, state.users),
       apiWriteState: ApiStateManager.onCompleted(),
-    };
-    this.applyState();
+    });
   }
 
   onClearCurrentUser() {
-    this.state = {
-      ...this.state,
-      currentUserId: null,
-    };
-    this.applyState();
+    const state: UserState = this.getState();
+    this.update({ ...state, currentUserId: null });
   }
 
   selectUserEntities(): Observable<Entity<User>> {
@@ -156,7 +135,7 @@ export class UserStore extends ObservableStore<UserState> {
   }
 
   selectUserEntitiesValue(): Entity<User> {
-    return this.selectStateValue().users;
+    return this.getState().users;
   }
 
   selectAllUsers(): Observable<User[]> {

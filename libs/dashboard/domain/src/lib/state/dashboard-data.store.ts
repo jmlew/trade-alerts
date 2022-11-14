@@ -6,9 +6,14 @@ import {
   ApiStateManager,
   ObservableStore,
 } from '@trade-alerts/shared/data-access';
-import { isNonNull } from '@trade-alerts/shared/util-common';
+import { EntitiesService, Entity, isNonNull } from '@trade-alerts/shared/util-common';
 
-import { DashboardData } from '../entities/dashboard-data.model';
+import {
+  AlertInfo,
+  DashboardApiData,
+  DashboardData,
+} from '../entities/dashboard-data.model';
+import { AlertInfoField } from '../entities/dashboard-data-fields.enum';
 
 interface DashboardState {
   data: DashboardData | null;
@@ -22,11 +27,16 @@ const initialState: DashboardState = {
 
 export class DashboardDataStore extends ObservableStore<DashboardState> {
   private static instance: DashboardDataStore;
+  private alertsEntitiesService: EntitiesService<AlertInfo, number>;
+
   override enableLogging = true;
   override extraLoggingKeys: (keyof DashboardState)[] = ['apiState'];
 
   private constructor() {
     super(initialState);
+    this.alertsEntitiesService = new EntitiesService<AlertInfo, number>(
+      AlertInfoField.AlertId
+    );
   }
 
   static getInstance() {
@@ -37,23 +47,46 @@ export class DashboardDataStore extends ObservableStore<DashboardState> {
   }
 
   onPending() {
-    this.state = { ...this.state, apiState: ApiStateManager.onPending() };
-    this.applyState();
+    const state: DashboardState = this.getState();
+    this.update({ ...state, apiState: ApiStateManager.onPending() });
   }
 
   onFailed(error: string) {
-    this.state = { ...this.state, apiState: ApiStateManager.onFailed(error) };
-    this.applyState();
+    const state: DashboardState = this.getState();
+    this.update({ ...state, apiState: ApiStateManager.onFailed(error) });
   }
 
-  onCompleted(data: DashboardData) {
-    this.state = { ...this.state, data, apiState: ApiStateManager.onCompleted() };
-    this.applyState();
+  /**
+   * Stores the dashboard API data in a normalised format. The alerts collection is
+   * converted into an entities object to update in this facade and is normalised back
+   * into an array prior to being consumed by the dashboard views, preferrably through a
+   * memoised context provider.
+   */
+  onCompleted(apiData: DashboardApiData) {
+    const state: DashboardState = this.getState();
+    const alerts: Entity<AlertInfo> = apiData.alerts
+      ? this.alertsEntitiesService.setAll(apiData.alerts)
+      : {};
+    const data: DashboardData = { ...apiData, alerts };
+    this.update({ ...state, data, apiState: ApiStateManager.onCompleted() });
+  }
+
+  onUpdateAlert(id: number, changes: Partial<AlertInfo>) {
+    const state: DashboardState = this.getState();
+    const data: DashboardData | null = state.data;
+    if (!data?.alerts) {
+      return;
+    }
+    const alerts: Entity<AlertInfo> = this.alertsEntitiesService.updateOne(
+      { id, changes },
+      data.alerts
+    );
+    this.onUpdateData({ ...data, alerts });
   }
 
   onUpdateData(data: DashboardData) {
-    this.state = { ...this.state, data };
-    this.applyState();
+    const state: DashboardState = this.getState();
+    this.update({ ...state, data });
   }
 
   selectData(): Observable<DashboardData> {

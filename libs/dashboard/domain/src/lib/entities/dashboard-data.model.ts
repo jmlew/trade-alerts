@@ -5,20 +5,20 @@ import { BinaryBoolean, BuySell } from './dashboard-data.enum';
 
 // Dashboard data object returned by the api.
 export interface DashboardApiData {
-  alerts: AlertInfo[];
-  trades: TradesInfo[];
-  alertsTrans: AlertsTransInfo[];
-  accountsTrans: AccountsTransInfo[];
+  alerts?: AlertInfo[];
+  trades?: TradesInfo[];
+  alertsTrans?: AlertsTransInfo[];
+  accountsTrans?: AccountsTransInfo[];
 }
 
 // Dashboard data object after normalisation for the app.
 export interface DashboardData {
   // Alerts are stored as entites to facilliate managing the data in the facade.
-  alerts: Entity<AlertInfo>;
+  alerts?: Entity<AlertInfo>;
   // All other collections are readonly and consumed as arrays throughout the app.
-  trades: TradesInfo[];
-  alertsTrans: AlertsTransInfo[];
-  accountsTrans: AccountsTransInfo[];
+  trades?: TradesInfo[];
+  alertsTrans?: AlertsTransInfo[];
+  accountsTrans?: AccountsTransInfo[];
 }
 
 export type DashboardDataGridField = AlertInfo | AccountsTransInfo | AlertsTransInfo;

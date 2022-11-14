@@ -1,20 +1,14 @@
-import { Observable, map, take } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import { ApiState } from '@trade-alerts/shared/data-access';
-import {
-  EntitiesService,
-  Entity,
-  selectAllFromEntities,
-} from '@trade-alerts/shared/util-common';
+import { Entity, selectAllFromEntities } from '@trade-alerts/shared/util-common';
 
-import { AlertInfoField } from '../entities/dashboard-data-fields.enum';
+import { AlertInfo, DashboardData } from '../entities/dashboard-data.model';
 import {
-  AlertInfo,
-  DashboardApiData,
-  DashboardData,
-} from '../entities/dashboard-data.model';
-import { DashboardDataService } from '../infrastructure/dashboard-data.service';
-import { dashboardDataStore } from '../state/dashboard-data.store';
+  DashboardDataEffects,
+  dashboardDataEffects,
+} from '../state/dashboard-data.effects';
+import { DashboardDataStore, dashboardDataStore } from '../state/dashboard-data.store';
 
 /**
  * Facade to interface between containers / context providers and http services.
@@ -22,8 +16,6 @@ import { dashboardDataStore } from '../state/dashboard-data.store';
  */
 
 class DashboardDataFacade {
-  private alertsEntitiesService: EntitiesService<AlertInfo, number>;
-
   // Store values exposed as readonly observables.
   dashData$: Observable<DashboardData> = dashboardDataStore.selectData();
   dashDataState$: Observable<ApiState> = dashboardDataStore.selectApiState();
@@ -35,50 +27,21 @@ class DashboardDataFacade {
     map((alerts: Entity<AlertInfo>) => selectAllFromEntities<AlertInfo, number>(alerts))
   );
 
-  constructor(private dataService: DashboardDataService) {
-    this.alertsEntitiesService = new EntitiesService<AlertInfo, number>(
-      AlertInfoField.AlertId
-    );
-  }
+  constructor(
+    private dataStore: DashboardDataStore,
+    private dataEffects: DashboardDataEffects
+  ) {}
 
   loadDashData(params: URLSearchParams) {
-    dashboardDataStore.onPending();
-    this.dataService
-      .getDashData(params)
-      .pipe(take(1))
-      .subscribe({
-        next: (data: DashboardApiData) =>
-          dashboardDataStore.onCompleted(this.normaliseDashboardApiData(data)),
-        error: (error: string) => dashboardDataStore.onFailed(error),
-      });
+    this.dataEffects.loadDashData(params);
   }
 
   updateDashDataWithAlert(id: number, changes: Partial<AlertInfo>) {
-    const data: DashboardData | null = dashboardDataStore.selectStateValue().data;
-    if (!data?.alerts) {
-      return;
-    }
-    const alerts: Entity<AlertInfo> = this.alertsEntitiesService.updateOne(
-      { id, changes },
-      data.alerts
-    );
-    dashboardDataStore.onUpdateData({ ...data, alerts });
-  }
-
-  /**
-   * Normalises the given API response data into a format which is most effectively
-   * managed by the facade. The alerts collection is converted into an entities object to
-   * update in this facade and is normalised back into an array prior to being consumed by
-   * the dashboard views, preferrably through a memoised context provider.
-   */
-  private normaliseDashboardApiData(data: DashboardApiData): DashboardData {
-    const alerts: Entity<AlertInfo> = data.alerts
-      ? this.alertsEntitiesService.setAll(data.alerts)
-      : {};
-    return { ...data, alerts };
+    this.dataStore.onUpdateAlert(id, changes);
   }
 }
 
 export const dashboardDataFacade: DashboardDataFacade = new DashboardDataFacade(
-  new DashboardDataService()
+  dashboardDataStore,
+  dashboardDataEffects
 );
