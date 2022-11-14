@@ -15,17 +15,29 @@ import {
 import { isNonNull } from '@trade-alerts/shared/util-common';
 
 interface AlertState {
-  apiState: ApiState;
   alertId: number | null;
+  apiState: ApiState;
 }
 
 const initialState: AlertState = {
-  apiState: ApiStateManager.onIdle(),
   alertId: null,
+  apiState: ApiStateManager.onIdle(),
 };
 
-class AlertManagerStore extends ObservableStore<AlertState> {
+export class AlertManagerStore extends ObservableStore<AlertState> {
+  private static instance: AlertManagerStore;
   override enableLogging = false;
+
+  private constructor() {
+    super(initialState);
+  }
+
+  static getInstance() {
+    if (!this.instance) {
+      this.instance = new AlertManagerStore();
+    }
+    return this.instance;
+  }
 
   onPending() {
     const state: AlertState = this.getState();
@@ -63,4 +75,4 @@ class AlertManagerStore extends ObservableStore<AlertState> {
   }
 }
 
-export const alertManagerStore: AlertManagerStore = new AlertManagerStore(initialState);
+export const alertManagerStore: AlertManagerStore = AlertManagerStore.getInstance();
