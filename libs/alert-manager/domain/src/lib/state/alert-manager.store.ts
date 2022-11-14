@@ -25,8 +25,8 @@ const initialState: AlertState = {
 };
 
 export class AlertManagerStore extends ObservableStore<AlertState> {
+  override enableLogging = true;
   private static instance: AlertManagerStore;
-  override enableLogging = false;
 
   private constructor() {
     super(initialState);

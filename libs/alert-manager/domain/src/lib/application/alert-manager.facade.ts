@@ -1,11 +1,11 @@
-import { Observable, map, take } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
-import { dashAlerts$, updateDashDataWithAlert } from '@trade-alerts/dashboard/api';
+import { dashAlerts$ } from '@trade-alerts/dashboard/api';
 import { ApiState } from '@trade-alerts/shared/data-access';
 
 import { Alert, AlertUpdateParams } from '../entities/alert-manager-data.model';
-import { AlertManagerDataService } from '../infrastructure/alert-manager-data.service';
-import { alertManagerStore } from '../state/alert-manager.store';
+import { AlertManagerEffects, alertManagerEffects } from '../state/alert-manager.effects';
+import { AlertManagerStore, alertManagerStore } from '../state/alert-manager.store';
 
 /**
  * Facade to interface between containers / context providers and http services.
@@ -22,32 +22,14 @@ class AlertManagerFacade {
     map((alerts: Alert[]) => this.mapToDomainAlerts(alerts))
   );
 
-  constructor(private dataService: AlertManagerDataService) {}
+  constructor(private store: AlertManagerStore, private effects: AlertManagerEffects) {}
 
   setAlertId(id: number) {
-    alertManagerStore.onSetAlertId(id);
+    this.store.onSetAlertId(id);
   }
 
   updateAlert(id: number, params: AlertUpdateParams) {
-    alertManagerStore.onPending();
-    this.dataService
-      .updateAlert(id, params)
-      .pipe(take(1))
-      .subscribe({
-        next: () => {
-          this.updateDashboardDataWithAlertParams(id, params);
-          alertManagerStore.onCompleted();
-        },
-        error: (error: string) => alertManagerStore.onFailed(error),
-      });
-  }
-
-  /**
-   * Updates the alert in the dashboard alerts collection in the dashboard facade.
-   */
-  private updateDashboardDataWithAlertParams(id: number, params: AlertUpdateParams) {
-    const changes: Partial<Alert> = { status: params.status };
-    updateDashDataWithAlert(id, changes);
+    this.effects.updateAlert(id, params);
   }
 
   /**
@@ -63,5 +45,6 @@ class AlertManagerFacade {
 }
 
 export const alertManagerFacade: AlertManagerFacade = new AlertManagerFacade(
-  new AlertManagerDataService()
+  alertManagerStore,
+  alertManagerEffects
 );
