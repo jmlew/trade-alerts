@@ -8,10 +8,10 @@ import {
 } from '@trade-alerts/dashboard/domain';
 
 /**
- * API which exposes specific features for consumption by other domains.  Cross-domain
+ * API which exposes specific features for consumption by other domains. Cross-domain
  * access restrictions are enforced through the base eslint rules and only specific
  * features exported below can be accessed by domains added to the rule containing the
- * "name:dashboard-api" tag.
+ * "domain:dashboard/api" tag.
  */
 
 export function updateDashDataWithAlert(id: number, changes: Partial<AlertInfo>) {
