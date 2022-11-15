@@ -15,7 +15,7 @@ import { DashboardDataStore, dashboardDataStore } from '../state/dashboard-data.
  * Exposes a simplified API for state management through custom observabe stores.
  */
 
-class DashboardDataFacade {
+export class DashboardDataFacade {
   // Store values exposed as readonly observables.
   dashData$: Observable<DashboardData> = this.dataStore.selectData();
   dashDataState$: Observable<ApiState> = this.dataStore.selectApiState();
