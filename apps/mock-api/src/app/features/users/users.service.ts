@@ -61,7 +61,11 @@ export class UsersService extends EntitiesManagerService<User, number> {
     return this.doesEntityExist(id);
   }
 
-  isFieldDuplicate(user: UserDetails, field: string, ignoreValue: any = null): boolean {
+  isFieldDuplicate(
+    user: UserDetails,
+    field: string,
+    ignoreValue: unknown = null
+  ): boolean {
     const users: User[] = this.selectAll();
     return users
       .filter((item: User) => ignoreValue === null || item[field] !== ignoreValue)

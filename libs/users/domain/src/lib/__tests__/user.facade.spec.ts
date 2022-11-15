@@ -1,12 +1,16 @@
 import { firstValueFrom, of } from 'rxjs';
 
 import { ApiStatus } from '@trade-alerts/shared/data-access';
-import { Entity } from '@trade-alerts/shared/util-common';
 
+import { UserFacade } from '../application/user.facade';
 import { User, UserDetails } from '../entities/user.model';
 import { UserEffects } from '../state/user.effects';
 import { UserStore } from '../state/user.store';
-import { UserFacade } from './user.facade';
+import { mockUserEntities, mockUsers } from './mock-data';
+
+let userStore: UserStore;
+let userEffects: UserEffects;
+let userFacade: UserFacade;
 
 /**
  * Instantiates all dependancies for mocking the facade. To be called after spies and
@@ -20,18 +24,12 @@ function instantiateMocks() {
   userEffects = new UserEffects(userStore);
   userFacade = new UserFacade(userStore, userEffects);
 }
-let userStore: UserStore;
-let userEffects: UserEffects;
-let userFacade: UserFacade;
 
-describe('UserFacade', () => {
+describe(UserFacade, () => {
   describe('Selectors', () => {
-    const allUsers: User[] = [
-      { id: 1, firstName: 'John', lastName: 'Smith', email: 'john@sample.com' },
-      { id: 2, firstName: 'Fred', lastName: 'Jackson', email: 'fred@sample.com' },
-    ];
-    const users: Entity<User> = { 1: allUsers[0], 2: allUsers[1] };
-
+    afterAll(() => {
+      jest.restoreAllMocks();
+    });
     it('should select usersReadState from user store', async () => {
       const value = { status: ApiStatus.Cancelled, error: null };
       jest
@@ -52,7 +50,7 @@ describe('UserFacade', () => {
       await expect(firstValueFrom(userFacade.usersWriteState$)).resolves.toEqual(value);
     });
     it('should select allUsers from user store', () => {
-      const value = allUsers;
+      const value = mockUsers;
       jest
         .spyOn(UserStore.prototype, 'selectAllUsers')
         .mockImplementation(() => of(value));
@@ -61,7 +59,7 @@ describe('UserFacade', () => {
       return expect(firstValueFrom(userFacade.allUsers$)).resolves.toEqual(value);
     });
     it('should select currentUser from user store', async () => {
-      const value = users[1] as User;
+      const value = mockUserEntities[1] as User;
       jest
         .spyOn(UserStore.prototype, 'selectCurrentUser')
         .mockImplementation(() => of(value));
@@ -73,22 +71,24 @@ describe('UserFacade', () => {
       const id = 1;
       jest
         .spyOn(UserStore.prototype, 'selectUser')
-        .mockImplementation((id: number) => of(users[id] as User));
+        .mockImplementation((id: number) => of(mockUserEntities[id] as User));
 
       instantiateMocks();
-      await expect(firstValueFrom(userFacade.selectUser(id))).resolves.toEqual(users[id]);
+      await expect(firstValueFrom(userFacade.selectUser(id))).resolves.toEqual(
+        mockUserEntities[id]
+      );
     });
   });
 
   describe('Actions', () => {
+    afterAll(() => {
+      jest.restoreAllMocks();
+    });
     const sampleUserParams: UserDetails = {
       firstName: 'John',
       lastName: 'Smith',
       email: 'john@sampleuser.com',
     };
-    afterAll(() => {
-      jest.resetAllMocks();
-    });
     it('should clearCurrentUser using user store', () => {
       jest.spyOn(UserStore.prototype, 'onClearCurrentUser');
       instantiateMocks();

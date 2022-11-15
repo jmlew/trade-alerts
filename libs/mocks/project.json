@@ -19,5 +19,5 @@
       }
     }
   },
-  "tags": ["type:mock"]
+  "tags": ["type:mock", "domain:shared"]
 }
