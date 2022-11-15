@@ -1,6 +1,7 @@
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { AjaxError, AjaxResponse, ajax } from 'rxjs/ajax';
 
+import { RepositoryObservable } from '@trade-alerts/shared/data-access';
 import {
   getRxjsAjaxApiErrorMessage,
   isDev,
@@ -19,7 +20,7 @@ import {
   UserRecord,
 } from '../user-api.model';
 
-export class UserApiRxjsAjaxService {
+export class UserApiRxjsAjaxService implements RepositoryObservable<User, number> {
   private basePath: string;
 
   constructor(private mapper: UserApiMapper) {
@@ -27,7 +28,7 @@ export class UserApiRxjsAjaxService {
     this.basePath = `${baseUrl}/${UserApiUri.Users}/`;
   }
 
-  getUser(userId: number): Observable<User> {
+  read(userId: number): Observable<User> {
     const request: Observable<AjaxResponse<GetUserResponse>> = ajax.get<GetUserResponse>(
       `${this.basePath}${userId}`
     );
@@ -40,7 +41,7 @@ export class UserApiRxjsAjaxService {
     );
   }
 
-  getUsers(): Observable<User[]> {
+  readAll(): Observable<User[]> {
     const params: URLSearchParams = new URLSearchParams();
     // params.append(UserApiParam.Page, `${pageIndex}`);
     const request: Observable<AjaxResponse<GetUsersResponse>> =
@@ -54,7 +55,7 @@ export class UserApiRxjsAjaxService {
     );
   }
 
-  updateUser(userId: number, values: UserDetails): Observable<User> {
+  update(userId: number, values: UserDetails): Observable<User> {
     const request: Observable<AjaxResponse<UpdateUserResponse>> =
       ajax.put<UpdateUserResponse>(`${this.basePath}${userId}`, values);
     return request.pipe(
@@ -66,7 +67,7 @@ export class UserApiRxjsAjaxService {
     );
   }
 
-  createUser(values: UserDetails): Observable<User> {
+  create(values: UserDetails): Observable<User> {
     const request: Observable<AjaxResponse<CreateUserResponse>> =
       ajax.post<CreateUserResponse>(this.basePath, values);
     return request.pipe(
@@ -78,7 +79,7 @@ export class UserApiRxjsAjaxService {
     );
   }
 
-  deleteUser(userId: number): Observable<number> {
+  delete(userId: number): Observable<number> {
     const request: Observable<AjaxResponse<DeleteUserResponse>> =
       ajax.delete<DeleteUserResponse>(`${this.basePath}${userId}`);
     return request.pipe(

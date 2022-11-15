@@ -6,22 +6,18 @@
 
 import { Observable } from 'rxjs';
 
-export interface Repository<T, P extends Partial<T>, K extends string | number> {
+export interface Repository<T, K extends string | number> {
   readAll(): T[];
   read(id: K): T;
-  create(params: P): T;
-  update(id: K, params: P): T;
+  create(params: Partial<T>): T;
+  update(id: K, params: Partial<T>): T;
   delete(id: K): { id: K };
 }
 
-export interface RepositoryObservable<
-  T,
-  P extends Partial<T>,
-  K extends string | number
-> {
+export interface RepositoryObservable<T, K extends string | number> {
   readAll(): Observable<T[]>;
   read(id: K): Observable<T>;
-  create(params: P): Observable<T>;
-  update(id: K, params: P): Observable<T>;
+  create(params: Partial<T>): Observable<T>;
+  update(id: K, params: Partial<T>): Observable<T>;
   delete(id: K): Observable<K>;
 }

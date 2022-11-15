@@ -11,6 +11,7 @@ export * from './lib/http/axios-api-interceptors.service';
 export * from './lib/http/axios.model';
 export * from './lib/http/axios/http-axios.util';
 export * from './lib/http/mapper.model';
+export * from './lib/http/repository.model';
 export * from './lib/http/rxjs-ajax/http-rxjs-ajax.util';
 export * from './lib/http/use-axios.hook';
 export * from './lib/http/use-fetch.hook';

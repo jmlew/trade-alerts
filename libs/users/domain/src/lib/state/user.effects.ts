@@ -1,5 +1,6 @@
 import { map, take } from 'rxjs';
 
+import { RepositoryObservable } from '@trade-alerts/shared/data-access';
 import { objectsSortOnKey } from '@trade-alerts/shared/util-common';
 
 import { User, UserDetails } from '../entities/user.model';
@@ -7,7 +8,10 @@ import { userApiRxjsAjaxService } from '../infrastructure/rxjs-ajax/user-api-rxj
 import { UserStore, userStore } from './user.store';
 
 export class UserEffects {
-  constructor(private userStore: UserStore) {}
+  constructor(
+    private userStore: UserStore,
+    private dataService: RepositoryObservable<User, number>
+  ) {}
 
   loadUser(userId: number) {
     // Load the current user value from the store if it exists.
@@ -17,8 +21,8 @@ export class UserEffects {
       return;
     }
     this.userStore.onReadPending();
-    userApiRxjsAjaxService
-      .getUser(userId)
+    this.dataService
+      .read(userId)
       .pipe(take(1))
       .subscribe({
         next: (data: User) => this.userStore.onLoadUserCompleted(data),
@@ -28,8 +32,8 @@ export class UserEffects {
 
   loadUsers() {
     this.userStore.onReadPending();
-    userApiRxjsAjaxService
-      .getUsers()
+    this.dataService
+      .readAll()
       .pipe(
         map((items: User[]) => objectsSortOnKey<User>(items, 'firstName')),
         take(1)
@@ -42,8 +46,8 @@ export class UserEffects {
 
   createUser(values: UserDetails) {
     this.userStore.onWritePending();
-    userApiRxjsAjaxService
-      .createUser(values)
+    this.dataService
+      .create(values)
       .pipe(take(1))
       .subscribe({
         next: (data: User) => this.userStore.onCreateUserCompleted(data),
@@ -53,8 +57,8 @@ export class UserEffects {
 
   updateUser(userId: number, values: UserDetails) {
     this.userStore.onWritePending();
-    userApiRxjsAjaxService
-      .updateUser(userId, values)
+    this.dataService
+      .update(userId, values)
       .pipe(take(1))
       .subscribe({
         next: (data: User) => {
@@ -72,8 +76,8 @@ export class UserEffects {
    */
   updateUserOptimistic(userId: number, values: UserDetails) {
     this.userStore.onUpdateUserCompleted(userId, values);
-    userApiRxjsAjaxService
-      .updateUser(userId, values)
+    this.dataService
+      .update(userId, values)
       .pipe(take(1))
       .subscribe({
         error: (error: string) => {
@@ -85,8 +89,8 @@ export class UserEffects {
 
   deleteUser(userId: number) {
     this.userStore.onWritePending();
-    userApiRxjsAjaxService
-      .deleteUser(userId)
+    this.dataService
+      .delete(userId)
       .pipe(take(1))
       .subscribe({
         next: (userId: number) => {
@@ -104,8 +108,8 @@ export class UserEffects {
    */
   deleteUserOptimistic(userId: number) {
     this.userStore.onDeleteUserCompleted(userId);
-    userApiRxjsAjaxService
-      .deleteUser(userId)
+    this.dataService
+      .delete(userId)
       .pipe(take(1))
       .subscribe({
         error: (error: string) => {
@@ -116,4 +120,7 @@ export class UserEffects {
   }
 }
 
-export const userEffects: UserEffects = new UserEffects(userStore);
+export const userEffects: UserEffects = new UserEffects(
+  userStore,
+  userApiRxjsAjaxService
+);

@@ -4,6 +4,8 @@ import { ApiStatus } from '@trade-alerts/shared/data-access';
 
 import { UserFacade } from '../application/user.facade';
 import { User, UserDetails } from '../entities/user.model';
+import { UserApiRxjsAjaxService } from '../infrastructure/rxjs-ajax/user-api-rxjs-ajax.service';
+import { UserApiMapper } from '../infrastructure/user-api.mapper';
 import { UserEffects } from '../state/user.effects';
 import { UserStore } from '../state/user.store';
 import { mockUserEntities, mockUsers } from './mock-data';
@@ -11,6 +13,7 @@ import { mockUserEntities, mockUsers } from './mock-data';
 let userStore: UserStore;
 let userEffects: UserEffects;
 let userFacade: UserFacade;
+let dataService: UserApiRxjsAjaxService;
 
 /**
  * Instantiates all dependancies for mocking the facade. To be called after spies and
@@ -21,7 +24,8 @@ function instantiateMocks() {
   userStore && userStore.onClear();
   // Instantiate user store instance.
   userStore = UserStore.getInstance();
-  userEffects = new UserEffects(userStore);
+  dataService = new UserApiRxjsAjaxService(new UserApiMapper());
+  userEffects = new UserEffects(userStore, dataService);
   userFacade = new UserFacade(userStore, userEffects);
 }
 
