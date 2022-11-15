@@ -31,7 +31,7 @@ interface AlertOverviewsProps {
 
 export function AlertOverviews({ overviews, onSelectAlert }: AlertOverviewsProps) {
   return (
-    <Box sx={styles.root}>
+    <Box sx={styles.root} aria-label="alerts overviews">
       <Box>
         {overviews.map((item: AlertOverviewInfo) => (
           <Typography variant="body2" key={item.field} sx={styles.headings}>

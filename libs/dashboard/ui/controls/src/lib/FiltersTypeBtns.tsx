@@ -13,11 +13,12 @@ interface FiltersTypeBtnsProps {
 
 export function FiltersTypeBtns({ type, onSetType }: FiltersTypeBtnsProps) {
   return (
-    <ButtonGroup variant="outlined" aria-label="outlined button group">
+    <ButtonGroup variant="outlined" aria-label="data filter type options">
       <Button
         variant={type === FiltersType.DateRange ? 'contained' : 'outlined'}
         sx={styles.btn}
         onClick={() => onSetType(FiltersType.DateRange)}
+        aria-label="by date range"
       >
         By Date
       </Button>
@@ -25,6 +26,7 @@ export function FiltersTypeBtns({ type, onSetType }: FiltersTypeBtnsProps) {
         variant={type === FiltersType.AlertId ? 'contained' : 'outlined'}
         sx={styles.btn}
         onClick={() => onSetType(FiltersType.AlertId)}
+        aria-label="by alert id"
       >
         By ID
       </Button>

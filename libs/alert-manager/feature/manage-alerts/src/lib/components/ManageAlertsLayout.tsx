@@ -35,10 +35,10 @@ export function ManageAlertsLayout() {
       <Typography sx={styles.title} variant="h5" color="primary.light">
         Update Alert
       </Typography>
-      <Box sx={styles.selector}>
+      <Box sx={styles.selector} aria-label="manage alerts select">
         <AlertSelectorContainer />
       </Box>
-      <Box sx={styles.form}>
+      <Box sx={styles.form} aria-label="manage alerts form">
         <UpdateAlertsContainer />
       </Box>
     </Box>

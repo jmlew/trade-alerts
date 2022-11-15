@@ -63,7 +63,12 @@ export function DateRangeInputs({
           value={fromInput}
           onChange={handleChangeFrom}
           renderInput={(params) => (
-            <TextField {...params} size="small" sx={styles.input} />
+            <TextField
+              {...params}
+              size="small"
+              sx={styles.input}
+              aria-label="enter date from"
+            />
           )}
           disableMaskedInput
         />
@@ -76,7 +81,12 @@ export function DateRangeInputs({
           value={toInput}
           onChange={handleChangeTo}
           renderInput={(params) => (
-            <TextField {...params} size="small" sx={styles.input} />
+            <TextField
+              {...params}
+              size="small"
+              sx={styles.input}
+              aria-label="enter date to"
+            />
           )}
           disableMaskedInput
         />

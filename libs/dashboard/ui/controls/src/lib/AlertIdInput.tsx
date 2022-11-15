@@ -42,6 +42,7 @@ export function AlertIdInput({ value, onSetValue }: AlertIdInputProps) {
     <TextField
       id="alert-id"
       label="Alert ID"
+      aria-label="alert id"
       size="small"
       color="primary"
       sx={styles.root}

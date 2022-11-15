@@ -20,6 +20,7 @@ export function BtnLoadData({ isLoading, onClick }: BtnLoadDataProps) {
       color="primary"
       loadingPosition="end"
       endIcon={<ChevronRight />}
+      aria-label="load dashboard data"
     >
       Load Data
     </LoadingButton>
