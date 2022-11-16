@@ -14,6 +14,9 @@ let dataService: DashboardDataService;
  * mocks have been applied to the relevant methods on the class prototypes for each test.
  */
 function createInstances() {
+  // Clear previous store state on current instance.
+  store && store.onClear();
+  // Instantiate classes.
   store = DashboardDataStore.getInstance();
   dataService = new DashboardDataService();
   effects = new DashboardDataEffects(store, dataService);

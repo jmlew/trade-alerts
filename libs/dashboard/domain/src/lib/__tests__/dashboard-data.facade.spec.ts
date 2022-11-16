@@ -21,7 +21,7 @@ let dataService: DashboardDataService;
 function createInstances() {
   // Clear previous store state on current instance.
   store && store.onClear();
-  // Instantiate data store instance.
+  // Instantiate classes.
   store = DashboardDataStore.getInstance();
   dataService = new DashboardDataService();
   effects = new DashboardDataEffects(store, dataService);

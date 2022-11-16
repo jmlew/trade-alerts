@@ -18,6 +18,7 @@ let dataService: UserApiRxjsAjaxService;
  * mocks have been applied to the relevant methods on the class prototypes for each test.
  */
 function createInstances() {
+  store && store.onClear(); // Clear previous store state on current instance.
   store = UserStore.getInstance();
   dataService = new UserApiRxjsAjaxService(new UserApiMapper());
   effects = new UserEffects(store, dataService);
@@ -36,7 +37,6 @@ describe(UserEffects, () => {
     jest.spyOn(UserApiRxjsAjaxService.prototype, 'read').mockReturnValue(of(user));
 
     createInstances();
-
     effects.loadUser(user.id);
     expect(store.onReadPending).toHaveBeenCalled();
     expect(dataService.read).toHaveBeenCalledWith(user.id);
@@ -52,7 +52,6 @@ describe(UserEffects, () => {
     jest.spyOn(UserApiRxjsAjaxService.prototype, 'read');
 
     createInstances();
-
     effects.loadUser(user.id);
     expect(store.onReadPending).not.toHaveBeenCalled();
     expect(dataService.read).not.toHaveBeenCalled();
@@ -69,7 +68,6 @@ describe(UserEffects, () => {
       .mockReturnValue(throwError(() => error));
 
     createInstances();
-
     effects.loadUser(id);
     expect(store.onReadPending).toHaveBeenCalled();
     expect(dataService.read).toHaveBeenCalledWith(id);
@@ -84,7 +82,6 @@ describe(UserEffects, () => {
       .mockReturnValue(of(mockUsers));
 
     createInstances();
-
     effects.loadUsers();
     expect(store.onReadPending).toHaveBeenCalled();
     expect(dataService.readAll).toHaveBeenCalled();
@@ -99,7 +96,6 @@ describe(UserEffects, () => {
       .mockReturnValue(throwError(() => error));
 
     createInstances();
-
     effects.loadUsers();
     expect(store.onReadPending).toHaveBeenCalled();
     expect(dataService.readAll).toHaveBeenCalled();
@@ -114,7 +110,6 @@ describe(UserEffects, () => {
     jest.spyOn(UserApiRxjsAjaxService.prototype, 'create').mockReturnValue(of(user));
 
     createInstances();
-
     effects.createUser(params);
     expect(store.onWritePending).toHaveBeenCalled();
     expect(dataService.create).toHaveBeenCalledWith(params);
@@ -131,7 +126,6 @@ describe(UserEffects, () => {
       .mockReturnValue(throwError(() => error));
 
     createInstances();
-
     effects.createUser(params);
     expect(store.onWritePending).toHaveBeenCalled();
     expect(dataService.create).toHaveBeenCalledWith(params);
@@ -147,7 +141,6 @@ describe(UserEffects, () => {
     jest.spyOn(UserApiRxjsAjaxService.prototype, 'update').mockReturnValue(of(user));
 
     createInstances();
-
     effects.updateUser(id, params);
     expect(store.onWritePending).toHaveBeenCalled();
     expect(dataService.update).toHaveBeenCalledWith(id, params);
@@ -165,7 +158,6 @@ describe(UserEffects, () => {
       .mockReturnValue(throwError(() => error));
 
     createInstances();
-
     effects.updateUser(id, params);
     expect(store.onWritePending).toHaveBeenCalled();
     expect(dataService.update).toHaveBeenCalledWith(id, params);
@@ -183,7 +175,6 @@ describe(UserEffects, () => {
       .mockReturnValue(of(user));
 
     createInstances();
-
     effects.updateUserOptimistic(id, params);
     expect(store.onWritePending).not.toHaveBeenCalled();
     expect(dataService.update).toHaveBeenCalledWith(id, params);
@@ -208,7 +199,6 @@ describe(UserEffects, () => {
       .mockReturnValue(throwError(() => error));
 
     createInstances();
-
     effects.updateUserOptimistic(id, params);
     expect(store.onWritePending).not.toHaveBeenCalled();
     expect(dataService.update).toHaveBeenCalledWith(id, params);
@@ -233,7 +223,6 @@ describe(UserEffects, () => {
     jest.spyOn(UserApiRxjsAjaxService.prototype, 'delete').mockReturnValue(of(id));
 
     createInstances();
-
     effects.deleteUser(id);
     expect(store.onWritePending).toHaveBeenCalled();
     expect(dataService.delete).toHaveBeenCalledWith(id);
@@ -250,7 +239,6 @@ describe(UserEffects, () => {
       .mockReturnValue(throwError(() => error));
 
     createInstances();
-
     effects.deleteUser(id);
     expect(store.onWritePending).toHaveBeenCalled();
     expect(dataService.delete).toHaveBeenCalledWith(id);
@@ -267,7 +255,6 @@ describe(UserEffects, () => {
       .mockReturnValue(of(id));
 
     createInstances();
-
     effects.deleteUserOptimistic(id);
     expect(store.onWritePending).not.toHaveBeenCalled();
     expect(dataService.delete).toHaveBeenCalledWith(id);
@@ -292,7 +279,6 @@ describe(UserEffects, () => {
       .mockReturnValue(throwError(() => error));
 
     createInstances();
-
     effects.deleteUserOptimistic(id);
     expect(store.onWritePending).not.toHaveBeenCalled();
     expect(dataService.delete).toHaveBeenCalledWith(id);
