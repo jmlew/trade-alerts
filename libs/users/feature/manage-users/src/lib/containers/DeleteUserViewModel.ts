@@ -18,7 +18,7 @@ export interface DeleteUserViewModelResult {
 
 export function DeleteUserViewModel(userFacade: UserFacade): DeleteUserViewModelResult {
   const [deleteUserId, setDeleteUserId] = useState<number | null>(null);
-  const apiState: ApiState | null = useObservable<ApiState>(userFacade.usersWriteState$);
+  const apiState: ApiState | null = useObservable(userFacade.usersWriteState$);
   const apiStateRef: ApiStateReference = useApiStateReference(apiState);
 
   function deleteUser(userId: number) {

@@ -18,8 +18,8 @@ export interface UpdateUserViewModelResult {
 }
 
 export function UpdateUserViewModel(userFacade: UserFacade): UpdateUserViewModelResult {
-  const user: User | null = useObservable<User | null>(userFacade.currentUser$);
-  const apiState: ApiState | null = useObservable<ApiState>(userFacade.usersWriteState$);
+  const user: User | null = useObservable(userFacade.currentUser$);
+  const apiState: ApiState | null = useObservable(userFacade.usersWriteState$);
   const apiStateRef: ApiStateReference = useApiStateReference(apiState);
   const formParams: UserDetails = getUserFormParams(user);
 

@@ -19,8 +19,8 @@ export interface CreateUserViewModelResult {
 }
 
 export function CreateUserViewModel(userFacade: UserFacade): CreateUserViewModelResult {
-  const user: User | null = useObservable<User | null>(userFacade.currentUser$);
-  const apiState: ApiState | null = useObservable<ApiState>(userFacade.usersWriteState$);
+  const user: User | null = useObservable(userFacade.currentUser$);
+  const apiState: ApiState | null = useObservable(userFacade.usersWriteState$);
   const apiStateRef: ApiStateReference = useApiStateReference(apiState);
   const formParams: UserDetails = getUserFormParams(null);
 

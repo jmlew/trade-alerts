@@ -10,10 +10,8 @@ interface Props {
 }
 
 export function ManageAlertsProvider({ children }: Props) {
-  const alerts: Alert[] | null = useObservable<Alert[]>(alertManagerFacade.alerts$);
-  const currentId: number | null = useObservable<number | null>(
-    alertManagerFacade.alertId$
-  );
+  const alerts: Alert[] | null = useObservable(alertManagerFacade.alerts$);
+  const currentId: number | null = useObservable(alertManagerFacade.alertId$);
 
   const value: ManageAlertsContextValue = useMemo(
     () => ({ alerts, currentId }),

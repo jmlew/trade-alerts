@@ -15,8 +15,8 @@ export interface LoadUsersViewModelResult {
 }
 
 export function LoadUsersViewModel(userFacade: UserFacade): LoadUsersViewModelResult {
-  const users: User[] | null = useObservable<User[]>(userFacade.allUsers$);
-  const apiState: ApiState | null = useObservable<ApiState>(userFacade.usersReadState$);
+  const users: User[] | null = useObservable(userFacade.allUsers$);
+  const apiState: ApiState | null = useObservable(userFacade.usersReadState$);
   const apiStateRef: ApiStateReference = useApiStateReference(apiState);
 
   function loadUsers() {

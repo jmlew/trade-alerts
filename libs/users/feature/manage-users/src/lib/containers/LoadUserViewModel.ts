@@ -18,8 +18,8 @@ export function LoadUserViewModel(
   userFacade: UserFacade,
   userId: number
 ): LoadUserViewModelResult {
-  const user: User | null = useObservable<User | null>(userFacade.selectUser(userId));
-  const apiState: ApiState | null = useObservable<ApiState>(userFacade.usersReadState$);
+  const user: User | null = useObservable(userFacade.selectUser(userId));
+  const apiState: ApiState | null = useObservable(userFacade.usersReadState$);
   const apiStateRef: ApiStateReference = useApiStateReference(apiState);
 
   function loadUser(userId: number) {

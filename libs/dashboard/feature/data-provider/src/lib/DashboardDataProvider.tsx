@@ -24,13 +24,9 @@ interface DashboardDataProviderProps {
 }
 
 export function DashboardDataProvider({ children }: DashboardDataProviderProps) {
-  const dashData: DashboardData | null = useObservable<DashboardData>(
-    dashboardDataFacade.dashData$
-  );
-  const alerts: AlertInfo[] | null = useObservable<AlertInfo[]>(
-    dashboardDataFacade.dashAlerts$
-  );
-  const dashDataState: ApiState | null = useObservable<ApiState>(
+  const dashData: DashboardData | null = useObservable(dashboardDataFacade.dashData$);
+  const alerts: AlertInfo[] | null = useObservable(dashboardDataFacade.dashAlerts$);
+  const dashDataState: ApiState | null = useObservable(
     dashboardDataFacade.dashDataState$
   );
   const value: DashboardDataContextValue = useMemo(() => {

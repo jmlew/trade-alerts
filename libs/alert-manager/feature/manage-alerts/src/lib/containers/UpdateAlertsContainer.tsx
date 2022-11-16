@@ -27,7 +27,7 @@ export function UpdateAlertsContainer() {
   const [initialValues, setInitialValues] = useState<AlertUpdateFormParams>(
     getInitialFormValues(currentAlert)
   );
-  const alertManagerState: ApiState | null = useObservable<ApiState>(
+  const alertManagerState: ApiState | null = useObservable(
     alertManagerFacade.alertManagerState$
   );
   const alertManagerStateRef: ApiStateReference = useApiStateReference(alertManagerState);
