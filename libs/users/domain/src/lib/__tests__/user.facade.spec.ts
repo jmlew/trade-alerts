@@ -10,28 +10,25 @@ import { UserEffects } from '../state/user.effects';
 import { UserStore } from '../state/user.store';
 import { mockUserEntities, mockUsers } from './mock-data';
 
-let userStore: UserStore;
-let userEffects: UserEffects;
-let userFacade: UserFacade;
+let store: UserStore;
+let effects: UserEffects;
+let facade: UserFacade;
 let dataService: UserApiRxjsAjaxService;
 
 /**
- * Instantiates all dependancies for mocking the facade. To be called after spies and
+ * Instantiates all dependancies for mocking the tests. To be called after spies and
  * mocks have been applied to the relevant methods on the class prototypes for each test.
  */
-function instantiateMocks() {
-  // Clear previous store state on current instance.
-  userStore && userStore.onClear();
-  // Instantiate user store instance.
-  userStore = UserStore.getInstance();
+function createInstances() {
+  store = UserStore.getInstance();
   dataService = new UserApiRxjsAjaxService(new UserApiMapper());
-  userEffects = new UserEffects(userStore, dataService);
-  userFacade = new UserFacade(userStore, userEffects);
+  effects = new UserEffects(store, dataService);
+  facade = new UserFacade(store, effects);
 }
 
 describe(UserFacade, () => {
   describe('Selectors', () => {
-    afterAll(() => {
+    afterEach(() => {
       jest.restoreAllMocks();
     });
     it('should select usersReadState from user store', async () => {
@@ -40,8 +37,8 @@ describe(UserFacade, () => {
         .spyOn(UserStore.prototype, 'selectApiReadState')
         .mockImplementation(() => of(value));
 
-      instantiateMocks();
-      await expect(firstValueFrom(userFacade.usersReadState$)).resolves.toEqual(value);
+      createInstances();
+      await expect(firstValueFrom(facade.usersReadState$)).resolves.toEqual(value);
     });
 
     it('should select usersWriteState from user store', async () => {
@@ -50,8 +47,8 @@ describe(UserFacade, () => {
         .spyOn(UserStore.prototype, 'selectApiWriteState')
         .mockImplementation(() => of(value));
 
-      instantiateMocks();
-      await expect(firstValueFrom(userFacade.usersWriteState$)).resolves.toEqual(value);
+      createInstances();
+      await expect(firstValueFrom(facade.usersWriteState$)).resolves.toEqual(value);
     });
     it('should select allUsers from user store', () => {
       const value = mockUsers;
@@ -59,8 +56,8 @@ describe(UserFacade, () => {
         .spyOn(UserStore.prototype, 'selectAllUsers')
         .mockImplementation(() => of(value));
 
-      instantiateMocks();
-      return expect(firstValueFrom(userFacade.allUsers$)).resolves.toEqual(value);
+      createInstances();
+      return expect(firstValueFrom(facade.allUsers$)).resolves.toEqual(value);
     });
     it('should select currentUser from user store', async () => {
       const value = mockUserEntities[1] as User;
@@ -68,8 +65,8 @@ describe(UserFacade, () => {
         .spyOn(UserStore.prototype, 'selectCurrentUser')
         .mockImplementation(() => of(value));
 
-      instantiateMocks();
-      await expect(firstValueFrom(userFacade.currentUser$)).resolves.toEqual(value);
+      createInstances();
+      await expect(firstValueFrom(facade.currentUser$)).resolves.toEqual(value);
     });
     it('should select a user based on a given id from user store', async () => {
       const id = 1;
@@ -77,15 +74,15 @@ describe(UserFacade, () => {
         .spyOn(UserStore.prototype, 'selectUser')
         .mockImplementation((id: number) => of(mockUserEntities[id] as User));
 
-      instantiateMocks();
-      await expect(firstValueFrom(userFacade.selectUser(id))).resolves.toEqual(
+      createInstances();
+      await expect(firstValueFrom(facade.selectUser(id))).resolves.toEqual(
         mockUserEntities[id]
       );
     });
   });
 
   describe('Actions', () => {
-    afterAll(() => {
+    afterEach(() => {
       jest.restoreAllMocks();
     });
     const sampleUserParams: UserDetails = {
@@ -95,79 +92,79 @@ describe(UserFacade, () => {
     };
     it('should clearCurrentUser using user store', () => {
       jest.spyOn(UserStore.prototype, 'onClearCurrentUser');
-      instantiateMocks();
+      createInstances();
 
-      userFacade.clearCurrentUser();
-      expect(userStore.onClearCurrentUser).toHaveBeenCalled();
+      facade.clearCurrentUser();
+      expect(store.onClearCurrentUser).toHaveBeenCalled();
     });
     it('should resetReadState using user store', () => {
       jest.spyOn(UserStore.prototype, 'onReadIdle');
       // jest.spyOn(UserFacade.prototype, 'resetReadState');
-      instantiateMocks();
+      createInstances();
 
-      userFacade.resetReadState();
-      expect(userStore.onReadIdle).toHaveBeenCalled();
+      facade.resetReadState();
+      expect(store.onReadIdle).toHaveBeenCalled();
     });
     it('should resetWriteState using user store', () => {
       jest.spyOn(UserStore.prototype, 'onWriteIdle');
-      instantiateMocks();
+      createInstances();
 
-      userFacade.resetWriteState();
-      expect(userStore.onWriteIdle).toHaveBeenCalled();
+      facade.resetWriteState();
+      expect(store.onWriteIdle).toHaveBeenCalled();
     });
     it('should loadUser using user effects', () => {
       jest.spyOn(UserEffects.prototype, 'loadUser');
-      instantiateMocks();
+      createInstances();
 
       const id = 1;
-      userFacade.loadUser(id);
-      expect(userEffects.loadUser).toHaveBeenCalledWith(id);
+      facade.loadUser(id);
+      expect(effects.loadUser).toHaveBeenCalledWith(id);
     });
     it('should loadUsers using user effects', () => {
       jest.spyOn(UserEffects.prototype, 'loadUsers');
-      instantiateMocks();
+      createInstances();
 
-      userFacade.loadUsers();
-      expect(userEffects.loadUsers).toHaveBeenCalled();
+      facade.loadUsers();
+      expect(effects.loadUsers).toHaveBeenCalled();
     });
     it('should createUser using user effects', () => {
       jest.spyOn(UserEffects.prototype, 'createUser');
-      instantiateMocks();
+      createInstances();
 
-      userFacade.createUser(sampleUserParams);
-      expect(userEffects.createUser).toHaveBeenCalledWith(sampleUserParams);
+      facade.createUser(sampleUserParams);
+      expect(effects.createUser).toHaveBeenCalledWith(sampleUserParams);
     });
     it('should updateUser using user effects', () => {
       jest.spyOn(UserEffects.prototype, 'updateUser');
-      instantiateMocks();
+      createInstances();
 
       const id = 1;
-      userFacade.updateUser(id, sampleUserParams, false);
-      expect(userEffects.updateUser).toHaveBeenCalledWith(id, sampleUserParams);
+      facade.updateUser(id, sampleUserParams, false);
+      expect(effects.updateUser).toHaveBeenCalledWith(id, sampleUserParams);
     });
     it('should updateUser optimistically using user effects', () => {
       jest.spyOn(UserEffects.prototype, 'updateUserOptimistic');
-      instantiateMocks();
+      createInstances();
 
       const id = 1;
-      userFacade.updateUser(id, sampleUserParams, true);
-      expect(userEffects.updateUserOptimistic).toHaveBeenCalledWith(id, sampleUserParams);
+      facade.updateUser(id, sampleUserParams, true);
+      expect(effects.updateUserOptimistic).toHaveBeenCalledWith(id, sampleUserParams);
     });
     it('should deleteUser using user effects', () => {
       jest.spyOn(UserEffects.prototype, 'deleteUser');
-      instantiateMocks();
+      createInstances();
 
       const id = 1;
-      userFacade.deleteUser(id, false);
-      expect(userEffects.deleteUser).toHaveBeenCalledWith(id);
+      facade.deleteUser(id, false);
+      expect(effects.deleteUser).toHaveBeenCalledWith(id);
     });
     it('should deleteUser optimistically using user effects', () => {
       jest.spyOn(UserEffects.prototype, 'deleteUserOptimistic');
-      instantiateMocks();
+      createInstances();
 
       const id = 1;
-      userFacade.deleteUser(id, true);
-      expect(userEffects.deleteUserOptimistic).toHaveBeenCalledWith(id);
+      facade.deleteUser(id, true);
+      expect(effects.deleteUserOptimistic).toHaveBeenCalledWith(id);
     });
   });
 });
