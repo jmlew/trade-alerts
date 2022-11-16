@@ -2,7 +2,11 @@ import { useEffect, useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useNotification } from '@trade-alerts/shared/feature/notification';
-import { Loading, NotificationType } from '@trade-alerts/shared/ui-common';
+import {
+  ErrorMessageWithButton,
+  Loading,
+  NotificationType,
+} from '@trade-alerts/shared/ui-common';
 import { userFacade } from '@trade-alerts/users/domain';
 import { UserDetailsForm } from '@trade-alerts/users/ui';
 
@@ -38,14 +42,18 @@ export function UpdateUserContainer() {
   return (
     <>
       {isPending() && <Loading />}
-      {
+      {user != null ? (
         <UserDetailsForm
           user={user}
           onSubmit={updateUser}
           onCancel={goToList}
           initialValues={formParams}
         />
-      }
+      ) : (
+        <ErrorMessageWithButton label="Go to Users" onClick={goToList}>
+          User does not exist
+        </ErrorMessageWithButton>
+      )}
     </>
   );
 }

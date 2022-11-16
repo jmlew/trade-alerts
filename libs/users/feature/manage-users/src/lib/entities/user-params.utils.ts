@@ -1,6 +1,6 @@
 import { User, UserDetails, UserRecord } from '@trade-alerts/users/domain';
 
-export function getUserFormParams(user?: UserRecord | User): UserDetails {
+export function getUserFormParams(user: UserRecord | User | null): UserDetails {
   if (user == null) {
     return {
       firstName: '',

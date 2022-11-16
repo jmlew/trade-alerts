@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { ErrorMessageWithButton, Loading } from '@trade-alerts/shared/ui-common';
 import { userFacade } from '@trade-alerts/users/domain';
 
-import { UserContextProvider } from '../context/UserContextProvider';
 import { LoadUserViewModel as useVM } from './LoadUserViewModel';
 
 interface LoadUserContainerProps {
@@ -34,9 +33,7 @@ export function LoadUserContainer({ userId, children }: LoadUserContainerProps) 
           {getError()}
         </ErrorMessageWithButton>
       )}
-      {isCompleted() && user != null && (
-        <UserContextProvider user={user}>{children}</UserContextProvider>
-      )}
+      {isCompleted() && user != null && children}
     </>
   );
 }

@@ -17,7 +17,7 @@ interface UserState {
   apiWriteState: ApiState;
 }
 
-const initialState: UserState = {
+export const initialState: UserState = {
   users: {},
   currentUserId: null,
 
@@ -93,6 +93,7 @@ export class UserStore extends ObservableStore<UserState> {
     this.update({
       ...state,
       users: this.entitiesService.setOne(data, state.users),
+      currentUserId: data.id,
       apiReadState: ApiStateManager.onCompleted(),
     });
   }
@@ -102,6 +103,7 @@ export class UserStore extends ObservableStore<UserState> {
     this.update({
       ...state,
       users: this.entitiesService.updateOne({ id, changes }, state.users),
+      currentUserId: id,
       apiWriteState: ApiStateManager.onCompleted(),
     });
   }

@@ -4,13 +4,12 @@ import {
   useApiStateReference,
 } from '@trade-alerts/shared/data-access';
 import { useObservable } from '@trade-alerts/shared/util-common';
-import { UserDetails, UserFacade, UserRecord } from '@trade-alerts/users/domain';
+import { User, UserDetails, UserFacade } from '@trade-alerts/users/domain';
 
-import { useUserContext } from '../context/user.context';
 import { getUserFormParams } from '../entities/user-params.utils';
 
 export interface UpdateUserViewModelResult {
-  user: UserRecord;
+  user: User | null;
   formParams: UserDetails;
   apiState: ApiState | null;
   apiStateRef: ApiStateReference;
@@ -19,13 +18,13 @@ export interface UpdateUserViewModelResult {
 }
 
 export function UpdateUserViewModel(userFacade: UserFacade): UpdateUserViewModelResult {
-  const { user } = useUserContext();
+  const user: User | null = useObservable<User | null>(userFacade.currentUser$);
   const apiState: ApiState | null = useObservable<ApiState>(userFacade.usersWriteState$);
   const apiStateRef: ApiStateReference = useApiStateReference(apiState);
   const formParams: UserDetails = getUserFormParams(user);
 
   function updateUser(values: UserDetails) {
-    userFacade.updateUser(user.id, values, true);
+    user != null && userFacade.updateUser(user.id, values, true);
   }
 
   function resetApiState() {

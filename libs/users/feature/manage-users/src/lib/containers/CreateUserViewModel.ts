@@ -22,7 +22,7 @@ export function CreateUserViewModel(userFacade: UserFacade): CreateUserViewModel
   const user: User | null = useObservable<User | null>(userFacade.currentUser$);
   const apiState: ApiState | null = useObservable<ApiState>(userFacade.usersWriteState$);
   const apiStateRef: ApiStateReference = useApiStateReference(apiState);
-  const formParams: UserDetails = getUserFormParams();
+  const formParams: UserDetails = getUserFormParams(null);
 
   function createUser(params: UserDetails) {
     userFacade.createUser(params);
