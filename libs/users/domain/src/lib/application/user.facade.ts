@@ -19,6 +19,7 @@ export class UserFacade {
   usersWriteState$: Observable<ApiState> = this.userStore.selectApiWriteState();
   allUsers$: Observable<User[]> = this.userStore.selectAllUsers();
   currentUser$: Observable<User | null> = this.userStore.selectCurrentUser();
+  currentUserId$: Observable<number | null> = this.userStore.selectCurrentUserId();
 
   constructor(private userStore: UserStore, private userEffects: UserEffects) {}
 

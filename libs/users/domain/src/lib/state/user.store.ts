@@ -1,9 +1,10 @@
-import { Observable, filter, map, switchMap, distinctUntilKeyChanged } from 'rxjs';
+import { Observable, filter, map, switchMap, distinctUntilKeyChanged, of } from 'rxjs';
 
 import {
   ApiState,
   ApiStateField,
   ApiStateManager,
+  isBrowser,
   ObservableStore,
 } from '@trade-alerts/shared/data-access';
 import { EntitiesService, Entity, isNonNull } from '@trade-alerts/shared/util-common';
@@ -123,6 +124,7 @@ export class UserStore extends ObservableStore<UserState> {
     this.update({
       ...state,
       users: this.entitiesService.removeOne(id, state.users),
+      currentUserId: id,
       apiWriteState: ApiStateManager.onCompleted(),
     });
   }

@@ -77,7 +77,7 @@ export class UsersController {
     if (!this.userService.doesUserExist(userId)) {
       throw new BadRequestException(ErrorMessage.NoUserMatch);
     }
-    return this.toStream(this.userService.updateUser(userId, params), 1000);
+    return this.toStream(this.userService.updateUser(userId, params));
   }
 
   @Delete(':id')
@@ -129,7 +129,7 @@ export class UsersController {
     return this.toStream(new BadRequestException(ErrorMessage.BadDelete), 1000);
   }
 
-  private toStream<T>(data: T, delay = 500) {
+  private toStream<T>(data: T, delay = 800) {
     return toStreamWithDelay(data, delay);
   }
 }

@@ -7,7 +7,7 @@ import { User, UserDetails, userFacade } from '@trade-alerts/users/domain';
 import {
   CreateUserViewModelResult,
   CreateUserViewModel as useVM,
-} from './CreateUserViewModel';
+} from '../containers/CreateUserViewModel';
 
 jest.mock('@trade-alerts/users/domain');
 

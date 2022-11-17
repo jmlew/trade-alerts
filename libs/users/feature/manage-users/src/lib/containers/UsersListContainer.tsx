@@ -24,8 +24,9 @@ export function UsersListContainer() {
     apiStateRef: loadStateRef,
   } = useLoadUsersVM(userFacade);
   const {
-    deleteUserId,
     deleteUser,
+    deleteUserId,
+    clearDeleteUserId,
     resetApiState: resetDeleteState,
     apiState: deleteState,
     apiStateRef: deleteStateRef,
@@ -51,18 +52,19 @@ export function UsersListContainer() {
 
   // Handle upates to delete user state.
   useEffect(() => {
-    const { isCompleted, isFailed, getError, wasPending } = deleteStateRef;
-    if (wasPending() && isCompleted()) {
+    const { isCompleted, isFailed, getError } = deleteStateRef;
+    if (isCompleted() && deleteUserId != null) {
       setNotification({
         isShown: true,
         message: `User ${deleteUserId} has been deleted`,
         type: NotificationType.Success,
       });
+      clearDeleteUserId();
     }
     if (isFailed()) {
       setNotification({ isShown: true, message: getError() || 'Delete user failed' });
     }
-  }, [deleteState]);
+  }, [deleteState, deleteUserId]);
 
   function editUser(userId: number) {
     navigate(`${userId}`);

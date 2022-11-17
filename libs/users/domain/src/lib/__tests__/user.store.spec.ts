@@ -125,6 +125,7 @@ describe(UserStore, () => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { [id]: removed, ...updatedUserEntities } = mockUserEntities;
       expect(store.getState().users).toEqual(updatedUserEntities);
+      expect(store.getState().currentUserId).toEqual(id);
       expect(store.selectUserValue(id)).toEqual(null);
     });
 
