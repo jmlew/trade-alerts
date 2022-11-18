@@ -15,7 +15,7 @@ export function CreateUserContainer() {
     user,
     formParams,
     createUser,
-    clearCurrentUser,
+    clearCurrentUserId,
     resetApiState,
     apiState,
     apiStateRef,
@@ -29,7 +29,7 @@ export function CreateUserContainer() {
         message: `User ${user.firstName} ${user.lastName} has been created`,
         type: NotificationType.Success,
       });
-      clearCurrentUser();
+      clearCurrentUserId();
       goToList();
     }
     if (isFailed()) {
@@ -38,7 +38,10 @@ export function CreateUserContainer() {
   }, [apiState, user]);
 
   useLayoutEffect(() => {
-    return () => resetApiState();
+    return () => {
+      resetApiState();
+      clearCurrentUserId();
+    };
   }, []);
 
   function goToList() {

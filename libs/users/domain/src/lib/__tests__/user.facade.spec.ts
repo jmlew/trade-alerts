@@ -60,6 +60,15 @@ describe(UserFacade, () => {
       createInstances();
       await expect(firstValueFrom(facade.allUsers$)).resolves.toEqual(value);
     });
+    it('should select current user ID from user store', async () => {
+      const value = 66;
+      jest
+        .spyOn(UserStore.prototype, 'selectCurrentUserId')
+        .mockImplementation(() => of(value));
+
+      createInstances();
+      await expect(firstValueFrom(facade.currentUserId$)).resolves.toEqual(value);
+    });
     it('should select current user from user store', async () => {
       const value = mockUserEntities[1] as User;
       jest
@@ -68,17 +77,6 @@ describe(UserFacade, () => {
 
       createInstances();
       await expect(firstValueFrom(facade.currentUser$)).resolves.toEqual(value);
-    });
-    it('should select a user based on a given id from user store', async () => {
-      const id = 1;
-      jest
-        .spyOn(UserStore.prototype, 'selectUser')
-        .mockImplementation((id: number) => of(mockUserEntities[id] as User));
-
-      createInstances();
-      await expect(firstValueFrom(facade.selectUser(id))).resolves.toEqual(
-        mockUserEntities[id]
-      );
     });
   });
 
@@ -92,11 +90,11 @@ describe(UserFacade, () => {
       email: 'john@sampleuser.com',
     };
     it('should clear current user using user store', () => {
-      jest.spyOn(UserStore.prototype, 'onClearCurrentUser');
+      jest.spyOn(UserStore.prototype, 'onClearCurrentUserId');
 
       createInstances();
-      facade.clearCurrentUser();
-      expect(store.onClearCurrentUser).toHaveBeenCalled();
+      facade.clearCurrentUserId();
+      expect(store.onClearCurrentUserId).toHaveBeenCalled();
     });
     it('should reset read state using user store', () => {
       jest.spyOn(UserStore.prototype, 'onReadIdle');

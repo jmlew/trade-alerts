@@ -38,9 +38,9 @@ describe('CreateUserViewModel hook', () => {
   });
   it('should call clearCurrentUser method on facade', () => {
     act(() => {
-      vm.result.current.clearCurrentUser();
+      vm.result.current.clearCurrentUserId();
     });
-    expect(mockedFacade.clearCurrentUser).toHaveBeenCalled();
+    expect(mockedFacade.clearCurrentUserId).toHaveBeenCalled();
   });
   it('should call createUser method on facade', () => {
     act(() => {
@@ -79,11 +79,11 @@ describe('CreateUserViewModel hook', () => {
     vm.rerender();
     expect(vm.result.current.user).toEqual(sampleUser);
     act(() => {
-      vm.result.current.clearCurrentUser();
+      vm.result.current.clearCurrentUserId();
       mockedFacade.currentUser$ = of(null);
     });
     vm.rerender();
-    expect(mockedFacade.clearCurrentUser).toHaveBeenCalled();
+    expect(mockedFacade.clearCurrentUserId).toHaveBeenCalled();
     expect(vm.result.current.user).toEqual(null);
   });
 });

@@ -25,12 +25,12 @@ export class UserApiRxjsAjaxService implements RepositoryObservable<User, number
 
   constructor(private mapper: UserApiMapper) {
     const baseUrl = isDev() && isUseMockInDev() ? UserApiUri.MockBase : UserApiUri.Base;
-    this.basePath = `${baseUrl}/${UserApiUri.Users}/`;
+    this.basePath = `${baseUrl}${UserApiUri.Users}`;
   }
 
   read(userId: number): Observable<User> {
     const request: Observable<AjaxResponse<GetUserResponse>> = ajax.get<GetUserResponse>(
-      `${this.basePath}${userId}`
+      `${this.basePath}/${userId}`
     );
     return request.pipe(
       map((response: AjaxResponse<GetUserResponse>) => response.response.data),
@@ -57,7 +57,7 @@ export class UserApiRxjsAjaxService implements RepositoryObservable<User, number
 
   update(userId: number, values: UserDetails): Observable<User> {
     const request: Observable<AjaxResponse<UpdateUserResponse>> =
-      ajax.put<UpdateUserResponse>(`${this.basePath}${userId}`, values);
+      ajax.put<UpdateUserResponse>(`${this.basePath}/${userId}`, values);
     return request.pipe(
       map((response: AjaxResponse<UpdateUserResponse>) => response.response),
       map(this.mapper.mapFrom),
@@ -81,7 +81,7 @@ export class UserApiRxjsAjaxService implements RepositoryObservable<User, number
 
   delete(userId: number): Observable<number> {
     const request: Observable<AjaxResponse<DeleteUserResponse>> =
-      ajax.delete<DeleteUserResponse>(`${this.basePath}${userId}`);
+      ajax.delete<DeleteUserResponse>(`${this.basePath}/${userId}`);
     return request.pipe(
       map((response: AjaxResponse<DeleteUserResponse>) => response.response.id),
       catchError((error: AjaxError) =>

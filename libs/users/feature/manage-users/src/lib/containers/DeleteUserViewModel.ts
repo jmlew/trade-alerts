@@ -8,9 +8,9 @@ import { UserFacade } from '@trade-alerts/users/domain';
 
 export interface DeleteUserViewModelResult {
   deleteUserId: number | null;
-  clearDeleteUserId: () => void;
   apiState: ApiState | null;
   apiStateRef: ApiStateReference;
+  clearDeletedUserId: () => void;
   deleteUser: (userId: number) => void;
   resetApiState: () => void;
 }
@@ -24,8 +24,8 @@ export function DeleteUserViewModel(userFacade: UserFacade): DeleteUserViewModel
     userFacade.deleteUser(userId, true);
   }
 
-  function clearDeleteUserId() {
-    userFacade.clearCurrentUser();
+  function clearDeletedUserId() {
+    userFacade.clearCurrentUserId();
   }
 
   function resetApiState() {
@@ -33,9 +33,9 @@ export function DeleteUserViewModel(userFacade: UserFacade): DeleteUserViewModel
   }
 
   return {
-    deleteUserId,
-    clearDeleteUserId,
     deleteUser,
+    deleteUserId,
+    clearDeletedUserId,
     resetApiState,
     apiState,
     apiStateRef,

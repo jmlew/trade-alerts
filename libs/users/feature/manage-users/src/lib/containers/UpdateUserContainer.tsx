@@ -15,8 +15,15 @@ import { UpdateUserViewModel as useVM } from './UpdateUserViewModel';
 export function UpdateUserContainer() {
   const navigate = useNavigate();
   const { setNotification } = useNotification();
-  const { user, formParams, updateUser, resetApiState, apiState, apiStateRef } =
-    useVM(userFacade);
+  const {
+    user,
+    formParams,
+    updateUser,
+    clearCurrentUserId,
+    resetApiState,
+    apiState,
+    apiStateRef,
+  } = useVM(userFacade);
   const { getError, isCompleted, isFailed, isPending } = apiStateRef;
 
   useEffect(() => {
@@ -32,7 +39,10 @@ export function UpdateUserContainer() {
   }, [apiState, user]);
 
   useLayoutEffect(() => {
-    return () => resetApiState();
+    return () => {
+      resetApiState();
+      clearCurrentUserId();
+    };
   }, []);
 
   function goToList() {

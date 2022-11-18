@@ -23,10 +23,6 @@ export class UserFacade {
 
   constructor(private userStore: UserStore, private userEffects: UserEffects) {}
 
-  selectUser(id: number): Observable<User | null> {
-    return this.userStore.selectUser(id);
-  }
-
   /* State API action handlers. */
   loadUser(userId: number) {
     this.userEffects.loadUser(userId);
@@ -52,8 +48,8 @@ export class UserFacade {
       : this.userEffects.deleteUser(userId);
   }
 
-  clearCurrentUser() {
-    this.userStore.onClearCurrentUser();
+  clearCurrentUserId() {
+    this.userStore.onClearCurrentUserId();
   }
 
   resetReadState() {

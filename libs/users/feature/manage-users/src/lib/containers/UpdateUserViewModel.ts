@@ -13,6 +13,7 @@ export interface UpdateUserViewModelResult {
   formParams: UserDetails;
   apiState: ApiState | null;
   apiStateRef: ApiStateReference;
+  clearCurrentUserId: () => void;
   updateUser: (values: UserDetails) => void;
   resetApiState: () => void;
 }
@@ -27,9 +28,21 @@ export function UpdateUserViewModel(userFacade: UserFacade): UpdateUserViewModel
     user != null && userFacade.updateUser(user.id, values, true);
   }
 
+  function clearCurrentUserId() {
+    userFacade.clearCurrentUserId();
+  }
+
   function resetApiState() {
     userFacade.resetWriteState();
   }
 
-  return { user, formParams, updateUser, resetApiState, apiState, apiStateRef };
+  return {
+    user,
+    formParams,
+    updateUser,
+    clearCurrentUserId,
+    resetApiState,
+    apiState,
+    apiStateRef,
+  };
 }

@@ -32,3 +32,7 @@ export function isCypress(): boolean {
 export function isJest(): boolean {
   return process.env['JEST_WORKER_ID'] !== undefined;
 }
+
+export function isBrowser(): boolean {
+  return typeof window !== 'undefined';
+}

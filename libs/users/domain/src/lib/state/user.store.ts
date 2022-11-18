@@ -4,7 +4,6 @@ import {
   ApiState,
   ApiStateField,
   ApiStateManager,
-  isBrowser,
   ObservableStore,
 } from '@trade-alerts/shared/data-access';
 import { EntitiesService, Entity, isNonNull } from '@trade-alerts/shared/util-common';
@@ -129,7 +128,7 @@ export class UserStore extends ObservableStore<UserState> {
     });
   }
 
-  onClearCurrentUser() {
+  onClearCurrentUserId() {
     const state: UserState = this.getState();
     this.update({ ...state, currentUserId: null });
   }

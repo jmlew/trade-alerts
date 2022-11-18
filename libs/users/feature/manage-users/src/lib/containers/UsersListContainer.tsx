@@ -26,7 +26,7 @@ export function UsersListContainer() {
   const {
     deleteUser,
     deleteUserId,
-    clearDeleteUserId,
+    clearDeletedUserId,
     resetApiState: resetDeleteState,
     apiState: deleteState,
     apiStateRef: deleteStateRef,
@@ -36,6 +36,7 @@ export function UsersListContainer() {
   useLayoutEffect(() => {
     return () => {
       resetDeleteState();
+      clearDeletedUserId();
     };
   }, []);
 
@@ -59,7 +60,7 @@ export function UsersListContainer() {
         message: `User ${deleteUserId} has been deleted`,
         type: NotificationType.Success,
       });
-      clearDeleteUserId();
+      clearDeletedUserId();
     }
     if (isFailed()) {
       setNotification({ isShown: true, message: getError() || 'Delete user failed' });

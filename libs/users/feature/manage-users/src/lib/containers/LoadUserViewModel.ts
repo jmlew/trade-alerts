@@ -10,15 +10,13 @@ export interface LoadUserViewModelResult {
   user: User | null;
   apiState: ApiState | null;
   apiStateRef: ApiStateReference;
+  clearCurrentUser: () => void;
   loadUser: (userId: number) => void;
   resetApiState: () => void;
 }
 
-export function LoadUserViewModel(
-  userFacade: UserFacade,
-  userId: number
-): LoadUserViewModelResult {
-  const user: User | null = useObservable(userFacade.selectUser(userId));
+export function LoadUserViewModel(userFacade: UserFacade): LoadUserViewModelResult {
+  const user: User | null = useObservable(userFacade.currentUser$);
   const apiState: ApiState | null = useObservable(userFacade.usersReadState$);
   const apiStateRef: ApiStateReference = useApiStateReference(apiState);
 
@@ -26,9 +24,13 @@ export function LoadUserViewModel(
     userFacade.loadUser(userId);
   }
 
+  function clearCurrentUser() {
+    userFacade.clearCurrentUserId();
+  }
+
   function resetApiState() {
     userFacade.resetReadState();
   }
 
-  return { user, loadUser, resetApiState, apiState, apiStateRef };
+  return { user, loadUser, clearCurrentUser, resetApiState, apiState, apiStateRef };
 }

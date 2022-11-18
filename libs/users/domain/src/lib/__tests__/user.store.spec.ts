@@ -129,11 +129,11 @@ describe(UserStore, () => {
       expect(store.selectUserValue(id)).toEqual(null);
     });
 
-    it('should store clear current user state and retrieve updated values', () => {
+    it('should store clear current user ID state and retrieve updated values', () => {
       const user = mockUsers[0];
       store.onLoadUserCompleted(user);
       expect(store.getState().currentUserId).toEqual(user.id);
-      store.onClearCurrentUser();
+      store.onClearCurrentUserId();
       expect(store.getState().currentUserId).toEqual(null);
     });
     it('should store clear all state and retrieve updated values', () => {

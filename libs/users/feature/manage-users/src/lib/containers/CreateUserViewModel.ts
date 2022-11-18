@@ -14,7 +14,7 @@ export interface CreateUserViewModelResult {
   apiState: ApiState | null;
   apiStateRef: ApiStateReference;
   createUser: (params: UserDetails) => void;
-  clearCurrentUser: () => void;
+  clearCurrentUserId: () => void;
   resetApiState: () => void;
 }
 
@@ -28,8 +28,8 @@ export function CreateUserViewModel(userFacade: UserFacade): CreateUserViewModel
     userFacade.createUser(params);
   }
 
-  function clearCurrentUser() {
-    userFacade.clearCurrentUser();
+  function clearCurrentUserId() {
+    userFacade.clearCurrentUserId();
   }
 
   function resetApiState() {
@@ -40,7 +40,7 @@ export function CreateUserViewModel(userFacade: UserFacade): CreateUserViewModel
     user,
     formParams,
     createUser,
-    clearCurrentUser,
+    clearCurrentUserId,
     resetApiState,
     apiState,
     apiStateRef,
