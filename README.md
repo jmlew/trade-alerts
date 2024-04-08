@@ -6,7 +6,10 @@ Organised as a [Nx](https://nx.dev) monorepo and composed using Domain Driven De
 
 ## Architecture
 
-The codebase combines a number of separate 'applications' (apps) and 'libraries' (libs) within the same workspace in a [NX Monorepo](https://nx.dev). There are only two applications:
+The architectural approach implemented here is documented under my
+[Scaleable Frontend Architectures guidelines](https://bit.ly/scaleable-apps)
+
+The codebase combines a number of separate 'applications' (apps) which are simple shells containing several 'libraries' (libs) to provide the real functionality, all within the same workspace in a [NX Monorepo](https://nx.dev). There are only two applications:
 
 1. Web-app
 
